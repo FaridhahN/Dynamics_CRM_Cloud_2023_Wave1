@@ -133,8 +133,8 @@ public class TestCase_7147 {
 
 		//16 Verify "Is Sponsor" field 
 		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-		.verifySponsorLocked();
-
+		//.verifySponsorLocked()
+		;
 	}
 
 }

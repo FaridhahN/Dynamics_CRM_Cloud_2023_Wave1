@@ -35,29 +35,6 @@ public class TestCase_8838 {
 		//3. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
-		//Click on save 			
-		.clickSave() 
-
-		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
-
-		//5. Account Type = Member
-		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
-		//Class of Trade =Any
-		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
-
-		//Business Classification = Auto populated
-		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
-
-		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
-
-		//Store/Location type = Bill to
-		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
-
-		//CAMS Flag = Yes
-		//.changeCAMSFlag()
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -67,15 +44,6 @@ public class TestCase_8838 {
 
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-
-		//Top Parent Relation =  OLM
-		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
-
-		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
-
-		//Click on Save 
-		.clickSave() 
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
@@ -89,21 +57,48 @@ public class TestCase_8838 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
+		//Class of Trade =Any
+		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+
+		//Business Classification = Auto populated
+		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
+
+		//Store/Location type = Bill to
+		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
+		//Top Parent Relation =  OLM
+		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+
+		// Top Parent Relation Date = Today's Date
+		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		//Click on Save 
+		.clickSave() 
+
+		//4. Verify CRM Account # is generated 
+		.verifyCRMNumberIsDisplayed()	
+
+		//5. Account Type = Member
+		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
+
+		//Account Status = Auto Populated to Active
+		.verifyDefaultAccountStatus()	
+
+		//CAMS Flag = Yes
+		//.changeCAMSFlag()
+
 		//Click on Save 
 		.clickSave() 
 
 		//7. Record Status = Published
-
 		.chooseRecordStatusPublishedMEF()				
 
 		//Click on Save 
 		.clickSave() 
 		.pageRefresh()
-		
+
 		//Wave2 Fix
 		.clickAdditionalCriteria()
-		
-		
+
+
 		//8. Verify Entity code is same as DP's entity code 
 		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "DirectParent", sDataSheetName))
 
@@ -112,6 +107,12 @@ public class TestCase_8838 {
 
 		.verifyAgEffectiveDateIsNull()
 		.verifyAffiliateGroupIsNull()
+		
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 
 		//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
@@ -124,12 +125,6 @@ public class TestCase_8838 {
 
 		//16 Verify Food Service parent name in the form 
 		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 
 		.clickGoBackButton()
 		.changeMemberForm()

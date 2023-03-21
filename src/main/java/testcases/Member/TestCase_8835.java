@@ -25,6 +25,18 @@ public class TestCase_8835 {
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
+		//Account  Type = Member
+		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
+
+		//Account name = Any
+		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+
+		//Class of Trade =Any
+		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+
+		//Business Classification = Auto populated
+		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
+
 		//3. Fill in the mandatory fields below
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 
@@ -35,24 +47,9 @@ public class TestCase_8835 {
 		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
-		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))				
-
-		//Account  Type = Member
-		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
-		//Account name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-
-	
-		//Class of Trade =Any
-		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
-
-		//Business Classification = Auto populated
-		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
-
+		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))	
 		//Account Status = Auto Populated to Active
 		.verifyDefaultAccountStatus()	
-
 		//Primary contact = 7000331193
 		.addMemberPrimaryContact(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
 
@@ -73,6 +70,7 @@ public class TestCase_8835 {
 
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+
 
 		//Top Parent Relation =  OLM
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))

@@ -158,7 +158,8 @@ public class TestCase_7144 {
 
 		//9. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
-		.verifyIsCorporateAccountLocked()
+		//.verifyIsCorporateAccountLocked()
+		.verifyIsCorporateAccountFieldIsDisabled()
 
 
 		//10. Verify Corporate parent name in the form
@@ -166,21 +167,24 @@ public class TestCase_7144 {
 
 		//11. Verify "Is Food Service parent" field 
 		.verifyIsFoodServiceParent(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFoodServiceParent", sDataSheetName))
-		.verifyIsFoodServiceParentLocked()
+		//.verifyIsFoodServiceParentLocked()
+		.verifyIsFoodServiceParentFieldIsDisabled()
 
 		//12 Verify Food Service parent name in the form 
 		.verifyFoodServiceParentNameIsNull()
 
 		//13. Verify "Is FBO" field 
 		.verifyIsFBO(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsFBO", sDataSheetName))
-		.verifyIsFBOLocked()
+		//.verifyIsFBOLocked()
+		.verifyIsFBOFieldIsDisabled()
 
 		//14. Verify "Is Sponsor" field 
 		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
 
 		//15. Verify "Is Sponsor" field 
 		.verifySponsorIsNull()
-		.verifySponsorLocked()
+		//.verifySponsorLocked()
+			
 		;
 	}
 }

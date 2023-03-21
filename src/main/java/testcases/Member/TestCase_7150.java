@@ -103,7 +103,6 @@ public class TestCase_7150 {
 		.verifyPremierStartDateIsAutoPopulated()
 
 
-
 		//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 

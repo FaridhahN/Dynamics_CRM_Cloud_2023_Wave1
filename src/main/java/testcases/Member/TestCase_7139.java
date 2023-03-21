@@ -42,39 +42,7 @@ public class TestCase_7139 {
 
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-
-
-
-		//Top Parent Relation =  OLM
-		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
-
-		//Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
-
-		//type TP reason
-		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "TPReason", sDataSheetName))
-
-		//Click on save 
-		.clickSave() 
-
-		//7. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
-
-		//8 Account  Type = Member
-		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
-		//Class of Trade =Any
-		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
-
-		//Business Classification = Auto populated
-		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
-
-		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
-
-		//Participation Type = Standard
-		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
-
+	
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
 
@@ -83,9 +51,6 @@ public class TestCase_7139 {
 
 		//DP exception reason = Any
 		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))
-
-		//Click on Save 
-		// .clickSave() 
 
 		//9.  Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
@@ -98,6 +63,37 @@ public class TestCase_7139 {
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
+		//Class of Trade =Any
+		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+
+		//Business Classification = Auto populated
+		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
+
+		//Account Status = Auto Populated to Active
+		.verifyDefaultAccountStatus()	
+
+		//Participation Type = Standard
+		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+
+
+		//Top Parent Relation =  OLM
+		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+
+		//Top Parent Relation Date = Today's Date
+		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+
+		//type TP reason
+		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "TPReason", sDataSheetName))
+		
+		//Click on save 
+		.clickSave() 
+
+		//7. Verify CRM Account # is generated 
+		.verifyCRMNumberIsDisplayed()	
+
+	
+		//8 Account  Type = Member
+		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 
 		//Application Start Date = Today's Date
@@ -126,8 +122,8 @@ public class TestCase_7139 {
 
 		// Click on LOB Save 
 		.clickLOBSaveAndCloseMEF()
-		
-		
+
+
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 

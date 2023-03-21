@@ -13,7 +13,7 @@ public class NewAccountPage extends WebDriverServiceImpl {
 //Choose member form
 	public MemberFormPage chooseMemberForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
-		click(getDriver().findElement(By.xpath("//*[@title='Member Form']")),"Member Form");
+		click(getDriver().findElement(By.xpath("//span[text()='Member Form']")),"Member Form");
 		List<WebElement> element=getDriver().findElements(By.xpath("//*[@data-id='cancelButton']"));
 		if(element.size()>0) {
 			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
@@ -28,7 +28,7 @@ public class NewAccountPage extends WebDriverServiceImpl {
 //Choose supplier form
 	public SupplierFormPage chooseSupplierForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
-		click(getDriver().findElement(By.xpath("//*[@title='Supplier Form']")),"Supplier Form");
+		click(getDriver().findElement(By.xpath("//span[text()='Supplier Form']")),"Supplier Form");
 		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		Thread.sleep(2000);
 		return new SupplierFormPage();
@@ -37,7 +37,7 @@ public class NewAccountPage extends WebDriverServiceImpl {
 //Choose member entry form
 	public MemberFormPage chooseMemberEntryForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
-		click(getDriver().findElement(By.xpath("//*[@title='Member Entry Form']")),"Member Entry Form");
+		click(getDriver().findElement(By.xpath("//span[text()='Member Entry Form']")),"Member Entry Form");
 		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		Thread.sleep(2000);
 		return new MemberFormPage();
