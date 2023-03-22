@@ -70,8 +70,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   		Thread.sleep(6000);
   		return new MemberFormPage();
   	}	
-  	
-  	
+  	  	
   
   	 //Select All Prospects view
   	public AccountsPage selectAllProspects() throws InterruptedException {

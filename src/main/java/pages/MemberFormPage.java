@@ -161,7 +161,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage verifyCRMNumberIsDisplayed() throws InterruptedException {
 		Thread.sleep(5000);
 		CRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
-		assertNotNull(CRMNumber);
+		System.out.println(CRMNumber);
+		if (CRMNumber==null) {
+			setReport().log(Status.FAIL, "Value is blank in CRM Number"	,screenshotCapture());
+			Driver.failCount++;		
+		}
 		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")), "CRM Account Number");
 		try {
 			DataInputProvider.setCellData(CRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
@@ -3344,6 +3348,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Navigate to Account status from MP
+	public MemberFormPage navigateToAccountStatusFromMPConfig() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//label[text()='FBO Type Effective Date']")),"Is Payment Entity");
+		click(getDriver().findElement(By.xpath("//label[text()='Is Payment Entity']")),"Is Payment Entity");
+		click(getDriver().findElement(By.xpath("//label[text()='Stock Symbol']")),"Stock Symbol'");
+		click(getDriver().findElement(By.xpath("//label[text()='Region']")),"Region");
+		click(getDriver().findElement(By.xpath("//label[text()='Participation Type']")),"Participation Type']");
+		click(getDriver().findElement(By.xpath("//label[text()='Exclude from Roster']")),"Exclude from Roster']");
+		return this;
+	}
+	
 	//Change Account Status
 	public MemberFormPage selectAccountStatus(String acountStatus) throws InterruptedException {
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")))),acountStatus,"Account Status");
