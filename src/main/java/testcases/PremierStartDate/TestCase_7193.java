@@ -1,11 +1,8 @@
 package testcases.PremierStartDate;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7193:Verify and Validate "Premier Start Date" Logic based on Multiple GPO Membership records.
 
@@ -119,7 +116,7 @@ public class TestCase_7193 {
 			.clickQuickCreateMembershipSaveAndClose()
 			
 		// Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()

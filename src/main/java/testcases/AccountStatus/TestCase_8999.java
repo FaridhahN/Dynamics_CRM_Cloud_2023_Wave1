@@ -1,11 +1,8 @@
 package testcases.AccountStatus;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 8999:Cloud - Verify whether Account should not get "Terminated" ,when any one of the Premier Membership is Active .
 
@@ -108,7 +105,7 @@ public class TestCase_8999 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -175,7 +172,7 @@ public class TestCase_8999 {
 
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -194,7 +191,7 @@ public class TestCase_8999 {
 
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

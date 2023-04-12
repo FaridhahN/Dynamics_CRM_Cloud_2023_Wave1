@@ -1,16 +1,11 @@
 package pages;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -332,10 +327,6 @@ public class ContactsPage extends WebDriverServiceImpl {
 						.findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")))),
 				contactTerminationReason, "Termination Reason");
 		Thread.sleep(3000);
-		String terminationReason = getAttribute(
-				getDriver()
-				.findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")),
-				"title", "Termination Reason");
 		Thread.sleep(3000);
 		return this;
 	}

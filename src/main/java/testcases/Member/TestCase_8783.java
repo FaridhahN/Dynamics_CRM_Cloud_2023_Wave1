@@ -1,11 +1,8 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 8783:Cloud - Validate Account Type Transitions
 //Test Case 8766:Cloud : Validate Account Type Transitions
@@ -95,7 +92,7 @@ public class TestCase_8783 {
 				.clickQuickCreateMembershipSaveAndClose()			
 
 				//6.Click the + icon on the Line of Business Grid ***** Corresponding LOB should be added successfully 
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				//Click New Line Of Business
 				.clickAddNewLineOfBusiness()

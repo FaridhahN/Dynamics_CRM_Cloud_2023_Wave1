@@ -1,12 +1,8 @@
 package testcases.LOBFSC;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6961:Verify Food Services LOB is added automatically when LOB Update is made after Non-GPO Premier Membership is converted to GPO Premier Membership
 
@@ -139,7 +135,7 @@ public class TestCase_6961 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -163,7 +159,7 @@ public class TestCase_6961 {
 		.clickSave() 
 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOBisNotDisplayed()
 
@@ -182,7 +178,7 @@ public class TestCase_6961 {
 		// Click on LOB Save 
 		.clickLOBSaveAndClose()
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 
@@ -296,7 +292,7 @@ public class TestCase_6961 {
 				.clickQuickCreateMembershipSaveAndClose()
 
 				//7.  Click the + icon on the Line of Business Grid
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				//Click New Line Of Business
 				.clickAddNewLineOfBusiness()
@@ -320,7 +316,7 @@ public class TestCase_6961 {
 				.clickSave() 
 
 
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				.verifyFoodServiceLOBisNotDisplayed()
 
@@ -339,7 +335,7 @@ public class TestCase_6961 {
 				// Click on LOB Save 
 				.clickLOBSaveAndClose()
 
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				.verifyFoodServiceLOBisNotDisplayed()
 

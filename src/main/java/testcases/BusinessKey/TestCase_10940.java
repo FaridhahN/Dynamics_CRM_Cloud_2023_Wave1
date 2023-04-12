@@ -3,7 +3,6 @@ package testcases.BusinessKey;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 10940:Cloud : Verify whether "BK active" is Yes, Business Key should auto generate.
 
@@ -108,7 +107,7 @@ public class TestCase_10940 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

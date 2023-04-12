@@ -1,8 +1,6 @@
 package testcases.Member;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 
 //Test Case 8930:Cloud: Verify AG and AG effective date on Account termination when AG populated based on TP and Business classification is Acute
@@ -92,7 +90,7 @@ public class TestCase_8930 {
 			.clickQuickCreateMembershipSaveAndClose()
 			
 			// Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 					
 		//6.Go to LOB and click on add LOB
 			.clickAddNewLineOfBusiness()

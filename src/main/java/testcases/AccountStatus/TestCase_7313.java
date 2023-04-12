@@ -1,9 +1,7 @@
 package testcases.AccountStatus;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS ID_7312: Add and update Primary contact to a Member account
 

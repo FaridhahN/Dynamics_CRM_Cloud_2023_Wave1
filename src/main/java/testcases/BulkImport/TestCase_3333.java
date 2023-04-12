@@ -1,7 +1,6 @@
 
 	package testcases.BulkImport;
 	import org.testng.annotations.Test;
-	import pages.LoginPage;
 	import utils.DataInputProvider;
 import utils.TestUtils;
 

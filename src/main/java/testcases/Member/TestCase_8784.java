@@ -1,14 +1,10 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+//TFS ID_8784:Cloud -Validate Publish Rec Status and LOB
 
 public class TestCase_8784 {
 
@@ -122,10 +118,12 @@ public class TestCase_8784 {
 		.verifyLOBRequiredErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
+		
+		.clickOnDiscardChanges()
 
 		// Line of Business =General GPO
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
@@ -148,16 +146,16 @@ public class TestCase_8784 {
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		.clickLineOfBusiness()
-		.selectLOB(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+		.clickLineOfBusinessesTab()
+		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.verifyErrorMessageLOBDeactivate()
 		.clickGoBackButton()
 		.clickGeneralTab()
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusiness()
-		.selectLOB(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+		.clickLineOfBusinessesTab()
+		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.clickGoBackButton()
 		.clickGeneralTab()
@@ -166,15 +164,15 @@ public class TestCase_8784 {
 		.verifyLOBRequiredForMemberShipErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusiness()
+		.clickLineOfBusinessesTab()
 		.selectDeactivatedLOB()
-		.selectLOB(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.activateLOB()
 		.clickGoBackButton()
 		.clickGeneralTab()
 		.chooseRecordStatusPublished()
 		.clickSave()
-		
+
 		;
 
 		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application

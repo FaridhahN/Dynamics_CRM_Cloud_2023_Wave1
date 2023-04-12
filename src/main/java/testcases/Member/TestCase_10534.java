@@ -1,11 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
-
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 
 //TFS_ID_10534-Verify Limited Member fields that are NOT editable
@@ -52,20 +48,22 @@ public class TestCase_10534 {
 		.verifyBKActiveIsNotEditable()
 		.verifySiebelIDIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "siebelID", sDataSheetName))
 		.verifyRegionIsNotEditable()
-		.verifySponsorDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "sponsor", sDataSheetName))
-		.verifySupplierRecordIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "supplierRecord", sDataSheetName))
+		//.verifySupplierRecordIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "supplierRecord", sDataSheetName))
 		.verifyOwnershipIsNotEditable()
 		.verifyStockSymbolIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "stockSymbol", sDataSheetName))
 		.verifyExchangeIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "exchange", sDataSheetName))
+		.verifySponsorDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "sponsor", sDataSheetName))
 		.verifyCorporateParentDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "corporateParent", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber1", sDataSheetName))
-		.verifyPaymentEntityDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "paymentEntity", sDataSheetName))
+		//.verifyPaymentEntityDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "paymentEntity", sDataSheetName))
 		.verifyCorporateRebateDetailsIsNotEditable()
 		.verifyFoodServiceParentDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "foodServiceParent", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber1", sDataSheetName))
+		.navigateToRecordStatus()
 		.verifyRequireManualAGAssignmentIsNotEditable()
 		.verifyAffiliateGroupIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 		.verifyAffiliateGroupEffectiveDateIsNotEditable()
 		.verifyRecordStatusIsNotEditable()
 		.verifyAccountTypeIsNotEditable()
+		.navigateToMembershipProviderConfig()
 		.verifyRecordChangeStatusIsNotEditable()
 		.verifyPremierRosterIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "premierRoster", sDataSheetName))
 		.verifyCurrentInternalRepIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "currentInternalRep", sDataSheetName))

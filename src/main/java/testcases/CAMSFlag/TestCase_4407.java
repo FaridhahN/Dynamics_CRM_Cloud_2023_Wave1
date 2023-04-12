@@ -3,7 +3,6 @@ package testcases.CAMSFlag;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 4539:Verify CAMS rule works when changing the DP of a member who has incorrect CAMS
 
@@ -105,7 +104,7 @@ public class TestCase_4407 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -207,7 +206,7 @@ public class TestCase_4407 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

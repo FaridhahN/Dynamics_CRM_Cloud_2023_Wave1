@@ -2,7 +2,6 @@ package testcases.Member;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_7138:Create new member - New Member form through sub account and save it as prospect first
@@ -82,7 +81,7 @@ public class TestCase_8806 {
 		.clickSave() 
 
 		// 10.Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

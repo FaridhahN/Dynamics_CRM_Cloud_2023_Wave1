@@ -3,7 +3,6 @@ package testcases.ConvertingAccounts;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 4534:Verify Food Service LOB rule or mapping works for main account converted from Shipto account
 
@@ -121,7 +120,7 @@ public class TestCase_4534 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 		
@@ -131,7 +130,7 @@ public class TestCase_4534 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -149,7 +148,7 @@ public class TestCase_4534 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOB()

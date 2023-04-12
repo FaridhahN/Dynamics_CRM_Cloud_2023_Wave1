@@ -2,8 +2,6 @@ package services;
 
 import events.WebDriverEvents;
 
-import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -800,9 +798,9 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		try {
 			System.out.println(bReturn);
 			if(bReturn.contains(expectedText)) {
-				setReport().log(Status.PASS, "The "+field+" contains "+expectedText,screenshotCapture());
+				setReport().log(Status.PASS, "The  "+field+"  contains : "+ expectedText,screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The "+field+" does not contain "+expectedText,screenshotCapture());
+				setReport().log(Status.FAIL, "The  "+field+"  does not contain : "+ expectedText,screenshotCapture());
 				Driver.failCount++;
 			}
 		} catch (WebDriverException e) {

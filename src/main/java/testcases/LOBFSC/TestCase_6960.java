@@ -1,12 +1,8 @@
 package testcases.LOBFSC;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6960:Verify Food Services LOB is added automatically when Non-GPO Premier Membership is converted to GPO Premier Membership.
 //Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
@@ -141,7 +137,7 @@ public class TestCase_6960 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -165,7 +161,7 @@ public class TestCase_6960 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 		
@@ -279,7 +275,7 @@ public class TestCase_6960 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -303,7 +299,7 @@ public class TestCase_6960 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		
 		;

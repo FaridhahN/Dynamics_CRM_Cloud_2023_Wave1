@@ -2,13 +2,12 @@ package testcases.Member;
 
 import java.awt.AWTException;
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 public class TestCase_8803 {
 
-	//	Test Case 8998:Cloud: Validate Business Key and BK Active fields..
+	//	TFS ID_8803:Cloud : Verify whether child Account cannot be published if DP does not have entity code
 
-	public static void createMemberTP(int iRowNumber, String sDataSheetName)throws Exception, InterruptedException, AWTException
+	public static void test8803(int iRowNumber, String sDataSheetName)throws Exception, InterruptedException, AWTException
 	{		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -101,7 +100,7 @@ public class TestCase_8803 {
 		.clickSave() 
 
 		// 10.Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -152,6 +151,8 @@ public class TestCase_8803 {
 		.typeTPReason("Test")
 		//Click on Save 
 		.clickSave() 
+		//Fix for Req change
+		.verifyDPChangeConfirmationForSubaccounts("This account has sub accounts that will be changed as well.")
 		.verifyDPWithoutEntityMessage("You cannot publish the Member since Direct Parent has no Entity code")
 		
 		;

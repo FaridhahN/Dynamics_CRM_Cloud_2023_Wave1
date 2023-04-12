@@ -1,11 +1,9 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7531:Verify user can not create membership provider with same name as duplicate
 public class TestCase_7420 {

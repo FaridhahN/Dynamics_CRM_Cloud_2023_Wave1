@@ -1,10 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS ID_10763:Cloud: Automation : Verify whether HIN digit check- characters should be alpha numeric only
 

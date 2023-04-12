@@ -1,12 +1,8 @@
 package testcases.ConvertingAccounts;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 4525:Verify if a shipto account can be converted to main account
 
@@ -114,7 +110,7 @@ public class TestCase_4525 {
 		.clickSave()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

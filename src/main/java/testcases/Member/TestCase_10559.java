@@ -1,10 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS_ID_10559-Cloud: Verify whether Limited Member should not be able to  create "Line of business".
 
@@ -29,7 +26,7 @@ public class TestCase_10559 {
 
 		//3.Verify Line of Business Entity for Limited Member
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyLineOfBusinesAssocView()
 		.verifyNewLineOfBusinessIsNotPresent();
 		

@@ -1,14 +1,11 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+//TFS ID_8786:Cloud - Validate (Member/Supplier) Account Type once set to value other than Prospect cannot change.
 
 public class TestCase_8786 {
 
@@ -53,8 +50,10 @@ public class TestCase_8786 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
+		//Navigate to Account Status
+		.navigateToState()
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
+		.verifyDefaultAccountStatus()
 
 		//Application Start Date = Today's Date
 		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
@@ -64,7 +63,6 @@ public class TestCase_8786 {
 
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
-
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -100,7 +98,7 @@ public class TestCase_8786 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

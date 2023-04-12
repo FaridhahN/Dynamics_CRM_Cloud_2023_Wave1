@@ -1,11 +1,8 @@
 package testcases.PremierStartDate;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS ID_ 7671:Verify Premier Start date is updated in member form when Premier Membership is created in Prospect.
 

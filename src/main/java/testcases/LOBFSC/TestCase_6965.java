@@ -3,7 +3,6 @@ package testcases.LOBFSC;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6965:Verify Food Services LOB is added automatically when LOB Update is made after Location Type Account is converted to Member
 
@@ -120,7 +119,7 @@ public class TestCase_6965 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 
@@ -130,7 +129,7 @@ public class TestCase_6965 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -150,13 +149,13 @@ public class TestCase_6965 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOBisNotDisplayed()
 		.clickGeneralTab()
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -174,7 +173,7 @@ public class TestCase_6965 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOB()
@@ -277,7 +276,7 @@ public class TestCase_6965 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 
@@ -287,7 +286,7 @@ public class TestCase_6965 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -305,7 +304,7 @@ public class TestCase_6965 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOBisNotDisplayed()

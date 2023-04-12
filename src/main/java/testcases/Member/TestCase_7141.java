@@ -1,8 +1,6 @@
 package testcases.Member;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
@@ -85,7 +83,7 @@ public class TestCase_7141 {
 		.clickSave() 
 
 		//5.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

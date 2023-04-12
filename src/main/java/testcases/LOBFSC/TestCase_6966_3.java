@@ -3,7 +3,6 @@ package testcases.LOBFSC;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6966:Verify Food Services LOB is added automatically when CoT update is made after Location Type Account is converted to Member
 
@@ -121,7 +120,7 @@ public class TestCase_6966_3 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 		
@@ -131,7 +130,7 @@ public class TestCase_6966_3 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -149,7 +148,7 @@ public class TestCase_6966_3 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOB()
@@ -161,7 +160,7 @@ public class TestCase_6966_3 {
 
 		//Click on Save 
 		.clickSave() 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 		.getClassificationTypeAfter()
@@ -264,7 +263,7 @@ public class TestCase_6966_3 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 		
@@ -274,7 +273,7 @@ public class TestCase_6966_3 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -292,7 +291,7 @@ public class TestCase_6966_3 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		.clickGeneralTab()
 		.clearClassOfTrade()
@@ -300,7 +299,7 @@ public class TestCase_6966_3 {
 
 		//Click on Save 
 		.clickSave() 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		
 

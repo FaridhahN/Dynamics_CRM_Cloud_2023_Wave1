@@ -108,7 +108,7 @@ public class TestCase_3289 {
 			.clickSave() 
 		
 		//9.  Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()

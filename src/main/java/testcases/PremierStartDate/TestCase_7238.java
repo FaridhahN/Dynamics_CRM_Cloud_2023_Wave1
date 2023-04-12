@@ -1,11 +1,8 @@
 package testcases.PremierStartDate;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7238:Verify whether "Premier Start Date" field should be Read Only in Member Forms.
 
@@ -112,7 +109,7 @@ public class TestCase_7238 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

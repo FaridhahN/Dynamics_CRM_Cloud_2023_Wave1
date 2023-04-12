@@ -1,10 +1,7 @@
 package testcases.Supplier;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS_ID_10662-Cloud :Verify whether user able to add same "Federal Tax ID" on different "Supplier" ,if they have the same Top Parent.
 

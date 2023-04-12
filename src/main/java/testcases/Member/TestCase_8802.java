@@ -1,13 +1,9 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.DashboardPage;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 8802:Cloud - Verify newly added "GPO memberships" in DP should not get cascaded to the "location type children" in draft status.
 
@@ -65,7 +61,7 @@ public class TestCase_8802 {
 		.clickSave() 
 
 		// 10.Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

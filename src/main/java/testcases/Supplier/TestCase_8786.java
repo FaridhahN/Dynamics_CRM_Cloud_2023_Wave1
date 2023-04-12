@@ -1,12 +1,8 @@
 package testcases.Supplier;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 // TFS ID_8786:Cloud - Validate (Member/Supplier) Account Type once set to value other than Prospect cannot change.
 

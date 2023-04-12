@@ -1,11 +1,8 @@
 package testcases.PremierStartDate;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7550:Verify whether "Premier Start Date" is getting recalculated when deactivating any existing membership.
 
@@ -99,7 +96,7 @@ public class TestCase_7550 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//6.Click the + icon on the Line of Business Grid ***** Corresponding LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -154,7 +151,7 @@ public class TestCase_7550 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//18.Now add corresponding LOB **** LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

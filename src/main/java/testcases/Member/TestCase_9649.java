@@ -1,10 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS_ID_9649-Cloud : Cloud: Verify if Limited member can access "Referred by" field
 

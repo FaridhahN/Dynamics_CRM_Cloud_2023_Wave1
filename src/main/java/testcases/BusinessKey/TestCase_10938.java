@@ -3,7 +3,6 @@ package testcases.BusinessKey;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 10938:Cloud : Verify whether "No Error Message" is thrown for Direct Parent whose BK Active is Yes and set its Child Account with BK Active as Yes.
 
@@ -107,7 +106,7 @@ public class TestCase_10938 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -219,7 +218,7 @@ public class TestCase_10938 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

@@ -3,7 +3,6 @@ package testcases.BusinessKey;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 10931:Cloud : Verify whether BK Active is defaulted to No.
 
@@ -104,7 +103,7 @@ public class TestCase_10931 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

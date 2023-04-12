@@ -1,6 +1,5 @@
 package testcases.Member;
 
-import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import driver.Driver;
@@ -97,7 +96,7 @@ public class TestCase_2222 {
 			 .clickSave() 
 				 
 			//Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()
@@ -215,7 +214,7 @@ public class TestCase_2222 {
 			 .clickSave() 
 				 
 			//Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()

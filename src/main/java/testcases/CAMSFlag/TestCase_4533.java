@@ -3,7 +3,6 @@ package testcases.CAMSFlag;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_4533:Verify if CAMS rule works fine for a main account converted from shipto account
 
@@ -121,7 +120,7 @@ public class TestCase_4533 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 

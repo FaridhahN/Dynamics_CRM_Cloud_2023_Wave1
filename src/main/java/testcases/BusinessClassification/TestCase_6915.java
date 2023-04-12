@@ -1,12 +1,8 @@
 package testcases.BusinessClassification;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6915:Verify auto populated Business classification can be overridden by the user
 
@@ -150,7 +146,7 @@ public class TestCase_6915 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

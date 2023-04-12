@@ -1,12 +1,8 @@
 package testcases.LOBFSC;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6962:Verify Food Services LOB is added automatically when "COT" update is made after Non-GPO Premier Membership is converted to GPO Premier Membership.
 
@@ -143,7 +139,7 @@ public class TestCase_6962 {
 		.clickGeneralTab()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -167,7 +163,7 @@ public class TestCase_6962 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 		.getClassificationType()
@@ -177,7 +173,7 @@ public class TestCase_6962 {
 
 		//Click on Save 
 		.clickSave() 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 		.getClassificationTypeAfter()
@@ -292,7 +288,7 @@ public class TestCase_6962 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -316,7 +312,7 @@ public class TestCase_6962 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		.clickGeneralTab()
 		.clearClassOfTrade()
@@ -324,7 +320,7 @@ public class TestCase_6962 {
 
 		//Click on Save 
 		.clickSave() 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		;
 	}

@@ -1,14 +1,8 @@
 package testcases.Activities;
 
-import java.io.IOException;
-
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 9629:Verify whether user should not get any script error, on add /update "Phone" call activity.
 
@@ -112,7 +106,7 @@ public class TestCase_9629 {
 		.clickSave()
 
 		//7. Click the + icon on the Line of Business Grid 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business 
 		.clickAddNewLineOfBusiness()

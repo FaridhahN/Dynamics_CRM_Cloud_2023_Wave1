@@ -1,11 +1,8 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 8790:Automation: Cloud - Verify FBO calculated correctly after prospect become a member
@@ -48,6 +45,9 @@ public class TestCase_8790 {
 
 		//5. Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+		
+		//Navigate to BC
+		.navigateToState()
 
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
@@ -99,7 +99,7 @@ public class TestCase_8790 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

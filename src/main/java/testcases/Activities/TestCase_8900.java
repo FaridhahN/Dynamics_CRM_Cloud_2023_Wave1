@@ -1,12 +1,8 @@
 package testcases.Activities;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 8900:Automation Cloud : Verify whether value : "ASCD-Portfolio Advisement" is available in Quick Subject-Task Entity.
 
@@ -97,7 +93,7 @@ public class TestCase_8900 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

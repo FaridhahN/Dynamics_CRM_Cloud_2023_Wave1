@@ -1,8 +1,6 @@
 package testcases.Member;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 
 //Test Case 8936:Cloud: Verify AG and AG effective date on Account creation when AG populated based on FBO and Business classification is Acute
@@ -93,7 +91,7 @@ public class TestCase_8936 {
 			.clickQuickCreateMembershipSaveAndClose()
 			
 			// Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 					
 		//6.Go to LOB and click on add LOB
 			.clickAddNewLineOfBusiness()

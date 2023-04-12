@@ -2,7 +2,6 @@ package testcases.DoNotVerifyAddress;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
@@ -40,13 +39,13 @@ public class TestCase_6160 {
 
 		.clickNyInformationTab().clickGeneralTab()
 		.navigateToState()
-		.getSatteValue()
+		.getStateValue()
 		.typeState("SS")
 		.clickSave()
 
 		.clickNyInformationTab().clickGeneralTab()
 		.navigateToState()
-		.getSatteValue()
+		.getStateValue()
 		.verifyStateValue("SS", true)
 		.clickSave()
 		.NavigateToSystemTab()
@@ -62,13 +61,13 @@ public class TestCase_6160 {
 
 		.clickNyInformationTab().clickGeneralTab()
 		.navigateToState()
-		.getSatteValue()
+		.getStateValue()
 		.typeState("SS")
 		.clickSave()
 
 		.clickNyInformationTab().clickGeneralTab()
 		.navigateToState()
-		.getSatteValue()
+		.getStateValue()
 		.verifyStateValue("SS", false)
 		.clickSave()
 		.NavigateToSystemTab()

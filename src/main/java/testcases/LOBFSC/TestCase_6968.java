@@ -1,12 +1,8 @@
 package testcases.LOBFSC;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
 
@@ -117,7 +113,7 @@ public class TestCase_6968 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -141,7 +137,7 @@ public class TestCase_6968 {
 		.clickSave() 
 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOB()
 
@@ -229,7 +225,7 @@ public class TestCase_6968 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -253,7 +249,7 @@ public class TestCase_6968 {
 		.clickSave() 
 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOBisNotDisplayed()
 

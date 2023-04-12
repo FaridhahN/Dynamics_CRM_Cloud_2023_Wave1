@@ -1,11 +1,8 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7277:Verify member account can not be published without one active Premier membership created
 
@@ -100,7 +97,7 @@ public class TestCase_7277 {
 			.chooseRecordStatusDraft()
 			
 		//6.  Go to Line of Business Entity and Add Line of Business with respect to the Premier Membership added in the Step above
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()

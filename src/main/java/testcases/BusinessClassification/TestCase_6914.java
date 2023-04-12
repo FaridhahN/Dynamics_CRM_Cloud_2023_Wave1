@@ -1,12 +1,8 @@
 package testcases.BusinessClassification;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6914:Verify Business classification auto populates based on the Class of trade and account type
 
@@ -149,7 +145,7 @@ public class TestCase_6914 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

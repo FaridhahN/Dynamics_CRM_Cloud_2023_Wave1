@@ -3,7 +3,6 @@ package testcases.LOBFSC;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_7147:Create new Shipto account - New Member form through sub account and save it as prospect first
 
@@ -120,7 +119,7 @@ public class TestCase_6964_3 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 		
@@ -130,7 +129,7 @@ public class TestCase_6964_3 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -148,7 +147,7 @@ public class TestCase_6964_3 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOB()
@@ -251,7 +250,7 @@ public class TestCase_6964_3 {
 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.clickGeneralTab()
 		
@@ -261,7 +260,7 @@ public class TestCase_6964_3 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -279,7 +278,7 @@ public class TestCase_6964_3 {
 		.clickLOBSaveAndClose()
 
 		//Click Line of Business
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Verify Food service LOB is displayed
 		.verifyFoodServiceLOBisNotDisplayed()

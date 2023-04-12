@@ -2,12 +2,7 @@ package pages;
 
 
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -53,8 +48,8 @@ public class AccountsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
 		Thread.sleep(15000);
-		Thread.sleep(8000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),20);
+		Thread.sleep(15000);
+		WebDriverWait wait= new WebDriverWait(getDriver(),15);
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		Thread.sleep(3000);
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );

@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//Test Case 8834:Cloud: Verify reactivating a terminated member
+//TFS ID_8781:Cloud : Verify CP, FSP, FBORD, AG dates are recalculated when reactivating an account
 
 public class TestCase_8781 {
 
@@ -37,6 +37,8 @@ public class TestCase_8781 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
+		//
+		.navigateToState()
 		//Account Status = Auto Populated to Active
 		.verifyDefaultAccountStatus()	
 
@@ -93,7 +95,7 @@ public class TestCase_8781 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//6.Click the + icon on the Line of Business Grid ***** Corresponding LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -132,7 +134,7 @@ public class TestCase_8781 {
 		.verifyAffiliateGroupIsNotNull()
 		.verifyAgEffectiveDateIsNotNull()
 		//Verify the AG and AG effective date **** AG should become NON Premier.AG effective date should be Premier end date 
-		
+
 
 		//9.Move the record status to draft and save  ***** Record moved to draft 
 		.chooseRecordStatusDraft()
@@ -189,7 +191,7 @@ public class TestCase_8781 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//18.Now add corresponding LOB **** LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -215,6 +217,9 @@ public class TestCase_8781 {
 
 		//19.Verify the Account status ***** Account status should be Active 
 		.pageRefresh()
+		
+		//navigation
+		.navigateToState()
 		.verifyDefaultAccountStatus()
 
 		//20.Verify the Premier start date **** Premier start date should be Acurity's start date 
@@ -228,7 +233,7 @@ public class TestCase_8781 {
 		.clickGeneralTab()
 		//22.Verify DPRD ***** DPRD should be same as new Premier start date 
 		.verifyDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
-		
+
 		//23.Verify TPRD ****TPRD should be same as New Premier start date 
 		.verifyTopParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 
@@ -237,12 +242,17 @@ public class TestCase_8781 {
 
 		//25 Verify Food SErvice Date effective Date
 		.verifyFoodServiceStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
-		
-		//26.Verify AG and AG effective date  ***** AG should not be NON Premier.AG effective date should be updated
-		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))		
 
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 		
+		//Navigate to AG from FBO Grid
+		.navigateToAG()
+				
+		//26.Verify AG and AG effective date  ***** AG should not be NON Premier.AG effective date should be updated
+		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))		
+
+		
+
 
 		;
 	}

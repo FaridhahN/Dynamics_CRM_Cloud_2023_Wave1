@@ -3,7 +3,6 @@ package testcases.BusinessKey;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Automation Cloud : Verify whether "No Error Message" is thrown when Direct Parent whose BK Active is set from No to Yes and which does not contain any Child Accounts.
 
@@ -104,7 +103,7 @@ public class TestCase_10942 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

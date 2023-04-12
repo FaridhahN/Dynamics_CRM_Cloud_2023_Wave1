@@ -1,9 +1,7 @@
 package testcases.Supplier;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 8778:Cloud : Verify a Business Partner record can be created and published by a Member Supervisor - Positive case
 

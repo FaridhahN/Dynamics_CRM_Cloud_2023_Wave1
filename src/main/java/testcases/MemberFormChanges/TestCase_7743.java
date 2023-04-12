@@ -1,11 +1,8 @@
 package testcases.MemberFormChanges;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7743:Verify "Membership" section is available on the top of the Member form.
 
@@ -132,7 +129,7 @@ public class TestCase_7743 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

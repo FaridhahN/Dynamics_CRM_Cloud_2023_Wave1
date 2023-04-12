@@ -1,11 +1,8 @@
 package testcases.MemberFormChanges;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7191:Verify Whether "Non-GPO Member" value is removed from account type in Member Form.
 
@@ -115,7 +112,7 @@ public class TestCase_7191 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

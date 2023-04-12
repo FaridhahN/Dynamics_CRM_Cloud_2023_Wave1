@@ -3,7 +3,6 @@ package testcases.CAMSFlag;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 4537:Verify CAMS flag can be changed from Yes to No or No to Yes when record status is draft
 
@@ -106,7 +105,7 @@ public class TestCase_4537 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

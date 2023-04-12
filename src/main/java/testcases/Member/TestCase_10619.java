@@ -1,10 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS_ID_10619-Cloud : Verify whether Base Read only role cannot create "LOB" via Line of Business Entity
 
@@ -29,7 +26,7 @@ public class TestCase_10619 {
 
 		//3.Verify Line of Business Entity for Base-Read Only
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyLineOfBusinesAssocView()
 		.verifyNewLineOfBusinessIsNotPresent();
 		

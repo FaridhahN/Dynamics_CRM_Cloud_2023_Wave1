@@ -1,12 +1,8 @@
 package testcases.LOBFSC;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6963:Verify Food Services LOB is NOT added automatically when LOB is not General GPO and Non-GPO Premier Membership is converted to GPO Premier Membership.
 
@@ -140,7 +136,7 @@ public class TestCase_6963 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -164,7 +160,7 @@ public class TestCase_6963 {
 		.clickSave() 
 
 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOBisNotDisplayed()
 
@@ -277,7 +273,7 @@ public class TestCase_6963 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -301,7 +297,7 @@ public class TestCase_6963 {
 		.clickSave() 
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		.verifyFoodServiceLOBisNotDisplayed()
 

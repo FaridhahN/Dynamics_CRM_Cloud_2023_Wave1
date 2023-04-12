@@ -1,11 +1,8 @@
 package testcases.PremierStartDate;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7214:Verify on updating "Premier Start Date" in an existing "Premier Memberships", Validate in Member form re calculation of Premier Start Date is getting triggered.
 
@@ -98,7 +95,7 @@ public class TestCase_7214 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//6.Click the + icon on the Line of Business Grid ***** Corresponding LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -153,7 +150,7 @@ public class TestCase_7214 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//18.Now add corresponding LOB **** LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

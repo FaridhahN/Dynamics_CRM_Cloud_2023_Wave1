@@ -2,9 +2,6 @@ package testcases.Pipeline;
 
 import org.testng.annotations.Test;
 
-import pages.LoginPage;
-import utils.DataInputProvider;
-
 //TFS ID_10516:Cloud -Replace existing primary contact with new one on a supplier
 
 

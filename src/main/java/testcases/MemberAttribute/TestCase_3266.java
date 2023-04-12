@@ -108,7 +108,7 @@ public class TestCase_3266 {
 			.clickSave() 
 		
 		//9.  Click the + icon on the Line of Business Grid
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
 			.clickAddNewLineOfBusiness()
@@ -193,7 +193,7 @@ public class TestCase_3266 {
 			.clickQuickCreateMembershipSaveAndClose()			
 
 			//18.Now add corresponding LOB **** LOB should be added successfully 
-			.clickLineOfBusiness()
+			.clickLineOfBusinesses()
 			
 			.selectactivateLOB()
 

@@ -3,7 +3,6 @@ package testcases.CAMSFlag;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 4538:Verify CAMS flag for a child can be Yes or No when the DP has CAMS as Yes
 
@@ -105,7 +104,7 @@ public class TestCase_4538 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -207,7 +206,7 @@ public class TestCase_4538 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -321,7 +320,7 @@ public class TestCase_4538 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

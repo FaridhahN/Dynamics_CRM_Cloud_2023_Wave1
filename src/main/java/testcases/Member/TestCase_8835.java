@@ -1,9 +1,7 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 8835:Cloud: Add and update Primary contact to a Member account
 
@@ -82,7 +80,7 @@ public class TestCase_8835 {
 		.clickSave() 
 
 		//4.Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

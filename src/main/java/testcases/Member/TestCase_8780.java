@@ -2,10 +2,9 @@ package testcases.Member;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_7138:Create new member - New Member form through sub account and save it as prospect first
+//TFS ID_8780:Cloud : Verify corresponding LOB is getting deactivated when end dated membership is deactivated
 public class TestCase_8780 {
 
 
@@ -109,7 +108,7 @@ public class TestCase_8780 {
 
 
 		//  Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -142,7 +141,7 @@ public class TestCase_8780 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//Now add corresponding LOB **** LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -194,8 +193,9 @@ public class TestCase_8780 {
 
 
 		//Now Verify the corresponding LOB 
-		.clickLineOfBusiness()
-		.selectLOB(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
+		.clickLineOfBusinesses()
+		//Wave 1 2023 fix
+		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
 		.verifyEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		.clickSaveAndCloseInEditPage()
 		.clickSave()
@@ -206,7 +206,7 @@ public class TestCase_8780 {
 
 		// then save
 		.clickGoBack()
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 		.verifyLOBIsNotPresent(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
 		;
 	}

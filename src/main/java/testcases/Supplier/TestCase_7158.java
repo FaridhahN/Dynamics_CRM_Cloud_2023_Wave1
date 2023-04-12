@@ -1,6 +1,4 @@
 package testcases.Supplier;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;

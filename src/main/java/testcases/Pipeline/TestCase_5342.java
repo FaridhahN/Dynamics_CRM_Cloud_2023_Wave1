@@ -1,10 +1,7 @@
 package testcases.Pipeline;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //TFS_ID_5342-Cloud :Verify if new pipeline is created by filling all the mandatory fields
 

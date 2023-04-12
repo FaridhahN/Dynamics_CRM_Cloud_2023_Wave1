@@ -1,11 +1,8 @@
 package testcases.MemberFormChanges;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7744:Verify "All Membership" is available on the Membership section of the Member form, where All Memberships are Available.
 

@@ -3,7 +3,6 @@ package testcases.LOBFSC;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 6967:Verify Food Services LOB is NOT added automatically when LOB is not General GPO and Location Type Account is converted to Member
 
@@ -140,7 +139,7 @@ public class TestCase_6967_2 {
 				.clickQuickCreateMembershipSaveAndClose()
 
 				//7.  Click the + icon on the Line of Business Grid
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				//Click New Line Of Business
 				.clickAddNewLineOfBusiness()
@@ -164,7 +163,7 @@ public class TestCase_6967_2 {
 				.clickSave() 
 
 
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				.verifyFoodServiceLOBisNotDisplayed()
 
@@ -283,7 +282,7 @@ public class TestCase_6967_2 {
 				.clickQuickCreateMembershipSaveAndClose()
 
 				//7.  Click the + icon on the Line of Business Grid
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				//Click New Line Of Business
 				.clickAddNewLineOfBusiness()
@@ -307,7 +306,7 @@ public class TestCase_6967_2 {
 				.clickSave() 
 
 				//7.  Click the + icon on the Line of Business Grid
-				.clickLineOfBusiness()
+				.clickLineOfBusinesses()
 
 				.verifyFoodServiceLOBisNotDisplayed()
 		;

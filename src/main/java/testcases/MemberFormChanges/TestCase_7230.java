@@ -1,11 +1,8 @@
 package testcases.MemberFormChanges;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7230:Verify Whether "Non-GPO Member" value is removed from account type in Member Entry Form.
 

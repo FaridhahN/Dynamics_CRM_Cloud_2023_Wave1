@@ -96,7 +96,7 @@ public class TestCase_8834 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//6.Click the + icon on the Line of Business Grid ***** Corresponding LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -193,7 +193,7 @@ public class TestCase_8834 {
 		.clickQuickCreateMembershipSaveAndClose()			
 
 		//18.Now add corresponding LOB **** LOB should be added successfully 
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

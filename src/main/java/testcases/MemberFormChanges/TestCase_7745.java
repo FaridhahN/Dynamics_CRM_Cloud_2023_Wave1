@@ -1,11 +1,8 @@
 package testcases.MemberFormChanges;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
 import utils.DataInputProvider;
 //Test Case 7745:Verify "Premier Membership" is available on the Membership section of the Member form, where Premier Memberships are Available.
 
@@ -129,7 +126,7 @@ public class TestCase_7745 {
 		.clickQuickCreateMembershipSaveAndClose()
 
 		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusiness()
+		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

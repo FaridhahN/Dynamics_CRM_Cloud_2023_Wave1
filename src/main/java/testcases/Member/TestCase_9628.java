@@ -1,12 +1,8 @@
 package testcases.Member;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-import driver.Driver;
 import pages.LoginPage;
-import pages.MemberFormPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_ 9628:Cloud : Verify whether user is able to "deactivate" Premier Membership in Published state when there is no other active Premier Membership.
 
@@ -14,7 +10,7 @@ public class TestCase_9628 {
 
 
 	@Test
-	public void createMember(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void test9628(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -39,7 +35,7 @@ public class TestCase_9628 {
 		.clickMembershipDeactivateButton()
 
 		//Click on membership save and close
-		.clickSaveAndCloseOnActivity()
+		//.clickSaveAndCloseOnActivity()
 
 		.verifyDeactivateError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 
