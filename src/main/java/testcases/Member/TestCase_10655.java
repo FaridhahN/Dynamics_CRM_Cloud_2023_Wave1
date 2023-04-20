@@ -62,10 +62,12 @@ public class TestCase_10655 {
 
 		// Click on Save
 		.clickSaveInJobFunction()
+		
+		.clickGoBack()
 
 		//Logout
 		.clickLogout()
-		
+
 		.refreshPage()
 
 
@@ -87,10 +89,10 @@ public class TestCase_10655 {
 
 		// 6. Click on Contact Account association record created
 		.doubleClickOnCAARecord()
-		
+
 		// 7. Click on Add new Job function
 		.clickAddJobFunction()
-		
+
 		// 8. Select "Chief Executive Officer" as Job function and click on Save
 		.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
 
@@ -106,7 +108,7 @@ public class TestCase_10655 {
 		.clickGoBackToMemberForm()
 		.clickLogout()
 		.refreshPage()
-	
+
 		//Data Reset
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
@@ -117,7 +119,7 @@ public class TestCase_10655 {
 		.selectAllContactView()
 		.selectExistingContact(DataInputProvider.getCellData_ColName(Driver.iTestCaseRowNumDriver, "CRMNumber", "Driver"))		
 		.deactivateContactAllContactsView();
-		
+
 
 	}
 }

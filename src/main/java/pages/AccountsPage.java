@@ -38,8 +38,8 @@ public class AccountsPage extends WebDriverServiceImpl {
   		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
   		Thread.sleep(5000);
   		click(getDriver().findElement(By.xpath("//*[contains(text(),'Active Members')]")),"Active Members View");
-  		Thread.sleep(10000);
-  		Thread.sleep(11000);
+  		Thread.sleep(15000);
+  		Thread.sleep(15000);
   		return this;
   	} 
 //Search accounts
@@ -95,32 +95,35 @@ public class AccountsPage extends WebDriverServiceImpl {
     	public  AccountsPage searchString(String String) throws InterruptedException {	
 
     		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),String,"Find Criteria" );
-    		Thread.sleep(5000);
+    		Thread.sleep(8000);
     		return this;
 
     	}
     	
     	public  AccountsPage clickclearButton() throws InterruptedException {	
-    		click(getDriver().findElement(By.xpath("//span[@id='quickFind_button_icon_1']")),"clear Button");
-    		Thread.sleep(10000);
-    		Thread.sleep(10000);
+    		click(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']")),"Clear Button");
+    		Thread.sleep(15000);
+    		Thread.sleep(11000);
     		return this;
     	}
+
+    	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
     	
-    	//select Draft Members view
+    	//Verify Account Name through DEA /HIN search
     	public AccountsPage verifyAccountisDisplayed() throws InterruptedException {
     		Thread.sleep(2000);
-    		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[contains(@class,'ag-cell-value') and @col-id='name']")), "Account Number");
+    		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[contains(@class,'ag-cell-value') and @col-id='name']")), " Account Number search for AccountName  ");
     		return this;
     	} 
     	
-    	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Base Read Only~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+    	
     	//Verify DEA and HIN Column
     	public AccountsPage verifyAccountnumberColumns() throws InterruptedException, AWTException {
     	
     		Thread.sleep(5000);
-    		click(getDriver().findElement(By.xpath("//span[contains(@class,'ms-Button-label') and contains(text(),'Edit columns')]")),"Edit ColumnsButton");
+    		//click(getDriver().findElement(By.xpath("//span[contains(@class,'ms-Button-label') and contains(text(),'Edit columns')]")),"Edit ColumnsButton");
+    		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"Edit ColumnsButton");
     		Thread.sleep(3000);
     		verifyDisplayed(getDriver().findElement(By.xpath("(//span[contains(@class,'pa-') and contains(text(),'DEA')])[2]")), "DEA");
     		verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(@class,'pa-') and contains(text(),'HIN')]")), "HIN");
@@ -129,7 +132,7 @@ public class AccountsPage extends WebDriverServiceImpl {
     		return this;
     	}
     	
-    	//Signout
+    	//Sign Out
       	public AccountsPage clickSignout() throws InterruptedException {
       		click(getDriver().findElement(By.xpath("//div[@class='mectrl_profilepic mectrl_profilepic_initials']")),"User Icon");
       		Thread.sleep(3000);	 

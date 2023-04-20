@@ -77,7 +77,7 @@ public class TestCase_8789 {
 
 		// Account  Type = Member
 		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-		
+
 		//Verify BC auto updated to Non-healthcare as per CoT
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
@@ -111,16 +111,16 @@ public class TestCase_8789 {
 
 		// Click on LOB Save 
 		.clickLOBSaveAndClose()
-		
+
 		//Change the status to publish
 		.chooseRecordStatusPublished()
 
 		.clickSave()
-		
+
 		.pageRefresh()
-		
+
 		.navigateToBusinessClassification()
-				
+
 		//Business Classification =Acute
 		.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
 
@@ -131,13 +131,11 @@ public class TestCase_8789 {
 		//7.Observe the AG and AG effective date populated 
 		.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
-		
-		
-		
-				
-				//7.Observe the AG and AG effective date populated 
-				.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
-				.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+
+
+		//7.Observe the AG and AG effective date populated 
+		.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
+		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 		;
 	}
 }

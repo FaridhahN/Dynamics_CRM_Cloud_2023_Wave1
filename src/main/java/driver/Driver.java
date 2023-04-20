@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 import org.testng.ITestContext;
@@ -59,79 +60,97 @@ public class Driver extends PreAndPost{
 			if (sCategory.equalsIgnoreCase("Member"))
 			{
 				sTestClassName="testcases.Member.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}
 			else if(sCategory.equalsIgnoreCase("Supplier"))
 			{
 				sTestClassName="testcases.Supplier.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}	
 			else if(sCategory.equalsIgnoreCase("Contact"))
 			{
 				sTestClassName="testcases.Contacts.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("LOBFSC"))
 			{
 				sTestClassName="testcases.LOBFSC.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("ConvertingAccounts"))
 			{
 				sTestClassName="testcases.ConvertingAccounts.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("Pipeline"))
 			{
 				sTestClassName="testcases.Pipeline.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("CAMSFlag"))
 			{
 				sTestClassName="testcases.CAMSFlag.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("BusinessKey"))
 			{
 				sTestClassName="testcases.BusinessKey.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("BusinessClassification"))
 			{
 				sTestClassName="testcases.BusinessClassification.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("MemberFormChanges"))
 			{
 				sTestClassName="testcases.MemberFormChanges.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}else if(sCategory.equalsIgnoreCase("Premier_StartDate"))
 			{
 				sTestClassName="testcases.PremierStartDate.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("Activities"))
 			{
 				sTestClassName="testcases.Activities.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("DoNotVerifyAddress"))
 			{
 				sTestClassName="testcases.DoNotVerifyAddress.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("ExcludeFromRoaster"))
 			{
 				sTestClassName="testcases.ExcludeFromRoaster.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("RebatePayment"))
 			{
 				sTestClassName="testcases.RebatePayment.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("PrescriptionData"))
 			{
 				sTestClassName="testcases.PrescriptionData.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("PatientServices"))
 			{
 				sTestClassName="testcases.PatientServices.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("SupplierAccountNumber"))
 			{
 				sTestClassName="testcases.SupplierAccountNumber.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("MemberAttribute"))
 			{
 				sTestClassName="testcases.MemberAttribute.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}	
 			else if(sCategory.equalsIgnoreCase("Account_Status"))
 			{
 				sTestClassName="testcases.AccountStatus.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
 			}				
-
-
 
 
 

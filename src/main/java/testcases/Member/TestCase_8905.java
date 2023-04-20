@@ -25,7 +25,7 @@ public class TestCase_8905 {
 
 		//2.Go to Workplace > Accounts and search for EIN 673415 
 		.selectAccountsTab()
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromSearchResults()

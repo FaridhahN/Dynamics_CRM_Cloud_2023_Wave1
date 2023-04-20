@@ -26,17 +26,23 @@ public class TestCase_10616 {
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromSearchResults()
-		
+
 		//3.Verify following Fields are NOT editable in Opened Member Account
 		.verifyAccountNameIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 		.verifyAccountName2IsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "accountName2", sDataSheetName))
-		.verifyPrimaryContactIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
+		
+		
 		.verifyPremierStartDateIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 		.verifyPremierEndDateIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+		.verifyGroupIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "verifyGroup", sDataSheetName))
+		.verifyClassOfTradeIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+		.verifyPrimaryContactIsNotEditable()
 		.verifyStoreLocTypeIsNotEditable()
 		.verifyStoreLocNumIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "storeLocNum", sDataSheetName))
 		.verifyStreet1IsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
+		
 		.verifyStreet2IsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "street2", sDataSheetName))
+		
 		.verifyCityIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 		.verifyCountyIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "county", sDataSheetName))
 		.verifyStateIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "state", sDataSheetName))
@@ -68,7 +74,7 @@ public class TestCase_10616 {
 		.verifySiebelIDIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "siebelID", sDataSheetName))
 		.verifyRegionIsNotEditable()
 		.verifySponsorDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "sponsor", sDataSheetName))
-		.verifySupplierRecordIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "supplierRecord", sDataSheetName))
+		.verifySupplierRecordIsNotEditable()
 		.verifyExternalAddressIDIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "externalAddressID", sDataSheetName))
 		.verifyOwnershipIsNotEditable()
 		.verifyStockSymbolIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "stockSymbol", sDataSheetName))
@@ -84,16 +90,17 @@ public class TestCase_10616 {
 		.verifyAccountTypeIsNotEditable()
 		.verifyRecordChangeStatusIsNotEditable()
 		.verifyPremierRosterIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "premierRoster", sDataSheetName))
+		.navigateToFeeShare()
 		.verifyCurrentInternalRepIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "currentInternalRep", sDataSheetName))
 		.verifyCurrentFieldRepIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "currentFieldRep", sDataSheetName))
 		.verifyFBOtDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "fBO", sDataSheetName))		
 		.verifyFeeShareDetailsIsNotEditable()
 		.clickNYInformationTab()
-		.verifyEstimatedNumLocationsIsNotEditable()
-		.verifyNAICSIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "nAICS", sDataSheetName))
+		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
+		.verifyNAICSIsNotEditable()
 		.verifyReferredByIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName));
 
-		
+
 		//Data Reset Not Required
 	}
 }

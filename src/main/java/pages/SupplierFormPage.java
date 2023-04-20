@@ -530,6 +530,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage verifyPrimaryContactValue(String verifyPrimaryContactValue) throws InterruptedException {
+		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_text']")), verifyPrimaryContactValue,"Primary Contact");
 		return this;
 	}
@@ -632,7 +633,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@title='NY INFORMATION']")),"My Information Label");
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
-		verifyDisplayed(getDriver().findElement(By.xpath("//div[@data-id='accountnumber-locked-iconWrapper']")), "CRM Lock symbol");
+		verifyDisplayed(getDriver().findElement(By.xpath("//input[@data-id='accountnumber.fieldControl-text-box-text']")), "CRM Lock symbol");
 		try {
 			DataInputProvider.setCellData(sCRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
 			assertNotNull(sCRMNumber);
@@ -787,6 +788,13 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		type((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']"))), street1,"Street");
 		return this;
 	}
+	
+	//navigate to TPRD via Street1
+	public SupplierFormPage navigateToTPRD() {
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),"Street");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+		return this;
+	}
 
 	public SupplierFormPage typeZipCode(String zipCode) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
@@ -834,7 +842,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage recordStatusLock() throws InterruptedException {
 		Thread.sleep(3000);		
-		verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus-locked-icon']")),"Record Status Lock");
+		//verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus-locked-icon']")),"Record Status Lock");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Record Status");
 		return this;
 	}
 

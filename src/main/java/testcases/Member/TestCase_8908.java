@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_ 8909:Cloud: Verify if HIN accepts Characters, Numbers, Alphanumeric values but it should be 9 char in length
+//TFS ID_8908:_709834_Cloud: Verify DEA and HIN number field are available in the Accounts view
 
 public class TestCase_8908 {
 

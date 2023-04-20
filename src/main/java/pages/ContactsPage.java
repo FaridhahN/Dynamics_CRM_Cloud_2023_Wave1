@@ -643,11 +643,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;	
 	}
 	//click save button in Job Function without Script Error Check
-
 	public ContactsPage clickSaveInJobFunctionWithoutScriptError() throws InterruptedException {
-		click(getDriver().findElement(By.xpath(
-				"//*[@data-id='ix_contactjobfunction|NoRelationship|Form|Mscrm.Form.ix_contactjobfunction.Save']")),
-				"Save");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contactjobfunction|NoRelationship|Form|Mscrm.Form.ix_contactjobfunction.Save']")),"Save");
 		Thread.sleep(10000);
 		//Duplicate Job Function Ignore and Save
 		try {
@@ -661,9 +658,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;}
 	//Select Contact from search results
 	public  ContactsPage deactivateContactAllContactsView() throws InterruptedException {	
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).click().build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//span[text()='Deactivate']")),"Deactivate");
 		Thread.sleep(2000);
@@ -702,7 +700,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(10000);
 		try {
 			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
-				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
+				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"OK");
 			}
 		}
 		catch(Exception e){

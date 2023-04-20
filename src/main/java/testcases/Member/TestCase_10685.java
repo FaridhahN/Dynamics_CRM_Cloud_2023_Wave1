@@ -36,6 +36,7 @@ public class TestCase_10685 {
 		.clickSaveInAccountNumbersEntity()
 		.clickGoBack()
 		.clickGeneralTab()
+		.pageRefresh()
 		.verifyDEA(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
 		
 							

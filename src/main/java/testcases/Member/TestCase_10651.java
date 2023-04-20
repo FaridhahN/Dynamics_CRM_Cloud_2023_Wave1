@@ -25,54 +25,54 @@ public class TestCase_10651 {
 		.selectAccountFromSearchResults()
 
 		//3.Verify Contacts Entity for Base Read Only
-		
+
 		.clickRelatedContacts()
 		.clickNewContact()
 		.addNewContactToMember((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "mainPhone", sDataSheetName)))
-		
+
 		//Open above created contact
 		.doubleClickExistingContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)))
-		
+
 		// Observe the Innovatix Contact ID field
-				.isInnovatixContactIDDisplayed()
+		.isInnovatixContactIDDisplayed()
 
-				// Change the record start from Draft to Published then save
-				.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "changeRecordStatus", sDataSheetName))
-					
-				
-				// Click on Save
-				.clickSaveAndClose()
-				
-				
-				//Open above created contact
-				.doubleClickExistingContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)))
-				
-				
-				// 6. Click on Contact Account association record created
-				.doubleClickOnCAARecord()
+		// Change the record start from Draft to Published then save
+		.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "changeRecordStatus", sDataSheetName))
 
-				// 7. Click on Add new Job function
-				.clickAddJobFunction()
 
-				// 8. Select "Bid Proposal Team" as Job function and click on Save
-				.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+		// Click on Save
+		.clickSaveAndClose()
 
-				// Click on Save
-				.clickSaveInJobFunctionWithoutScriptError()
-				
-				//Verify Error Message
-				.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
-				.clickOKOnErrorMessage()
-				.clickGoBack()
-				.clickDiscardChanges()
-				.clickGoBack()
-				.clickGoBackToMemberForm()
-				
-	
-		
+
+		//Open above created contact
+		.doubleClickExistingContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)))
+
+
+		// 6. Click on Contact Account association record created
+		.doubleClickOnCAARecord()
+
+		// 7. Click on Add new Job function
+		.clickAddJobFunction()
+
+		// 8. Select "Bid Proposal Team" as Job function and click on Save
+		.typeJobFunction(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+
+		// Click on Save
+		.clickSaveInJobFunctionWithoutScriptError()
+
+		//Verify Error Message
+		.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
+		.clickOKOnErrorMessage()
+		.clickGoBack()
+		.clickDiscardChanges()
+		.clickGoBack()
+		.clickGoBackToMemberForm()
+
+
+
 		//Data Reset
 		.deactivateContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)));
 

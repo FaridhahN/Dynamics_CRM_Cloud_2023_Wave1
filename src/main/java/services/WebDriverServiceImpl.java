@@ -1125,12 +1125,12 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 				String sExpectedValue= ele.getAttribute("value");
 				if (sExpectedValue.equalsIgnoreCase(data))
 				{
-					setReport().log(Status.FAIL, "The data: "+data+" entered in  "+fieldName+ "    Locked field",screenshotCapture());
+					setReport().log(Status.FAIL, "The data: ' "+data+"  ' was entered in  ' "+fieldName+ "  '   Locked field",screenshotCapture());
 					Driver.failCount++;
 				}
 				else
 				{
-					setReport().log(Status.PASS, "The data: "+data+"      COULD NOT be entered in Locked Field: "+fieldName,screenshotCapture());
+					setReport().log(Status.PASS, "The data: ' "+data+"    '  COULD NOT be entered in Locked Field:  "+fieldName,screenshotCapture());
 				}
 			}
 

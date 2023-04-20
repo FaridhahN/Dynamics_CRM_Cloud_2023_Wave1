@@ -4,7 +4,8 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+//TFS ID_ 8906:_781859_Cloud: Verify if the DEA expiration date is displayed
+//TFS ID_ 8906:_709843_Cloud: Verify if the DEA expiration date is displayed
 
 public class TestCase_8906 {
 

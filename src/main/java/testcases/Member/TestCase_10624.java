@@ -25,18 +25,18 @@ public class TestCase_10624 {
 		.selectAccountFromSearchResults()
 
 		//3.Verify Contacts Entity for Limited Member
-		
+
 		.clickRelatedContacts()
 		.clickNewContact()
 		.addNewContactToMember((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "mainPhone", sDataSheetName)))
-		
+
 		//Choose Existing Contact from Contact Associated View
-		
+
 		.doubleClickExistingContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)))
-		
+
 		// Observe the Innovatix Contact ID field
 		.isInnovatixContactIDDisplayed()
 
@@ -46,12 +46,12 @@ public class TestCase_10624 {
 		// Click on Save
 		.clickSaveAndClose()
 
-		
+
 		//Data Reset
 		.deactivateContact((DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName)));
 
-	
-	
+
+
 
 	}
 }
