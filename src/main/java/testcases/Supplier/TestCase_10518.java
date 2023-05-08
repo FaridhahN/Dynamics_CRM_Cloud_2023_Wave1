@@ -7,8 +7,7 @@ public class TestCase_10518 {
 	
 	//TFS ID 10518:Cloud -Verify if Supplier Supervisor User is able to publish Supplier from draft status
 
-	
-	
+		
 	@Test()
 
 	public void createSupplierAsSupplierSupervisor(int iRowNumber, String sDataSheetName) throws Exception {

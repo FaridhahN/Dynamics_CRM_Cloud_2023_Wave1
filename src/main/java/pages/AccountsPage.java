@@ -184,7 +184,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
 		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
 		Thread.sleep(10000);
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		return new SupplierFormPage();
 	}
   	

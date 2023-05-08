@@ -3571,7 +3571,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//Tupe membership end date
+	//Type membership end date
 	public MemberFormPage typeMembershipEndDate(String EndDate) {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")),"End Date");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),EndDate,"End Date");

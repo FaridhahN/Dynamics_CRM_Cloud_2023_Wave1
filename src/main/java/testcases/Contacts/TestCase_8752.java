@@ -103,7 +103,7 @@ public class TestCase_8752 {
 		// Verify relationship end date
 		.verifyCAARelationEndDateInSubGridView(
 				DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
-
+		
 		// 6. Check the Job function and communication record status
 		.doubleClickOnCAARecordInSubGridView()
 

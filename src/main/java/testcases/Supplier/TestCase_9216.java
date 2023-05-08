@@ -30,18 +30,18 @@ public class TestCase_9216 {
 
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
-		
-		
+
+
 		//Go to Diversity Information and Choose Active Diversity Info View
 		.diversityInfoAssociatedView()
 		.activeDiversityView()
 		.inactiveDiversityView();
-		
-		
 
 
 
-		
+
+
+
 
 	}
 }

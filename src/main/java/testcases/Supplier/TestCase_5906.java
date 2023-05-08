@@ -87,7 +87,7 @@ public class TestCase_5906 {
 		//9. Go to Membership  Entity and End the Premier/National Membership ***  The Premier Membership should be End Dated successfully
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 
-		// End reason = Anything from dropdown,
+		// End reason = Anything from drop-down,
 		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
 
 		// then save

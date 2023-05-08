@@ -52,6 +52,9 @@ public class TestCase_7158 {
 
 		//Update the Street1 Address Info
 		.updateStreet1(TestUtils.generateRandomChars("abcdefghi",5))
+		
+		//
+		.navigateToZipCode()
 
 		//Update the Zip Code Address Info
 		.updateZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))

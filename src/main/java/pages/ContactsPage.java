@@ -431,14 +431,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Wave2 Update
 		String endDate = getAttribute(getDriver().findElement(By.xpath("(//div[@col-id='ix_relationshipenddate']//label)[2]")), "aria-label",
 				"Relationship End Date in Contact Account Association Sub Grid View");
+		System.out.println(endDate);
 		if (endDate.equalsIgnoreCase(relatioshipEndDate)) {
 
 			setReport().log(Status.PASS, "Relationship End Date in Contact Account Association Sub Grid View " + endDate
-					+ " is displayed as expected ", screenshotCapture());
+					+ " is displayed as expected " + relatioshipEndDate  ,  screenshotCapture());
 
 		} else {
 			setReport().log(Status.FAIL, "Relationship End Date in Contact Account Association Sub Grid View " + endDate
-					+ " is NOT displayed as expected", screenshotCapture());
+					+ " is NOT displayed as expected" + relatioshipEndDate, screenshotCapture());
 			Driver.failCount++;
 		}
 		return this;
@@ -697,7 +698,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath(
 				"//*[@data-id='ix_contactjobfunction|NoRelationship|Form|Mscrm.Form.ix_contactjobfunction.Save']")),
 				"Save");
-		Thread.sleep(10000);
+		Thread.sleep(7000);
 		try {
 			if (getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")).isDisplayed()) {
 				click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"OK");

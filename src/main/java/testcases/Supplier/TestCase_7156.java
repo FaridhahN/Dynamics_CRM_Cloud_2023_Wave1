@@ -49,6 +49,9 @@ public class TestCase_7156 {
 		//Update the Street1 Address Info
 		.updateStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 		
+		//
+		.navigateToZipCode()
+		
 		//Update the Zip Code Address Info
 		.updateZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
 		

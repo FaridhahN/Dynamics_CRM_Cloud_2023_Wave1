@@ -28,7 +28,7 @@ public class TestCase_9200 {
 
 		//Search Existing Account using CRM#
 		//.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
-		.selectAllSupplierView()
+		//.selectAllSupplierView()
 
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
@@ -54,13 +54,28 @@ public class TestCase_9200 {
 		.addSmallBusinesDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
 		.addNewDiversityInfo()
-		.addWomenOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
-
+		.verifyWomenOwndSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType2", sDataSheetName))
+		.addWomenOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType2", sDataSheetName),
+				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
+				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
+				(DataInputProvider.getCellData_ColName(iRowNumber, "subClassification2", sDataSheetName)))
+		.addNewDiversityInfo()
+		.verifySerDisVetSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName))
+		.addSerDisVetDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName),
+				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
+				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
+				"Asian-Pacific")
+		.addNewDiversityInfo()
+		.verifyDisBusEntSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName))
+		.addDisBusEntDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName),
+				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
+				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
+				"Black")
 
 		//Data Reset
 		.deactivateAllDiversityInfo()
-		.clickConfirmDiversityDeactivation();
+		//.clickConfirmDiversityDeactivation()
+		;
 
 
 
