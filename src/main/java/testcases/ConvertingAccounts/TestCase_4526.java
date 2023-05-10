@@ -140,6 +140,11 @@ public class TestCase_4526 {
 		.clickSave()
 		.verifyParentEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 		
+		//date reset -> change account to Ship to, to avoid data mismatch infuture
+		.chooseRecordStatusDraft()
+		.chooseLocationType("Ship To")
+		.chooseRecordStatusPublished()
+		.clickSave()
 		;
 	}
 }

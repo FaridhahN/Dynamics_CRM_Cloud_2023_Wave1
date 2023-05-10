@@ -17,7 +17,8 @@ public class TestCase_8998 {
 	  	    .clicSignin()
 	  	    .clicYesInStaySignedin()
 			
-		//2.Go to Account and search for any account with BK Active as Yes and does not any child account ex. 1000194141	
+		//2.Go to Account and search for any account with BK Active as Yes and does not any child account ex. 1000194141
+	  	   //Actual data -> crmnum 1 = 1000048096 -> BK Active - yes & DP's BK Active Yes
 			.selectAccountsTab()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))	
 			.selectAccountFromSearchResults()
@@ -35,6 +36,7 @@ public class TestCase_8998 {
 				.clickSave()
 			
 		//4.Go to Accounts and search for any account with BK Active No and its DP has BK active Ex. 2000424828
+				 //Actual data -> crmnum 2 = 2000391336 -> BK Active - No & has its DP's BK active yes
 			.selectAccountss()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))	
 			.selectAccountFromSearchResults()
@@ -52,6 +54,8 @@ public class TestCase_8998 {
 				.clickSave()
 			
 		//6.Go to Accounts and search for any account with BK Active is No and its DP has BK Active is No, ex. 2000444770
+				//Actual data -> crmnum 3 = 2000444770 -> BK Active - No & has its DP has BK active No	
+				
 			.selectAccountss()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber2", sDataSheetName))	
 			.selectAccountFromSearchResults()				
@@ -69,6 +73,8 @@ public class TestCase_8998 {
 			.clickOkInErrorMsgBKField()
 			
 		//8. Go to Accounts and search for any account with BK Active is Yes and it has child accounts with BK active as Yes ex.2000103171
+			//Actual data -> crmnum 4 = 1000194141 -> BK Active - Yes & has its DP has BK active Yes	
+			
 			.selectAccountss()
 			.clickOnDiscardChanges()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber3", sDataSheetName))	

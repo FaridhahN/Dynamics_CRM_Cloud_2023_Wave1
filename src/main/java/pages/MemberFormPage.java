@@ -180,9 +180,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
 		try {
-			List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//button[text()='Ignore and save']"));
+			List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
 			if(ignoreMessage.size()>0)
-				click(getDriver().findElement(By.xpath("//button[text()='Ignore and save']")),"Ignore and Save");	
+				click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");	
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -378,11 +378,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Change CAMS flag
 	public MemberFormPage changeCAMSFlagAsYes() {
+		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"Yes","CAMS Flag"); 
 		return this;
 	}
 
 	public MemberFormPage changeCAMSFlagAsNo() {
+		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"No","CAMS Flag"); 
 		return this;
 	}
@@ -416,7 +424,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//Select DPR
+	//Select DPR as Managed
 	public MemberFormPage selectDirectParentRelationManaged() throws InterruptedException {
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_parentrelationship.fieldControl-option-set-select']")))),"Managed","Direct Parent Relation");
 		Thread.sleep(2000);
@@ -1611,7 +1619,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String date1= dateFormat.format(date); 
-		String endate=getAttribute(getDriver().findElement(By.xpath("(//*[@col-id='ix_enddate']//label)[2]")),"aria-label","End Date");
+		String endate=getAttribute(getDriver().findElement(By.xpath("(//*[@col-id='ix_enddate']//label)[2]//div//div")),"textContent","End Date");
 		System.out.println(date1+endate);
 		assertTrue(date1.contentEquals(endate),"LOB End date does not match with current date");
 		return this;
@@ -1845,7 +1853,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Line of Businesses')]")),"Line Of Businessess");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		return this;
 	}
 	//Verify Line of Business  Associated View
@@ -1858,8 +1866,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify the food service LOB
 	public MemberFormPage verifyFoodServiceLOB() {
 
-		verifyDisplayed(getDriver().findElement(By.xpath("//label[@aria-label='Food Services']")), "Food Service LOB");
-		attributevalue=getAttribute(getDriver().findElement(By.xpath("//label[contains(text(),'Food Services')]/ancestor::div[@col-id='ix_portfolio']/following-sibling::div[@col-id='ix_classificationtypenew']//a")), "aria-label", "Classtification type");
+		//verifyDisplayed(getDriver().findElement(By.xpath("//label[@aria-label='Food Services']")), "Food Service LOB");
+		attributevalue=getAttribute(getDriver().findElement(By.xpath("(//div[contains(text(),'Food Services')])[2]")), "textContent", "Food Service LOB");
+		attributevalue=getAttribute(getDriver().findElement(By.xpath("//div[contains(text(),'Food Services')]/ancestor::div[@col-id='ix_portfolio']/following-sibling::div[@col-id='ix_classificationtypenew']//a//span")), "textContent", "Classtification type");
 		return this;
 	}
 
@@ -1920,9 +1929,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		try
 		{
-			if ( getDriver().findElement(By.xpath("//span[contains(text(),'Save and Close')]")).isDisplayed())
+			if ( getDriver().findElement(By.xpath("//span[contains(text(),'Save and continue')]")).isDisplayed())
 			{
-				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and Close')]")),"Save and continue");
+				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and continue')]")),"Save and continue");
+				//span[contains(text(),'Save and Close')]
 			}
 		}
 		catch(Exception e)
@@ -2179,7 +2189,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 	//Type Line Of Business Start Date
-	public MemberFormPage typeLineOfBusinessStartDate(String lineOfBusinessStartDate) {
+	public MemberFormPage typeLineOfBusinessStartDate(String lineOfBusinessStartDate) throws InterruptedException {
+		Thread.sleep(5000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")))),lineOfBusinessStartDate,"Line of Bussiness Start Date");
 		return this;
 	}
@@ -2263,10 +2274,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Membership provider
 	public MemberFormPage selectMembershipProvider(String membershipProvider) throws InterruptedException   {	
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),"Membership Provider");
-		type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
-		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")),"Membership Provider");
-		return this;
+				type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
+				Thread.sleep(5000);
+				((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
+						getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")));
+				setReport().log(Status.PASS, "Clicked on the Membership Provider successfully", screenshotCapture());
+				//Thread.sleep(10000);
+				//click(getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")),"Membership Provider");
+				Thread.sleep(5000);
+				return this;
 	}
 
 	//Select Membership provider
@@ -3698,6 +3714,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify CAMS flag
 	public MemberFormPage verifyCAMSFlag(String verifyCAMSFlag) {
+		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-container']")),verifyCAMSFlag,"CAMS Flag"); 
 		return this;
 	}
@@ -3717,7 +3737,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Verify BK active
-	public MemberFormPage verifyBKActive(String verifyBKActive) {
+	public MemberFormPage verifyBKActive(String verifyBKActive) throws InterruptedException {
+		Thread.sleep(3000);
+		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		
+		WebElement element2 = getDriver().findElement(By.xpath("//label[contains(text(),'CAMS Flag')]"));
+		je.executeScript("arguments[0].scrollIntoView(true);",element2);
+			
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_bkactive.fieldControl-checkbox-container']")),verifyBKActive,"BKActive"); 
 		return this;
 	}
@@ -6293,8 +6321,46 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(ExpirationDate.size(), "Expiration Date");
 		return this;
 	}
+
+
+//Verify if "Member's or Non-GPO Member's CAMS Flag cannot be checked if it's
+	// Parent's CAMS Flag is unchecked" error msg is displayed when a Child member
+	// account has Yes whereas the Parent has CAMS as No
+	public MemberFormPage verifyCAMSerrorMsg() throws InterruptedException {
+		Thread.sleep(3000);
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),
+				"Member's or Non-GPO Member's CAMS Flag cannot be checked if it's Parent's CAMS Flag is unchecked",
+				"CAMS Flag error");
+		return this;
+	}
+
+	
+	// Verify if date validation error msg is displayed for Member Account
+	public MemberFormPage verifyDateValidationErrorMsg(String appDate, String startdate) throws InterruptedException {
+		Thread.sleep(3000);
+		
+		String dateValidationMsg = getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")).getText();
+		System.out.println("dateValidationMsg :\n" + dateValidationMsg);
+		
+		String ExpectedDateValidationMsg = "Date Restriction Error: Application Start Date (" + appDate
+				+ ") must be <=  Premier Member Start Date (" + startdate + ")";
+		System.out.println("ExpectedDateValidationMsg :\n" + ExpectedDateValidationMsg);
+		
+		if (dateValidationMsg.replaceAll("\\s", "").equalsIgnoreCase(ExpectedDateValidationMsg.replaceAll("\\s", ""))) {
+			setReport().log(Status.PASS,
+					"Error message displayed successfully" + "Date Restriction Error: Application Start Date ("
+							+ appDate + ") must be <=  Premier Member Start Date (" + startdate + ")",
+					screenshotCapture());
+		} else {
+			setReport().log(Status.FAIL, "Date restriction error message is not displayed as expected",
+					screenshotCapture());
+			Driver.failCount++;
+		}
+		verifyExactContent(dateValidationMsg.replaceAll("\\s", "").replaceAll("\\p{P}", ""),
+				ExpectedDateValidationMsg.replaceAll("\\s", "").replaceAll("\\p{P}", ""), "Date Restriction Error Message");
+
+		return this;
+	}
 }
-
-
 
 

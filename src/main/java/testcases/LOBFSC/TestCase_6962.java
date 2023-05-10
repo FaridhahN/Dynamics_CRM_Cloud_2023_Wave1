@@ -177,6 +177,12 @@ public class TestCase_6962 {
 
 		.verifyFoodServiceLOB()
 		.getClassificationTypeAfter()
+		/*
+		 * 
+		 * 
+		 * 
+		 * isssue in the below function
+		 */
 		.compareClassificationtype()
 		.clickNewOnAccountsPage()
 

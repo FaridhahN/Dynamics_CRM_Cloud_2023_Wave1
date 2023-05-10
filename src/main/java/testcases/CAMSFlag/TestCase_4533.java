@@ -4,131 +4,210 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_4533:Verify if CAMS rule works fine for a main account converted from shipto account
-
-
+//TFS ID_4533:Verify if CAMS rule works fine for a main account converted from shipto account - Old TC Name
+//TFS ID_4533:_710334_Verify if CAMS rule works fine for a main account converted from shipto account - New TC Name
+// Test Case 710334: TFS ID_8866:_710334_Verify if CAMS rule works fine for a main account converted from shipto account - TC num is 8866 in Azure - which is there in "ConvertingAccount" module as well - repetitive
 
 public class TestCase_4533 {
 
 	@Test
-	public void VerifyCAMSinDraft(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void VerifyCAMSinDraft(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
-		//1. Login to CRM using member supervisor / member credentials 
+		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage()
-		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-		.clickNext()
-		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
-		.clicSignin()
-		.clicYesInStaySignedin()
 
-		//2. From the left navigation column ,Go to Accounts > +New
-		.selectAccountsTab()
+				.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName)).clickNext()
+				.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
+				.clicSignin()
 
-		.clickNewOnAccountsPage()
-		.chooseMemberForm()
-		//3. Account Name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+				.clicYesInStaySignedin()
 
-		//Click on save 			
-		.clickSave() 
+				// 2. From the left navigation column ,Go to Accounts > +New
+				.selectAccountsTab()
 
-		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
+				.clickNewOnAccountsPage().chooseMemberForm()
 
-		//5. Account Type = Member
-		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
+				// 3. Account Name = Any
+				.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
-		//Class of Trade =Any
-		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+				// Click on save
+				.clickSave()
 
-		//Business Classification = Auto populated
-		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
+				// 4. Verify CRM Account # is generated
+				.verifyCRMNumberIsDisplayed()
 
-		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
+				// 5. Account Type = Member
+				.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
-		//Application Start Date = Today's Date
-		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+				// Class of Trade =Any
+				.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 
-		//Store/Location type = Shipto
-		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
+				// Business Classification = Auto populated
+				.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber,
+						"verifyBusinessClassification", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
+				// Account Status = Auto Populated to Active
+				.verifyDefaultAccountStatus()
 
-		//CAMS Flag = Yes
-		.changeCAMSFlagAsYes()
+				// Application Start Date = Today's Date
+				.chooseApplicationDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
 
-		//Participation Type = Standard
-		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+				// Participation Type = Standard
+				.selectParticipationType(
+						DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
+				// Direct Parent Entity Code = 673415
+				.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
-		//Direct Parent Entity Code = 673415
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+				// Direct Parent Relation = Managed
+				.selectDirectParentRelationManaged()
 
-		//Direct Parent Relation = Managed
-		.selectDirectParentRelationManaged() 
+				// Direct Parent Relation date = Today's Date
+				.selectDirectParentRelationDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
 
-		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+				// Top Parent Relation = OLM
+				.selectTopParentRelation(
+						DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 
-		//Top Parent Relation =  OLM
-		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+				// Top Parent Relation Date = Today's Date
+				.selectTopParentRelationDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
-		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+				// Click on Save
+				.clickSave()
 
-		//6. Street 1 = Any
-		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
+				// 6. Street 1 = Any
+				.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 
-		//City = NY
-		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
+				// City = NY
+				.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+				// Country =USA
+				.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
-		//Type Zip code
-		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
+				// Type Zip code
+				.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
+				// Click on Save
+				.clickSave()
 
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
+				// 7. Click the + icon on the Line of Business Grid
+				.clickLineOfBusinesses()
 
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+				// Click New Line Of Business
+				.clickAddNewLineOfBusiness()
 
-		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+				// Line of Business =General GPO
+				.selectLineOfBusiness(
+						DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
+				// Classification Type = General GPO
+				.selectLOBfClassificationType(
+						DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
 
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
+				// Start Date =Today's date
+				.typeLineOfBusinessStartDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
+				// Click on LOB Save
+				.clickLOBSaveAndClose()
 
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
+				// Click add new membership
+				.clickMembershipAndAddNewMembership()
 
-		//8. Record Status = Published
-		.chooseRecordStatusDraft()
+				// Choose Membership type
+				.selectMembershipType(
+						DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+				.selectMembershipProvider(
+						DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
-		.clickSave() 
+				// Provide any start date and click on save
+				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber,
+						"membershipProviderStartDate", sDataSheetName))
 
-		.clickLineOfBusinesses()
+				// Click on membership save and close
+				.clickQuickCreateMembershipSaveAndClose()
 
-		.clickGeneralTab()
+				// CAMS Flag = No
+				.changeCAMSFlagAsNo()
 
-		//Store/Location type = Blank
-		.chooseLocationTypewithOutVerifying("---")	
+				// 8. Record Status = Published
+				.chooseRecordStatusPublished()
 
-		//Click on Save 
-		.clickSave() 
+				// Click on Save
+				.clickSave()
+
+				.clickSave()
+				// 9. Verify Entity code is generated
+				.entityCodeIsDisplayed()
+
+				.selectSubaccount()
+
+				// 4. Click on Add new account
+				.clickNewAccountInSubAccount()
+				// 6. Account Name = Any
+				.typeAccountName("Subaccount")
+
+				// Top Parent Relation = OLM
+				.selectTopParentRelation(
+						DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+
+				// Top Parent Relation Date = Today's Date
+				.selectTopParentRelationDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+
+				// type TP reason
+				.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "tpReason", sDataSheetName))
+
+				// Click on save
+				.clickSave()
+
+				// 7 Verify CRM Account # is generated
+				.verifyCRMNumberIsDisplayed()
+
+				// 8.Account Type = Member
+				.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
+
+				// Class of Trade =Any
+				.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
+
+				// Business Classification = Auto populated
+				.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber,
+						"verifyBusinessClassification", sDataSheetName))
+
+				// Account Status = Auto Populated to Active
+				.verifyDefaultAccountStatus()
+
+				// Store/Location type = Shipto
+				.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))
+
+				// CAMS Flag = Yes
+				.changeCAMSFlagAsYes()
+
+				// Participation Type = Standard
+				.selectParticipationType(
+						DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+
+				// Direct Parent Relation = Managed
+				.selectDirectParentRelationManaged()
+
+				// Direct Parent Relation date = Today's Date
+				.selectDirectParentRelationDate(
+						DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+
+				// DP exception reason = Any
+				.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "dpReason", sDataSheetName))
+
+				// Click on Save
+				.clickSave()
+
+				// Verify error mesage -> The CAMS error message should be displayed : "Member's
+				// or Non-GPO Member's CAMS Flag cannot be checked if it's Parent's CAMS Flag is
+				// unchecked" because a Child member account with Yes cannot go with Parent with
+				// CAMS as No
+				.verifyCAMSerrorMsg()
 
 		;
 

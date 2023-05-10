@@ -69,7 +69,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		FileUtils.copyFile(source, destination);  
 		return screenshotPath;
 	}
-	
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public String verifIsNoTNullWithText(WebElement ele, String field) {	
@@ -127,53 +127,53 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 		return null;
 	}
-	
+
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-			public void verifyElementisDisplayed(int count, String field) {
+	public void verifyElementisDisplayed(int count, String field) {
 
-				try {
-					if(count>0) {
-						setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
-						
-					}else {
-						setReport().log(Status.FAIL, field+" is not displayed",screenshotCapture());
-						Driver.failCount++;
-					}
-				} catch (WebDriverException e) {
-					setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
-					Driver.failCount++;
-					throw e;
-				} 
+		try {
+			if(count>0) {
+				setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
+
+			}else {
+				setReport().log(Status.FAIL, field+" is not displayed",screenshotCapture());
+				Driver.failCount++;
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public String verifIsNoTNullWithTitleAttribute(WebElement ele, String field) {	
+		String bReturn = "";
+		try {
+
+			bReturn = ele.getAttribute("title");
+			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+				setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
+				Driver.failCount++;
+			}
+			else {
+				setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
 
 			}
-			
-			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+		return bReturn;
+	}
 
-			public String verifIsNoTNullWithTitleAttribute(WebElement ele, String field) {	
-				String bReturn = "";
-				try {
 
-					bReturn = ele.getAttribute("title");
-					if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
-						setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
-						Driver.failCount++;
-					}
-					else {
-						setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
 
-					}
-				} catch (WebDriverException e) {
-					setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
-					Driver.failCount++;
-					throw e;
-				}
-				return bReturn;
-			}
-
-			
-			
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	public WebElement locateElement(String locValue) {
@@ -196,7 +196,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			String sExpectedValue= ele.getAttribute("value");
 
 			if (fieldName.equalsIgnoreCase("password"))
@@ -354,93 +354,93 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		public void verifyDisabledFields(WebElement ele, String field) {
-			
-			try {
-				String att = ele.getAttribute("disabled");
-				System.out.println(att);
-						
-				if(att.equalsIgnoreCase("true")){
-					
-					setReport().log(Status.PASS, field +" is disabled ",screenshotCapture());
-				}
-				else {
-					if(att.equals(null))
+	public void verifyDisabledFields(WebElement ele, String field) {
+
+		try {
+			String att = ele.getAttribute("disabled");
+			System.out.println(att);
+
+			if(att.equalsIgnoreCase("true")){
+
+				setReport().log(Status.PASS, field +" is disabled ",screenshotCapture());
+			}
+			else {
+				if(att.equals(null))
 					setReport().log(Status.FAIL, field+" is NOT disabled ",screenshotCapture());
-					Driver.failCount++;
-				}	
-					
-			} catch (WebDriverException e) {
-				setReport().log(Status.FAIL, "WebDriverException : \"+e.getMessage()",screenshotCapture());
 				Driver.failCount++;
-				throw e;
-			}
-			}
-		
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
-		public void doubleClick(WebElement ele,String field)  {
-			try {
-				
-				Actions action =new Actions(getDriver());
-				action.doubleClick(ele).build().perform();
-				setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
-			}
-			catch (InvalidElementStateException e) {
-				e.printStackTrace();
-				setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
-				Driver.failCount++;
-			} catch (WebDriverException e) {
-				e.printStackTrace();
-				setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
-				Driver.failCount++;
-			} 
-		}	
+			}	
 
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		
-		//Clear a text field
-		public void clear(WebElement ele, String fieldName) throws InterruptedException  {
-			
-				try {
-
-					//Fix : Adding sleep after Chrome driver version 98 update. Which was auto clearing the text input after typing.
-					Thread.sleep(1000);
-					ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
-					ele.sendKeys(Keys.BACK_SPACE);
-					Thread.sleep(1000);
-					setReport().log(Status.PASS, "The data in " +  fieldName + " field is cleared ",screenshotCapture());
-				} catch (InvalidElementStateException e) {
-					setReport().log(Status.FAIL, "The data in " +  fieldName + " field could not be cleared",screenshotCapture());
-					Driver.failCount++;
-					throw e;
-				} catch (WebDriverException e) {
-					e.printStackTrace();
-					setReport().log(Status.FAIL, "Unknown exception occured while clearing data in " +  fieldName + " field",screenshotCapture());
-					Driver.failCount++;
-					throw e;
-				}
-				}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//Use when Field has no 'read only' or 'disable' attributes
-		public void verifyExactTextWithTextContentAttribute(WebElement ele, String expectedText,String field) {
-			String bReturn=ele.getAttribute("textContent");
-			System.out.println(bReturn);
-				try {
-				if(bReturn.contains(expectedText)) {
-					setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+ " . The  " + field + "  field is Readonly",screenshotCapture());
-				}else {
-					setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+  ". The " + field + " field  NOT is Readonly",screenshotCapture());
-					Driver.failCount++;
-				}
-			} catch (WebDriverException e) {
-				setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
-				Driver.failCount++;
-				throw e;
-			} 
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "WebDriverException : \"+e.getMessage()",screenshotCapture());
+			Driver.failCount++;
+			throw e;
 		}
+	}
 
-		
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public void doubleClick(WebElement ele,String field)  {
+		try {
+
+			Actions action =new Actions(getDriver());
+			action.doubleClick(ele).build().perform();
+			setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
+		}
+		catch (InvalidElementStateException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
+			Driver.failCount++;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
+			Driver.failCount++;
+		} 
+	}	
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//Clear a text field
+	public void clear(WebElement ele, String fieldName) throws InterruptedException  {
+
+		try {
+
+			//Fix : Adding sleep after Chrome driver version 98 update. Which was auto clearing the text input after typing.
+			Thread.sleep(1000);
+			ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
+			ele.sendKeys(Keys.BACK_SPACE);
+			Thread.sleep(1000);
+			setReport().log(Status.PASS, "The data in " +  fieldName + " field is cleared ",screenshotCapture());
+		} catch (InvalidElementStateException e) {
+			setReport().log(Status.FAIL, "The data in " +  fieldName + " field could not be cleared",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while clearing data in " +  fieldName + " field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Use when Field has no 'read only' or 'disable' attributes
+	public void verifyExactTextWithTextContentAttribute(WebElement ele, String expectedText,String field) {
+		String bReturn=ele.getAttribute("textContent");
+		System.out.println(bReturn);
+		try {
+			if(bReturn.contains(expectedText)) {
+				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+ " . The  " + field + "  field is Readonly",screenshotCapture());
+			}else {
+				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value in "+field+  ". The " + field + " field  NOT is Readonly",screenshotCapture());
+				Driver.failCount++;
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+	}
+
+
 	public void click(WebElement ele,String field)  {
 		try {
 			//WebDriverWait wait = new WebDriverWait(getDriver(), 15);
@@ -636,11 +636,11 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+
 	public void selectDropDownUsingVisibleText(WebElement ele, String value,String field) {
 		try {
-			 new Select(ele).selectByVisibleText(value);					
-			setReport().log(Status.PASS, ele+" is selected with value ' "+ value +" ' in "+field,screenshotCapture());
+			new Select(ele).selectByVisibleText(value);					
+			setReport().log(Status.PASS, ele.getText()+" is selected with value ' "+ value +" ' in "+field,screenshotCapture());
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL,  field+" could not be found",screenshotCapture());
 			Driver.failCount++;
@@ -713,8 +713,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-	
-	
+
+
 	public void verifyTextDoesNotMatchTitleAttribute(WebElement ele, String expectedText,String field) {
 		String bReturn=ele.getAttribute("title");
 		//String bReturn=ele.getText();
@@ -724,7 +724,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 				Driver.failCount++;
 			}else {
 				setReport().log(Status.PASS, "The text :"+bReturn+" did not match with the value "+expectedText+" in "+field+" field",screenshotCapture());
-				
+
 			}
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
@@ -732,8 +732,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			throw e;
 		} 
 	}
-	
-	
+
+
 	public void verifyExactTextWithTitleAttribute(WebElement ele, String expectedText,String field) {
 		String bReturn=ele.getAttribute("title");
 		//String bReturn=ele.getText();
@@ -756,7 +756,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void verifyExactText(WebElement ele, String expectedText,String field) {
 		//String bReturn=ele.getAttribute("title");
 		String bReturn=ele.getText();
-		
+
 		System.out.println(bReturn);
 		try {
 			if(bReturn.equalsIgnoreCase(expectedText)) {
@@ -1090,86 +1090,101 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-		public void verifyReadonlyFields(WebElement ele, String field) {
-			String bReturn = "false";
-			try {
-				bReturn = ele.getAttribute("readonly");
-				System.out.println(bReturn);
-				
-				if(bReturn.equalsIgnoreCase("true")){
-					
-					setReport().log(Status.PASS, field +" is Locked and readonly ",screenshotCapture());
-				}
-				else {
-					setReport().log(Status.FAIL, field+" is Null or Empty ",screenshotCapture());
-					Driver.failCount++;
-				}	
-					
-			} catch (WebDriverException e) {
-				setReport().log(Status.FAIL, "WebDriverException : \"+e.getMessage()",screenshotCapture());
+	public void verifyReadonlyFields(WebElement ele, String field) {
+		String bReturn = "false";
+		try {
+			bReturn = ele.getAttribute("readonly");
+			System.out.println(bReturn);
+
+			if(bReturn.equalsIgnoreCase("true")){
+
+				setReport().log(Status.PASS, field +" is Locked and readonly ",screenshotCapture());
+			}
+			else {
+				setReport().log(Status.FAIL, field+" is Null or Empty ",screenshotCapture());
 				Driver.failCount++;
-				throw e;
-			}
-			}
-		public void typeLocked(WebElement ele, String data, String fieldName)  {
+			}	
+
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "WebDriverException : \"+e.getMessage()",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		}
+	}
+	public void typeLocked(WebElement ele, String data, String fieldName)  {
+		try {
 			try {
-				try {
 
-					//Fix : Adding sleep after Chrome driver version 98 update. Which was auto clearing the text input after typing.
-					Thread.sleep(1000);
-					ele.sendKeys(data);
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				String sExpectedValue= ele.getAttribute("value");
-				if (sExpectedValue.equalsIgnoreCase(data))
-				{
-					setReport().log(Status.FAIL, "The data: ' "+data+"  ' was entered in  ' "+fieldName+ "  '   Locked field",screenshotCapture());
-					Driver.failCount++;
-				}
-				else
-				{
-					setReport().log(Status.PASS, "The data: ' "+data+"    '  COULD NOT be entered in Locked Field:  "+fieldName,screenshotCapture());
-				}
-			}
-
-			//			catch (InvalidElementStateException e) {
-			//			setReport().log(Status.FAIL, "The data: "+data+" could not be entered in  : "+fieldName, screenshotCapture());
-			//			Driver.failCount++;
-			//			throw e;
-
-			catch (WebDriverException e) {
+				//Fix : Adding sleep after Chrome driver version 98 update. Which was auto clearing the text input after typing.
+				Thread.sleep(1000);
+				ele.sendKeys(data);
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
-				setReport().log(Status.FAIL, "Unknown exception occured while entering  "+data+" in "+fieldName, screenshotCapture());	
+			}
+			String sExpectedValue= ele.getAttribute("value");
+			if (sExpectedValue.equalsIgnoreCase(data))
+			{
+				setReport().log(Status.FAIL, "The data: ' "+data+"  ' was entered in  ' "+fieldName+ "  '   Locked field",screenshotCapture());
 				Driver.failCount++;
-				throw e;
+			}
+			else
+			{
+				setReport().log(Status.PASS, "The data: ' "+data+"    '  COULD NOT be entered in Locked Field:  "+fieldName,screenshotCapture());
 			}
 		}
 
-		
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//			catch (InvalidElementStateException e) {
+		//			setReport().log(Status.FAIL, "The data: "+data+" could not be entered in  : "+fieldName, screenshotCapture());
+		//			Driver.failCount++;
+		//			throw e;
 
-				public void clickAndArrowDown(WebElement ele,String field)  {
-					try {
-								
-						ele.click();
-						ele.sendKeys(Keys.ARROW_DOWN);
-						setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
-					}
-					catch (InvalidElementStateException e) {
-						e.printStackTrace();
-						setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
-						Driver.failCount++;
-					} catch (WebDriverException e) {
-						e.printStackTrace();
-						setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
-						Driver.failCount++;
-					} 
-				}
+		catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while entering  "+data+" in "+fieldName, screenshotCapture());	
+			Driver.failCount++;
+			throw e;
+		}
+	}
 
-				//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	public void clickAndArrowDown(WebElement ele,String field)  {
+		try {
+
+			ele.click();
+			ele.sendKeys(Keys.ARROW_DOWN);
+			setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
+		}
+		catch (InvalidElementStateException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
+			Driver.failCount++;
+		} catch (WebDriverException e) {
+			e.printStackTrace();
+			setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
+			Driver.failCount++;
+		} 
+	}
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public void verifyExactContent( String actualText,String expectedText,String field) {
+		//String bReturn=ele.getAttribute("value");
+		try {
+			if(actualText.equalsIgnoreCase(expectedText)) {
+				setReport().log(Status.PASS, "The text :"+actualText+" matches with the value in "+field+" field",screenshotCapture());
+			}else {
+				setReport().log(Status.FAIL, "The text :"+actualText+" did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
+				Driver.failCount++;
+			}
+		} catch (WebDriverException e) {
+			setReport().log(Status.FAIL, "Unknown exception occured while verifying the Text in "+field+" field",screenshotCapture());
+			Driver.failCount++;
+			throw e;
+		} 
+	}
+
 	
-
 }
+
 

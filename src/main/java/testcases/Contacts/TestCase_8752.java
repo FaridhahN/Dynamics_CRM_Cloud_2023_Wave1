@@ -118,12 +118,14 @@ public class TestCase_8752 {
 		// Verify job function termination status
 		.verifyJobFunctionTerminationReason(
 				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
-
-		.clickCAArecordFromJobFunction()
+		
+		.clickGoBack()
 
 		.clickContactCommunicationFromRelated()
+		
+		.clickCAArecordFromJobFunction()
 
-		.doubleClickOnContactCommunication()
+		//.doubleClickOnContactCommunication()
 
 		// Verify contact communication termination status
 		.verifyContactCommunicationTerminationReason(

@@ -489,6 +489,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	//Update member record field
+		public SupplierFormPage clearMemberRecordId() throws InterruptedException {
+			Thread.sleep(3000);
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_memberrecordid.fieldControl-LookupResultsDropdown_ix_memberrecordid_selected_tag']"))).perform();
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_memberrecordid.fieldControl-LookupResultsDropdown_ix_memberrecordid_selected_tag_delete']")),"Clear Icon"); 
+			Thread.sleep(3000);
+			return this;
+		}
 
 
 	public SupplierFormPage verifyPremierStartDateAsCurrentDate() throws InterruptedException {

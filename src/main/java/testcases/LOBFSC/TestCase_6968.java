@@ -111,6 +111,9 @@ public class TestCase_6968 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+		
+		//Click on save 			
+				//.clickSave()
 
 		//7.  Click the + icon on the Line of Business Grid
 		.clickLineOfBusinesses()
@@ -223,6 +226,9 @@ public class TestCase_6968 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+		
+		//Click on save 			
+				//.clickSave()
 
 		//7.  Click the + icon on the Line of Business Grid
 		.clickLineOfBusinesses()

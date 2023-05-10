@@ -126,20 +126,41 @@ public class TestCase_4525 {
 
 		// Click on LOB Save 
 		.clickLOBSaveAndClose()
-
+		
 		//Click add new membership
-		.clickMembershipAndAddNewMembership()
+		//.clickMembershipAndAddNewMembership()
 
 		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		//.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+		//.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+		//.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 
 		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
+		//.clickQuickCreateMembershipSaveAndClose()
 
+		/*
+		 * New code added 
+		 */
+		//7.  Click the + icon on the Line of Business Grid
+				.clickLineOfBusinesses()
+
+				//Click New Line Of Business
+				.clickAddNewLineOfBusiness()
+
+				// Line of Business =General GPO
+				.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
+
+				// Classification Type = General GPO
+				.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification2", sDataSheetName))
+
+				// Start Date =Today's date
+				.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate2", sDataSheetName))
+
+				// Click on LOB Save 
+				.clickLOBSaveAndClose()
+				
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
 
