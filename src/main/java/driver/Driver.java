@@ -114,9 +114,9 @@ public class Driver extends PreAndPost{
 				sTestClassName="testcases.DoNotVerifyAddress.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 
-			}else if(sCategory.equalsIgnoreCase("ExcludeFromRoaster"))
+			}else if(sCategory.equalsIgnoreCase("ExcludeFromRoster"))
 			{
-				sTestClassName="testcases.ExcludeFromRoaster.".concat(sTestClassName);
+				sTestClassName="testcases.ExcludeFromRoster.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 
 			}else if(sCategory.equalsIgnoreCase("RebatePayment"))

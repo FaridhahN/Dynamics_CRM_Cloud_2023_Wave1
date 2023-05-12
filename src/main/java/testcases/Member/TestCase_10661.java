@@ -38,7 +38,7 @@ public class TestCase_10661 {
 		
 		//4.Logout as Member
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 		
 		//5.Login as a Supplier Supervisor
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
@@ -72,7 +72,7 @@ public class TestCase_10661 {
 		
 		//Log out as a Supplier Supervisor
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 
 		//Login as a Member Supervisor
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))

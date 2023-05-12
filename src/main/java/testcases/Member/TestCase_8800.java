@@ -30,7 +30,7 @@ public class TestCase_8800 {
 		.selectAccountFromSearchResults()
 		.verifyTPDateCheck()
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 		;
 		
 		new LoginPage()

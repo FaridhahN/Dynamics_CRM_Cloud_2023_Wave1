@@ -220,7 +220,7 @@ public class TestCase_8994 {
 		//Any future date
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 
-		// End reason = Anything from dropdown,
+		// End reason = Anything from drop-down,
 		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
 
 		// then save
@@ -232,7 +232,7 @@ public class TestCase_8994 {
 		//Any future date
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 
-		// End reason = Anything from dropdown,
+		// End reason = Anything from drop-down,
 		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
 
 		// then save
@@ -245,15 +245,16 @@ public class TestCase_8994 {
 		//Any future date
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 
-		// End reason = Anything from dropdown,
+		// End reason = Anything from drop-down,
 		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
 
 		// then save
 		.clickMembershipSaveAndClose()
 
 		.verifyTerminateStatus("Terminated")
-
-		.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		
+		//Step not in Test case 
+		//.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		;
 	}
 }

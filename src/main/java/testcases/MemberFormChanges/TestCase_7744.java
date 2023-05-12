@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//Test Case 7744:Verify "All Membership" is available on the Membership section of the Member form, where All Memberships are Available.
+//Test Case 7744:Verify "All Memberships" is available on the Membership section of the Member form, where All Memberships are Available.
 
 public class TestCase_7744 {
 
@@ -115,7 +115,7 @@ public class TestCase_7744 {
 		//Click and Choose option list  :Membership Type - Premier,  
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
 
-		//Membership Provider -Acurity
+		//Membership Provider -Non-GPO
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider2", sDataSheetName))
 
 		//Start date-1/1/2021 .
@@ -123,6 +123,24 @@ public class TestCase_7744 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+		
+		// Click the + icon on the Line of Business Grid
+		.clickLineOfBusinesses()
+
+		//Click New Line Of Business
+		.clickAddNewLineOfBusiness()
+
+		// Line of Business =Non- GPO
+		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+
+		// Classification Type = Non- GPO
+		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
 
 		
 		//8. Click on Publish ,after adding one Premier Membership.
@@ -135,9 +153,10 @@ public class TestCase_7744 {
 		.entityCodeIsDisplayed()
 
 		.verifymembershipwidget()
-		.selectAllMembership()
 		
-		.verifyAllMembershipisDisplayed()
+		.selectAllMembershipsView()
+		
+		.verifyAllMembershipsisDisplayed()
 		
 		;
 	}

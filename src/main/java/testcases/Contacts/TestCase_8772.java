@@ -38,6 +38,7 @@ public class TestCase_8772 {
 		.isInnovatixContactIDDisplayed()
 
 		.goBackandSelectAccount()
+		
 		// Primary Account = 1000155094
 		.addAnotherPrimaryAccount(
 				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount1", sDataSheetName))
@@ -45,11 +46,12 @@ public class TestCase_8772 {
 		// Save the record
 		.clickSave()
 
-		.clickSignout();
-
+		.clickSignout() ;
+		
+	
 
 		//1. Login to CRM using member supervisor / member credentials 
-		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email1", sDataSheetName))
+		new LoginPage() .refreshPageChooseSignInUser().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email1", sDataSheetName))
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
@@ -81,9 +83,10 @@ public class TestCase_8772 {
 		.clickSave()
 
 		.clickSignout();
+		
 
 		//1. Login to CRM using member supervisor / member credentials 
-		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
+		new LoginPage().refreshPageChooseSignInUser().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
@@ -115,8 +118,11 @@ public class TestCase_8772 {
 		.clickSave()
 
 		.clickSignout();
+		
+		
+		
 		//1. Login to CRM using member supervisor / member credentials 
-		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email3", sDataSheetName))
+		new LoginPage().refreshPageChooseSignInUser().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email3", sDataSheetName))
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
@@ -148,8 +154,9 @@ public class TestCase_8772 {
 		.clickSave()
 
 		.clickSignout();
+		
 		//1. Login to CRM using member supervisor / member credentials 
-		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email4", sDataSheetName))
+		new LoginPage().refreshPageChooseSignInUser().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email4", sDataSheetName))
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 

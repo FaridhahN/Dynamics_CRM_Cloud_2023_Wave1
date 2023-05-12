@@ -130,7 +130,7 @@ public class TestCase_8783 {
 				
 				.verifyAccountTypeLocked()
 				.clickLogout()
-				.refreshPage()
+				.refreshPageChooseSignInUser()
 		;
 				
 				

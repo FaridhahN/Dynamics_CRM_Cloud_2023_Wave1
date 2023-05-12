@@ -80,7 +80,7 @@ public class TestCase_7158 {
 
 		//Data Reset
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 		//Type the Username
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
 		.clickNext()

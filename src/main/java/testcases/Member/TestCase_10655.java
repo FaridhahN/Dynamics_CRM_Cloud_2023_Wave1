@@ -68,7 +68,7 @@ public class TestCase_10655 {
 		//Logout
 		.clickLogout()
 
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 
 
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))
@@ -107,7 +107,7 @@ public class TestCase_10655 {
 		.clickGoBack()
 		.clickGoBackToMemberForm()
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 
 		//Data Reset
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))

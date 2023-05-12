@@ -95,14 +95,13 @@ public class TestCase_7191 {
 		.clickSave() 
 
 
-
 		//7. Try to Add one Premier Membership .       
 		.clickMembershipAndAddNewMembership()
 
 		//Click and Choose option list  :Membership Type - Premier,  
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
 
-		//Membership Provider -Acurity
+		//Membership Provider -Non-GPO
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 		//Start date-1/1/2021 .
@@ -110,24 +109,26 @@ public class TestCase_7191 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+		
+		//LOB not required for NON-GPO , removing In correct steps Wave 2023 check
 
-		// Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
+//		// Click the + icon on the Line of Business Grid
+//		.clickLineOfBusinesses()
+//
+//		//Click New Line Of Business
+//		.clickAddNewLineOfBusiness()
+//
+//		// Line of Business =Non- GPO
+//		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+//
+//		// Classification Type = Non- GPO
+//		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+//
+//		// Start Date =Today's date
+//		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+//
+//		// Click on LOB Save 
+//		.clickLOBSaveAndClose()
 
 		//8. Click on Publish ,after adding one Premier Membership.
 		.chooseRecordStatusPublished()

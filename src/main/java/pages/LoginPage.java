@@ -20,7 +20,7 @@ public class LoginPage extends WebDriverServiceImpl{
 		if(getDriver().findElements(By.xpath("//h1[contains(text(),'Notifications')]")).size()>0)
 		{
 			getDriver().findElement(By.xpath("//a[contains(text(),'Sign Out')]")).click();
-			refreshPage();
+			refreshPageChooseSignInUser();
 
 		}
 		
@@ -28,8 +28,8 @@ public class LoginPage extends WebDriverServiceImpl{
 		return this;
 	}
 	
-	public LoginPage refreshPage() {
-		
+	public LoginPage refreshPageChooseSignInUser() {
+		//Wave 2023 
 		obj.getUrl();
 		WebDriverWait wait = new WebDriverWait(getDriver(),30);
 		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'Use another account')]"))));

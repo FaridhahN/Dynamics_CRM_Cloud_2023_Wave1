@@ -1,4 +1,4 @@
-package testcases.ExcludeFromRoaster;
+package testcases.ExcludeFromRoster;
 
 import org.testng.annotations.Test;
 
@@ -6,9 +6,10 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
-//Test Case 11371:Cloud: Verify Whether "Exclude from Roster" field is defaulted to 'No' for Member Form.
+//Test Case 11372:Cloud: Verify Whether "Exclude from Roster" field is defaulted to 'No' for Member Entry Form.
 
-public class TestCase_11371 {
+
+public class TestCase_11372 {
 
 
 	@Test
@@ -26,18 +27,15 @@ public class TestCase_11371 {
 
 		//2.Go to Workplace > Accounts and search for  
 		.selectAccountsTab()
-		
+
+		//4. Click on Add new account 
 		.clickNewOnAccountsPage()
-		
-		.chooseMemberForm()
-		
-		.navigateToroster()
+		.chooseMemberEntryForm()
+		.clickAdditionalCriteria()
+		.navigateTorosterMemberEntryForm()
 		.excludeFromRoster()
-		
+
 		;
-		
-
-
 
 	}
 

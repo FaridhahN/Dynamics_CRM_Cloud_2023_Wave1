@@ -213,8 +213,17 @@ public class TestCase_8999 {
 		//Click on Save 
 		.clickSave() 
 
+		.selectAccountStatus("Terminated")
+
+		.clickSave()
+
+		.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		
 		//4.Now go to the membership and end date any of the existing membership with any future date then save
 		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		
+
+		.clickOnDiscardChanges()
 
 		//Any future date
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
@@ -226,7 +235,6 @@ public class TestCase_8999 {
 		.clickMembershipSaveAndClose()
 
 		.verifyTerminateStatus("Active")
-		.selectAccountStatus("Terminate")
 
 		;
 	}

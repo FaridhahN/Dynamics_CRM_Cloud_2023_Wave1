@@ -254,15 +254,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//go back and selct the account
+	//go back and select the account
 
 	// to choose an existing Active contact
 	public ContactsPage goBackandSelectAccount() throws InterruptedException {
+		Thread.sleep(3000);
 		clickGoBack();
 		Actions a = new Actions(getDriver());
 		//Wave2 Update 
 		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
-		a.moveToElement(getDriver().findElement(By.xpath("//label[@aria-label]"))).doubleClick().build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']"))).doubleClick().build().perform();
 		Thread.sleep(6000);
 		return this;
 	}
@@ -275,7 +276,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),PrimaryAccount1, "Primary Account");
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		return this;
 	}
@@ -1024,14 +1025,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// double click the created Contact Communication entry from view
 	public ContactsPage doubleClickOnContactCommunication() throws InterruptedException {
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		//Actions a = new Actions(getDriver());
 		//Wave2 Update
 		//a.moveToElement(
 		//Wave 2023
-				//doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"CAA on Comm/Pub");
+				doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"CAA on Comm/Pub");
 				
-				doubleClick(getDriver().findElement(By.xpath("//*[@col-id='statecode']//label[@aria-label='Read only']")),"CAA on Comm/Pub");
+				//doubleClick(getDriver().findElement(By.xpath("//*[@col-id='statecode']//label[@aria-label='Read only']")),"CAA on Comm/Pub");
 				
 		Thread.sleep(3000);
 		return this;

@@ -1,4 +1,4 @@
-package testcases.ExcludeFromRoaster;
+package testcases.ExcludeFromRoster;
 
 import org.testng.annotations.Test;
 

@@ -1,4 +1,4 @@
-package testcases.ExcludeFromRoaster;
+package testcases.ExcludeFromRoster;
 
 import org.testng.annotations.Test;
 
@@ -6,11 +6,10 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
-//Test Case 11377:Automation Cloud: Verify for Child accounts whose "Exclude from Roster" can be Yes when the parent has "Exclude from Roster" as Yes.
+//Test Case 11376:Cloud: Verify for a Child accounts whose "Exclude from Roster" can be Yes when the parent has "Exclude from Roster" as No.
 
 
-
-public class TestCase_11377 {
+public class TestCase_11376 {
 
 
 	@Test
@@ -36,30 +35,19 @@ public class TestCase_11377 {
 		.selectAccountFromSearchResults()
 
 		.selectSubaccount()
-
-		//4. Click on Add new account 
-		.clickNewAccountInSubAccount()
-
-		//6. Account Name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-
-
-		//Direct Parent Relation = Managed
-		.selectDirectParentRelationManaged() 
-
-		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-
-		.navigateToState()
-		//Top Parent Relation =  OLM
-		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
-
-		//Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		.searchinSubaccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		.selectAccountFromSearchResults()
 
 		.navigateToroster()
 		.setExcludeFromRoster("Yes")
-
+		
+		//Click on save 
+		.clickSave() 
+		.verifyErrorisNotDisplayed()
+		
+		.navigateToroster()
+		.setExcludeFromRoster("No")
+		
 		//Click on save 
 		.clickSave() 
 		.verifyErrorisNotDisplayed()

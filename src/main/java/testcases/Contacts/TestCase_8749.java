@@ -111,7 +111,7 @@ public class TestCase_8749 {
 		
 		.clickCAArecordFromJobFunction()
 
-		.doubleClickOnContactCommunication()
+		//.doubleClickOnContactCommunication()
 
 		// Check communication record status
 		.verifyContactCommunicationTerminationReason(

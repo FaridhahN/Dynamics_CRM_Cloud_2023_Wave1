@@ -552,12 +552,13 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		try {
 
 			bReturn = ele.getAttribute("value");
+			System.out.println(bReturn);
 			if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
 				setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
 				Driver.failCount++;
 			}
 			else {
-				setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+				setReport().log(Status.PASS, field+" contains value : "+bReturn + "  as Expected ",screenshotCapture());
 
 			}
 		} catch (WebDriverException e) {
@@ -640,7 +641,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void selectDropDownUsingVisibleText(WebElement ele, String value,String field) {
 		try {
 			new Select(ele).selectByVisibleText(value);					
-			setReport().log(Status.PASS, ele.getText()+" is selected with value ' "+ value +" ' in "+field,screenshotCapture());
+			setReport().log(Status.PASS, field+" is selected with value  :' "+ value + " : as expected" ,screenshotCapture());
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL,  field+" could not be found",screenshotCapture());
 			Driver.failCount++;
@@ -739,9 +740,9 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		//String bReturn=ele.getText();
 		try {
 			if(bReturn.contains(expectedText)) {
-				setReport().log(Status.PASS, "The text :"+bReturn+" matches with the value in "+field+" field",screenshotCapture());
+				setReport().log(Status.PASS, "The text '"+bReturn+" ' matches with the value in "+field+" field",screenshotCapture());
 			}else {
-				setReport().log(Status.FAIL, "The text :"+bReturn+" did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
+				setReport().log(Status.FAIL, "The text ' "+bReturn+" ' did not match with the value "+expectedText+"in "+field+" field",screenshotCapture());
 				Driver.failCount++;
 			}
 		} catch (WebDriverException e) {

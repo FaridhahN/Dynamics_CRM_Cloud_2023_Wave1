@@ -42,9 +42,7 @@ public class TestCase_8816 {
 		//5. Select Account type as Member
 		.selectAccountType("Member")
 
-		//6. Participation Type = Standard
-		.selectParticipationType("Standard")
-
+			
 
 		//7. Select Direct Parent Entity code
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -61,6 +59,9 @@ public class TestCase_8816 {
 		//11. Top Parent Relation Date
 		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
+		//6. Participation Type = Standard
+				.selectParticipationType("Standard")
+				
 		//12. Click on save 			
 		.clickSave() 
 		
@@ -98,7 +99,7 @@ public class TestCase_8816 {
 		.verifyTerminateStatusError()	
 
 		
-		//23. Change the account Location type to Remit to
+		//23. Change the account Location type to RemiT to
 		.chooseLocationType("Remit To")
 
 		//24. Click on save 			

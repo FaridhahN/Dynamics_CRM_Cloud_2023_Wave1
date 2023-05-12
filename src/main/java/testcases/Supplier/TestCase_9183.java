@@ -66,7 +66,7 @@ public class TestCase_9183 {
 		
 		//Log out as a Supplier
 		.clickLogout()
-		.refreshPage()
+		.refreshPageChooseSignInUser()
 		
 		//Login as Supplier Supervisor
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))

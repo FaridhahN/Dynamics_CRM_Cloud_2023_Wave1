@@ -60,9 +60,10 @@ public class AccountsPage extends WebDriverServiceImpl {
   //Select member account from search results
   	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
   		//Actions action = new Actions(getDriver());
+  		//Wave2 fix
   		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
   		//click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
-  		Thread.sleep(6000);
+  		Thread.sleep(9000);
   		return new MemberFormPage();
   	}	
   	  	

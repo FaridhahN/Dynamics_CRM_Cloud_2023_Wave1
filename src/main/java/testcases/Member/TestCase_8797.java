@@ -154,7 +154,7 @@ public class TestCase_8797 {
 		  .entityCodeIsDisplayed()
 		  
 		  .clickLogout() 
-		  .refreshPage() ;
+		  .refreshPageChooseSignInUser() ;
 		  
 		  new LoginPage() 
 		  .typeEmail(DataInputProvider.getCellData_ColName(iRowNumber,
@@ -297,7 +297,7 @@ public class TestCase_8797 {
 		  .typeAccountName("Your Health Team") 
 		  .clickSave() 
 		  .clickLogout()
-		  .refreshPage() ;
+		  .refreshPageChooseSignInUser() ;
 		 
 
 		//Access Login Page

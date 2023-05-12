@@ -22,12 +22,17 @@ public class TestCase_7313 {
 	  	    .selectAccountsTab()
 	  	  	.clickNewOnAccountsPage()
 			.chooseMemberForm()
-					
+			
+							
 		//3. Verify Account status field value at the top
 			.defaultAccountStatusHeader()
-		
-		//4. Verify Account status field in the form
+			
+			
+			
+			//4. Verify Account status field in the form
 			.verifyDefaultAccountStatus()
+		
+	
 		
 		//5. Change the form view to Member entry form
 			.chooseMemberEntryForm()
