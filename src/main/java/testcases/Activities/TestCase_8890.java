@@ -164,7 +164,7 @@ public class TestCase_8890 {
 		.clickNewFaxActivity()
 
 		//Verify Autom populated Feilds
-		.verfiyAutopopulatedFeildsFax()
+		.verfiyAutopopulatedFieldsFax()
 
 		//Select the information view
 		.selectInformationview()

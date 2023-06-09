@@ -26,7 +26,7 @@ public class TestCase_3268 {
 		.selectRelatedMemberAttributesForLimMem()
 		.clickNewAccountnumberMemberAttribute()
 		.addNewAccountMemberAttribute(DataInputProvider.getCellData_ColName(iRowNumber, "AttributeType", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "AttributeValue", sDataSheetName))
-		.verifyErrorMessage_contains_Sinlgequote("You can't create a Member Attribute with same Attribute Type")
+		.verifyErrorMessage_contains_Singlequote("An exception has occured: You can't create a Member Attribute with same Attribute Type")
 		.clickGoBackButton()
 		.clickOnDiscardChanges()
 		;

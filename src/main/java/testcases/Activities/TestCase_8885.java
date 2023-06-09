@@ -141,14 +141,17 @@ public class TestCase_8885 {
 		//Click New Task Activity
 		.clickNewTaskActivity()
 		
-		//Verify Autom populated Feilds
-		.verfiyAutopopulatedFeilds()
+		//Verify Auto populated Fields
+		.verfiyAutopopulatedFields()
 		
 		//Select the information view
 		.selectInformationview()
 		
 		//Enter the details in the new tasks window
-		.EnterTaskDetails(DataInputProvider.getCellData_ColName(iRowNumber, "Subject", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) , DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
+		.EnterTaskDetails(DataInputProvider.getCellData_ColName(iRowNumber, "Subject", sDataSheetName), 
+				DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName),
+				DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) ,
+				DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
 		;
 	}
 }

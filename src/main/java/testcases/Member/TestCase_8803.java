@@ -154,7 +154,7 @@ public class TestCase_8803 {
 		//Fix for Req change
 		.verifyDPChangeConfirmationForSubaccounts("This account has sub accounts that will be changed as well.")
 		.verifyDPWithoutEntityMessage("You cannot publish the Member since Direct Parent has no Entity code")
-		
+
 		;
 	}
 }

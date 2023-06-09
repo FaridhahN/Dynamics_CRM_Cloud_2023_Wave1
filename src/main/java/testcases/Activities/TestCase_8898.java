@@ -162,7 +162,7 @@ public class TestCase_8898 {
 		.clickAppointmentActivity()
 
 		//Verify Auto populated Feilds
-		.verfiyAutopopulatedFeildsAppointment()
+		.verfiyAutopopulatedFieldsAppointment()
 
 		//Select the information view
 		.selectInformationview()

@@ -53,7 +53,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		Thread.sleep(3000);
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
-		Thread.sleep(7000);
+		Thread.sleep(10000);
 		return this;
 	}
 
@@ -63,7 +63,7 @@ public class AccountsPage extends WebDriverServiceImpl {
   		//Wave2 fix
   		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
   		//click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
-  		Thread.sleep(9000);
+  		Thread.sleep(15000);
   		return new MemberFormPage();
   	}	
   	  	
@@ -177,15 +177,16 @@ public class AccountsPage extends WebDriverServiceImpl {
   	
  //Select supplier account from search result
   	public  SupplierFormPage selectSupplierAccountFromSearchResults() throws InterruptedException {	
+  		Thread.sleep(5000);
 		Actions action = new Actions(getDriver());	
 //		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
 //		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();
-//		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
-//		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
-		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
-		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
+		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
+//		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
+//		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
 		Thread.sleep(10000);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		return new SupplierFormPage();
 	}
   	

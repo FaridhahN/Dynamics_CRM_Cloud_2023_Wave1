@@ -30,7 +30,7 @@ public class TestCase_8804 {
 		.selectAccountFromSearchResults()
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.verifyIsCorporateAccount("No")
+		.verifyIsCorporateAccount("Yes")
 		;
 	}
 }

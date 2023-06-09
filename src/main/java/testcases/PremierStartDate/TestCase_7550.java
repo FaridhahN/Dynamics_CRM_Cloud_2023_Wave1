@@ -181,9 +181,9 @@ public class TestCase_7550 {
 		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 		.clickMembershipDeactivateButton()
-		
+
 		.clickMembershipDeactivateButtonConfirm()
-		
+
 		.clickGoBack()
 
 		//Verify

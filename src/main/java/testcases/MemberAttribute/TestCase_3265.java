@@ -26,7 +26,7 @@ public class TestCase_3265 {
 		.selectAccountsTab()
 
 
-		
+
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -138,14 +138,21 @@ public class TestCase_3265 {
 		//Is Top parent = Yes
 		.changeTopParentAsYes()
 
-		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "TPExcpetion", sDataSheetName))
+		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "tPReason", sDataSheetName))
+		
+		//Navigate to Region via Do Not verify
+		.navigateToDoNotVerify()
+		
 		//Region = Any
 		.selectRegion(DataInputProvider.getCellData_ColName(iRowNumber, "region", sDataSheetName))
+		
+		.selectTopParentRelation("OLM")
 
 		//Top parent classification = Any
 		.selectTopParentClassification(DataInputProvider.getCellData_ColName(iRowNumber, "topParentClassification", sDataSheetName))
-		.chooseRecordStatusPublished()
 		
+		.chooseRecordStatusPublished()
+
 		.clickSave()
 		.selectRelatedMemberAttributesForLimMem()
 		.verifyPrepopulatedAttributes()

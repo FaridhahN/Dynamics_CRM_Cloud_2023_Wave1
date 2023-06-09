@@ -156,7 +156,7 @@ public class TestCase_3292 {
 		.selectRelatedMemberAttributesForLimMem()
 		.clickNewAccountnumberMemberAttribute()
 		.addNewAccountMemberAttribute(DataInputProvider.getCellData_ColName(iRowNumber, "AttributeType1", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "AttributeValue1", sDataSheetName))
-		.verifyErrorMessage_contains_Sinlgequote("You can't create 'Check Parent Do Not Override' rebate rule as there is a member lower down in the hierarchy that has a rebate rule for the same LOB.")
+		.verifyErrorMessage_contains_Singlequote("You can't create 'Check Parent Do Not Override' rebate rule as there is a member lower down in the hierarchy that has a rebate rule for the same LOB.")
 		.clickGoBackandDiscardChanges()
 		;
 

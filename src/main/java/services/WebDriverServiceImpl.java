@@ -486,8 +486,8 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 			bReturn = ele.getAttribute("value");
 			if(bReturn != null && !bReturn.isEmpty() && !bReturn.equalsIgnoreCase("---") ){
-				System.out.println("The Value in the "+ field + bReturn);
-				setReport().log(Status.PASS, bReturn+" is displayed in "+field,screenshotCapture());
+				System.out.println("The Value in the "+ field + " is : "+ bReturn + " as expected.");
+				setReport().log(Status.PASS, bReturn+" is displayed in "+field + " as expected.",screenshotCapture());
 			}
 			else {
 				setReport().log(Status.FAIL, field+" is Null or Empty ",screenshotCapture());
@@ -862,7 +862,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void verifyDisplayed(WebElement ele,String field) {
 		try {
 			if(ele.isDisplayed()) {
-				setReport().log(Status.PASS, field+" is displayed",screenshotCapture());
+				setReport().log(Status.PASS, ele.getText()+" is displayed in : " + field + " as expected." ,screenshotCapture());
 			} else {
 				setReport().log(Status.FAIL, field+" is not displayed",screenshotCapture());
 			}

@@ -37,7 +37,7 @@ public class TestCase_9205 {
 		.clickNeSupplierAccount()
 		.AddSupplierAccount(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "supplierRep", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchasingPreference", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "memberLevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startdate", sDataSheetName))
 		.saveAndCloseSupplierAccount()
-		.clickSupplierAccountNumbers()
+		.doubleClickSupplierAccountNumbers()
 		.deActivateSupplierAccount()
 		;
 	}

@@ -49,6 +49,11 @@ public class TestCase_11436 {
 		.clickSave()
 		.NavigateToSystemTab()
 		.verifyMellissa()
+		
+		//Data Reset -Added Wave 2023 fix
+		.clickGeneralTab()
+		.navigateToDoNotVerifyEnterData("313 Congress St Fl 5","02210-1218")
+		.clickSave()
 		;
 	}
 

@@ -36,15 +36,16 @@ public class TestCase_8768 {
 		.clickGoBackButton()
 		.clickNewAccountnumberMemberAttribute()
 		.addNewAccountMemberAttribute(DataInputProvider.getCellData_ColName(iRowNumber, "AttributeType", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "AttributeValue", sDataSheetName))
-		.verifyErrorMessage_contains_Sinlgequote("You can't create a Member Attribute with same Attribute Type")
+		.verifyErrorMessage_contains_Singlequote("An exception has occured: You can't create a Member Attribute with same Attribute Type")
 		.clickGoBackButton()
 		.clickOnDiscardChanges()
 		.clickNewAccountnumberMemberAttribute()
 		.addNewAccountMemberAttribute(DataInputProvider.getCellData_ColName(iRowNumber, "AttributeType1", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "AttributeValue1", sDataSheetName))
-		.verifyErrorMessage_contains_Sinlgequote("You can't create a Member Attribute with same Attribute Type")
+		.verifyErrorMessage_contains_Singlequote("An exception has occured: You can't create a Member Attribute with same Attribute Type")
 		.clickGoBackButton()
 		.clickOnDiscardChanges()
+		//Data Reset
 		.deactivateAllAttributes()
-;
+		;
 	}
 }

@@ -6,7 +6,7 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
-//Test Case 9203:Cloud-Add a supplier account number to a member
+//TFS ID_9204:_710096_Cloud - Detach a supplier account number
 
 
 public class TestCase_9204 {
@@ -39,15 +39,21 @@ public class TestCase_9204 {
 		.saveSupplierAccount()
 		.navigateToAccountNumberTab()
 		.clickNewAccountNumber()
-		.AddGeneralAccountNumber(DataInputProvider.getCellData_ColName(iRowNumber, "name", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "number", sDataSheetName))
+		.AddGeneralAccountNumber(DataInputProvider.getCellData_ColName(iRowNumber, "number", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "name", sDataSheetName))
 		.saveGeneralAccountnumber()
 		.navigateToSupplierAccountTab()
 		.addSupplierAccount(DataInputProvider.getCellData_ColName(iRowNumber, "memberlevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "locationtype", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "retailAccount", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "portfolio", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "Audit", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "attachdate", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "latestverifiedattachdate", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "LastOrderDate", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "description", sDataSheetName))
 		.saveGeneralAccountnumber()
 		.saveAndCloseSupplierAccount()
-		.clickSupplierAccountNumbers()
-		.navigateToSupplierAccountNumbers()
-		.navigateToAccountNumberTab()
+		.doubleClickSupplierAccountNumbers()
+		.typeDetachDate()
+		.clickSaveAndCloseSupplierAccountNumber()
+		.verifyDetachDateInSupplierAccountNumbersView()
+		
+		//Data Reset
+		.doubleClickSupplierAccountNumbers()
+		.deActivateSupplierAccount()
+		
 		;
 	}
 

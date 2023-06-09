@@ -47,7 +47,7 @@ public class TestCase_6948 {
 		//Click on save 			
 		.clickSave() 
 
-		.clearBusineesClassification()
+		.clearBusinessClassification()
 
 		.selectBusinessClassification("Acute")
 

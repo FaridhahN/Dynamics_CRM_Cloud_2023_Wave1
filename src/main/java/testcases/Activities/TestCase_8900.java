@@ -142,7 +142,7 @@ public class TestCase_8900 {
 		.clickNewTaskActivity()
 		
 		//Verify Autom populated Feilds
-		.verfiyAutopopulatedFeilds()
+		.verfiyAutopopulatedFields()
 		
 		//Select the information view
 		.selectInformationview()

@@ -163,7 +163,7 @@ public class TestCase_8891 {
 		.clickNewPhoneActivity()
 
 		//Verify Autom populated Feilds
-		.verfiyAutopopulatedFeildsFax()
+		.verfiyAutopopulatedFieldsFax()
 
 		//Select the information view
 		.selectInformationview()

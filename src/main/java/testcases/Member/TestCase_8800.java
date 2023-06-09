@@ -32,7 +32,7 @@ public class TestCase_8800 {
 		.clickLogout()
 		.refreshPageChooseSignInUser()
 		;
-		
+
 		new LoginPage()
 
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email2", sDataSheetName))

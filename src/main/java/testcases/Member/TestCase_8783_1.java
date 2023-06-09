@@ -42,10 +42,11 @@ public class TestCase_8783_1 {
 
 		//Application Start Date = Today's Date
 		.chooseApplicationStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
-
+		
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
+		
 		//Direct Parent CRM number = 2000092265/822660
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
@@ -74,7 +75,7 @@ public class TestCase_8783_1 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
-		// Click on Save 
+		
 		.clickSave() 
 
 

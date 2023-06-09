@@ -87,11 +87,8 @@ public class TestCase_7238 {
 
 		.verifyPremierStartDateIsNull()
 
-
 		//Click on Save 
 		.clickSave() 
-
-
 
 		//7. Try to Add one Premier Membership .       
 		.clickMembershipAndAddNewMembership()

@@ -24,11 +24,11 @@ public class TestCase_9634 {
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-		
+
 
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 		.verifyFormType("Member Form")
-;
+		;
 	}
 }

@@ -162,7 +162,7 @@ public class TestCase_8894 {
 		.clickNewEmailActivity()
 
 		//Verify Autom populated Feilds
-		.verfiyAutopopulatedFeildsEmail()
+		.verfiyAutopopulatedFieldsEmail()
 
 
 		//Enter the details in the new tasks window
