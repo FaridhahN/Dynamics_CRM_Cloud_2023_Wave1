@@ -8,7 +8,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 //Click on Accounts in My work
 	public AccountsPage selectAccountsTab() throws InterruptedException {	
 		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
-		Thread.sleep(2000);
+		Thread.sleep(35000);
 		return new AccountsPage();
 	}
 	

@@ -22,7 +22,7 @@ public class TestCase_10535 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify following Fields are editable in Opened Member Account 
 		//Account Name

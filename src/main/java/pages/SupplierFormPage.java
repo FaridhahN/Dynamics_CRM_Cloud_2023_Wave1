@@ -748,7 +748,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage selectDirectParent(String directParent) throws InterruptedException {	
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]")),"Direct Parent");
 		return this;		
 	}

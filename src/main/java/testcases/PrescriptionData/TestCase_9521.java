@@ -32,7 +32,7 @@ public class TestCase_9521 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectPrescriptionData()
 		.clickPrescritpionDataButton()
 		.AddPrescriptionData(DataInputProvider.getCellData_ColName(iRowNumber, "DataContact", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "PharmacySelect", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "DataSource", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "CollectionReason", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startDate", sDataSheetName))

@@ -20,7 +20,7 @@ public class TestCase_3267 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//Navigate to the Member Attribute Page
 		.selectRelatedMemberAttributesForLimMem()

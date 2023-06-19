@@ -24,7 +24,7 @@ public class TestCase_7151 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()

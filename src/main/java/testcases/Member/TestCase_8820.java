@@ -27,7 +27,7 @@ public class TestCase_8820 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 		.selectSubaccount()
 

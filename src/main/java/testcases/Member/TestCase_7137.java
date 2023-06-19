@@ -30,7 +30,7 @@ public class TestCase_7137 {
 
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 
 		.clickNewOnAccountsPage()
@@ -87,12 +87,14 @@ public class TestCase_7137 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
+		
+
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))

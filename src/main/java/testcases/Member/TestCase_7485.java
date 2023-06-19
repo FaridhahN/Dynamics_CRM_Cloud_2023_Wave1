@@ -23,7 +23,7 @@ public class TestCase_7485 {
 		.selectAccountsTab()		
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify following Fields are editable in Opened Member Account 
 		//Account Name

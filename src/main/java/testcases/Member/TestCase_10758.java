@@ -24,7 +24,7 @@ public class TestCase_10758 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify HIN when Deactivated is removed from Member Form  
 		

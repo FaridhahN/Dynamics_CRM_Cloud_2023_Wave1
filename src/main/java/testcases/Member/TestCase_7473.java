@@ -87,7 +87,7 @@ public class TestCase_7473 {
 		//13. Go to any member account and try to add new membership with the inactivated membership provider
 		.selectAccountss()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		.clickMembershipAndAddNewMembership()
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))

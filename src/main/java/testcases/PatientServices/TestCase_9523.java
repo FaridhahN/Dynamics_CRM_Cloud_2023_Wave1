@@ -31,7 +31,7 @@ public class TestCase_9523 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectPatientServices()
 		.clickNewPatientServices()
 		.AddGeneralActivities("2","2","2")

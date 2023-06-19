@@ -60,7 +60,7 @@ public class TestCase_7420 {
 			//8. Go to the Accounts and search for CRM# 1000155584
 			.selectAccountss()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-			.selectAccountFromSearchResults()
+			.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 			
 		//9. Go to Membership entity and click on Add new membership
 			 //Click add new membership

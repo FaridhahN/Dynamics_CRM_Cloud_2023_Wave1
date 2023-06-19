@@ -23,7 +23,7 @@ public class TestCase_10664 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Add FedTaxID on Member Account 1
 		.selectAccountNumbers()
@@ -41,7 +41,7 @@ public class TestCase_10664 {
 
 		//5.Search and Select another Member Account 2 using CRM#
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber1", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		
 		//6.Add the same Fed Tax ID (from step 3 )  on to the Member Account 2
 		.selectAccountNumbers()
@@ -62,7 +62,7 @@ public class TestCase_10664 {
 		//Select the same Member Account 1 on which the Fed Tax ID was added in Step 3 
 		.selectAccountsTabFromMemberFormPage()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountNumbers()
 		
 		//Deactivate Fed Tax ID from the Member Account 1

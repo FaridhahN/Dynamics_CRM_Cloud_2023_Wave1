@@ -25,7 +25,7 @@ public class TestCase_8978 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 		.selectAccountRepresentative()
 		.clickNewAccountRepresentativeButton()
 		.verifyRepresentativeDropDown()

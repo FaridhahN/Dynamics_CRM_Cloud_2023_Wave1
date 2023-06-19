@@ -22,7 +22,7 @@ public class TestCase_7142 {
 		//2. Go to Workplace > Accounts > +New 
 		.selectAccountsTab()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 		.clickNewOnAccountsPage()
 		.chooseMemberEntryForm()
@@ -70,7 +70,7 @@ public class TestCase_7142 {
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
 		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))

@@ -26,7 +26,7 @@ public class TestCase_7139 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 		.selectSubaccount()
 
@@ -54,15 +54,16 @@ public class TestCase_7139 {
 
 		//9.  Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-
+		
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
-
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
+		
+		//Country =USA
+	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+		
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 

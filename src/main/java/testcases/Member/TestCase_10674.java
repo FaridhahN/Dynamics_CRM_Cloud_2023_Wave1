@@ -7,34 +7,34 @@ import utils.DataInputProvider;
 
 public class TestCase_10674 {
 
-	  	
+
 	@Test
 	public void verifyBaseReadOnlyEstLoc(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
-		
+
 		//1. Login to CRM as BaseReadOnly 
 		new LoginPage()
-			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-			.clickNext()
-	  	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
-	  	    .clicSignin()
-	  	    .clicYesInStaySignedin()
-		
+		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
+		.clickNext()
+		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
+		.clicSignin()
+		.clicYesInStaySignedin()
+
 		//2. Go to Workplace >> Take Any Member Account 
-	  	  .selectAccountsTab()		
-			.selectActiveMembers()
-			.selectAccountFromSearchResults()
+		.selectAccountsTab()		
+		.selectActiveMembers()
+		.selectAccountFromSearchResults()
 
 		//3.Verify  NIACS code field access 
-			.clickNYInformationTab()
-			.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName));
-								
-			
-		
+		.clickNYInformationTab()
+		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName));
+
+
+
 		//data reset-not required
-			
-			
-		
-				
-			
+
+
+
+
+
 	}
 }

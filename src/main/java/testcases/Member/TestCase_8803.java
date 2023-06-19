@@ -24,7 +24,7 @@ public class TestCase_8803 {
 
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		//9.Move the record status to draft and save  ***** Record moved to draft 
 		.chooseRecordStatusDraft()
 
@@ -139,7 +139,7 @@ public class TestCase_8803 {
 		.selectAccountsTab()
 		.clickOnDiscardChanges()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		.changeTopParentAsNo()
 		.selectDirectParentWithoutEnitiy(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))

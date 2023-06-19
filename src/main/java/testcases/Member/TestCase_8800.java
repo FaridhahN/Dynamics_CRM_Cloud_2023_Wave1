@@ -27,7 +27,7 @@ public class TestCase_8800 {
 
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.verifyTPDateCheck()
 		.clickLogout()
 		.refreshPageChooseSignInUser()

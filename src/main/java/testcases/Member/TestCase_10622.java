@@ -25,7 +25,7 @@ public class TestCase_10622 {
 		//2. Go to Work place >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		
 		//3.Verify following Fields are NOT editable in Opened Member Account
 		.verifyAccountEntityIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName));

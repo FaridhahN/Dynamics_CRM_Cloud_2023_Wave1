@@ -44,16 +44,20 @@ public class AccountsPage extends WebDriverServiceImpl {
   	} 
 //Search accounts
   	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
-  		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
-		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
-		Thread.sleep(15000);
-		Thread.sleep(15000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),15);
-		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
-		Thread.sleep(3000);
-		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
-		Thread.sleep(10000);
+//  		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
+//  		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+//		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
+//		//Thread.sleep(15000);
+//		Thread.sleep(15000);
+//		WebDriverWait wait= new WebDriverWait(getDriver(),15);
+//		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+//		Thread.sleep(3000);
+//		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
+  		//06/14/2023 -Due to Active Member Taking Long Time to load
+  		Thread.sleep(5000);
+  		click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
+		typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),crmNumberInput,"Global Search Input Box" );
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -63,7 +67,16 @@ public class AccountsPage extends WebDriverServiceImpl {
   		//Wave2 fix
   		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
   		//click(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']/a")),"Search Results");
-  		Thread.sleep(15000);
+  		Thread.sleep(5000);
+  		return new MemberFormPage();
+  	}	
+  	
+  	//Select member account from Global search results -06/14/2023
+  	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
+  		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]"))).perform();
+		doubleClick(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]")),"Search Result Record");
+  		Thread.sleep(5000);
   		return new MemberFormPage();
   	}	
   	  	
@@ -181,10 +194,12 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Actions action = new Actions(getDriver());	
 //		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
 //		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
-		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
+//		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
+//		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
 //		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
 //		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")));
+		action.doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]"))).build().perform();
 		Thread.sleep(10000);
 		Thread.sleep(2000);
 		return new SupplierFormPage();

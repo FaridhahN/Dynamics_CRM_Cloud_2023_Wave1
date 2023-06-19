@@ -28,7 +28,7 @@ public class TestCase_8786 {
 
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 		.getDPData()
 
 		.clickNewOnAccountsPage()

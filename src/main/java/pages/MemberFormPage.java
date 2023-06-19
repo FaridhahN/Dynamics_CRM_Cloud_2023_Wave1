@@ -367,7 +367,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Choose application start date
 	public MemberFormPage chooseApplicationDate(String applicationDate) throws InterruptedException {
-
+		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]"));
+		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		je.executeScript("arguments[0].scrollIntoView();",element);
+	
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
 		Thread.sleep(5000);
@@ -433,7 +436,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(6000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]")),"Direct Parent");
 		return this;
 	}
@@ -1346,7 +1349,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Type country
-	public MemberFormPage typeCountry(String country) {
+	public MemberFormPage typeCountry(String country) { 
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
 		type((getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']"))),country,"Country");
 		return this;
@@ -2646,13 +2649,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier, Lookup']")),"Supplier");
 		Thread.sleep(3000);
 		type(((getDriver().findElement(By.xpath("//input[@placeholder='Look for Supplier']")))),supplier,"Supplier");
-		Thread.sleep(5000);
+		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")),"Supplier");
 
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")),"Supplier Rep");
-		Thread.sleep(6000);
+		Thread.sleep(3000);
 		type(((getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")))),supplierRep,"Supplier Rep");
-		Thread.sleep(5000);
+		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//li[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_resultsContainer']")),"Supplier Rep");
 
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Purchasing Preference']")), purchasingPreference, "Purchasing Preference");
@@ -4541,7 +4544,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage doubleClickSupplierAccountNumbers() throws InterruptedException {
 		//Actions a = new Actions(getDriver());
-		doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"Supplier Account Number");
+		doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Supplier Account Number");
 		Thread.sleep(3000);
 
 		return this;
@@ -4554,7 +4557,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		String detachDate= dateFormat.format(date);
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-tabsupplier']")),"Supplier Account Tab");
-		click(getDriver().findElement(By.xpath("//*[@data-id='ix_pharmacyportfoliodetachdate.fieldControl-date-time-input']")),"Detach Date");
+		doubleClick(getDriver().findElement(By.xpath("//*[@data-id='ix_pharmacyportfoliodetachdate.fieldControl-date-time-input']")),"Detach Date");
+		Thread.sleep(3000);
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_pharmacyportfoliodetachdate.fieldControl-date-time-input']")),detachDate,"Detach Date");
 		Thread.sleep(3000);
 		return this;

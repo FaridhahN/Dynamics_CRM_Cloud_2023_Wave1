@@ -25,7 +25,7 @@ public class TestCase_7140 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 		.clickNewOnAccountsPage()
 		.chooseMemberEntryForm()
@@ -79,7 +79,7 @@ public class TestCase_7140 {
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
 		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))

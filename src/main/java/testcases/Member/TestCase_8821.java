@@ -27,7 +27,7 @@ public class TestCase_8821 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromSearchResults()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//.Move the record status to draft and save  ***** Record moved to draft 
 		.chooseRecordStatusDraft()
