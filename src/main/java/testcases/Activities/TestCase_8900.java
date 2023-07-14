@@ -145,7 +145,7 @@ public class TestCase_8900 {
 		.verfiyAutopopulatedFields()
 		
 		//Select the information view
-		.selectInformationview()
+		//.selectInformationview()
 		
 		//Enter the details in the new tasks window
 		.EnterTaskDetailswithQuickSubject(DataInputProvider.getCellData_ColName(iRowNumber, "Subject", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) , DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
