@@ -616,9 +616,9 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage clickContactJobFunctionFromRelated() throws InterruptedException {
 		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
-		Thread.sleep(4000);
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Job Functions')]")),
-				"Contact Job Functions");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Contact Job Functions')]")),"Contact job function");
+			
 		return this;
 	}
 

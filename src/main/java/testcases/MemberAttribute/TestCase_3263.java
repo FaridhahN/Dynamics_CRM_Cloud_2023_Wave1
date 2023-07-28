@@ -73,6 +73,10 @@ public class TestCase_3263 {
 			//Click on Save
 			.clickSave() 
 			
+			
+			//7. Refresh the page to unlock the Fee share eligible field 
+				.pageRefresh()
+				
 		//6. Street 1 = Any
 			 .typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
 				
@@ -88,10 +92,7 @@ public class TestCase_3263 {
 			 //Click on Save 
 			.clickSave() 
 		
-			
-		//7. Refresh the page to unlock the Fee share eligible field 
-			.pageRefresh()
-			
+		
 		//8. Fee share eligible = Yes
 			.changeFeeShareEligibleToYes()
 			
@@ -107,7 +108,21 @@ public class TestCase_3263 {
 			//Click on Save 
 			.clickSave() 
 		
-		//9.  Click the + icon on the Line of Business Grid
+		 	
+			//Click add new membership
+			.clickMembershipAndAddNewMembership()
+			
+			// Choose Membership type 
+		 	.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+			.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+			
+			//Provide any start date and click on save
+			.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+			
+			//Click on membership save and close
+			.clickQuickCreateMembershipSaveAndClose()
+			
+			//9.  Click the + icon on the Line of Business Grid
 			.clickLineOfBusinesses()
 			
 			//Click New Line Of Business
@@ -124,19 +139,6 @@ public class TestCase_3263 {
 			
 			// Click on LOB Save 
 			.clickLOBSaveAndClose()
-		 	
-			//Click add new membership
-			.clickMembershipAndAddNewMembership()
-			
-			// Choose Membership type 
-		 	.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-			.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-			
-			//Provide any start date and click on save
-			.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
-			
-			//Click on membership save and close
-			.clickQuickCreateMembershipSaveAndClose()
 			
 		//10. Record Status = Published
 			.chooseRecordStatusPublished()

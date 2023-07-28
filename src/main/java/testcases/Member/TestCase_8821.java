@@ -30,7 +30,7 @@ public class TestCase_8821 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//.Move the record status to draft and save  ***** Record moved to draft 
-		.chooseRecordStatusDraft()
+		.chooseRecordStatusDraftfromTop()
 
 		//Click on Save 
 		.clickSave() 
