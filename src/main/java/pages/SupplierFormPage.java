@@ -653,6 +653,16 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage crmNumberIsDisplayed() throws InterruptedException {
 		Thread.sleep(5000);
+		
+		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'HIBCC Subsc')]")),"My Information Label");
+
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'No New Products')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exchange')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//h3[contains(text(),'Timeline')]")),"My Information Label");
+		
+		
 		click(getDriver().findElement(By.xpath("//*[@title='NY INFORMATION']")),"My Information Label");
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
 		verifyDisplayed(getDriver().findElement(By.xpath("//input[@data-id='accountnumber.fieldControl-text-box-text']")), "CRM Lock symbol");
