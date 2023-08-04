@@ -97,10 +97,11 @@ public class AccountsPage extends WebDriverServiceImpl {
 
 	//Select member account from Global search results -06/14/2023
 	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
-
+		Thread.sleep(3000);
 		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
 			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
 		}
+		Thread.sleep(3000);
 		Actions action = new Actions(getDriver());
 		action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]"))).perform();
 		doubleClick(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]")),"Search Result Record");

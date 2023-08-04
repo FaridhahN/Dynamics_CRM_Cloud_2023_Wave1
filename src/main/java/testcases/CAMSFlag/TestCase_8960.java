@@ -1,34 +1,29 @@
-package testcases.ConvertingAccounts;
+package testcases.CAMSFlag;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//Test Case 4531:Verify cascade works fine when a shipto account gets converted to a main account
+//Test Case 4537:Verify CAMS flag can be changed from Yes to No or No to Yes when record status is draft
 
 
-public class TestCase_4531 {
 
+public class TestCase_8960 {
 
 	@Test
-	public void VerifyCascade(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void VerifyCAMSinDraft(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
-
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
 		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
 		.clicSignin()
-
 		.clicYesInStaySignedin()
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromSearchResults()
-		.getDPData()
+		
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -62,8 +57,6 @@ public class TestCase_4531 {
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
-		//Store/Location type = Shipto
-		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -98,7 +91,6 @@ public class TestCase_4531 {
 		//Click on Save 
 		.clickSave() 
 
-
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -112,21 +104,6 @@ public class TestCase_4531 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
-
-		//Click on Save 
-		.clickSave() 
-
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
-		.verifyParentEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
-		.chooseRecordStatusDraft()
-
-		.chooseLocationTypewithOutVerifying("---")
-
-		.clickSave()
 		//7.  Click the + icon on the Line of Business Grid
 		.clickLineOfBusinesses()
 
@@ -144,41 +121,41 @@ public class TestCase_4531 {
 
 		// Click on LOB Save 
 		.clickLOBSaveAndClose()
-
-		.chooseRecordStatusPublished()
-
+		
 		//Click on Save 
 		.clickSave() 
+		
+		//Verify CAMS flag =yes
+		.verifyCAMSFlag("Yes")
+		
+		//CAMS Flag = No
+		.changeCAMSFlagAsNo()
+		
+		//Click on Save 
+		.clickSave() 
+		
+		//Verify CAMS flag =No
+		.verifyCAMSFlag("No")
+		
+		//Change the Record status as Published
+		.chooseRecordStatusPublished()
+		
+		//Click Save
+		.clickSave()
+		
+		//Verify entity code
 		.entityCodeIsDisplayed()
 		
-		.verifyParentEntityCodeisNotMatched(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-		.verifyAffiliateGroupIsNotNull()
-		.verifyAgEffectiveDateIsNotNull()
+		//Verify CAMS flag =NO
+		.verifyCAMSFlag("No")
 		
-		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-
-		//14. Verify Corporate parent name in the form
-		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
-		//15. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-
-		//16 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-
-
-		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+		//Change the CAMS flag as Yes
+		.changeCAMSFlagAsYes()
 		
-		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-		
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		//Verify CAMS flag
+		.verifyCAMSFlagNotMatch("Yes")
 		;
+
 	}
+
 }

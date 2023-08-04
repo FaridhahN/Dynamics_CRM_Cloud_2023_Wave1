@@ -5,11 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//Test Case 4532:Verify if FBO cascade works fine when ship-to account is converted back to main account
+//Test Case 4531:Verify cascade works fine when a shipto account gets converted to a main account
 
 
-
-public class TestCase_4532 {
+public class TestCase_8864 {
 
 
 	@Test
@@ -27,6 +26,9 @@ public class TestCase_4532 {
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromSearchResults()
+		.getDPData()
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -59,6 +61,9 @@ public class TestCase_4532 {
 
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+
+		//Store/Location type = Shipto
+		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -93,6 +98,7 @@ public class TestCase_4532 {
 		//Click on Save 
 		.clickSave() 
 
+
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -105,6 +111,20 @@ public class TestCase_4532 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+
+		//8. Record Status = Published
+		.chooseRecordStatusPublished()
+
+		//Click on Save 
+		.clickSave() 
+
+		//9. Verify Entity code is generated 
+		.entityCodeIsDisplayed()
+		.verifyParentEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+
+		.chooseRecordStatusDraft()
+
+		.chooseLocationTypewithOutVerifying("---")
 
 		.clickSave()
 		//7.  Click the + icon on the Line of Business Grid
@@ -130,59 +150,35 @@ public class TestCase_4532 {
 		//Click on Save 
 		.clickSave() 
 		.entityCodeIsDisplayed()
-		.getDPData()
-		.chooseRecordStatusDraft()
-		.clickSave()
-		//Store/Location type = Shipto
-		.chooseLocationType("Ship To")	
+		
+		.verifyParentEntityCodeisNotMatched(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.verifyAffiliateGroupIsNotNull()
+		.verifyAgEffectiveDateIsNotNull()
+		
+		//13. Verify "IS Corporate account" field
+		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 
-		.chooseRecordStatusPublished()
+		//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
 
-		//Click on Save 
-		.clickSave() 
+		//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+
+		//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+
 
 		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
-
+		
 		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-
-		.verifyFBORD(WebDriverServiceImpl.Dpdata.get("FBORD"))
 		
-		.chooseRecordStatusDraft()
-		
-		.chooseLocationTypewithOutVerifying("---")
-
-		//Click on Save 
-		.clickSave() 
-
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
-		.chooseRecordStatusPublished()
-
-		//Click on Save 
-		.clickSave() 
-		
-		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
-
-		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-
-		.verifyFBORD(WebDriverServiceImpl.Dpdata.get("FBORD"))
-		
+		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 		;
 	}
 }

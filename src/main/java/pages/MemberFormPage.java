@@ -290,6 +290,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectAccountType(String accountType) throws InterruptedException{
 		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
+		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
@@ -376,7 +377,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Choose application start date
 	public MemberFormPage chooseApplicationDate(String applicationDate) throws InterruptedException {
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]"));
 		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 		je.executeScript("arguments[0].scrollIntoView();",element);
@@ -388,6 +389,21 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	//Choose application start date
+		public MemberFormPage chooseApplicationDateWithoutScrolling(String applicationDate) throws InterruptedException {
+			Thread.sleep(15000);
+			WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]"));
+			JavascriptExecutor je = (JavascriptExecutor) getDriver();
+			je.executeScript("arguments[0].scrollIntoView();",element);
+		
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
+			Thread.sleep(5000);
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),applicationDate, "Application Start Date");
+			return this;
+
+		}
 
 
 	//Choose application start date
@@ -1195,7 +1211,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Navigate to Do Not Verify and type Address
 
-	public MemberFormPage navigateToDoNotVerifyEnterData(String Street, String zipcode) {
+	public MemberFormPage navigateToDoNotVerifyEnterData(String Street, String zipcode) throws InterruptedException {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		typeStreet1(Street);
@@ -1383,7 +1399,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage chooseRecordStatusPublished() throws InterruptedException {
 		Thread.sleep(3000);
 		
-		
+		navigateToDoNotVerify();
 		click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
@@ -3040,15 +3056,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	// Select and Mark Complete	a Open Task Activity			
 	public MemberFormPage deActivatePatientServices() throws InterruptedException   {
-        List<WebElement> beforecount=getDriver().findElements(By.xpath("//div[@id='entity_control-powerapps_onegrid_control_container']//i[@data-icon-name='CheckMark']"));
+        List<WebElement> beforecount=getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"));
         Actions a = new Actions(getDriver());
-        a.moveToElement(getDriver().findElement(By.xpath("//div[@id='entity_control-powerapps_onegrid_control_container']//i[@data-icon-name='CheckMark']"))).click().build().perform();
+        a.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"))).click().build().perform();
         Thread.sleep(2000);
         click(getDriver().findElement(By.xpath("(//span[contains(text(),'Deactivate')])[1]")),"Deactivate Patient Services");
         Thread.sleep(3000);
         click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")),"Deactivate Button");
         Thread.sleep(5000);
-        List<WebElement> afterCount=getDriver().findElements(By.xpath("//div[@id='entity_control-powerapps_onegrid_control_container']//i[@data-icon-name='CheckMark']"));
+        List<WebElement> afterCount=getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"));
         assertTrue(beforecount.size()> afterCount.size(),"Patient Services is not deactivated");
         return this;
   }
@@ -3396,8 +3412,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Type Zip code	
-	public MemberFormPage typeZipCode(String zipCode) {
+	public MemberFormPage typeZipCode(String zipCode) throws InterruptedException {
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		Thread.sleep(1000);
 		type((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),zipCode, "Zip Code");
 		return this;
 	}
@@ -3413,7 +3430,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage chooseMemberEntryForm() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("(//*[@data-id='form-selector'])[1]")),"Form Selector");
 		click(getDriver().findElement(By.xpath("//span[text()='Member Entry Form']")),"Member Entry Form");
+		
+		if(getDriver().findElements(By.xpath("//*[@data-id='cancelButton']")).size()>0) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		}
 		Thread.sleep(2000);
 		return new MemberFormPage();
 	}

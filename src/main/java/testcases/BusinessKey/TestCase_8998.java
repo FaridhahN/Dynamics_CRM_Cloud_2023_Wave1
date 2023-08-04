@@ -39,7 +39,7 @@ public class TestCase_8998 {
 		//Actual data -> crmnum 2 = 2000391336 -> BK Active - No & has its DP's BK active yes
 		.selectAccountss()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))	
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
 
 		//5. Now change the BK Active from No to Yes and save
 		.selectBKActiveYes()
@@ -58,7 +58,7 @@ public class TestCase_8998 {
 
 		.selectAccountss()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber2", sDataSheetName))	
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))				
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber2", sDataSheetName))				
 
 		//7.Now change the BK Active to Yes and Save
 		.selectBKActiveYes()
@@ -78,7 +78,7 @@ public class TestCase_8998 {
 		.selectAccountss()
 		.clickOnDiscardChanges()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber3", sDataSheetName))	
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))	
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber3", sDataSheetName))	
 
 		//9. Now change the BK Active to NO and save
 		.selectBKActiveNo()

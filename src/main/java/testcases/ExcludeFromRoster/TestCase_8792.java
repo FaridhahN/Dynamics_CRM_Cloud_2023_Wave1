@@ -43,7 +43,7 @@ public class TestCase_8792 {
 		//GPO Draft Member
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
@@ -54,7 +54,7 @@ public class TestCase_8792 {
 		//Non GPO Active
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber2", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber2", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
@@ -66,7 +66,7 @@ public class TestCase_8792 {
 		//Prospect search
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber3", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber3", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
@@ -77,7 +77,7 @@ public class TestCase_8792 {
 		//Ship to Active
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber4", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber4", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
@@ -88,7 +88,7 @@ public class TestCase_8792 {
 		//Ship to Draft
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber5", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber5", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
@@ -101,7 +101,7 @@ public class TestCase_8792 {
 		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber6", sDataSheetName))
 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber6", sDataSheetName))
 		.navigateToroster()
 		.excludeFromRoster()
 		;
