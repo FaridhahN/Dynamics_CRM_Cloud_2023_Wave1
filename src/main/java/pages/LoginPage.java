@@ -80,7 +80,7 @@ public class LoginPage extends WebDriverServiceImpl{
 		if(getDriver().findElements(By.id("idSIButton9")).size()>0){
 			click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
 		}
-		Thread.sleep(2000);
+		Thread.sleep(7000);
 
 		return new DashboardPage();
 	}	

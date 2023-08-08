@@ -462,7 +462,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(7000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(90000);
+		Thread.sleep(120000);
 		if(getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"+directParent+"')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]")),"Direct Parent");
 		} //2000033926
@@ -2351,7 +2351,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
 		Thread.sleep(7000);
 		((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
-				getDriver().findElement(By.xpath("//*[contains(text(),'"+membershipProvider+"')]")));
+				getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")));
 		setReport().log(Status.PASS, "Clicked on the Membership Provider successfully", screenshotCapture());
 		
 		//Thread.sleep(10000);
