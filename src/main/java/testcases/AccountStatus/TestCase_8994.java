@@ -214,6 +214,7 @@ public class TestCase_8994 {
 		//Click on Save 
 		.clickSave() 
 
+		.pageRefresh()
 		//4.Now go to the membership and end date any of the existing membership with any future date then save
 		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
