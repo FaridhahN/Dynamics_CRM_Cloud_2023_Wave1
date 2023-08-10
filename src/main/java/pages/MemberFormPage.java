@@ -1653,11 +1653,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage selectPremierMembership() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Membership");
+		click(getDriver().findElement(By.xpath("//span[normalize-space()='Premier Memberships']")),"Membership");
 
 		Thread.sleep(5000);
 		Actions a = new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Premier Memberships']"))).click().build().perform();;
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(text(),'Premier Memberships')]"))).click().build().perform();;
 		return this;
 	}
 
@@ -1666,14 +1666,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectAllMembershipsView() throws InterruptedException {
 
 		//click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid_outer']//span[contains(text(),'Premier Memberships')]")),"Premier Memberships");
-		Thread.sleep(3000);
+		
 		//Actions a = new Actions(getDriver());
 		//a.moveToElement(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='All Memberships']"))).click().build().perform();
 		//a.moveToElement(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid']//div[@aria-label='All Memberships']"))).click().build().perform();
-		click(getDriver().findElement(By.xpath("//span[normalize-space()='All Memberships']")),"'All Memberships'");
-		//click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid']//div[@aria-label='All Memberships']")),"sdfsd");
-		Thread.sleep(2000);
+		
+		Thread.sleep(5000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//span[contains(text(),'All Memberships')]"))).click().build().perform();
 		return this;
+		//click(getDriver().findElement(By.xpath("//div[@id='dataSetRoot_MembershipSubGrid']//div[@aria-label='All Memberships']")),"sdfsd");
+		
 	}
 
 	public MemberFormPage verifyPremierMembershipisDisplayed() {
@@ -1690,7 +1693,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage verifyAllMembershipsisDisplayed() {
-		assertTrue((getDriver().findElement(By.xpath("//div[@class='ms-List-cell']//span[contains(text(),'Aggregation Affiliation')]")).isDisplayed()),"Aggregation Affiliation is displayed");
+		assertTrue((getDriver().findElement(By.xpath("//a[contains(@data-id,'MembershipSubGrid-ListItemContent')]/span[contains(text(),'Aggregation Affiliation')]")).isDisplayed()),"Aggregation Affiliation is displayed");
 		setReport().log(Status.PASS, "All Memberships view is displayed as Expected", screenshotCapture());
 		return this;
 
