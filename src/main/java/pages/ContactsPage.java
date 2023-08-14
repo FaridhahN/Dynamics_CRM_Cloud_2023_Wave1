@@ -103,7 +103,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
 	}

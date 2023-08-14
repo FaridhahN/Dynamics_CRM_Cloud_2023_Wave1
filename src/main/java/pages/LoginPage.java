@@ -16,7 +16,6 @@ public class LoginPage extends WebDriverServiceImpl{
 	//Verify Notification page
 	public LoginPage verifyNotificationpage() throws InterruptedException {
 
-		Thread.sleep(3000);
 		if(getDriver().findElements(By.xpath("//h1[contains(text(),'Notifications')]")).size()>0)
 		{
 			getDriver().findElement(By.xpath("//a[contains(text(),'Sign Out')]")).click();
@@ -41,34 +40,42 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
+		Thread.sleep(3000);
+		System.out.println("Entering the User Id");
+		List<WebElement> emailid=getDriver().findElements(By.xpath("//*[@name='loginfmt']"));
+		if(emailid.size()==0) {
 		List<WebElement> useanother=getDriver().findElements(By.xpath("//div[@id='otherTileText']"));
 		if(useanother.size()>0) {
 			click(getDriver().findElement(By.xpath("//div[@id='otherTileText']")),"User another Account");
 		}
-		System.out.println("Entering the User Id");
 		verifyNotificationpage();
 		Thread.sleep(2000);
+		}
 		type(getDriver().findElement(By.xpath("//*[@name='loginfmt']")),email,"Email");
-		Thread.sleep(3000);
 		return this;
 	}
 
 	//Enter Password 
 	public LoginPage typePassword(String password) throws InterruptedException {
-		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[@name='passwd']"))));
 		type(getDriver().findElement(By.xpath("//*[@name='passwd']")),password,"Password");
-		Thread.sleep(2000);
+		
 		return this;
 	}
 
 	//Click on Next
 	public LoginPage clickNext() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("idSIButton9"))));
 		click(getDriver().findElement(By.id("idSIButton9")),"Next");
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		return new LoginPage();
 	}	
 	//Click on Signin
 	public LoginPage clicSignin() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("idSIButton9"))));
 		click(getDriver().findElement(By.id("idSIButton9")),"Signin");
 		Thread.sleep(2000);
 		return new LoginPage();

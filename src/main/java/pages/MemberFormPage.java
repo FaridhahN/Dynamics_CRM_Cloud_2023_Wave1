@@ -2563,7 +2563,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//select Membership Entity
 	public MemberFormPage goToMembershipPage(String membershipProvider) throws InterruptedException {
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("(//span[text()='"+membershipProvider+"'])")),membershipProvider);
+		System.out.println("//span[text()='"+membershipProvider+"'])");
+		
+		
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"') and contains(@data-id,'MembershipSubGrid')]")),membershipProvider);
 		Thread.sleep(3000);
 		return this;
 	}
