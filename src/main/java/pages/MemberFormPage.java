@@ -1261,7 +1261,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	//Navigate to Exclude from roster
-	public MemberFormPage navigateToroster() {
+	public MemberFormPage navigateToroster() throws InterruptedException {
+		Thread.sleep(2000);
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"County");
@@ -3376,6 +3377,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select member account from search results
 	public  MemberFormPage selectAccountFromSearchResults() throws InterruptedException {	
 		//Actions action = new Actions(getDriver());
+		Thread.sleep(4000);
 		if((getDriver().findElements(By.xpath("//div[@col-id='name']//a"))).size()>0) {
 		click(getDriver().findElement(By.xpath("//div[@col-id='name']//a")),"Search Results");
 		
