@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Assert; 
 import org.openqa.selenium.By;
@@ -654,13 +655,13 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage crmNumberIsDisplayed() throws InterruptedException {
 		Thread.sleep(5000);
 		
-		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"My Information Label");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'HIBCC Subsc')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"DIVERSITY INFORMATION");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'HIBCC Subsc')]")),"HIBCC Subsc");
 
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'No New Products')]")),"My Information Label");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")),"My Information Label");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exchange')]")),"My Information Label");
-		click(getDriver().findElement(By.xpath("//h3[contains(text(),'Timeline')]")),"My Information Label");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'No New Products')]")),"No New Products");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")),"Ownership");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exchange')]")),"Exchange");
+		click(getDriver().findElement(By.xpath("//h3[contains(text(),'Timeline')]")),"Timeline");
 		
 		
 		click(getDriver().findElement(By.xpath("//*[@title='NY INFORMATION']")),"My Information Label");
@@ -836,8 +837,11 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage updateStreet1(String street1) {
-
-		type((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']"))), street1,"Street1");
+		// update random numbers to change address
+		Random rand = new Random();
+		int upperbound = 99999;
+		int int_random = rand.nextInt(upperbound);
+		type((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']"))), street1+int_random,"Street1");
 		return this;
 	}
 

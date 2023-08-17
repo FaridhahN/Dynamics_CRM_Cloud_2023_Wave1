@@ -72,8 +72,12 @@ public class TestCase_7157 {
 		.entityCodeIsDisplayed()
 		
 		//Verify Entity Code remains the same after Publish
-		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName));
-		}
+		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName))
+		
+	
+	//Data Reset
+	//Reset the Record Change Status to Approved
+	.chooseRecordChangeStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordChangeStatus", sDataSheetName));
 
-
+	}
 }
