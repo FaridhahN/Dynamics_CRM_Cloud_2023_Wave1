@@ -7,7 +7,7 @@ import utils.DataInputProvider;
 //Test Case 4534:Verify Food Service LOB rule or mapping works for main account converted from Shipto account
 
 
-public class TestCase_4534 {
+public class TestCase_8867 {
 
 	@Test
 	public void VerifyFoodServiceLOB(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {

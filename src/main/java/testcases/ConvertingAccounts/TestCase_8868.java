@@ -4,10 +4,10 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//Test Case 4535:Verify if a main account which has child accounts can not be converted to a shipto account
+//Test Case 8868:Verify if a main account which has child accounts can not be converted to a shipto account
 
 
-public class TestCase_4535 {
+public class TestCase_8868 {
 
 	@Test
 	public void Verifymainaccounttolocation(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {

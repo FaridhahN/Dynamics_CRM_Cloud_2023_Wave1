@@ -139,7 +139,7 @@ public class TestCase_8803 {
 		.selectAccountsTab()
 		.clickOnDiscardChanges()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
 
 		.changeTopParentAsNo()
 		.selectDirectParentWithoutEnitiy(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))

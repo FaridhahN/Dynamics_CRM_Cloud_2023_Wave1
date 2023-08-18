@@ -22,21 +22,21 @@ public class LoginPage extends WebDriverServiceImpl{
 			refreshPageChooseSignInUser();
 
 		}
-		
+
 		Thread.sleep(3000);
 		return this;
 	}
-	
+
 	public LoginPage refreshPageChooseSignInUser() {
 		//Wave 2023 
 		obj.getUrl();
 		WebDriverWait wait = new WebDriverWait(getDriver(),30);
 		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'Use another account')]"))));
 		getDriver().findElement(By.xpath("//div[contains(text(),'Use another account')]")).click();
-		
+
 		return this;
 	}
-	
+
 
 	//Enter Email Id to Login
 	public LoginPage typeEmail(String email) throws InterruptedException, AWTException {
@@ -44,12 +44,12 @@ public class LoginPage extends WebDriverServiceImpl{
 		System.out.println("Entering the User Id");
 		List<WebElement> emailid=getDriver().findElements(By.xpath("//*[@name='loginfmt']"));
 		if(emailid.size()==0) {
-		List<WebElement> useanother=getDriver().findElements(By.xpath("//div[@id='otherTileText']"));
-		if(useanother.size()>0) {
-			click(getDriver().findElement(By.xpath("//div[@id='otherTileText']")),"User another Account");
-		}
-		verifyNotificationpage();
-		Thread.sleep(2000);
+			List<WebElement> useanother=getDriver().findElements(By.xpath("//div[@id='otherTileText']"));
+			if(useanother.size()>0) {
+				click(getDriver().findElement(By.xpath("//div[@id='otherTileText']")),"User another Account");
+			}
+			verifyNotificationpage();
+			Thread.sleep(2000);
 		}
 		type(getDriver().findElement(By.xpath("//*[@name='loginfmt']")),email,"Email");
 		return this;
@@ -60,7 +60,7 @@ public class LoginPage extends WebDriverServiceImpl{
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[@name='passwd']"))));
 		type(getDriver().findElement(By.xpath("//*[@name='passwd']")),password,"Password");
-		
+
 		return this;
 	}
 
@@ -101,6 +101,6 @@ public class LoginPage extends WebDriverServiceImpl{
 		switchToDefaultContent();
 	}	
 
-	
+
 
 }
