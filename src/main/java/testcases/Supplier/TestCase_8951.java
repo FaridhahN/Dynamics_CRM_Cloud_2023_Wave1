@@ -55,7 +55,7 @@ public class TestCase_8951 {
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		
 		// End reason = Anything from dropdown,
-		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "EndReason", sDataSheetName))
+		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
 		
 		// then save
 		.clickMembershipSaveAndClose()

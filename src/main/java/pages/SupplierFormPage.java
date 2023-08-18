@@ -997,6 +997,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage selectMembershipEndReason(String EndReason) throws InterruptedException {
 		//Wave2 update
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select-container']")),"End Reason");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")),"End Reason");
 		Thread.sleep(3000);
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")))),EndReason,"End Reason");
 		return this; 	
