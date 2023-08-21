@@ -239,7 +239,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		 * action.doubleClick(getDriver().findElement(By.xpath(
 		 * "(//*[@data-icon-name='CheckMark'])[2]"))).build().perform();
 		 */
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		Thread.sleep(2000);
 		return new SupplierFormPage();
 	}
