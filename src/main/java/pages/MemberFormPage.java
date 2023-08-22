@@ -462,12 +462,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(7000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(120000);
+		Thread.sleep(20000);
 		if(getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"+directParent+"')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]")),"Direct Parent");
 		} //2000033926
 		else {
-			click(getDriver().findElement(By.xpath("//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"+directParent+"')]")),"Clcikc Entity code");
+			click(getDriver().findElement(By.xpath("//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"+directParent+"')]")),"Click Entity code");
 		}
 		return this;
 	}
@@ -6291,7 +6291,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")),"Click Save button");
 		Thread.sleep(10000);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		return this;
 	}
 
@@ -6343,31 +6343,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//verify New Account Number button is displayed
 	public MemberFormPage verifyAccountnumberButton() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		getDriver().findElement(By.xpath("//span[contains(text(),'New Account Number')]")).isDisplayed();
 		return this;
 
 	}
 
 	//Verify newly added Account Number is displayed in the Account Number page
-	public MemberFormPage verifyNewlyCreatedAccountNumber() {
-		boolean isTrue=false;
-		String accountnumber=null;
+	public MemberFormPage verifyNewlyCreatedAccountNumber(String accountnumber) {
 		//Wave1 2023 Update
 		List<WebElement> accountNumber=getDriver().findElements(By.xpath("//div[@data-id='entity_control-powerapps_onegrid_control_container']//div[@class='ag-center-cols-container']/div[contains(@class,'ag-row-') and @role='row']//a/div"));
 		for(int i=1;1<=accountNumber.size();i++) {
 			accountnumber=getDriver().findElement(By.xpath("(//div[@data-id='entity_control-powerapps_onegrid_control_container']//div[@class='ag-center-cols-container']/div[contains(@class,'ag-row-')and @role='row'])["+i+"]//a/div")).getText();
-			System.out.println("Expected:"+randomString+"Actual:"+accountnumber);
 			if(accountnumber.contains(randomString)) {
-				isTrue=true;
-				break;
-			}
-		}
-		if(isTrue==true) {
-			setReport().log(Status.PASS, "The text :"+accountnumber+" matches with the value in "+"Account Number"+" field",screenshotCapture());
+				break;}
+					}
+		if(accountnumber.equals(randomString)) {
+			setReport().log(Status.PASS, "The text :"+accountnumber+" matches with the value "+  randomString + "  in  Account Number"+" field",screenshotCapture());
 
 		}else {
-			setReport().log(Status.FAIL, "The text :"+accountnumber+" did not match with the value "+randomString+"in"+"Account Number"+" field",screenshotCapture());
+			setReport().log(Status.FAIL, "The text :"+accountnumber+" did not match with the value "+randomString+" in"+" Account Number"+" field",screenshotCapture());
 			Driver.failCount++;
 		}
 
@@ -6419,6 +6414,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 
 		randomString = sb.toString();
+		
+		try {
+			DataInputProvider.setCellData(randomString, Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return this;
 	}
@@ -6450,6 +6451,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 
 		randomString = sb.toString();
+		
+		try {
+			DataInputProvider.setCellData(randomString, Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return this;
 	}
@@ -6500,7 +6507,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		String accountname=getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getText();
 		System.out.println();
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Calculated Name']")), accountname+" - "+accountNumberType+" - "+AccNumNPI, "Cacluclate Nane");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Calculated Name']")), accountname+" - "+accountNumberType+" - "+AccNumNPI, "Cacluclate Name");
 		return this;
 	}
 
