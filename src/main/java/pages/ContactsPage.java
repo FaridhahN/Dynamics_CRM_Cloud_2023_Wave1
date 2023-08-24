@@ -275,7 +275,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Wave2 Update
 		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
 		//a.moveToElement(
-		doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"Check Mark");
+		doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Check Mark");
 		Thread.sleep(6000);
 		return this;
 	}
@@ -302,7 +302,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),PrimaryAccount1, "Primary Account");
-		Thread.sleep(6000);
+		//Thread.sleep(6000);
+		// Explicit Wait- 8/23/2023
+				WebDriverWait wait = new WebDriverWait(getDriver(),120);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")));
+				click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		return this;
 	}
