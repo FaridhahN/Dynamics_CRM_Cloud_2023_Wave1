@@ -90,8 +90,7 @@ public class TestCase_8752 {
 
 		.clickCAAFromRelated()
 
-		// 5. Check the Contact account association status as Terminated inside "Contact
-		// Subgrid view"
+		// 5. Check the Contact account association status as Terminated inside "Contact Sub grid view"
 
 		// Select contact sub grid view
 		.clickContactSubGridViewInCAA()

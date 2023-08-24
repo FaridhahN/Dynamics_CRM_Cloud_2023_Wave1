@@ -29,7 +29,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.Driver;
 
@@ -462,7 +464,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(7000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(20000);
+		Thread.sleep(120000);		
 		if(getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"+directParent+"')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]")),"Direct Parent");
 		} //2000033926
@@ -4345,20 +4347,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		
 		//Wave2023 Update
 				//Locator Change Select All button removed- Adding list to deactivate line items one by one
-				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_emsattributetype']//a"));
-				System.out.println("# of Rows Including Header:"+ rowList.size());
-				for (int i = 1; i <=rowList.size(); i++) {
-					click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
-					Thread.sleep(5000);
-					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
-					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
-					Thread.sleep(6000);
-				}		
-//
-//		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
-//		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
-//		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
+//				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+//				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_emsattributetype']//a"));
+//				System.out.println("# of Rows Including Header:"+ rowList.size());
+//				for (int i = 1; i <=rowList.size(); i++) {
+//					click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
+//					Thread.sleep(5000);
+//					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+//					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+//					Thread.sleep(6000);
+//				}		
+// Wave2023 Update revert ( Missing Select All Radio button reappeared without fix in CRM Cloud. Enabling back the below code and commenting above
+		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
 		return this;
 	}
 
@@ -5049,7 +5051,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			if (title.equals("DEA")) {
 				Thread.sleep(3000);
 				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label)[2]")), "DEA");
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				break;				
 			}
 		}		
@@ -6544,7 +6546,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	// Verify if date validation error msg is displayed for Member Account
-	public MemberFormPage verifyDateValidationErrorMsg(String appDate, String startdate) throws InterruptedException {
+	public MemberFormPage verifyAppDateValidationErrorMsg(String appDate, String startdate) throws InterruptedException {
 		Thread.sleep(3000);
 
 		String dateValidationMsg = getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")).getText();
@@ -6569,6 +6571,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+	
+	
+	//Date validation error
+	public MemberFormPage verifyDateValidationError(String errorText) {
+		//Wave2 Update
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']"))), errorText,"Date Validation Error");
+		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok");
+		return this;
+	}
+	
+	//
+	public MemberFormPage clickLineOfBusinessesTab(String errorText) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-nav_ix_account_ix_portfoliocategory_Account']")),"Line of Businesses Tab");
+		return this;
+	}
+	
 }
+
+
+
 
 
