@@ -16,6 +16,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -67,7 +68,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	//verify Contact End date
 	public ContactsPage verifyContactEndDate() throws InterruptedException {
 		Thread.sleep(3000);
-		verifyDisplayed(getDriver().findElement(By.xpath("//label[@title='Contact End Date']")), "Contact End Date");
+		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(text(),'Contact End Date')]")), "Contact End Date");
 		return this;
 	}
 	//select view type
@@ -789,15 +790,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Date date = new Date();
 		String curDate = formatter.format(date);
 
-		Thread.sleep(3000);
-
-		String dateInUI = getAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",
-				"Created On");
+		//Thread.sleep(3000);
+		//Explicit wait 08/25/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
+		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value","Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
 
-		Thread.sleep(6000);
+		Thread.sleep(4000);
 		if (finalDate.equalsIgnoreCase(curDate)) {
 			setReport().log(Status.PASS, "An entry is added with current date " + finalDate, screenshotCapture());
 
@@ -1030,15 +1031,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
 		String curDate = formatter.format(date);
-		Thread.sleep(3000);
-
+		//Thread.sleep(3000);
+		//Explicit wait -08/25/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
 		String dateInUI = getAttribute(
 				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",
 				"Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
 
-		Thread.sleep(6000);
+		Thread.sleep(4000);
 
 		if (finalDate.equalsIgnoreCase(curDate)) {
 			setReport().log(Status.PASS, "An entry is added with current date " + finalDate, screenshotCapture());
