@@ -2,14 +2,24 @@ package pages;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.Status;
@@ -58,7 +68,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	//verify Contact End date
 	public ContactsPage verifyContactEndDate() throws InterruptedException {
 		Thread.sleep(3000);
-		verifyDisplayed(getDriver().findElement(By.xpath("//label[@title='Contact End Date']")), "Contact End Date");
+		verifyDisplayed(getDriver().findElement(By.xpath("//div[contains(text(),'Contact End Date')]")), "Contact End Date");
 		return this;
 	}
 	//select view type
@@ -103,7 +113,24 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
-		Thread.sleep(10000);
+		//Thread.sleep(55000);
+
+		//		Fluent Wait
+//		 Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
+//			       .withTimeout(Duration.ofSeconds(90L))
+//			       .pollingEvery(Duration.ofSeconds(10L))
+//			       .ignoring(NoSuchElementException.class ,ElementNotInteractableException.class);
+//
+//			   WebElement primaryAccountOnContact = wait.until(new Function<WebDriver, WebElement>() {
+//			     public WebElement apply(WebDriver driver) {
+//			       return getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]"));
+//			     }
+//			   });
+//		click(primaryAccountOnContact,primaryAccount);
+		
+		// Explicit Wait- 8/23/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),120);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")));
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
 	}
@@ -249,7 +276,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Wave2 Update
 		//a.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).doubleClick().build().perform();
 		//a.moveToElement(
-		doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"Check Mark");
+		doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Check Mark");
 		Thread.sleep(6000);
 		return this;
 	}
@@ -276,7 +303,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),PrimaryAccount1, "Primary Account");
-		Thread.sleep(6000);
+		//Thread.sleep(6000);
+		// Explicit Wait- 8/23/2023
+				WebDriverWait wait = new WebDriverWait(getDriver(),120);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")));
+				click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 		return this;
 	}
@@ -459,7 +490,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Actions a = new Actions(getDriver());
 		//Wave2 update
 		//a.moveToElement(
-				doubleClick(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[1]")),"CAA Rec");
+				doubleClick(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[2]")),"CAA Rec");
 		Thread.sleep(3000);
 		return this;
 	}
@@ -759,15 +790,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Date date = new Date();
 		String curDate = formatter.format(date);
 
-		Thread.sleep(3000);
-
-		String dateInUI = getAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",
-				"Created On");
+		//Thread.sleep(3000);
+		//Explicit wait 08/25/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
+		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value","Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
 
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		if (finalDate.equalsIgnoreCase(curDate)) {
 			setReport().log(Status.PASS, "An entry is added with current date " + finalDate, screenshotCapture());
 
@@ -868,8 +899,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Wave 2023 update
 		Thread.sleep(3000);
 		//doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"CAA on Job Func");
-		
-		doubleClick(getDriver().findElement(By.xpath("//*[@col-id='statecode']//label[@aria-label='Read only']")),"CAA on Job Func");
+		doubleClick(getDriver().findElement(By.xpath("//*[@col-id='statecode']//label[@aria-label='Active']")),"CAA on Job Func");
 		Thread.sleep(4000);
 		return this;
 	}
@@ -1001,15 +1031,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		Date date = new Date();
 		String curDate = formatter.format(date);
-		Thread.sleep(3000);
-
+		//Thread.sleep(3000);
+		//Explicit wait -08/25/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
 		String dateInUI = getAttribute(
 				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",
 				"Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
 
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 
 		if (finalDate.equalsIgnoreCase(curDate)) {
 			setReport().log(Status.PASS, "An entry is added with current date " + finalDate, screenshotCapture());

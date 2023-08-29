@@ -29,7 +29,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.Driver;
 
@@ -462,12 +464,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
 		Thread.sleep(7000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(120000);
+		Thread.sleep(120000);		
 		if(getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"+directParent+"')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]")),"Direct Parent");
 		} //2000033926
 		else {
-			click(getDriver().findElement(By.xpath("//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"+directParent+"')]")),"Clcikc Entity code");
+			click(getDriver().findElement(By.xpath("//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"+directParent+"')]")),"Click Entity code");
 		}
 		return this;
 	}
@@ -4345,20 +4347,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		
 		//Wave2023 Update
 				//Locator Change Select All button removed- Adding list to deactivate line items one by one
-				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_emsattributetype']//a"));
-				System.out.println("# of Rows Including Header:"+ rowList.size());
-				for (int i = 1; i <=rowList.size(); i++) {
-					click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
-					Thread.sleep(5000);
-					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
-					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
-					Thread.sleep(6000);
-				}		
-//
-//		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
-//		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
-//		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
+//				WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+//				List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_emsattributetype']//a"));
+//				System.out.println("# of Rows Including Header:"+ rowList.size());
+//				for (int i = 1; i <=rowList.size(); i++) {
+//					click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
+//					Thread.sleep(5000);
+//					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+//					click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+//					Thread.sleep(6000);
+//				}		
+// Wave2023 Update revert ( Missing Select All Radio button reappeared without fix in CRM Cloud. Enabling back the below code and commenting above
+		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
 		return this;
 	}
 
@@ -5049,7 +5051,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			if (title.equals("DEA")) {
 				Thread.sleep(3000);
 				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label)[2]")), "DEA");
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				break;				
 			}
 		}		
@@ -6291,7 +6293,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")),"Click Save button");
 		Thread.sleep(10000);
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		return this;
 	}
 
@@ -6343,31 +6345,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//verify New Account Number button is displayed
 	public MemberFormPage verifyAccountnumberButton() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		getDriver().findElement(By.xpath("//span[contains(text(),'New Account Number')]")).isDisplayed();
 		return this;
 
 	}
 
 	//Verify newly added Account Number is displayed in the Account Number page
-	public MemberFormPage verifyNewlyCreatedAccountNumber() {
-		boolean isTrue=false;
-		String accountnumber=null;
+	public MemberFormPage verifyNewlyCreatedAccountNumber(String accountnumber) {
 		//Wave1 2023 Update
 		List<WebElement> accountNumber=getDriver().findElements(By.xpath("//div[@data-id='entity_control-powerapps_onegrid_control_container']//div[@class='ag-center-cols-container']/div[contains(@class,'ag-row-') and @role='row']//a/div"));
 		for(int i=1;1<=accountNumber.size();i++) {
 			accountnumber=getDriver().findElement(By.xpath("(//div[@data-id='entity_control-powerapps_onegrid_control_container']//div[@class='ag-center-cols-container']/div[contains(@class,'ag-row-')and @role='row'])["+i+"]//a/div")).getText();
-			System.out.println("Expected:"+randomString+"Actual:"+accountnumber);
 			if(accountnumber.contains(randomString)) {
-				isTrue=true;
-				break;
-			}
-		}
-		if(isTrue==true) {
-			setReport().log(Status.PASS, "The text :"+accountnumber+" matches with the value in "+"Account Number"+" field",screenshotCapture());
+				break;}
+					}
+		if(accountnumber.equals(randomString)) {
+			setReport().log(Status.PASS, "The text :"+accountnumber+" matches with the value "+  randomString + "  in  Account Number"+" field",screenshotCapture());
 
 		}else {
-			setReport().log(Status.FAIL, "The text :"+accountnumber+" did not match with the value "+randomString+"in"+"Account Number"+" field",screenshotCapture());
+			setReport().log(Status.FAIL, "The text :"+accountnumber+" did not match with the value "+randomString+" in"+" Account Number"+" field",screenshotCapture());
 			Driver.failCount++;
 		}
 
@@ -6419,6 +6416,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 
 		randomString = sb.toString();
+		
+		try {
+			DataInputProvider.setCellData(randomString, Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return this;
 	}
@@ -6450,6 +6453,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 
 		randomString = sb.toString();
+		
+		try {
+			DataInputProvider.setCellData(randomString, Driver.iTestCaseRowNum, "HIN",Driver.sCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return this;
 	}
@@ -6500,7 +6509,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		String accountname=getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")).getText();
 		System.out.println();
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Calculated Name']")), accountname+" - "+accountNumberType+" - "+AccNumNPI, "Cacluclate Nane");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Calculated Name']")), accountname+" - "+accountNumberType+" - "+AccNumNPI, "Cacluclate Name");
 		return this;
 	}
 
@@ -6537,7 +6546,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	// Verify if date validation error msg is displayed for Member Account
-	public MemberFormPage verifyDateValidationErrorMsg(String appDate, String startdate) throws InterruptedException {
+	public MemberFormPage verifyAppDateValidationErrorMsg(String appDate, String startdate) throws InterruptedException {
 		Thread.sleep(3000);
 
 		String dateValidationMsg = getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")).getText();
@@ -6562,6 +6571,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+	
+	
+	//Date validation error
+	public MemberFormPage verifyDateValidationError(String errorText) {
+		//Wave2 Update
+		verifyPartialText((getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']"))), errorText,"Date Validation Error");
+		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok");
+		return this;
+	}
+	
+	//
+	public MemberFormPage clickLineOfBusinessesTab(String errorText) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-nav_ix_account_ix_portfoliocategory_Account']")),"Line of Businesses Tab");
+		return this;
+	}
+	
 }
+
+
+
 
 

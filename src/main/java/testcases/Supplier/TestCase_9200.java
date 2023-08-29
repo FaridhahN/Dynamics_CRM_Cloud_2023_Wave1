@@ -27,7 +27,7 @@ public class TestCase_9200 {
 		.selectAccountsTab()
 
 		//Search Existing Account using CRM#
-		//.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		//.selectAllSupplierView()
 
 		//Choose the desired account from the search results

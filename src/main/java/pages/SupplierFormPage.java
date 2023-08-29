@@ -258,11 +258,11 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		{
 			click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Active Diversity Information Associated View -Down Arrow");
 			Thread.sleep(5000);
-			click(getDriver().findElement(By.xpath("//span[text()='Inactive Diversity Informations']")),"InActive Diversity Information View");
+			click(getDriver().findElement(By.xpath("//*[text()='Inactive Diversity Informations']")),"InActive Diversity Information View");
 			Thread.sleep(3000);	
-			JavascriptExecutor je = (JavascriptExecutor) getDriver();
-			WebElement element = getDriver().findElement(By.xpath("//label[@title='Store/Location Type (Account)']"));
-			je.executeScript("arguments[0].scrollIntoView(true);",element);
+			//Wave2 Update		
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
 			//List<WebElement> colmns = getDriver().findElements(By.xpath("//div[@class='wj-colheaders']/div[@class='wj-row']/div/div/div/div/div[1]"));
 			List<WebElement> colmns = getDriver().findElements(By.xpath("//*[@role='columnheader']//label"));
 			//Wave2 Update
@@ -997,6 +997,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage selectMembershipEndReason(String EndReason) throws InterruptedException {
 		//Wave2 update
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select-container']")),"End Reason");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")),"End Reason");
 		Thread.sleep(3000);
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")))),EndReason,"End Reason");
 		return this; 	
@@ -1060,7 +1061,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),premierStartDate,"Premier Start Date");
 		return this;
 	}
-
+	
+	
 	//Account name 2
 	public SupplierFormPage typeAccountName2(String AccountName2) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"AccountName2");
@@ -1306,12 +1308,12 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			List<String> actualWomOwnSubClass=new ArrayList<String>();	
 			//Create temp Array List > add  actual options  from DOM for comparison
 			List<WebElement> mylist =subClass.getOptions();	
-			System.out.println("The Number of Minority Owned Diversity Type's Sub Classifications available : "  + " " + mylist.size());
+			System.out.println("The Number of Women Owned Diversity Type's Sub Classifications available : "  + " " + mylist.size());
 			//loop through DOM and add dropdown values into mylist for comparison
 			for (WebElement ele:mylist) {			
 				String data =ele.getText();
 				actualWomOwnSubClass.add(data);								
-				System.out.println("The Actual Minority Owned Diversity Type's Sub Classifications available : "  + " " +data);				
+				System.out.println("The Actual Women Owned Diversity Type's Sub Classifications available : "  + " " +data);				
 				Thread.sleep(3000);
 				if(expectedWomOwnSubClass.containsAll(actualWomOwnSubClass))
 				{		
@@ -1533,20 +1535,25 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	//Deactivate All Diversity Info
 	public SupplierFormPage deactivateAllDiversityInfo() throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//div[@data-id='btnheaderselectcolumn']//div[1]")), " Select All check mark ");
-		//click(getDriver().findElement(By.xpath("//i[@data-icon-name='StatusCircleCheckmark']")), "Select All Radio Button");
+		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Select All Radio Button");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+		Thread.sleep(2000);
 		
-		//Wave2 Update
+		//Wave2 Update - 08/21/2023 -Reverting back as the Select All button is available back 
 		//Locator Change Select All button removed- Adding list to deactivate line items one by one
-		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_diversitytype']//label"));
-		System.out.println("# of Rows Including Header:"+ rowList.size());
-		for (int i = 2; i <=rowList.size(); i++) {
-			click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
-			Thread.sleep(5000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
-			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
-			Thread.sleep(6000);
-		}		
+//		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+//		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_diversitytype']//label"));
+//		System.out.println("# of Rows Including Header:"+ rowList.size());
+//		for (int i = 2; i <=rowList.size(); i++) {
+//			click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")), "Check Mark");
+//			Thread.sleep(5000);
+//			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+//			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+//			Thread.sleep(6000);
+//		}		
 
 		return this;					
 	}

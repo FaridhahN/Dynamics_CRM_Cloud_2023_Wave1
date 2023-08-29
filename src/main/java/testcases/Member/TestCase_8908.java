@@ -26,11 +26,14 @@ public class TestCase_8908 {
 		.selectAccountsTab()
 		.selectActiveMembers()
 		.verifyAccountnumberColumns()
-		.searchString(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
-		.verifyAccountisDisplayed()
-		.clickclearButton()
-		.searchString(DataInputProvider.getCellData_ColName(iRowNumber, "HIN", sDataSheetName))
-		.verifyAccountisDisplayed()
+		
+		//~~~~~~~~~~~~ Cloud Restriction- Account Numbers cannot be searched from any Account View -Commenting below
+		
+//		.searchString(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
+//		.verifyAccountisDisplayed()
+//		.clickclearButton()
+//		.searchString(DataInputProvider.getCellData_ColName(iRowNumber, "HIN", sDataSheetName))
+//		.verifyAccountisDisplayed()
 		;
 	}
 }

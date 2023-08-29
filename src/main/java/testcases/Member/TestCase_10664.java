@@ -41,7 +41,7 @@ public class TestCase_10664 {
 
 		//5.Search and Select another Member Account 2 using CRM#
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber1", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
 		
 		//6.Add the same Fed Tax ID (from step 3 )  on to the Member Account 2
 		.selectAccountNumbers()

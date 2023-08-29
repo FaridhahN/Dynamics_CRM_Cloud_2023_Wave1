@@ -11,7 +11,7 @@ public class TestCase_8749 {
 
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void changePrimaryContact(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))

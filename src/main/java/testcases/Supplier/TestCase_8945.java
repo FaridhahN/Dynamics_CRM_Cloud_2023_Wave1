@@ -32,7 +32,7 @@ public class TestCase_8945 {
 			//Business Classification = Any
 			.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
 			
-			//Direct Parent  =2000133648
+			//Direct Parent  = 2000141874
 			.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 			
 			//Direct Parent Relation Date  =Any
