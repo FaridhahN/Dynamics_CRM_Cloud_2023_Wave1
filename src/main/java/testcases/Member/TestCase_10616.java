@@ -75,6 +75,8 @@ public class TestCase_10616 {
 		.verifyRegionIsNotEditable()
 		.verifySponsorDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "sponsor", sDataSheetName))
 		.verifySupplierRecordIsNotEditable()
+		//chk
+		.navigatetoExternalAddress()
 		.verifyExternalAddressIDIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "externalAddressID", sDataSheetName))
 		.verifyOwnershipIsNotEditable()
 		.verifyStockSymbolIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "stockSymbol", sDataSheetName))

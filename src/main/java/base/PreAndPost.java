@@ -67,18 +67,16 @@ public class PreAndPost extends WebDriverEvents
 		
 		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
 		
-		//webdriver = (RemoteWebDriver) WebDriverManager.chromedriver().create();
+		webdriver = (RemoteWebDriver) WebDriverManager.chromedriver().create();
 		
 		
-		 System.setProperty("webdriver.chrome.driver","src\\test\\resources\\chromedriver.exe"); 
-		 webdriver = new ChromeDriver();
+		/*
+		 * System.setProperty("webdriver.chrome.driver",
+		 * "src\\test\\resources\\chromedriver.exe"); webdriver = new ChromeDriver();
+		 */
 		 
 		driver = new EventFiringWebDriver(webdriver);
-		/*
-		 * 
-		 * 
-		 * 
-		 */	
+		
 		 driver.register(this);
 		 tlDriver.set(driver);
 		getDriver().manage().window().maximize();

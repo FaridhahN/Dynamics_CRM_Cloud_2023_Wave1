@@ -46,7 +46,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
 		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 
-		
+		System.out.println(crmNumberInput+" searching ");
 		 click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
 		 typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),
 		 crmNumberInput,"Global Search Input Box" );

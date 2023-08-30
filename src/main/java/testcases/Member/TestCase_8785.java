@@ -123,8 +123,10 @@ public class TestCase_8785 {
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
 		
-		.clickOnDiscardChanges()
-
+		.verifyLOBRequiredErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		
+		.clickAddNewLineOfBusiness()
+		
 		// Line of Business =General GPO
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 

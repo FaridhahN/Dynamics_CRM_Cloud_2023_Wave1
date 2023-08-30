@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import pages.DashboardPage;
 import pages.LoginPage;
+import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 8802:Cloud - Verify newly added "GPO memberships" in DP should not get cascaded to the "location type children" in draft status.
 
@@ -31,15 +32,28 @@ public class TestCase_8802 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+
+		//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened
+		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber,
+				"membershipProvider", sDataSheetName)) 
+
+		
+
+		//11.Provide end date = Any future date **** Account should be saved successfully
+		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber,
+				"membershipEndDate", sDataSheetName))
+
+		// End reason = Anything from dropdown,
+		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber,
+				"membershipEndReason", sDataSheetName))
+
+		// then save 
+		.clickMembershipSaveAndClose()
+
 		.selectSubaccount()
 
-		.searchinSubaccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		.createSubAccountLocationType(1)
 
-		.selectAccountFromSearchResults()
-		.selectRelatedMembership()
-		.searchinMemberShip(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		.verifyMembership(false,DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 		.clickGeneralTab()
 		.chooseRecordStatusDraft()
 
@@ -60,24 +74,28 @@ public class TestCase_8802 {
 		//Click on Save 
 		.clickSave() 
 
-		// 10.Click the + icon on the Line of Business Grid
+		
+		  // 10.Click the + icon on the Line of Business Grid 
 		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
+		  
+		  //Click New Line Of Business 
 		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationTypeIntersectta(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
+		  
+		  // Line of Business =General GPO
+		  .selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber,
+		  "lineOfBusiness", sDataSheetName))
+		  
+		  // Classification Type = General GPO
+		  .selectLOBfClassificationTypeIntersectta(DataInputProvider.
+		  getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
+		  
+		  // Start Date =Today's date
+		  .typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(
+		  iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+		  
+		  // Click on LOB Save 
+		  .clickLOBSaveAndClose()
+		 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -102,8 +120,8 @@ public class TestCase_8802 {
 
 		.selectAccountsTab()
 
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		.searchAccount(WebDriverServiceImpl.CRMNumber)
+		.selectAccountFromGlobalSearchResults(WebDriverServiceImpl.CRMNumber)
 		.selectRelatedMembership()
 		.searchinMemberShip(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 

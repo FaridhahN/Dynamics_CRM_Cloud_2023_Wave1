@@ -82,7 +82,7 @@ public class TestCase_10535 {
 		.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
 
 		.verifyNAICSIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "nAICS", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "industryTitle", sDataSheetName))
-
+		.naivagateToReferredByFromNACS()
 		.verifyReferredByIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName))
 
 		.clickNyTabSave()

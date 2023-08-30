@@ -29,6 +29,7 @@ public class TestCase_7491 {
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
+		.navigateToCountry()
 		//Country =USA
 		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
@@ -45,7 +46,7 @@ public class TestCase_7491 {
 
 		//Direct Parent = 1000039759
 		//.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-		.selectDirectParentWithoutEnitiy(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//TP relation - Affiliated
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
