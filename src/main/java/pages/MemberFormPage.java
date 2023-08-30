@@ -5074,7 +5074,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")),"search textbox");
 		typeAndEnter(((getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")))),membership,"Membership");
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 		return this;
 	}
 
