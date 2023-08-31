@@ -152,8 +152,49 @@ public class Driver extends PreAndPost{
 
 			}				
 
+			else if(sCategory.equalsIgnoreCase("MembershipProvider"))
+			{
+				sTestClassName="testcases.MembershipProvider.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
+			}
+			
+			else if(sCategory.equalsIgnoreCase("BaseReadOnly"))
+			{
+				sTestClassName="testcases.BaseReadOnly.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 
+			}
+			
+			else if(sCategory.equalsIgnoreCase("AccountNumbers"))
+			{
+				sTestClassName="testcases.AccountNumbers.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+
+			}
+			
+			else if(sCategory.equalsIgnoreCase("MemberEntryForm"))
+			{
+				sTestClassName="testcases.MemberEntryForm.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+
+			}
+			else if(sCategory.equalsIgnoreCase("LimitedMember"))
+			{
+				sTestClassName="testcases.LimitedMember.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+
+			}
+			
+			else if(sCategory.equalsIgnoreCase("AGRules"))
+			{
+				sTestClassName="testcases.AGRules.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+
+			}
+			
+
+						
 			//Create instance of the class during run time
 			Class<?> cls = Class.forName(sTestClassName);
 			Object clsInstance = (Object) cls.getDeclaredConstructor().newInstance();

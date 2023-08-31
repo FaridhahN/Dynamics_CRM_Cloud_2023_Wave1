@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -462,15 +464,23 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//select Direct parent
 	public MemberFormPage selectDirectParent(String directParent) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
-		Thread.sleep(7000);
+		Thread.sleep(1000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
-		Thread.sleep(120000);		
-		if(getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"+directParent+"')]")).size()>0) {
-			click(getDriver().findElement(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]")),"Direct Parent");
-		} //2000033926
-		else {
-			click(getDriver().findElement(By.xpath("//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"+directParent+"')]")),"Click Entity code");
-		}
+		//Thread.sleep(120000);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+directParent+"')]")));
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+directParent+"')]")),"Direct Parent");
+		
+		/*
+		 * if(getDriver().findElements(By.xpath(
+		 * "//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]//span[contains(text(),'"
+		 * +directParent+"')]")).size()>0) { click(getDriver().findElement(By.xpath(
+		 * "//*[contains(@id,'parentaccountid.fieldControl-accountnumber')]"))
+		 * ,"Direct Parent"); } //2000033926 else {
+		 * click(getDriver().findElement(By.xpath(
+		 * "//*[contains(@data-id,'parentaccountid.fieldControl-ix_premierein')]//span[contains(text(),'"
+		 * +directParent+"')]")),"Click Entity code"); }
+		 */
 		return this;
 	}
 
@@ -2356,19 +2366,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Select Membership provider
 	//Select Membership provider
-		public MemberFormPage selectMembershipProvider(String membershipProvider) throws InterruptedException   {	
-			//click(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),"Membership Provider");
-			type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
-			Thread.sleep(10000);
-			//((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
-			//	getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")));
-			setReport().log(Status.PASS, "Clicked on the Membership Provider successfully", screenshotCapture());
+	public MemberFormPage selectMembershipProvider(String membershipProvider) throws InterruptedException   {	
+		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),"Membership Provider");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_textInputBox_with_filter_new']")),membershipProvider,"Membership Provider");
+		Thread.sleep(10000);
+		//((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();",
+		//	getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")));
+		setReport().log(Status.PASS, "Clicked on the Membership Provider successfully", screenshotCapture());
 
-			//Thread.sleep(10000);
-			click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_membershipprovider.fieldControl-nam')]/span[contains(text(),'"+membershipProvider+"')]")),"Membership Provider");
-			Thread.sleep(5000);
-			return this;
-		}
+		//Thread.sleep(10000);
+		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_membershipprovider.fieldControl-nam')]/span[contains(text(),'"+membershipProvider+"')]")),"Membership Provider");
+		Thread.sleep(5000);
+		return this;
+	}
 
 	//Select Membership provider
 	public MemberFormPage TyprMembershipProvider(String membershipProvider) throws InterruptedException   {	
@@ -6604,7 +6614,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			typeAccountName("MemberAccount1");
 
 			//Click on save 			
-						//5. Account Type = Member
+			//5. Account Type = Member
 			selectAccountType("Member");
 			//Class of Trade =Any
 			selectClassOfTrade("Auditorium/Museum");
@@ -6636,7 +6646,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 			//Click on Save 
 			clickSave(); 
-			
+
 			verifyCRMNumberIsDisplayed();
 
 
