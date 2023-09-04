@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -185,21 +183,53 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//Click on Save button
+//	//Click on Save button
+//	public MemberFormPage clickSave() throws InterruptedException {
+//		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
+//		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
+//		Thread.sleep(5000);
+//		try {
+//			List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+//			if(ignoreMessage.size()>0)
+//				click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");	
+//		} catch (Exception e) {
+//			e.getMessage();
+//		}
+//		Thread.sleep(7000);
+//		return this;	
+//	}
+	
 	public MemberFormPage clickSave() throws InterruptedException {
-		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
-		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
-		Thread.sleep(5000);
-		try {
-			List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
-			if(ignoreMessage.size()>0)
-				click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");	
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		Thread.sleep(7000);
-		return this;	
-	}
+
+        //click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
+
+        click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
+
+        Thread.sleep(2000);
+
+        
+
+        try {
+
+            List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+
+            if(ignoreMessage.size()>0)
+
+                click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");    
+
+        } catch (Exception e) {
+
+            e.getMessage();
+
+        }
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")));
+
+        return this;    
+
+    }
 
 	//Set the Do not verify Address
 	public MemberFormPage selectDonotVerify(String option) throws InterruptedException {
@@ -4352,7 +4382,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;
 	}
-
+		
 	//Deactivate all attributes
 	public MemberFormPage deactivateAllAttributes() throws InterruptedException {
 
@@ -4369,7 +4399,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//					Thread.sleep(6000);
 		//				}		
 		// Wave2023 Update revert ( Missing Select All Radio button reappeared without fix in CRM Cloud. Enabling back the below code and commenting above
-		click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
+		//09/01/2023 -Actions implemented & explicit wait
+		WebDriverWait wait = new WebDriverWait(getDriver(),120);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@data-icon-name='CheckMark']")));
+//		Actions action = new Actions(getDriver());		
+//		action.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
+		WebElement element = getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"));
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].click();", element);
+		//click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
 		return this;
@@ -5075,7 +5113,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
-		Thread.sleep(3000);
+		//Explicit wait -09/01/2023
+		WebDriverWait wait = new WebDriverWait(getDriver(),60);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'New Membership')]")));
+		System.out.println("New Membership is displayed");
+		//Thread.sleep(3000);
 		return this;
 	}
 
