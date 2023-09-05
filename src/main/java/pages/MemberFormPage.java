@@ -2330,7 +2330,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
 		//Wave2 Fix
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
-		Thread.sleep(5000);
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
+		
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);
 		return this;	
@@ -2622,6 +2625,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;
 	}
+	
+	
+	//select Specific Membership Entity
+		public MemberFormPage selectMembership(String membershipProvider) throws InterruptedException {
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'"+membershipProvider+"')]")),membershipProvider);
+			Thread.sleep(3000);
+			return this;
+		}
 
 	//Click Deactivate button in the membership Page
 	public MemberFormPage clickMembershipDeactivateButton() throws InterruptedException {
@@ -3836,12 +3848,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-SUMMARY_TAB_section_9']")),"FBO");
 		String Text=getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group");
 		System.out.println(Text);
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group Effective Date')]")),"AG Effective Date");
 		Assert.assertTrue((getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group")).equals(verifyAffiliateGroup));
 		return this;
 	}
 
 	//Verify AG effective date
 	public MemberFormPage verifyAgEffectiveDate(String verifyAgEffectiveDate) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
 		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Effective Date")).equals(verifyAgEffectiveDate));
 		return this;
 	}
@@ -4410,6 +4424,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//click(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check Mark");
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
+		return this;
+	}
+	
+	
+	
+	//Save And Close
+			public MemberFormPage clickSystemTab() throws InterruptedException {
+				click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Clic System Tab");
+				WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
+				return this;
+
+			}
+			
+	public MemberFormPage pageRefreshWithGeneral() throws InterruptedException {
+		getDriver().navigate().refresh();
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));
+	
 		return this;
 	}
 
@@ -5317,7 +5351,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		List<WebElement> newMShip= getDriver().findElements(By.xpath("//span[contains(text(),'New Membership')]"));
 		verifyElementisNotDisplayed(newMShip.size()," '+ New Membership  ' Button ");
 		return this;
-	}				
+	}	
+	
+	
+	//+ New Membership Button
+		public MemberFormPage navigateToMembershipPage() throws InterruptedException {
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+			return this;
+		}	
+	
 
 	// Read Only Membership Entity Error Info Message for Limited Member
 	public MemberFormPage verifyMembershipEntityIsNotEditable(String errorMessage) throws InterruptedException {

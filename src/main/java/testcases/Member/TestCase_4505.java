@@ -91,7 +91,7 @@ public class TestCase_4505 {
 
 
 		//7. Refresh the page to unlock the Fee share eligible field 
-		.pageRefresh()
+		.pageRefreshWithGeneral()
 
 		//8. Fee share eligible = Yes
 		.changeFeeShareEligibleToYes()

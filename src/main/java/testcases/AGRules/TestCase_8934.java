@@ -4,6 +4,8 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 
 //Test Case 8934:Cloud: Verify AG and AG effective date on Account creation when AG populated based on FBO and Business classification is NON Healthcare
+//TFS ID_8936:_684224_Cloud: Verify AG and AG effective date on Account creation when AG populated based on FBO and Business classification is Acute
+//TFS ID_8935:_684223_Cloud: Verify AG and AG effective date on Account creation when AG populated based on FBO and Business classification is Alternate Site
 
 public class TestCase_8934 {
 	  	
@@ -111,6 +113,34 @@ public class TestCase_8934 {
 			 
 		//7.Observe the AG and AG effective date populated 
 			.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
+			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		
+			//Navigate to System tab an come back to General Tab
+			.clickSystemTab()
+			.clickGeneralTab()
+			
+			//Change the Business Classification
+			.navigateToBusinessClassification()
+			.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification1", sDataSheetName))
+			.clickSave()
+			
+			//Verify AG Rules
+			.navigateToAG()
+			.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup1", sDataSheetName))
+			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+			
+			//Navigate to System tab an come back to General Tab
+			.clickSystemTab()
+			.clickGeneralTab()
+			
+			//Change the Business Classification
+			.navigateToBusinessClassification()
+			.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification2", sDataSheetName))
+			.clickSave()
+			
+			//Verify AG Rules
+			.navigateToAG()
+			.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup2", sDataSheetName))
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		;
 	}
