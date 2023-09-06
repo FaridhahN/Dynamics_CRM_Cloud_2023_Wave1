@@ -1,4 +1,4 @@
-package testcases.CAMSFlag;
+package testcases.Supplier;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
@@ -63,6 +63,8 @@ public class TestCase_9215 {
 		.clickSave()
 
 		.crmNumberIsDisplayed()
+		
+		.pageRefresh()
 
 		//5.Verify the Premier Start Date.
 		.verifyPremierStartDateAsCurrentDate()
@@ -85,12 +87,22 @@ public class TestCase_9215 {
 
 		//Account Name = Any
 		.typeAccountName("Child Account")	
+		
+		
+		//Navigate to Business Classification
+		.navigateToZipCode()	
+	
+
 
 		//Business Classification = Any
 		.selectBusinessClassification("Manufacturer")
 
-		//select CAMS as no
+		//select CAMS as Yes
 		.changeCAMSFlagAsYes()
+		
+		//Clear Member Record ID - Wave 2023
+		.clearMemberRecordId()
+
 		//Direct Parent Relation Date  =Any
 		.selectDPParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "selectDPRelationDate", sDataSheetName))
 
@@ -111,7 +123,8 @@ public class TestCase_9215 {
 
 		//Record Status = Draft (Default)
 		.recordStatusDraft()
-
+		
+	
 		//Save the Record
 		.clickSave()
 
@@ -119,7 +132,7 @@ public class TestCase_9215 {
 		.verifyPremierStartDateAsCurrentDate()
 
 		//6.Modify Premier Start Date to different date and save ***The new Premier Start Date should be saved 
-		.pickPremierStartDate("5/5/2021")
+		.pickPremierStartDate("10/5/2023")
 		//Save the Record
 		.clickSave()
 
