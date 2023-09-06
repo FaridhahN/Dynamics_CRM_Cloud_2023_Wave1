@@ -48,10 +48,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Enter account name
 	public MemberFormPage typeAccountName(String accountName) throws InterruptedException {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String executiondate = dateFormat.format(date);
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account name");
 		Thread.sleep(2000);
 		System.out.println(accountName);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")))),accountName,"Account name");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")))),accountName + "_" + executiondate,"Account name");
 		return this;
 	}
 
@@ -4441,7 +4444,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			// DOM was showing duplicate select all elements when its not available in UI- to avoid inconsistency implementing preceding sibling approach - 09/04/2023
 			click(getDriver().findElement(By.xpath("//div[@col-id='ix_membershiptype']/preceding-sibling::div//i")),"Select All Check Mark");
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
-			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate button");
 			WebDriverWait wait = new WebDriverWait(getDriver(),120);
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.AddNewStandard']")));
 			//Thread.sleep(5000)	;		

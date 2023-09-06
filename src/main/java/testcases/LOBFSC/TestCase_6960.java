@@ -186,7 +186,6 @@ public class TestCase_6960 {
 
 		.selectRelatedMembership()
 
-
 		//Deactivating All Memberships
 		.deactivateAllMemberships()
 
