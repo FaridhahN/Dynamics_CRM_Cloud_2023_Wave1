@@ -45,20 +45,21 @@ public class AccountsPage extends WebDriverServiceImpl {
 	//Search accounts
 	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
 		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
-
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("GlobalSearchBox"))));
 		System.out.println(crmNumberInput+" searching ");
-		 click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
-		 typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),
-		 crmNumberInput,"Global Search Input Box" );
-		 Thread.sleep(5000);
-		 if(getDriver().findElements(By.xpath("//*[@id='numberOfSyncedEntitiesInApp']//*[contains(text(),'We didn')]")).size()>0){
+		click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
+		typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),
+				crmNumberInput,"Global Search Input Box" );
+		Thread.sleep(5000);
+		if(getDriver().findElements(By.xpath("//*[@id='numberOfSyncedEntitiesInApp']//*[contains(text(),'We didn')]")).size()>0){
 			// click(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']")),"Clear button");
-			
-			 click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
-			 click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
-			 searchAccountFromFilter(crmNumberInput);
-		 }
-		
+
+			click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
+			click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
+			searchAccountFromFilter(crmNumberInput);
+		}
+
 
 
 		return this;
@@ -97,7 +98,8 @@ public class AccountsPage extends WebDriverServiceImpl {
 
 	//Select member account from Global search results -06/14/2023
 	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
-		Thread.sleep(4000);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
 		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
 			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
 		}
@@ -225,7 +227,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
 		}
 		Actions action = new Actions(getDriver());	
-		
+
 		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='accountnumber']//span"))).build().perform();
 		//		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
 		//		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();

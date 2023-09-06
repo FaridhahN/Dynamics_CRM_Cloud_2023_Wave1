@@ -205,8 +205,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
         click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
 
-        Thread.sleep(2000);
-
+      
         
 
         try {
@@ -2678,7 +2677,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Rebate Payment
 	public MemberFormPage selectRebatePayment() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		click(getDriver().findElement(By.xpath("//*[text()='Rebate Payments']")),"Related > Rebate Payments");
 		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
 		Thread.sleep(2000);
@@ -2924,10 +2923,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Save Patient Services
 	public MemberFormPage savePatientServices() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
-
-		Thread.sleep(10000);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']"))));
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
-
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}

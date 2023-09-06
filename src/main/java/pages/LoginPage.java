@@ -77,7 +77,7 @@ public class LoginPage extends WebDriverServiceImpl{
 		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("idSIButton9"))));
 		click(getDriver().findElement(By.id("idSIButton9")),"Signin");
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		return new LoginPage();
 	}	
 
