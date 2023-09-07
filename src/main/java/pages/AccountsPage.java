@@ -33,6 +33,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}
 
 	//select Active Member view
+	
 	public AccountsPage selectActiveMembers() throws InterruptedException {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");

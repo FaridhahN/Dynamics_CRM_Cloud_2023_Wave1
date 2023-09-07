@@ -125,6 +125,7 @@ public class WebDriverEvents implements WebDriverEventListener {
 	public static EventFiringWebDriver getDriver() {
 		return tlDriver.get();
 	}
+		
 
 	public void waitForLoaderToDisapper() {
 		// TODO Auto-generated method stub

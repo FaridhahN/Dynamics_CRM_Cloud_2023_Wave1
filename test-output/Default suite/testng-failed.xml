@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testcases.Member.TestCase_10616">
+      <class name="testcases.LOBFSC.TestCase_6960">
         <methods>
-          <include name="verifyLimitedMemberNonEditablefields"/>
+          <include name="verifyFSLOBAddedautomatically"/>
         </methods>
-      </class> <!-- testcases.Member.TestCase_10616 -->
+      </class> <!-- testcases.LOBFSC.TestCase_6960 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
