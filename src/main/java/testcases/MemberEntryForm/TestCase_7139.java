@@ -42,7 +42,7 @@ public class TestCase_7139 {
 
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
-	
+
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
 
@@ -54,16 +54,16 @@ public class TestCase_7139 {
 
 		//9.  Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
+
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
-		
+
 		//Country =USA
-	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
-		
+		//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 
@@ -85,14 +85,14 @@ public class TestCase_7139 {
 
 		//type TP reason
 		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "TPReason", sDataSheetName))
-		
+
 		//Click on save 
 		.clickSave() 
 
 		//7. Verify CRM Account # is generated 
 		.verifyCRMNumberIsDisplayed()	
 
-	
+
 		//8 Account  Type = Member
 		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
@@ -153,24 +153,6 @@ public class TestCase_7139 {
 		.verifyAffiliateGroupIsNotNullMEF()
 		.verifyAgEffectiveDateIsNotNull()
 
-		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-
-		//14. Verify Corporate parent name in the form
-		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
-		//15. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-
-		//16 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-
 		//FBO details verification
 		//Verify "Is FBO" field 
 
@@ -181,6 +163,28 @@ public class TestCase_7139 {
 
 		//FBORD
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		.navigateToSponsor()
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+		.navigateToCorporateParent()
+
+		//13. Verify "IS Corporate account" field
+		.verifyIsCorporateAccountMEF(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+
+		//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+		.navigateToFoodServices()
+		//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+
+		//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+
+
+
 		.clickGoBackButton()
 		.changeMemberForm()
 		.clickSave()

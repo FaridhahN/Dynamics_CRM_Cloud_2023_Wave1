@@ -87,17 +87,18 @@ public class TestCase_8838 {
 
 		//Click on Save 
 		.clickSave() 
-
+		.navigatetoAdditionaCriteriaFromDonotVerify()
 		//7. Record Status = Published
 		.chooseRecordStatusPublishedMEF()				
 
 		//Click on Save 
 		.clickSave() 
-		.pageRefresh()
-
-		//Wave2 Fix
-		.clickAdditionalCriteria()
-
+				
+				 .pageRefresh()
+				 
+				 //Wave2 Fix 
+				 .clickAdditionalCriteria()
+				 
 
 		//8. Verify Entity code is same as DP's entity code 
 		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "DirectParent", sDataSheetName))
@@ -108,23 +109,38 @@ public class TestCase_8838 {
 		.verifyAgEffectiveDateIsNull()
 		.verifyAffiliateGroupIsNull()
 		
+		//FBO details verification
+		//Verify "Is FBO" field 
+
+		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+
+		//FBO
+		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
+
+		//FBORD
+		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		.navigateToRecordStatus()
+		.navigateToSponsor()
 		//17 Verify Sponsor field 
 		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 
 		//16 Verify "Is Sponsor" field 
 		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+		.navigateToCorporateParent()
 
 		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+		.verifyIsCorporateAccountMEF(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 
 		//14. Verify Corporate parent name in the form
 		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
+		.navigateToFoodServices()
 		//15. Verify "Is Food Service parent" field 
 		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
 
 		//16 Verify Food Service parent name in the form 
 		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+
+
 
 		.clickGoBackButton()
 		.changeMemberForm()

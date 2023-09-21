@@ -33,7 +33,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}
 
 	//select Active Member view
-	
+
 	public AccountsPage selectActiveMembers() throws InterruptedException {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
@@ -52,15 +52,16 @@ public class AccountsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
 		typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),
 				crmNumberInput,"Global Search Input Box" );
-		Thread.sleep(5000);
-		if(getDriver().findElements(By.xpath("//*[@id='numberOfSyncedEntitiesInApp']//*[contains(text(),'We didn')]")).size()>0){
-			// click(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']")),"Clear button");
+		Thread.sleep(2000);
+		if(!(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span")).isDisplayed())) {
+			if(getDriver().findElements(By.xpath("//*[@id='numberOfSyncedEntitiesInApp']//*[contains(text(),'We didn')]")).size()>0){
+				// click(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']")),"Clear button");
 
-			click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
-			click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
-			searchAccountFromFilter(crmNumberInput);
+				click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
+				click(getDriver().findElement(By.xpath("//button[contains(@id,navigateBackButtontab-id) and @title='Go back']")),"Back button");
+				searchAccountFromFilter(crmNumberInput);
+			}
 		}
-
 
 
 		return this;

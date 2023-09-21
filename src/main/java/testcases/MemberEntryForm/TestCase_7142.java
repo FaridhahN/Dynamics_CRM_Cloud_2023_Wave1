@@ -70,7 +70,7 @@ public class TestCase_7142 {
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
 		//Country =USA
-	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+		//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -127,24 +127,6 @@ public class TestCase_7142 {
 		.verifyAffiliateGroupIsNotNullMEF()
 		.verifyAgEffectiveDateIsNotNull()
 
-		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-
-		//14. Verify Corporate parent name in the form
-		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
-		//15. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-
-		//16 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-
 		//FBO details verification
 		//Verify "Is FBO" field 
 
@@ -152,6 +134,30 @@ public class TestCase_7142 {
 
 		//FBO
 		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
+
+		//FBORD
+		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		.navigateToSponsor()
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+		.navigateToCorporateParent()
+
+		//13. Verify "IS Corporate account" field
+		.verifyIsCorporateAccountMEF(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
+
+		//14. Verify Corporate parent name in the form
+		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+		.navigateToFoodServices()
+		//15. Verify "Is Food Service parent" field 
+		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
+
+		//16 Verify Food Service parent name in the form 
+		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
+
+
 
 		.clickGoBackButton()
 		.changeMemberForm()

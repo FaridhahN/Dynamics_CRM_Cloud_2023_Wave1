@@ -83,7 +83,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Click on Yes in stay signed in window
 	public DashboardPage clicYesInStaySignedin() throws InterruptedException {
-
+		Thread.sleep(3000);
 		if(getDriver().findElements(By.id("idSIButton9")).size()>0){
 			click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
 		}
