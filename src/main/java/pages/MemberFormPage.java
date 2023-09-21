@@ -1931,6 +1931,21 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Navigate to FBORD
+	public MemberFormPage navigateToFBOFromCorporate() {
+		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"Food Service Parent");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Food Service Parent')]")),"Food Service");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Entity Code')]")),"Entity Code");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Food Service Parent Start Date')]")),"Food Service Parent Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Food Service Parent Override')]")),"Food Service Override");
+		click(getDriver().findElement(By.xpath("//h2[@title='FBO']")),"FBO");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is FBO')]")),"Is FBO");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Relation Date')]")),"Is FBO Relation Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Manual Override')]")),"Is FBO Manual Override");
+		
+		
+		return this;
+	}
 	//Verify FBORD
 	public MemberFormPage verifyFBORD(String verifyFBORD) {
 		List<WebElement>FBO=getDriver().findElements(By.xpath("//h2[contains(text(),'FBO')]"));
@@ -3756,7 +3771,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(7000);
 		//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		//Changes as part of Ticket 833703
-		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+		click(getDriver().findElement(By.xpath("//*[@title='General']")),"GENERAL");
 		Thread.sleep(5000);
 		chooseApplicationnavigateToAdditionalCriteria();
 		return this;	
@@ -3863,7 +3878,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		//Changes as part of Ticket 833703
-		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+		click(getDriver().findElement(By.xpath("//*[@title='General']")),"GENERAL");
 		Thread.sleep(5000);
 		return this;	
 	}	

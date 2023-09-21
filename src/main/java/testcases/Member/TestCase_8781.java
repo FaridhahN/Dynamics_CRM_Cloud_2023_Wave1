@@ -229,7 +229,7 @@ public class TestCase_8781 {
 		//21.Verify Premier end date ***** Premier end date should be blank 
 		.verifyPremierEndDateIsNull()
 
-		.clickNyInformationTab()
+		.NavigateToSystemTab()
 		.clickGeneralTab()
 		//22.Verify DPRD ***** DPRD should be same as new Premier start date 
 		.verifyDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
@@ -243,6 +243,8 @@ public class TestCase_8781 {
 		//25 Verify Food SErvice Date effective Date
 		.verifyFoodServiceStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 
+		.navigateToFBOFromCorporate()
+		
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 		
 		//Navigate to AG from FBO Grid

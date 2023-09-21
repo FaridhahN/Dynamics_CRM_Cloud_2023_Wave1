@@ -178,7 +178,7 @@ public class TestCase_8780 {
 		//Click on Save 
 		.clickSave() 
 
-		.clickNyInformationTab()
+		.NavigateToSystemTab()
 		.clickGeneralTab()
 		//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened 
 		.selectMemberShipEntity(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider2", sDataSheetName))

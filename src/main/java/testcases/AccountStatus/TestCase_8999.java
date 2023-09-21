@@ -219,7 +219,7 @@ public class TestCase_8999 {
 
 		.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		
-		.clickNyInformationTab()
+		.NavigateToSystemTab()
 		
 		.clickGeneralTab()
 		

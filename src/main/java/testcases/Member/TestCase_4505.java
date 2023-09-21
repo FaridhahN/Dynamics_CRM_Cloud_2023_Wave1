@@ -149,7 +149,7 @@ public class TestCase_4505 {
 		.entityCodeIsDisplayed()
 
 		//Verify DP RD is blank
-		.clickNyInformationTab()
+		.NavigateToSystemTab()
 		.clickGeneralTab()
 		.verifyDPRDIsNull()
 		//Verify Premier start date is auto populated
