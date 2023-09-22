@@ -76,13 +76,17 @@ public class TestCase_10535 {
 		.verifyReceiveDirectMailIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "receiveDirectMail", sDataSheetName))
 
 		.verifyDoNotVerifyAddresIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "doNotVerifyAddress", sDataSheetName))
-		//			
+
 		.verifyExternalAddressIDIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "externalAddressID", sDataSheetName))
 
 		.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
-
+		
+		.navigatetoNAICS()
+		
 		.verifyNAICSIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "nAICS", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "industryTitle", sDataSheetName))
+		
 		.naivagateToReferredByFromNACS()
+		
 		.verifyReferredByIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName))
 
 		.clickNyTabSave()

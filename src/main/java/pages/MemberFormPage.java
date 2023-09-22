@@ -1498,6 +1498,32 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	public MemberFormPage navigateToRecordStatusForMember() throws InterruptedException {
+		Thread.sleep(3000);
+		//Scroll down to make the record status field visible
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group')]")),"Affiliate Group");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group Effective Date')]")),"Affiliate Group Effective Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account Type");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group')]")),"Affiliate Group");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group Effective Date')]")),"Affiliate Group Effective Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")),"Premier Owner");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Corporate')]")),"Corporate");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'CAMS Flag')]")),"CAMS Flag");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exclude from Roster')]")),"Exclude from Roster");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Receive Direct Mail");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible')]")),"Fee Share Eligible");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible Date')]")),"Fee Share Eligible Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Business Key')]")),"Business Key");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'BK Active')]")),"BK Active");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Payment Entity')]")),"Payment Entity");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Corporate Rebate')]")),"Corporate Rebate");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
+
+		return this;
+
+	}
 
 	//Select Record status published
 
@@ -6168,7 +6194,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Editable #Estimated Locations phone- NY Information Tab
 	public MemberFormPage verifyEstLocIsEditable(String numEstLoc ) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//li[text()='NY INFORMATION']")),"NY Information");	
+		navigatetNYInformation();
 		Thread.sleep(2000);
 		verifyIsEnabled(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"# of Estimated Locations");
@@ -6272,7 +6298,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		type(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")), referredBy,"Referred By");
 		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath("//span[@data-id='ix_referredby.fieldControl-address1_composite1_0_0']")),"Referred By Account");
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@data-id,'ix_referredby.fieldControl-accountnumber')]")));
+
+		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_referredby.fieldControl-accountnumber')]")),"Referred By Account");
 		Thread.sleep(2000);	
 		return this;
 	}
@@ -6933,10 +6963,31 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage navigatetoExternalAddress() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Accounts");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]")),"Accounts");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Do No')]")),"Accounts");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'External Address')]")),"Accounts");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Receive Direct Mail");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]")),"FSRPT Flag");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Do No')]")),"Do Not Verify");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'External Address')]")),"External Address");
+
+		return this;
+	}
+	
+	public MemberFormPage navigatetNYInformation() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")),"Ownership");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Stock Symbol')]")),"Stock Symbol");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exchange')]")),"Exchange");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Payment Entity')]")),"Payment Entity");
+		click(getDriver().findElement(By.xpath("//h2[@title='NY INFORMATION']")),"NY Information");
+
+		return this;
+	}
+	
+	public MemberFormPage navigatetoNAICS() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Commissioned Representative')]")),"Commissioned Representative");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'CSA Commissioned Representative')]")),"CSA ");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Annual Revenue')]")),"Annual Revenue");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'No. of Employees')]")),"NO Of Employees");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Safe Harbor Instructions')]")),"Safe Harbor Instructions");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'NAICS Code')]")),"NAICS Code");
 
 		return this;
 	}

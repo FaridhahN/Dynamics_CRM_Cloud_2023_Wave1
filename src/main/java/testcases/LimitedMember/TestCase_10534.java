@@ -57,7 +57,7 @@ public class TestCase_10534 {
 		.verifyPaymentEntityDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "paymentEntity", sDataSheetName))
 		.verifyCorporateRebateDetailsIsNotEditable()
 		.verifyFoodServiceParentDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "foodServiceParent", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber1", sDataSheetName))
-		.navigateToRecordStatus()
+		
 		.verifyRequireManualAGAssignmentIsNotEditable()
 		.verifyAffiliateGroupIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 		.verifyAffiliateGroupEffectiveDateIsNotEditable()
