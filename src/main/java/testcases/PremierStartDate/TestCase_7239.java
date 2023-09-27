@@ -28,7 +28,7 @@ public class TestCase_7239 {
 			.clickAdditionalCriteria()
 		.verifyPremierStartDateIsLocked()
 		//3.  Fill in All Mandatory Fields .
-		.clickgeneralDemographic()
+		.clickGeneralTabMEF()
 
 		//3. Account  Type = Member
 				.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))

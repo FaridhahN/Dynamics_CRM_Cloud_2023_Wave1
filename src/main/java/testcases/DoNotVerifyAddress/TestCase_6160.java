@@ -37,13 +37,13 @@ public class TestCase_6160 {
 
 		.clickSave()
 
-		.clickNyInformationTab().clickGeneralTab()
+		.NavigateToSystemTab().clickGeneralTab()
 		.navigateToState()
 		.getStateValue()
 		.typeState("SS")
 		.clickSave()
 
-		.clickNyInformationTab().clickGeneralTab()
+		.NavigateToSystemTab().clickGeneralTab()
 		.navigateToState()
 		.getStateValue()
 		.verifyStateValue("SS", true)
@@ -59,13 +59,13 @@ public class TestCase_6160 {
 
 		.clickSave()
 
-		.clickNyInformationTab().clickGeneralTab()
+		.NavigateToSystemTab().clickGeneralTab()
 		.navigateToState()
 		.getStateValue()
 		.typeState("SS")
 		.clickSave()
 
-		.clickNyInformationTab().clickGeneralTab()
+		.NavigateToSystemTab().clickGeneralTab()
 		.navigateToState()
 		.getStateValue()
 		.verifyStateValue("SS", false)

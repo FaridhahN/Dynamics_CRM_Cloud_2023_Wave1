@@ -37,7 +37,7 @@ public class TestCase_10652 {
 
 		//5.Verify + New Membership Button is not available
 
-		.verifyAddNewMembershipIsNotPresent();
+		.verifyAddNewMembershipIsNotPresentWithoutNavigation();
 
 
 

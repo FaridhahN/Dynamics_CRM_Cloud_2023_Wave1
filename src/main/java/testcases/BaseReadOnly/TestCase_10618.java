@@ -26,7 +26,6 @@ public class TestCase_10618 {
 
 		//3.Verify Account Number Entity for Base Read Only User
 
-		.selectAccountNumbers()
 		.verifyAddNewAccountNumberIsNotPresent()
 		.doubleClickExistingAccountNumberDEA()
 		.verifyAccountNameInAccountNumbersIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage1", sDataSheetName))

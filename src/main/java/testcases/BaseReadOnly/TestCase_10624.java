@@ -22,6 +22,7 @@ public class TestCase_10624 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.selectActiveMembers()
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName))
 		.selectAccountFromSearchResults()
 
 		//3.Verify Contacts Entity for Limited Member
