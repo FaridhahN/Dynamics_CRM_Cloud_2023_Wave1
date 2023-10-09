@@ -7,36 +7,40 @@ import utils.DataInputProvider;
 
 public class TestCase_9649 {
 
-	  	
+
 	@Test
 	public void verifyLimitedMemberEditablefields(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
-		
+
 		//1. Login to CRM as Limited member 
 		new LoginPage()
-			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-			.clickNext()
-	  	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
-	  	    .clicSignin()
-	  	    .clicYesInStaySignedin()
-		
+		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
+		.clickNext()
+		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
+		.clicSignin()
+		.clicYesInStaySignedin()
+
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		.navigateToDoNotVerify()
+		.navigatetNYInformation()
+
 		//3.Verify  Referred By field access 
-			.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
-			.verifyReferredByIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName))						
-			.clickNyTabSave()
-			
-			
-			
-			//Data Reset
-			.removeReferredBy();
-		
-						
-		
-				
-			
+		.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
+		.navigatetoNAICS()
+		.verifyReferredByIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName))						
+		.clickNyTabSave()
+
+
+
+		//Data Reset
+		.removeReferredBy();
+
+
+
+
+
 	}
 }

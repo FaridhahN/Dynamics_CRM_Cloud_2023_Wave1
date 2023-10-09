@@ -110,7 +110,7 @@ public class TestCase_9631 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
+		.clickLineOfBusinessesMEF()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -155,6 +155,25 @@ public class TestCase_9631 {
 		.verifyAffiliateGroupIsNotNullMEF()
 		.verifyAgEffectiveDateIsNotNull()
 
+		//FBO details verification
+		//Verify "Is FBO" field 
+
+		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
+
+		//FBO
+		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
+
+		//FBORD
+		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
+		.navigateToSponsor()
+
+		//17 Verify Sponsor field 
+		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
+
+		//16 Verify "Is Sponsor" field 
+		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
+
+		.navigateToCorporateParent()
 		//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 
@@ -167,22 +186,8 @@ public class TestCase_9631 {
 		//16 Verify Food Service parent name in the form 
 		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
 
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
 
-		//FBO details verification
-		//Verify "Is FBO" field 
-
-		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
-
-		//FBO
-		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-
-		//FBORD
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		.clickGoBackButton()
 		.changeMemberForm()
 		.clickSave()

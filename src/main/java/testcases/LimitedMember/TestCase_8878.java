@@ -24,6 +24,9 @@ public class TestCase_8878 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		.navigateToDoNotVerify()
+		.navigatetNYInformation()
+		
 		//3.Verify  NIACS code field access 
 		.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
 

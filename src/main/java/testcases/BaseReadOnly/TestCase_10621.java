@@ -23,6 +23,8 @@ public class TestCase_10621 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.selectActiveMembers()
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
+		
 		.selectAccountFromSearchResults()
 
 		//3.Select Account Representative Entity and verify +New Account Representative button

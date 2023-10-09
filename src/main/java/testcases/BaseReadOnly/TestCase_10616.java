@@ -7,7 +7,7 @@ import pages.LoginPage;
 
 import utils.DataInputProvider;
 //TFS_ID_10616:Cloud : Verify whether Base Read only role cannot edit "Member" Account.
-
+//TFS ID_10674-Cloud :Base Read Only should NOT have access to "# of Estimated Locations"
 public class TestCase_10616 {
 
 
@@ -88,6 +88,8 @@ public class TestCase_10616 {
 		.verifyRequireManualAGAssignmentIsNotEditable()
 		.verifyAffiliateGroupIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 		.verifyAffiliateGroupEffectiveDateIsNotEditable()
+		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
+		
 		.verifyRecordStatusIsNotEditable()
 		.verifyAccountTypeIsNotEditable()
 		.verifyRecordChangeStatusIsNotEditable()
@@ -95,11 +97,9 @@ public class TestCase_10616 {
 		.navigateToFeeShare()
 		.verifyCurrentInternalRepIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "currentInternalRep", sDataSheetName))
 		.verifyCurrentFieldRepIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "currentFieldRep", sDataSheetName))
-		.verifyFBOtDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "fBO", sDataSheetName))		
-		.verifyFeeShareDetailsIsNotEditable()
-		.clickNYInformationTab()
-		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
+		.verifyFBOtDetailsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "fBO", sDataSheetName))
 		.verifyNAICSIsNotEditable()
+		.verifyFeeShareDetailsIsNotEditable()
 		.verifyReferredByIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName));
 
 

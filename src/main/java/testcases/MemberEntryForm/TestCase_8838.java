@@ -52,7 +52,7 @@ public class TestCase_8838 {
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
 		//Country =USA
-	//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
+		//	.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -93,22 +93,22 @@ public class TestCase_8838 {
 
 		//Click on Save 
 		.clickSave() 
-				
-				 .pageRefresh()
-				 
-				 //Wave2 Fix 
-				 .clickAdditionalCriteria()
-				 
+
+		.pageRefresh()
+
+		//Wave2 Fix 
+		.clickAdditionalCriteria()
+
 
 		//8. Verify Entity code is same as DP's entity code 
 		.verifyEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "DirectParent", sDataSheetName))
 
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
-
+		.navigateToAGDateMEF()
 		.verifyAgEffectiveDateIsNull()
 		.verifyAffiliateGroupIsNull()
-		
+
 		//FBO details verification
 		//Verify "Is FBO" field 
 

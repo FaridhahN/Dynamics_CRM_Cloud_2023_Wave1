@@ -96,7 +96,7 @@ public class TestCase_8906 {
 		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
+		.AddNewLineOfBusiness()
 
 		// Line of Business =General GPO
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))

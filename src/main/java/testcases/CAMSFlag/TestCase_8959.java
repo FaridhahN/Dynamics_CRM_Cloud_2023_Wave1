@@ -126,7 +126,7 @@ public class TestCase_8959 {
 
 
 		//Change the Record status as Published
-		.chooseRecordStatusPublished()
+		.chooseRecordStatusPublishedtillFBO()
 
 		//Click Save
 		.clickSave()

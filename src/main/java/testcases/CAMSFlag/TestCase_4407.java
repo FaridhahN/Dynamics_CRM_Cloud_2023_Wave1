@@ -20,7 +20,8 @@ public class TestCase_4407 {
 				// 2. From the left navigation column ,Go to Accounts > +New
 				.selectAccountsTab()
 
-				.clickNewOnAccountsPage().chooseMemberForm()
+				.clickNewOnAccountsPage()
+				.chooseMemberForm()
 
 				// 3. Account Name = Any
 				.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
@@ -222,10 +223,10 @@ public class TestCase_4407 {
 				.clickSave()
 
 				// 10. Click the + icon on the Line of Business Grid
-				.clickLineOfBusinesses()
+				.clickLineOfBusinessesMEF()
 
 				// Click New Line Of Business
-				.clickAddNewLineOfBusiness()
+				.clickAddNewLineOfBusinessMEF()
 
 				// Line of Business =General GPO
 				.selectLineOfBusiness(

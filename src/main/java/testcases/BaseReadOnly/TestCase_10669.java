@@ -23,7 +23,9 @@ public class TestCase_10669 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.selectActiveMembers()
-		.selectAccountFromSearchResults()
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+
 
 		//3.Verify Member Attributes Entity for Base Read Only
 

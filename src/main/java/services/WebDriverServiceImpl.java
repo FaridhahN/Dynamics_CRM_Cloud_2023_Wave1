@@ -222,7 +222,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 				}
 				else
 				{
-					setReport().log(Status.FAIL, "The data: "+data+" is NOT entered in : "+fieldName,screenshotCapture());
+					setReport().log(Status.FAIL, "The data: "+data+" is NOT entered in : "+fieldName+ " instead "+sExpectedValue+" is entered",screenshotCapture());
 					Driver.failCount++;
 				}
 			}
@@ -239,6 +239,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		}
 	}
 
+	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 
 	public void typeAndChoose(WebElement ele, String data,String field)  {

@@ -32,7 +32,7 @@ public class TestCase_11372 {
 		.clickNewOnAccountsPage()
 		.chooseMemberEntryForm()
 		.clickAdditionalCriteria()
-		.navigateTorosterMemberEntryForm()
+		.navigateTorosterFromAppDate()
 		.excludeFromRoster()
 
 		;
