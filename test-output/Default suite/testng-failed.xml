@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testcases.MemberEntryForm.TestCase_8838">
+      <class name="testcases.CAMSFlag.TestCase_4407">
         <methods>
-          <include name="createMemberTP"/>
+          <include name="VerifyCAMSOfDP"/>
         </methods>
-      </class> <!-- testcases.MemberEntryForm.TestCase_8838 -->
+      </class> <!-- testcases.CAMSFlag.TestCase_4407 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

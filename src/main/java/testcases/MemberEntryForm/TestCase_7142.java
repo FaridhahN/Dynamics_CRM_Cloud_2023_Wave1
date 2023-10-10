@@ -82,7 +82,7 @@ public class TestCase_7142 {
 		.clickSave() 
 
 		//5.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
+		.clickLineOfBusinessesMEF()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()

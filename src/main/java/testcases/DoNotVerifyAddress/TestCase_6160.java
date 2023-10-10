@@ -37,7 +37,8 @@ public class TestCase_6160 {
 
 		.clickSave()
 
-		.NavigateToSystemTab().clickGeneralTab()
+		.NavigateToSystemTab()
+		.clickGeneralTab()
 		.navigateToState()
 		.getStateValue()
 		.typeState("SS")

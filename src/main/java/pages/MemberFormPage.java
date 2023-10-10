@@ -278,8 +278,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify LOB required Error message
 	public MemberFormPage verifyErrorMessage_contains_Singlequote(String errorMessage) throws InterruptedException {
-
-		Thread.sleep(5000);
+		Thread.sleep(6000);
+		
+		System.out.println("//h2[@aria-label=\""+errorMessage+"\"]");
+	
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[@aria-label=\""+errorMessage+"\"]")),"Business Process Error");
 		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"OK Button");
 		return this;
@@ -1390,6 +1392,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//NavigateToSystemTab
 	public MemberFormPage NavigateToSystemTab() throws InterruptedException {
+		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 160);
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@title='SYSTEM']")));
+
 		click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
 		Thread.sleep(3000);
 		return this;
@@ -5806,6 +5813,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 
+	public MemberFormPage delectMemberAttribute() throws InterruptedException {
+		List<WebElement> attribute=getDriver().findElements(By.xpath("//div[contains(@class,'ag-row') and @aria-label='Press SPACE to deselect this row.']"));
+		if(attribute.size()>0) {
+			click( getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']")),"Check MArk");	
+		}
+
+		click( getDriver().findElement(By.xpath("//button[@data-id='ix_memberattributes|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_memberattributes.Deactivate']")),"Deactivated");
+		return this;
+	}
+	
+	
 	//Add Account New Account Member Attribute
 	public MemberFormPage addNewAccountMemberAttribute(String emsAttribute, String attributeValue) throws InterruptedException {
 
