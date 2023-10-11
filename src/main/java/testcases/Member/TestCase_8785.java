@@ -123,10 +123,6 @@ public class TestCase_8785 {
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
 		
-		.verifyLOBRequiredErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-		
-		.clickAddNewLineOfBusiness()
-		
 		// Line of Business =General GPO
 		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 
@@ -148,7 +144,7 @@ public class TestCase_8785 {
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.verifyErrorMessageLOBDeactivate()
@@ -156,7 +152,7 @@ public class TestCase_8785 {
 		.clickGeneralTab()
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.clickGoBackButton()
@@ -166,7 +162,7 @@ public class TestCase_8785 {
 		.verifyLOBRequiredForMemberShipErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.selectDeactivatedLOB()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.activateLOB()

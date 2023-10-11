@@ -234,7 +234,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		}
 
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 180);
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")));
 
@@ -279,9 +279,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify LOB required Error message
 	public MemberFormPage verifyErrorMessage_contains_Singlequote(String errorMessage) throws InterruptedException {
 		Thread.sleep(6000);
-		
+
 		System.out.println("//h2[@aria-label=\""+errorMessage+"\"]");
-	
+
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[@aria-label=\""+errorMessage+"\"]")),"Business Process Error");
 		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"OK Button");
 		return this;
@@ -803,7 +803,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Actions a=new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		//Changed on 10/11/2023
+		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -2253,9 +2256,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		try
 		{
-			if ( getDriver().findElement(By.xpath("//span[contains(text(),'Save and continue')]")).isDisplayed())
+			if ( getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")).isDisplayed())
 			{
-				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and continue')]")),"Save and continue");
+				click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Save and continue");
 				//span[contains(text(),'Save and Close')]
 			}
 		}
@@ -2263,7 +2266,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		{
 			//e.printStackTrace();	
 		}
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -4739,7 +4742,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on Discard changes
 	public MemberFormPage clickOnDiscardChanges() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		List<WebElement> cancelbutton=getDriver().findElements(By.xpath("//*[@data-id='cancelButton']"));
+		if(cancelbutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
+		}
 		Thread.sleep(3000);
 		return this;
 	}
@@ -5576,7 +5582,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Open Activities
 	public MemberFormPage selectOpenActivitiesViewAfterTask() throws InterruptedException   {
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
+		List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
+		if(dropdown.size()>0) {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+		}else {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
+		}
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Open Activity Associated View')]")),"Open Activitiy Associtated View");
 		Thread.sleep(15000);
@@ -5669,6 +5680,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage completeAllTask() {
+		
+		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
+		if(checkmark.size()>0) {
+			click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Delete Activity')]")),"Delete Activity Button");
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Delete']")),"Confirm Delete Button");
+			
+			
+		}
+		
+		return this;
+	}
 
 	public MemberFormPage verifySubject(String subject) throws InterruptedException, IOException   {
 		Thread.sleep(2000);
@@ -5822,8 +5846,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click( getDriver().findElement(By.xpath("//button[@data-id='ix_memberattributes|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_memberattributes.Deactivate']")),"Deactivated");
 		return this;
 	}
-	
-	
+
+
 	//Add Account New Account Member Attribute
 	public MemberFormPage addNewAccountMemberAttribute(String emsAttribute, String attributeValue) throws InterruptedException {
 

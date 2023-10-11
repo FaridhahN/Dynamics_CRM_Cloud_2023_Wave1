@@ -146,7 +146,7 @@ public class TestCase_8784 {
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.verifyErrorMessageLOBDeactivate()
@@ -154,7 +154,7 @@ public class TestCase_8784 {
 		.clickGeneralTab()
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.deactivateLOB()
 		.clickGoBackButton()
@@ -164,7 +164,7 @@ public class TestCase_8784 {
 		.verifyLOBRequiredForMemberShipErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
 		.chooseRecordStatusDraft()
 		.clickSave()
-		.clickLineOfBusinessesTab()
+		.clickLineOfBusinesses()
 		.selectDeactivatedLOB()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 		.activateLOB()

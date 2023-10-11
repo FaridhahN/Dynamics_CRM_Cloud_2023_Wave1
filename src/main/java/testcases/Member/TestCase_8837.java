@@ -106,8 +106,8 @@ public class TestCase_8837 {
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
 
-		//			.verifyAgEffectiveDateIsNull()
-		//			.verifyAffiliateGroupIsNull()
+		.verifyAgEffectiveDateIsNull()
+		.verifyAffiliateGroupIsNull()
 		//				
 
 		//13. Verify "IS Corporate account" field
