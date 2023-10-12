@@ -835,7 +835,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Task Details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -855,7 +855,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Phone Number']")),Phonenumber,"Phone Number");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -868,7 +868,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -890,7 +890,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Tasks details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),letterdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -904,16 +904,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 
-		for(int i=0;i<22;i++) {
-			Actions a =new Actions(getDriver());
-			a.sendKeys(Keys.TAB).build().perform();
-			Thread.sleep(3000);
-		}
-		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Tasks details");
-
-		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),letterdetails,"task details feild");
-
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -968,7 +959,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),letterdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -989,7 +980,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Tasks details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),letterdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1010,7 +1001,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Phone Number']")),Phonenumber,"Phone Number");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1057,7 +1048,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1077,7 +1068,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(1000);
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Tasks details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1087,6 +1078,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//click back in the New Activity page
 	public MemberFormPage clickGoBackTaskPage() {
+		WebDriverWait wait = new WebDriverWait(getDriver(), 160);
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@id,'navigateBackButtontab-id')]")));
+
 		click(getDriver().findElement(By.xpath("//button[contains(@id,'navigateBackButtontab-id')]")),"Back button");
 		return this;
 	}
@@ -5681,16 +5676,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage completeAllTask() {
-		
+
 		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
 		if(checkmark.size()>0) {
 			click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
 			click(getDriver().findElement(By.xpath("//span[contains(text(),'Delete Activity')]")),"Delete Activity Button");
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Delete']")),"Confirm Delete Button");
-			
-			
+
+
 		}
-		
+
 		return this;
 	}
 
