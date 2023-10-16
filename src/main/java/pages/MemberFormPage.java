@@ -5679,11 +5679,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
 			Thread.sleep(4000);
 			List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Task')]"));
-
+			List<WebElement> closphone=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Phone')]"));
+			List<WebElement> closletter=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Letter')]"));
 			if(closbutton.size()>0) {
 				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Task')]")),"Confirm Delete Button");	
-			}else {
+			}else if(closphone.size()>0){
 				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+			}else if(closletter.size()>0) {
+				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Letter')]")),"Confirm Delete Button");
 			}
 		}
 
