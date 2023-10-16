@@ -166,6 +166,9 @@ public class TestCase_8885 {
 				DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) ,
 				DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
+		
+		.selectOpenActivitiesViewAfterTask()
+		.verifyTasksComplete("Open")
 		;
 	}
 }

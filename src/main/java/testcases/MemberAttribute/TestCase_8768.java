@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.MemberAttribute;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;

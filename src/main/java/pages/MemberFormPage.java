@@ -835,7 +835,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Task Details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -851,7 +851,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Thread.sleep(200);
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).click().build().perform();
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Phone Number']")),Phonenumber,"Phone Number");
 
@@ -868,7 +868,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -993,15 +993,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage EnterFPhoneDetailsWithQuickSubject(String subject, String duedate, String duration, String Phonenumber) throws InterruptedException, IOException   {
 
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due Date']")),duedate, "Due DAte");
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
-		Thread.sleep(200);
-		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
 
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Phone Number']")),Phonenumber,"Phone Number");
-
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1048,7 +1041,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
 
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1060,15 +1053,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage EnterTaskDetailswithQuickSubject(String subject, String duedate, String duration, String taskdetails) throws InterruptedException, IOException   {
 
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
-		Actions a=new Actions(getDriver());
-		Thread.sleep(1000);
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
-		Thread.sleep(1000);
-		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Tasks details");
-		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
@@ -1122,6 +1108,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+
+	public MemberFormPage selectATask(String subject) throws InterruptedException{
+
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//a[contains(@aria-label,'"+subject+"')]"))).doubleClick().build().perform();
+		Thread.sleep(3000);
+
+		return this;
+	}
 
 	// Select and Mark Complete	a Open Task Activity			
 	public MemberFormPage selectAndMarkComplete() throws InterruptedException   {
@@ -5675,15 +5670,37 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage completeAllTask() {
+	public MemberFormPage completeAllTask() throws InterruptedException {
 
 		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
 		if(checkmark.size()>0) {
 			click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
-			click(getDriver().findElement(By.xpath("//span[contains(text(),'Delete Activity')]")),"Delete Activity Button");
-			click(getDriver().findElement(By.xpath("//button[@aria-label='Delete']")),"Confirm Delete Button");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
+			Thread.sleep(4000);
+			List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Task')]"));
 
+			if(closbutton.size()>0) {
+				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Task')]")),"Confirm Delete Button");	
+			}else {
+				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+			}
+		}
 
+		return this;
+	}
+
+	public MemberFormPage completePhonecall() throws InterruptedException {
+
+		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
+		if(checkmark.size()>0) {
+			click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+
+			//button[contains(@aria-label,'Close Phone')]
 		}
 
 		return this;

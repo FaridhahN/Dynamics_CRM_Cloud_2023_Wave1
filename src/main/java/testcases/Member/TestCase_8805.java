@@ -1,4 +1,4 @@
-package testcases.AccountNumbers;
+package testcases.Member;
 
 import org.testng.annotations.Test;
 

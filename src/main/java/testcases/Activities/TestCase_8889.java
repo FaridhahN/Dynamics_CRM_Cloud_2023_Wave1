@@ -160,7 +160,7 @@ public class TestCase_8889 {
 
 		//Enter the details in the new tasks window
 		.EnterFaxDetailswithQuickSubject(DataInputProvider.getCellData_ColName(iRowNumber, "Subject", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Faxnumber", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "noofPages", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Coverpage", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Direction", sDataSheetName) , DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
-		.clickGoBackTaskPage()
+		//.clickGoBackTaskPage()
 
 		//Select Open Activities View
 		.selectOpenActivitiesViewAfterTask()
