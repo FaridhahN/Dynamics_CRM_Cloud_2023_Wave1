@@ -9,7 +9,6 @@ public class TestUtils {
 	LocalDate currentdate = LocalDate.now();
 	return ""+currentdate.getMonth()+currentdate.getDayOfMonth();
 	
-	
 	}
 	
 	public static String getRandomNumberString() {

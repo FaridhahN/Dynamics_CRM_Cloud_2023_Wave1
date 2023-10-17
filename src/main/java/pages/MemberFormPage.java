@@ -436,6 +436,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	public MemberFormPage navigateToApplicationDate() {
+		
+		
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Primary Contact, Lookup']")),"Prmiary Contact");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Group')]")),"Group of Trade");
+		click(getDriver().findElement(By.xpath("//ul[@title='Class of Trade']")),"Class of Trade");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Facility')]")),"Facility");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Business')]")),"Business Classification");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")),"Premier owner");
+		
+		
+		return this;
+	}
 
 	//Choose application start date
 	public MemberFormPage chooseApplicationDateWithoutScrolling(String applicationDate) throws InterruptedException {

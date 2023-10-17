@@ -192,6 +192,14 @@ public class Driver extends PreAndPost{
 				System.out.println("Executing : " + sTestCaseID);
 
 			}
+			else if(sCategory.equalsIgnoreCase("DateValidations"))
+			{
+				sTestClassName="testcases.DateValidations.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+
+			}
+			
+			
 			
 
 						
