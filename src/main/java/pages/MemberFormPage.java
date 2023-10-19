@@ -440,9 +440,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage navigateToApplicationDate() {
 		
 		
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Primary Contact, Lookup']")),"Prmiary Contact");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Primary Contact')]")),"Prmiary Contact");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Group')]")),"Group of Trade");
 		click(getDriver().findElement(By.xpath("//ul[@title='Class of Trade']")),"Class of Trade");
+		
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Facility')]")),"Facility");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Business')]")),"Business Classification");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")),"Premier owner");
@@ -3870,6 +3871,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[contains(@id,'primarycontactid.fieldControl-firstname0_0_0')]")),"Primary Contact search");
 		return this;	
 	}
+	
+	//Update primary contact
+		public MemberFormPage clearDP() throws InterruptedException {
+			
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']"))).perform();
+			click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_delete']")),"Clear Icon"); 
+			Thread.sleep(3000);
+			return this;	
+		}
 
 	//Verify Primary contact name
 	public MemberFormPage verifyPrimaryContactValue(String verifyPrimaryContactValue) throws InterruptedException {
@@ -4712,6 +4723,23 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return this;
 	}
+	
+	
+	public MemberFormPage verifyDPChangeConfirmation(String errMsg) throws InterruptedException {
+		Thread.sleep(3000);
+		verifyPartialText(getDriver().findElement(By.xpath("//*[@data-id='dialogMessageText']")),errMsg,"DP Change Confirmation Pop-Up");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Continue']")),"Continue Button");
+		Thread.sleep(2000);
+		return this;
+	}
+	
+	public MemberFormPage verifyDPChangeConfirmationNotDisplayed() throws InterruptedException {
+		Thread.sleep(3000);
+		List<WebElement> continuebutton=getDriver().findElements(By.xpath("//button[@aria-label='Continue']"));
+		verifyElementisNotDisplayed(continuebutton.size(), "DP Confirmation message is displayed");
+		Thread.sleep(2000);
+		return this;
+	}
 
 
 	public AccountsPage selectAccountsTab() throws InterruptedException {	
@@ -4946,6 +4974,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public MemberFormPage changeRecordStatus(String ChangeRecordStatus){
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Change Record Status");
+		
 		click(getDriver().findElement(By.id("ix_recordchangestatus")),"Change Record Status");
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.id("ix_recordchangestatus_d")))),ChangeRecordStatus,"Change Record Status");
 		verifyExactText(getDriver().findElement(By.id("ix_recordchangestatus")),ChangeRecordStatus,"Change Record Status"); 
@@ -5676,7 +5706,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-	public MemberFormPage verifyTasksComplete(String status) throws InterruptedException, IOException   {
+	public MemberFormPage verifyTasksCompletionstatus(String status) throws InterruptedException, IOException   {
 		Thread.sleep(2000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//div[@col-id='statecode']//label[contains(@class,'option')]/div[contains(@class,'ms-TooltipHost')]")),"Completion status");
 		System.out.println(saveStatus);
