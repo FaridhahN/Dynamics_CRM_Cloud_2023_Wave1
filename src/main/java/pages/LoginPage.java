@@ -1,6 +1,7 @@
 package pages;
 
 import java.awt.AWTException;
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class LoginPage extends WebDriverServiceImpl{
 	public LoginPage refreshPageChooseSignInUser() {
 		//Wave 2023 
 		obj.getUrl();
-		WebDriverWait wait = new WebDriverWait(getDriver(),30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(text(),'Use another account')]"))));
 		getDriver().findElement(By.xpath("//div[contains(text(),'Use another account')]")).click();
 
@@ -59,7 +60,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Enter Password 
 	public LoginPage typePassword(String password) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[@name='passwd']"))));
 		type(getDriver().findElement(By.xpath("//*[@name='passwd']")),password,"Password");
 
@@ -68,7 +69,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Click on Next
 	public LoginPage clickNext() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("idSIButton9"))));
 		click(getDriver().findElement(By.id("idSIButton9")),"Next");
 		Thread.sleep(3000);
@@ -76,7 +77,7 @@ public class LoginPage extends WebDriverServiceImpl{
 	}	
 	//Click on Signin
 	public LoginPage clicSignin() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("idSIButton9"))));
 		click(getDriver().findElement(By.id("idSIButton9")),"Signin");
 		//Thread.sleep(2000);

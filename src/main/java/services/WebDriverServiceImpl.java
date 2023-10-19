@@ -4,6 +4,7 @@ import events.WebDriverEvents;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -320,7 +321,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		try {
 			//WebDriverWait wait = new WebDriverWait(getDriver(), 15);
 			//				wait.until(ExpectedConditions.elementToBeClickable(ele));			
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
+			((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", ele);
 			//	ele.click();
 			setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
 		}
@@ -464,7 +465,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void clickWithNoSnap(WebElement ele) {
 		String text = "";
 		try {
-			WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
 			wait.until(ExpectedConditions.elementToBeClickable(ele));	
 			text = ele.getText();
 			ele.click();			
@@ -633,7 +634,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 
 	public void scrollUntilElementVisible(WebElement element) throws InterruptedException {
 
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
 		Thread.sleep(500); 
 
 	}

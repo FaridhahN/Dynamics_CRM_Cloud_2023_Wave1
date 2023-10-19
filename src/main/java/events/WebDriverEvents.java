@@ -7,12 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.events.WebDriverListener;
 
-public class WebDriverEvents implements WebDriverEventListener {
+public class WebDriverEvents implements WebDriverListener {
 
 	public RemoteWebDriver webdriver;
-	public EventFiringWebDriver driver;
-	public static final ThreadLocal<EventFiringWebDriver> tlDriver = new ThreadLocal<EventFiringWebDriver>();
+	//Removing Deprecated EventFiring WebDriver as part of Selenium 4.11 version upgrade.
+	//public EventFiringWebDriver driver;
+	public static final ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
 
 	public WebDriverEvents() {
 
@@ -122,7 +124,7 @@ public class WebDriverEvents implements WebDriverEventListener {
 		
 	}
 	
-	public static EventFiringWebDriver getDriver() {
+	public static WebDriver getDriver() {
 		return tlDriver.get();
 	}
 		

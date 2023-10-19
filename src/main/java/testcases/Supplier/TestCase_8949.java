@@ -7,7 +7,7 @@ public class TestCase_8949 {
 
 		//	Test Case 8949:Cloud -Supplier account can not be inactive
 	
-	@Test()
+	@Test
 
 	public void inactivesupplierAccountStatus(int iRowNumber, String sDataSheetName) throws Exception {
 		//Access Login Page

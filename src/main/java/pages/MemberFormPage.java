@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -234,7 +235,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		}
 
-		WebDriverWait wait = new WebDriverWait(getDriver(), 180);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")));
 
@@ -535,7 +536,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(1000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
 		//Thread.sleep(120000);
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+directParent+"')]")));
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+directParent+"')]")),"Direct Parent");
 
@@ -1079,7 +1080,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//click back in the New Activity page
 	public MemberFormPage clickGoBackTaskPage() {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 160);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(160));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@id,'navigateBackButtontab-id')]")));
 
@@ -1401,7 +1402,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//NavigateToSystemTab
 	public MemberFormPage NavigateToSystemTab() throws InterruptedException {
 		Thread.sleep(3000);
-		WebDriverWait wait = new WebDriverWait(getDriver(), 160);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(160));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@title='SYSTEM']")));
 
@@ -2165,10 +2166,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		 * click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
 		 * Thread.sleep(2000);
 		 */
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
-
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'LOB')]")));
-
 		click(getDriver().findElement(By.xpath("//li[contains(text(),'LOB')]")),"Line Of Businessess");
 		//Thread.sleep(5000);
 		return this;
@@ -2277,7 +2276,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on add new LineOfBusiness - 10/04/2023 WebDriver Wait
 	public MemberFormPage clickAddNewLineOfBusinessMEF() throws InterruptedException   {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='ix_portfoliocategory|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_portfoliocategory.AddNewStandard']")));
@@ -2302,7 +2301,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on add new LineOfBusiness - 09/05/2023 WebDriver Wait
 	public MemberFormPage AddNewLineOfBusiness() throws InterruptedException   {
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='ix_portfoliocategory|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_portfoliocategory.AddNewStandard']")));
@@ -2599,7 +2598,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
 		//Wave2 Fix
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(3000);
@@ -3235,7 +3234,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Save Patient Services
 	public MemberFormPage savePatientServices() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']"))));
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
@@ -4819,7 +4818,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//div[@col-id='ix_membershiptype']/preceding-sibling::div//i")),"Select All Check Mark");
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate button");
-		WebDriverWait wait = new WebDriverWait(getDriver(),120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.AddNewStandard']")));
 		//Thread.sleep(5000)	;		
 		return this;
@@ -4828,7 +4827,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Save And Close
 	public MemberFormPage clickSystemTab() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Clic System Tab");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
 		return this;
 
@@ -4837,7 +4836,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage pageRefreshWithGeneral() throws InterruptedException {
 		getDriver().navigate().refresh();
 
-		WebDriverWait wait = new WebDriverWait(getDriver(), 120);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));
 
 		return this;
@@ -5560,7 +5559,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
 		//Explicit wait -09/01/2023
-		WebDriverWait wait = new WebDriverWait(getDriver(),60);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Membership Associated View')]")));
 		System.out.println("New Membership is displayed");
 		//Thread.sleep(3000);
@@ -6617,7 +6616,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		type(getDriver().findElement(By.xpath("//input[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_textInputBox_with_filter_new']")), referredBy,"Referred By");
 		Thread.sleep(5000);
-		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(60));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@data-id,'ix_referredby.fieldControl-accountnumber')]")));
 

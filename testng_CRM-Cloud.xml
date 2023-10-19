@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite">
+<suite name="CRM Regresion Suite">
 	<listeners>
         <listener class-name="events.TestAnnotation"/>
     </listeners>
-  <test  name="Results" >
+  <test  name="CRM Cloud">
     <classes>
-   		 <class name="driver.Driver"/>   
+   		 <class name="driver.Driver"/>    		  
     </classes>
   </test> <!-- Test --> 
  </suite> <!-- Suite -->

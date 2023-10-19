@@ -2,6 +2,7 @@ package pages;
 
 
 import java.awt.AWTException;
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 
 	//Click new on accounts page
 	public NewAccountPage clickNewOnAccountsPage() throws InterruptedException { 
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.account.NewRecord']"))));
 		
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.account.NewRecord']")),"New");
@@ -48,7 +49,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 	//Search accounts
 	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
 		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("GlobalSearchBox"))));
 		System.out.println(crmNumberInput+" searching ");
 		click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
@@ -75,7 +76,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
 		Thread.sleep(15000);
 		Thread.sleep(15000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),15);
+		WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(15));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		Thread.sleep(3000);
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
@@ -102,7 +103,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 
 	//Select member account from Global search results -06/14/2023
 	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
-		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
 		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
 			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();

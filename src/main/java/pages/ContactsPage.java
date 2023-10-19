@@ -47,7 +47,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'All Contacts')]")), "All Contacts");
 		Thread.sleep(10000);
 		Thread.sleep(15000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),20);
+		WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(20));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),CRMNumber,"Find Criteria" );
 		Thread.sleep(5000);
@@ -129,7 +129,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 //		click(primaryAccountOnContact,primaryAccount);
 		
 		// Explicit Wait- 8/23/2023
-		WebDriverWait wait = new WebDriverWait(getDriver(),120);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")));
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
@@ -305,7 +305,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),PrimaryAccount1, "Primary Account");
 		//Thread.sleep(6000);
 		// Explicit Wait- 8/23/2023
-				WebDriverWait wait = new WebDriverWait(getDriver(),120);
+				WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")));
 				click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
 				//click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),PrimaryAccount1);
@@ -792,7 +792,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 		//Thread.sleep(3000);
 		//Explicit wait 08/25/2023
-		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
 		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value","Created On");
 		Date diffdate = formatter.parse(dateInUI);
@@ -1033,7 +1033,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		String curDate = formatter.format(date);
 		//Thread.sleep(3000);
 		//Explicit wait -08/25/2023
-		WebDriverWait wait = new WebDriverWait(getDriver(),10);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
 		String dateInUI = getAttribute(
 				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",

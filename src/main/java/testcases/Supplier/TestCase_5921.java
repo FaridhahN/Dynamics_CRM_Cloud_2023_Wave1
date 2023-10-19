@@ -8,7 +8,7 @@ public class TestCase_5921  {
 	
 	//Automation-Create a supplier Top Parent_Save and Publish as a Supplier Supervisor
 	
-	@Test()
+	@Test
 	public void createSupplierTP(int iRowNumber, String sDataSheetName)throws Exception,InterruptedException {
 		
 		//Access Login Page
