@@ -9,8 +9,9 @@ import utils.DataInputProvider;
 public class TestCase_11233 {
 
 	@Test
-	public void CreateTopParent(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyTopParentRelation(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
+		//Login to the CRM application
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
@@ -18,7 +19,7 @@ public class TestCase_11233 {
 		.clicSignin()
 		.clicYesInStaySignedin()
 
-		//2. From the left navigation column ,Go to Accounts > +New
+		//Create the new account
 		.selectAccountsTab()
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
@@ -42,9 +43,10 @@ public class TestCase_11233 {
 		//Click on save
 		.clickSave() 
 
+		//Verify the Error message is displayed for TP relation
 		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 
-		//	.navigateToParticipationType()
+		
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
@@ -55,10 +57,10 @@ public class TestCase_11233 {
 		.selectRegion(DataInputProvider.getCellData_ColName(iRowNumber, "region", sDataSheetName))
 
 
-
-
 		//Click on save
 		.clickSave()
+		
+		//Verify the Error message is displayed for TP relation
 		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		;
 

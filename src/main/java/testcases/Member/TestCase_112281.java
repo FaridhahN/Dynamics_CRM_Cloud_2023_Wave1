@@ -6,9 +6,9 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
-//TFS ID_11232:_31007_ Cloud: Verify warning message is displayed when there is any DP change of an account with children (non location type)
+//TFS ID_11228:_828841_Cloud: Verify "This account is in Draft status." info text is displayed when there is a DP change and Record status is in draft
 
-public class TestCase_11232 {
+public class TestCase_112281 {
 
 
 	@Test
@@ -38,7 +38,8 @@ public class TestCase_11232 {
 		.chooseRecordStatusDraftfromTop()	
 		.clickSave()
 
-		//Navigate to Documents tab
+		
+		//Navigate to system tab
 
 		.NavigateToDocumentTab()
 		.clickGeneralTab()
@@ -69,12 +70,18 @@ public class TestCase_11232 {
 		.clickSave() 
 
 		//Verify DP Change confirmation message
-		.verifyDPChangeConfirmation(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		.verifyDPChangeConfirmation(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
+		
+		//Verify Account is int Draft message
+		.VerifyDraftMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+
 		.chooseRecordStatusPublished()
 
+		.VerifyDraftMessageNotDisplayed(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		
 		//Data reset -- Change the DP to the previous one
 
-		//Navigate to Document tab
+		//Navigate to Sysyem tab
 		.NavigateToDocumentTab()
 		.clickGeneralTab()
 
@@ -112,7 +119,7 @@ public class TestCase_11232 {
 		.clickSave() 
 
 		//Verify DP change confirmation message
-		.verifyDPChangeConfirmation(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		.verifyDPChangeConfirmation(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
 
 		//Publish the account
 		.chooseRecordStatusPublished()

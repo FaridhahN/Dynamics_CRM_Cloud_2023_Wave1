@@ -5,15 +5,15 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_11200:_30983_Cloud: Verify Prospect accounts can not be published
+//Test case 8818: Cloud : Verify the TP relation is getting saved correctly when creating a new member
 
-public class TestCase_11200 {
+public class TestCase_8818 {
 
 
 	@Test
-	public void publishProspect(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void VerifyTPR(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
-		//Login to CRM using member supervisor / member credentials 
+		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
 
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -23,20 +23,28 @@ public class TestCase_11200 {
 
 		.clicYesInStaySignedin()
 
-		//From the left navigation column ,Go to Accounts > +New
+		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
+
+
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.getDPData()
 
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
-		//Account Name = Any
+		//3. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
 		//Click on save 			
 		.clickSave() 
 
-		//Verify CRM Account # is generated 
+		//4. Verify CRM Account # is generated 
 		.verifyCRMNumberIsDisplayed()	
+
+		//5. Account Type = Member
+		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
@@ -73,30 +81,12 @@ public class TestCase_11200 {
 		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
 		//Click on Save 
-		.clickSave() 
-
-		//Street 1 = Any
-		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-
-
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
-
-		//City = NY
-		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
-
-
-		//Type Zip code
-		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
-
-		//Select publish record status 
-		.chooseRecordStatusPublished()
+		.clickSave()
 		
-		//Click on Save 
-		.clickSave() 
-		
-		//Verify the error when tried to publish the prospect account
-		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName));
+		.verifyTPR(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+		;
 
-		}
+			
+		
+	}
 }

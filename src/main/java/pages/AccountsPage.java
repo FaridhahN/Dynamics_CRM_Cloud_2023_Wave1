@@ -100,6 +100,27 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return new MemberFormPage();
 	}	
+	
+
+	//Select Open Activities
+		public AccountsPage selectTerminatedView() throws InterruptedException   {
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelector')]")),"Select a view");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'Terminated Members')]")),"Terminated Members View");
+			Thread.sleep(15000);
+			return this;
+		}
+
+		//open the First displayed Terminated account
+		public MemberFormPage openFirstTermninatedAcoount() {
+			
+			Actions a=new Actions(getDriver());
+			a.doubleClick(getDriver().findElement(By.xpath("//label[@aria-label='Terminated']"))).build().perform();;
+			
+			return new MemberFormPage();
+			
+		}
 
 	//Select member account from Global search results -06/14/2023
 	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	

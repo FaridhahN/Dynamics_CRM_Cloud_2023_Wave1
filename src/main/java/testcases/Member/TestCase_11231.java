@@ -5,17 +5,16 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
-//Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
-//Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
+//TFS ID_11231:_31006_Cloud: Verify warning message is NOT displayed when there is any DP change of an account with only location type children
+
 
 public class TestCase_11231 {
 
 
 	@Test
-	public void createMember(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void DPchange(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
-		//1. Login to CRM using member supervisor / member credentials 
+		//Login to CRM using member supervisor / member credentials 
 		new LoginPage()
 
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -25,18 +24,23 @@ public class TestCase_11231 {
 
 		.clicYesInStaySignedin()
 
-		//2. From the left navigation column ,Go to Accounts > +New
+		//From the account search for the existing account and select
 		.selectAccountsTab()
 
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		
+		//Navigate to record status
 		.navigateToAGDate()
-		//5. Record Status = Published
 		.chooseRecordStatusDraftfromTop()	
 		.clickSave()
-		.NavigateToSystemTab()
+		
+		//Navigate to Document tab
+		.NavigateToDocumentTab()
 		.clickGeneralTab()
+		
+		//Clear exisitng DP and select new DP
 		.clearDP()
 
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -58,19 +62,27 @@ public class TestCase_11231 {
 		//Click on Save 
 		.clickSave() 
 		
+		//Verify DP change confirmation message
 		.verifyDPChangeConfirmationNotDisplayed()
 		.chooseRecordStatusPublished()
 
+		//Data Reset
 		
-		.NavigateToSystemTab()
+		//Navigate to Document Tab
+		.NavigateToDocumentTab()
 		.clickGeneralTab()
 
+		//navigate to Record status feild
 		.navigateToAGDate()
-		//5. Record Status = Published
+		
 		.chooseRecordStatusDraftfromTop()	
 		.clickSave()
-		.NavigateToSystemTab()
+		
+		//Navigate to Document Tab
+		.NavigateToDocumentTab()
 		.clickGeneralTab()
+		
+		//Clear existing DP and select the new one
 		.clearDP()
 
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "changedirectParent", sDataSheetName))
@@ -91,6 +103,8 @@ public class TestCase_11231 {
 		.typeTPReason("Test")
 		//Click on Save 
 		.clickSave() 
+		
+		//Verify the DP change confirmation message
 		.verifyDPChangeConfirmationNotDisplayed()
 
 		.chooseRecordStatusPublished()

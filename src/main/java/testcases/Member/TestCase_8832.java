@@ -6,13 +6,13 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 
-//TFS ID_11232:_31007_ Cloud: Verify warning message is displayed when there is any DP change of an account with children (non location type)
+//TFS ID_8832:_828828_Cloud: Validate Top Parent Relationship Date Change
 
-public class TestCase_11232 {
+public class TestCase_8832 {
 
 
 	@Test
-	public void DPChange(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void TPRDValidation(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -33,12 +33,21 @@ public class TestCase_11232 {
 
 		//Navigate to the Record status feild
 		.navigateToAGDate()
+		.typeTPReason("")
+		.selectTopParentRelationDate("10/10/2023")
+
 
 		//Record Status = Published
-		.chooseRecordStatusDraftfromTop()	
 		.clickSave()
 
-		//Navigate to Documents tab
+		.verifyTPexceptionreasonDisplayed()
+
+		.typeTPReason("Test")
+		.clickSave()
+
+		.typeTPReason("")
+		.clickSave()
+		//Navigate to system tab
 
 		.NavigateToDocumentTab()
 		.clickGeneralTab()
@@ -62,19 +71,25 @@ public class TestCase_11232 {
 		// Top Parent Relation Date = Today's Date
 		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
-		//Type TP reason
-		.typeTPReason("Test")
 
 		//Click on Save 
 		.clickSave() 
 
 		//Verify DP Change confirmation message
 		.verifyDPChangeConfirmation(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+
+
+		//Publish the account
 		.chooseRecordStatusPublished()
+
+		.clickSave()
+
+		.verifyTPexceptionreasonnotDisplayed()
+
 
 		//Data reset -- Change the DP to the previous one
 
-		//Navigate to Document tab
+		//Navigate to Sysyem tab
 		.NavigateToDocumentTab()
 		.clickGeneralTab()
 
