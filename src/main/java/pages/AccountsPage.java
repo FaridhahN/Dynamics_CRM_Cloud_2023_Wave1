@@ -245,32 +245,49 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return new MemberFormPage();
 	}
 
-	//Select supplier account from search result
-	public  SupplierFormPage selectSupplierAccountFromSearchResults() throws InterruptedException {	
-		Thread.sleep(5000);
+	
+	//Select member account from Global search results -06/14/2023
+		public  SupplierFormPage selectSupplierAccountFromSearchResults(String crmNumberInput) throws InterruptedException {	
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
+			if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
+				getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
+			}
+			Thread.sleep(4000);
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]"))).perform();
+			doubleClick(getDriver().findElement(By.xpath("//span[text()= "+crmNumberInput+"]")),"Search Result Record");
+			Thread.sleep(5000);
+			return new SupplierFormPage();
+		}	
+		
+	
+		//Select supplier account from search result
+		public  SupplierFormPage selectSupplierAccountFromSearchResults() throws InterruptedException {	
+			Thread.sleep(5000);
 
-		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
-			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
+			if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
+				getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
+			}
+			Actions action = new Actions(getDriver());	
+
+			action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='accountnumber']//span"))).build().perform();
+			//		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
+			//		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();
+			//		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
+			//		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
+			//		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
+			//		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
+			/*
+			 * action.moveToElement(getDriver().findElement(By.xpath(
+			 * "(//*[@data-icon-name='CheckMark'])[2]")));
+			 * action.doubleClick(getDriver().findElement(By.xpath(
+			 * "(//*[@data-icon-name='CheckMark'])[2]"))).build().perform();
+			 */
+			Thread.sleep(5000);
+			Thread.sleep(2000);
+			return new SupplierFormPage();
 		}
-		Actions action = new Actions(getDriver());	
-
-		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='accountnumber']//span"))).build().perform();
-		//		action.moveToElement(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']")));
-		//		action.doubleClick(getDriver().findElement(By.xpath("//span[contains(@class,'RowSelectionCheckMarkSpan')]//i[@data-icon-name='StatusCircleCheckmark']"))).build().perform();
-		//		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']")));
-		//		action.doubleClick(getDriver().findElement(By.xpath("//*[@data-id='cell-0-6']"))).build().perform();
-		//		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a")));
-		//		action.doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name']//a"))).build().perform();
-		/*
-		 * action.moveToElement(getDriver().findElement(By.xpath(
-		 * "(//*[@data-icon-name='CheckMark'])[2]")));
-		 * action.doubleClick(getDriver().findElement(By.xpath(
-		 * "(//*[@data-icon-name='CheckMark'])[2]"))).build().perform();
-		 */
-		Thread.sleep(5000);
-		Thread.sleep(2000);
-		return new SupplierFormPage();
-	}
 
 
 	//Click on Discard changes
