@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+<suite name="Failed suite [CRM Regresion Suite]" guice-stage="DEVELOPMENT">
   <listeners>
     <listener class-name="events.TestAnnotation"/>
   </listeners>
-  <test thread-count="5" name="Results(failed)">
+  <test thread-count="5" name="CRM Cloud(failed)">
     <classes>
       <class name="driver.Driver">
         <methods>
@@ -15,5 +15,5 @@
         </methods>
       </class> <!-- driver.Driver -->
     </classes>
-  </test> <!-- Results(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- CRM Cloud(failed) -->
+</suite> <!-- Failed suite [CRM Regresion Suite] -->
