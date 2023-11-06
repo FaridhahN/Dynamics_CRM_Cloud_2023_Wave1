@@ -27,6 +27,10 @@ public class TestCase_8837 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 
+		//Remove Bill to location from Parent Account
+		
+		
+		
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
