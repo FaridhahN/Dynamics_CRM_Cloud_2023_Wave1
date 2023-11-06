@@ -2305,8 +2305,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click Related and line of business
 	public MemberFormPage clickLineOfBusinessesMEF() throws InterruptedException   {
 		Thread.sleep(2000);
-
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
 		Thread.sleep(2000);
 
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Line of Businesses')]")),"Line Of Businessess");
