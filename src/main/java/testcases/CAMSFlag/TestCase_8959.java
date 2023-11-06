@@ -206,7 +206,7 @@ public class TestCase_8959 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
+		.clickLineOfBusinessesMEF()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -320,7 +320,7 @@ public class TestCase_8959 {
 		.clickSave() 
 
 		//10.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
+		.clickLineOfBusinessesMEF()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
