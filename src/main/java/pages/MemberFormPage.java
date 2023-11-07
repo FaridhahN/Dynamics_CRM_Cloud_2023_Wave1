@@ -1707,7 +1707,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage clickGeneralTab() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+		List<WebElement> general=getDriver().findElements(By.xpath("//*[@title='GENERAL']"));
+		if(general.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");	
+		}else {
+			click(getDriver().findElement(By.xpath("//*[@title='General']")),"General");
+		}
+		
 		return this;
 	}
 
@@ -2996,7 +3002,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		if(discarChanges.size()>0) {
 			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		}
-		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
+		List<WebElement> general=getDriver().findElements(By.xpath("//*[@title='GENERAL']"));
+		if(general.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");	
+		}else {
+			click(getDriver().findElement(By.xpath("//*[@title='General']")),"General");
+		}
+		
 		Thread.sleep(5000);
 		return this;	
 	}
