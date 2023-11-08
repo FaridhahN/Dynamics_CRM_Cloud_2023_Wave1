@@ -15,7 +15,9 @@ public class DashboardPage extends WebDriverServiceImpl {
 	//Click on Accounts in My work
 	public AccountsPage selectAccountsTab() throws InterruptedException {
 
-		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
+		
+		Thread.sleep(5000);
+		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
 
 		if(copilotclosbutton.size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
@@ -31,11 +33,28 @@ public class DashboardPage extends WebDriverServiceImpl {
 
 	public AccountsPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
+		
+		Thread.sleep(15000);
+		
+		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
+
+		if(copilotclosbutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
+		}
 		return new AccountsPage();
 	}
 
 	public ContactsPage selectContacts() {	
+		
+		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
+
+		if(copilotclosbutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
+		}
+		
 		click(getDriver().findElement(By.xpath("//span[text()='Contacts']")),"Contacts");
+		
+		
 		return new ContactsPage();
 	}
 
