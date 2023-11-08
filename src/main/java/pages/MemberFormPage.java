@@ -1713,7 +1713,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			click(getDriver().findElement(By.xpath("//*[@title='General']")),"General");
 		}
-		
+
 		return this;
 	}
 
@@ -3008,7 +3008,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			click(getDriver().findElement(By.xpath("//*[@title='General']")),"General");
 		}
-		
+
 		Thread.sleep(5000);
 		return this;	
 	}
@@ -4243,7 +4243,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),IsCorporateAccount,"Is Corporate Account"); 
 		return this;
 	}
-	
+
 
 	public MemberFormPage noMatchforCorporateParent(String corporateparent) throws InterruptedException {	
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")),"Corporate Parent");
@@ -4254,12 +4254,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		List <WebElement> nodp=getDriver().findElements(By.xpath("//*[contains(text(),'No records found. Create a new record.')]"));
 		getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")).sendKeys(Keys.TAB);
 		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
-		
-		
-		
+
+
+
 		return this;		
 	}
-	
+
 	public MemberFormPage noMatchforFSP(String FSP) throws InterruptedException {	
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")),"Corporate Parent");
 		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")))),FSP,"Corporate Parent");
@@ -4267,25 +4267,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		List <WebElement> dp=getDriver().findElements(By.xpath("//span[contains(text(),'"+FSP+"')]"));
 		verifyElementisNotDisplayed(dp.size(), "Corporate Parent");
 		List <WebElement> nodp=getDriver().findElements(By.xpath("//*[contains(text(),'No records found. Create a new record.')]"));
-		
+
 		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
 		getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_textInputBox_with_filter_new']")).sendKeys(Keys.TAB);
-		
-		
+
+
 		return this;		
 	}
-	
-	
+
+
 	//Clear Corporate parent and select new Corporate parent
-		public MemberFormPage clearCP() throws InterruptedException {
-			
-			Actions action = new Actions(getDriver());
-			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_selected_tag_text']"))).perform();
-			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Clear Icon"); 
-			Thread.sleep(3000);
-			return this;
-		}
-	
+	public MemberFormPage clearCP() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_selected_tag_text']"))).perform();
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButton')]")),"Clear Icon"); 
+		Thread.sleep(3000);
+		return this;
+	}
+
 
 
 	public MemberFormPage verifyAffiliateGroupIsNotNullMEF() {
@@ -4758,18 +4758,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentoverride.fieldControl-checkbox-container']")),corpParentOverride,"Corporate Parent Override"); 
 		return this;
 	}
-	
-	
+
+
 	//Change value of Corporate Parent Override
 	public MemberFormPage changeCorpParentOverride(String corpParentOverride) {
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")),corpParentOverride,"Corporate Parent Override");
-		
+
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentoverride.fieldControl-checkbox-container']")),corpParentOverride,"Corporate Parent Override"); 
 		return this;
 	}
-	
-	
-	
+
+
+
 	//Verify FBO Manual Override
 	public MemberFormPage VerifyFBOManualOverride(String FBOManualOverride) {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_fbomanualoverride.fieldControl-checkbox-container']")),FBOManualOverride,"FBO Manual Override"); 
@@ -5875,7 +5875,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click Related Activities
 	public MemberFormPage selectRelatedActivities() throws InterruptedException   {
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
 		click(getDriver().findElement(By.xpath("(//*[text()='Activities'])[2]")),"Activities");
 		Thread.sleep(3000);
 		return this;
