@@ -91,10 +91,23 @@ public class LoginPage extends WebDriverServiceImpl{
 			click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
 		}
 		Thread.sleep(7000);
-
+		verifyOldLook();
 		return new DashboardPage();
 	}	
 
+	public LoginPage verifyOldLook() throws InterruptedException{
+		List<WebElement> newlook=getDriver().findElements(By.xpath("//button[@aria-checked='true']"));
+		if(newlook.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-checked='true']")),"New look toggle");
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Skip feedback')]")),"Skip Feedback");
+			
+		}
+		
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[@aria-checked='false']"))));
+		//Thread.sleep(000);
+		return this;
+	}
 	//Click on Yes in stay signed in window
 	public void selectPremierAccount() throws InterruptedException {
 		switchToFrame(1);

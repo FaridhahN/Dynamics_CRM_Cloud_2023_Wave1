@@ -116,7 +116,7 @@ public class TestCase_8934 {
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 		
 			//Navigate to System tab an come back to General Tab
-			.clickSystemTab()
+			.clickLineOfBusinesses()
 			.clickGeneralTab()
 			
 			//Change the Business Classification
@@ -130,7 +130,7 @@ public class TestCase_8934 {
 			.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
 			
 			//Navigate to System tab an come back to General Tab
-			.clickSystemTab()
+			.clickLineOfBusinesses()
 			.clickGeneralTab()
 			
 			//Change the Business Classification

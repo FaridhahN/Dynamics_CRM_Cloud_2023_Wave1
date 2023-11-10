@@ -172,7 +172,7 @@ public class TestCase_8925 {
 			.clickLOBSaveAndClose()			
 
 			//Navigate Back to General page and change the Business classification 
-			.clickSystemTab()
+			.clickLineOfBusinesses()
 			.clickGeneralTab()
 			.navigateToBusinessClassification()
 			.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification1", sDataSheetName))
@@ -241,7 +241,7 @@ public class TestCase_8925 {
 			.clickLOBSaveAndClose()			
 
 			//Navigate Back to General page and change the business classification
-			.clickSystemTab()
+			.clickLineOfBusinesses()
 			.clickGeneralTab()
 			.navigateToBusinessClassification()
 			.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification2", sDataSheetName))

@@ -113,7 +113,7 @@ public class TestCase_8940 {
 		//7.Observe the AG and AG effective date populated 
 		.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup", sDataSheetName))
 		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-		.clickSystemTab()
+		.clickLineOfBusinesses()
 		.clickGeneralTab()
 		.navigateToBusinessClassification()
 		.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification1", sDataSheetName))
@@ -123,7 +123,7 @@ public class TestCase_8940 {
 		.navigateToAG()
 		.verifyAffiliateGroup(DataInputProvider.getCellData_ColName(iRowNumber, "affiliateGroup1", sDataSheetName))
 		.verifyAgEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-		.clickSystemTab()
+		.clickLineOfBusinesses()
 		.clickGeneralTab()
 		.navigateToBusinessClassification()
 		.clearAndSelectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification2", sDataSheetName))
