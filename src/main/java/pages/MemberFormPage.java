@@ -1490,12 +1490,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//NavigateToSystemTab
 	public MemberFormPage NavigateToSystemTab() throws InterruptedException {
 		Thread.sleep(3000);
-		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(160));
+		List<WebElement> systemTab=getDriver().findElements(By.xpath("//li[@title='SYSTEM']"));
+		if(systemTab.size()>0) {
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@title='SYSTEM']")));
-
-		click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
-		Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
+			Thread.sleep(3000);
+				
+		}else {
+			
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
+			Thread.sleep(3000);
+		
+		}
 		return this;
 	}
 
@@ -3895,6 +3902,30 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;	
 	}
 
+	//Delete the bill to accout
+	public MemberFormPage filterbyLocation(String locationtype) throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//div[contains(text(),'Store/Location Type')]")),"Location type header");
+		click(getDriver().findElement(By.xpath("//button[@name='Filter by']")),"Filter by option");
+		getDriver().switchTo().frame(getDriver().findElement(By.id("powerAppsAuthFlowFrame")));
+		click(getDriver().findElement(By.xpath("//div[@aria-label='Filter by value']")),"Filter by Value button");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+locationtype+"')]")),"location type option");
+		click(getDriver().findElement(By.xpath("//button[@type='submit']")),"Submit button");
+		getDriver().switchTo().defaultContent();
+		
+		return this;
+	}
+	
+	public MemberFormPage ChangetheLocationtype() throws InterruptedException {
+		List<WebElement> locationAccount=getDriver().findElements(By.xpath("//div[@class='ag-row-even ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-first']//a"));
+		
+		if(locationAccount.size()>0) {
+			
+			doubleClick(getDriver().findElement(By.xpath("//div[@class='ag-row-even ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-first']//a")), "Account");
+		}
+		
+		return this;
+	}
 
 	//Select sub accounts from Related
 	public MemberFormPage selectSubaccount() throws InterruptedException {	

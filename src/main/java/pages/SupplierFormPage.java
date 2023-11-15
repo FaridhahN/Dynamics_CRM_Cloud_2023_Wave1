@@ -1,8 +1,10 @@
 package pages;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -37,6 +39,95 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	//Click Related and Activities
+	public SupplierFormPage clickRelatedActivities() throws InterruptedException   {
+		Thread.sleep(2000);
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Activities'])[2]")),"Activities");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Click New Activity- Task
+		public SupplierFormPage clickNewTaskActivity() throws InterruptedException   {
+			click(getDriver().findElement(By.xpath("//button[contains(@title,'New Activity')]")),"New Activity");
+			Thread.sleep(10000);
+			click(getDriver().findElement(By.xpath("//span[text()='Task']")),"Task");
+			Thread.sleep(2000);
+			return this;
+		}
+		
+		//Select Open Activities
+		public SupplierFormPage selectOpenActivitiesViewAfterTask() throws InterruptedException   {
+			Thread.sleep(2000);
+			List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
+			if(dropdown.size()>0) {
+				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+			}else {
+				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
+			}
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'Open Activity Associated View')]")),"Open Activitiy Associtated View");
+			Thread.sleep(15000);
+			return this;
+		}
+		
+		public SupplierFormPage verifyTasksCompletionstatus(String status) throws InterruptedException, IOException   {
+			Thread.sleep(2000);
+			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//div[@col-id='statecode']//label[contains(@class,'option')]/div[contains(@class,'ms-TooltipHost')]")),"Completion status");
+			System.out.println(saveStatus);
+			assertTrue(saveStatus.contains(status),"Status is not "+status);
+			return this;
+		}
+
+		public SupplierFormPage completeAllTask() throws InterruptedException {
+
+			List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
+			if(checkmark.size()>0) {
+				click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
+				Thread.sleep(4000);
+				List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Task')]"));
+				List<WebElement> closphone=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Phone')]"));
+				List<WebElement> closletter=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Letter')]"));
+				if(closbutton.size()>0) {
+					click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Task')]")),"Confirm Delete Button");	
+				}else if(closphone.size()>0){
+					click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+				}else if(closletter.size()>0) {
+					click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Letter')]")),"Confirm Delete Button");
+				}
+			}
+
+			return this;
+		}
+		
+		//Enter the Task Details
+		public SupplierFormPage EnterTaskDetails(String entitycode, String accountName, String subject, String duedate, String duration, String taskdetails) throws InterruptedException, IOException   {
+			verifyExactText(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+": ", "Subject");
+			typewithoutClear(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
+			Actions a=new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
+			type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
+			//Changed on 10/11/2023
+			//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+
+			Thread.sleep(10000);
+			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+			System.out.println(saveStatus);
+			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+			return this;
+		}
+		
 	//Verify Diversity Info fields
 	public SupplierFormPage verifyDiversityInfoFields() throws InterruptedException {
 		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"Account Name");	
