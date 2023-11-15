@@ -89,7 +89,17 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 			List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
 			if(checkmark.size()>0) {
-				click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
+				List<WebElement> checkbox=  getDriver().findElements(By.xpath("(//div[@role='columnheader']//input[@aria-label='Toggle selection of all rows'])[2]"));
+				if(checkbox.size()>0) {
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("(//div[@role='columnheader']//input[@aria-label='Toggle selection of all rows'])[2]"))).click().build().perform();
+					
+				}else {
+					
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("//div[@role='columnheader']//input[@aria-label='Toggle selection of all rows']"))).click().build().perform();
+					
+				}
 				Thread.sleep(2000);
 				click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
 				Thread.sleep(4000);
@@ -110,7 +120,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		
 		//Enter the Task Details
 		public SupplierFormPage EnterTaskDetails(String entitycode, String accountName, String subject, String duedate, String duration, String taskdetails) throws InterruptedException, IOException   {
-			verifyExactText(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+": ", "Subject");
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+":", "Subject");
 			typewithoutClear(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 			type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 			type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
@@ -126,6 +136,24 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			System.out.println(saveStatus);
 			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 			return this;
+		}
+		
+		
+		//Select Open Activities
+		public SupplierFormPage selectOpenActivitiesView() throws InterruptedException   {
+			Thread.sleep(2000);
+			Thread.sleep(2000);
+			List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
+			if(dropdown.size()>0) {
+				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+			}else {
+				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
+			}
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'Open Activity Associated View')]")),"Open Activitiy Associtated View");
+			Thread.sleep(15000);
+			return this;
+			
 		}
 		
 	//Verify Diversity Info fields

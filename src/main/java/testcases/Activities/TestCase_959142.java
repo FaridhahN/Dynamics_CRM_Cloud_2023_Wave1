@@ -27,6 +27,11 @@ public class TestCase_959142 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectSupplierAccountFromSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.clickRelatedActivities()
+		
+		.selectOpenActivitiesView()
+		.clickNewTaskActivity()
+		
+		
 		.EnterTaskDetails(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "verifyAccountName", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "Subject", sDataSheetName), 
 				DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) ,
