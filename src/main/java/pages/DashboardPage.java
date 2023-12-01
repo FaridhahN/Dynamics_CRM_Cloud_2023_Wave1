@@ -15,7 +15,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 	//Click on Accounts in My work
 	public AccountsPage selectAccountsTab() throws InterruptedException {
 
-		
+
 		Thread.sleep(5000);
 		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
 
@@ -31,11 +31,28 @@ public class DashboardPage extends WebDriverServiceImpl {
 		return new AccountsPage();
 	}
 
+	//Navigate To Activities option in the Dashboard
+	public SupplierFormPage navigateToActivitiesOption() throws InterruptedException {
+
+		Thread.sleep(5000);
+		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
+
+		if(copilotclosbutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
+		}
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@aria-label='Activities']")));
+		
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Activities']")),"Activities Tab");
+		Thread.sleep(15000);
+		return new SupplierFormPage();
+	}
 	public AccountsPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
-		
+
 		Thread.sleep(15000);
-		
+
 		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
 
 		if(copilotclosbutton.size()>0) {
@@ -45,16 +62,16 @@ public class DashboardPage extends WebDriverServiceImpl {
 	}
 
 	public ContactsPage selectContacts() {	
-		
+
 		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
 
 		if(copilotclosbutton.size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
 		}
-		
+
 		click(getDriver().findElement(By.xpath("//span[text()='Contacts']")),"Contacts");
-		
-		
+
+
 		return new ContactsPage();
 	}
 

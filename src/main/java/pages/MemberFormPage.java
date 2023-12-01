@@ -3,6 +3,7 @@ package pages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -874,6 +875,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//verify the subject feild is null
+	public MemberFormPage verifySubjectFieldisNull() {
+		verifIsNullWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), "Subject");
+		return this;
+
+	}
+
 	//Select Information view
 	public MemberFormPage selectInformationview() throws InterruptedException   {
 		Thread.sleep(4000);
@@ -885,6 +893,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		if(element.size()>0) {
 			click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Discard changes')]")),"Discard Changes");
 		}
+
 		verifyIsDisplayed(getDriver().findElement(By.xpath("//label[contains(text(),'Quick Subject')]")));
 		return this;
 	}
@@ -1495,13 +1504,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
 			Thread.sleep(3000);
-				
+
 		}else {
-			
+
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
 			Thread.sleep(3000);
-		
+
 		}
 		return this;
 	}
@@ -3622,6 +3631,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
+
 	// Select and Mark Complete	a Open Task Activity			
 	public MemberFormPage deActivatePrescriptionData() throws InterruptedException   {
 		List<WebElement> beforecount=getDriver().findElements(By.xpath("//i[@data-icon-name='CheckMark']"));
@@ -3904,7 +3914,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Delete the bill to accout
 	public MemberFormPage filterbyLocation(String locationtype) throws InterruptedException {
-		
+
 		click(getDriver().findElement(By.xpath("//div[contains(text(),'Store/Location Type')]")),"Location type header");
 		click(getDriver().findElement(By.xpath("//button[@name='Filter by']")),"Filter by option");
 		getDriver().switchTo().frame(getDriver().findElement(By.id("powerAppsAuthFlowFrame")));
@@ -3912,18 +3922,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+locationtype+"')]")),"location type option");
 		click(getDriver().findElement(By.xpath("//button[@type='submit']")),"Submit button");
 		getDriver().switchTo().defaultContent();
-		
+
 		return this;
 	}
-	
+
 	public MemberFormPage ChangetheLocationtype() throws InterruptedException {
 		List<WebElement> locationAccount=getDriver().findElements(By.xpath("//div[@class='ag-row-even ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-first']//a"));
-		
+
 		if(locationAccount.size()>0) {
-			
+
 			doubleClick(getDriver().findElement(By.xpath("//div[@class='ag-row-even ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-first']//a")), "Account");
 		}
-		
+
 		return this;
 	}
 
@@ -4109,7 +4119,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;	
 	}
 
-	//Update primary contact
+	//Clear DP
 	public MemberFormPage clearDP() throws InterruptedException {
 
 		Actions action = new Actions(getDriver());
@@ -4177,6 +4187,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+
+	//To add existing FedTaxID
+	public MemberFormPage typeRandomFedTaxID(int lowerbound, int upperbound) {
+
+		Random rand = new Random();
+
+		String fedTaxID = rand.nextInt(lowerbound, upperbound)+"";
+		System.out.println(fedTaxID);
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),fedTaxID,"Fed Tax ID Account Number");
+		return this;
+
+	}
 	//Type Membership provider name in account name field
 	public MemberFormPage typeMPAccountNameWithoutRandomName(String accountName) throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-container']")),"Account name");
@@ -4878,6 +4901,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),fedTaxID,"Fed Tax ID Account Number");
 		return this;
 	}
+	
+	//To add existing Account Number
+		public MemberFormPage typeStaticAccountNumber(String number) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),number,"Number");
+			return this;
+		}
 
 	//Choose Existing Account Number -FedTax ID
 	public MemberFormPage doubleClickExistingAccountNumberFedTaxID() throws InterruptedException   {
@@ -5535,11 +5565,39 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
+	
+	//Choose Existing Account Number -Remitra
+		public MemberFormPage doubleClickExistingAccountNumberRemitra() throws InterruptedException   {
+			//Wave1 2023 Update
+			Thread.sleep(4000);
+			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div"));
+			System.out.println("# of Rows Including Header:"+ rowList.size());
+			for (int i = 1; i <=rowList.size(); i++) {
+				String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")).getText();
+				System.out.println(title);					
+				if (title.equals("Remitra")) {
+					Thread.sleep(3000);
+					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "Remitra");
+					Thread.sleep(3000);
+					break;								
+				}
+				else if (title.equals("---"))
+				{
+
+				}
+
+			}		
+
+			return this;					
+		}
+	
+	
 
 	public MemberFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
 		Thread.sleep(10000);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		return this;
 	}
 
@@ -5696,6 +5754,45 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String enddate= dateFormat.format(date);			
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
+		return this;
+	}
+
+
+	//Enter End Date as FutureDate Date in Account Numbers
+	public MemberFormPage typeFutureEndDateInAccountNumbers() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+
+		Calendar c = Calendar.getInstance();    
+		c.setTime(date);        
+		// manipulate date        
+		c.add(Calendar.DATE, 1); 
+		// convert calendar to date      
+		Date currentDatePlusOne = c.getTime();
+
+		String enddate= dateFormat.format(currentDatePlusOne);			
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
+		return this;
+	}
+
+	//Enter End Date as FutureDate Date in Account Numbers
+	public MemberFormPage typePastEndDateInAccountNumbers() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+
+		Calendar c = Calendar.getInstance();    
+		c.setTime(date);        
+		// manipulate date        
+		c.add(Calendar.DATE, -1); 
+		// convert calendar to date      
+		Date currentDatePlusOne = c.getTime();
+
+		String enddate= dateFormat.format(currentDatePlusOne);			
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
 		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
@@ -7135,6 +7232,23 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Verify the Accountnumber type is present in the dropdown
+
+	public MemberFormPage verifyAccountnumberTypedropdown(String accountNumberType){
+		Select accountnumber= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")));
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		List<WebElement> statuList =accountnumber.getOptions();	
+
+		for(int i=0;i<statuList.size();i++) {
+
+			selectoptions.add(statuList.get(i).getText());
+
+		}
+		assertTrue((selectoptions.contains(accountNumberType)), "Account number type ");
+
+		return this;
+	}
+
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeHIN() {
 		try {
@@ -7147,6 +7261,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+
+	//Select Account number type in account numbers window
+		public MemberFormPage chooseAccountNumberTypeRemitra() {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeGLN() {
@@ -7181,6 +7308,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+	
+	//Type Remitra account number
+		public MemberFormPage typeAccountNumberRemitra() {
+			int min=111111111;
+			int max=999999999;
+			//Random randomGenerator = new Random();
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			System.out.println(randomInt);
+			String AccNumRemitra=String.valueOf(randomInt);
+			randomString=AccNumRemitra;
+			
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumRemitra,"Remitra Account Number");
+			try {
+				DataInputProvider.setCellData(AccNumRemitra.toString(), Driver.iTestCaseRowNum, "Remitra",Driver.sCategory);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 
 	public MemberFormPage clickSaveAndClosInAccountNumbers() throws InterruptedException {
@@ -7236,6 +7383,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")),"Click Save button");
 		Thread.sleep(10000);
+
 		//Thread.sleep(10000);
 		return this;
 	}
@@ -7693,4 +7841,4 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-}
+	}
