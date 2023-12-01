@@ -968,11 +968,12 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(5000);
 
 		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"DIVERSITY INFORMATION");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'HIBCC Subsc')]")),"HIBCC Subsc");
-
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'No New Products')]")),"No New Products");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")),"Ownership");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exchange')]")),"Exchange");
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Fax')]")), "Fax");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Receive Direct Mail')]")), "Recieve Direct Mail");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]")), "Do not Verify Address");
 		click(getDriver().findElement(By.xpath("//h3[contains(text(),'Timeline')]")),"Timeline");
 
 
