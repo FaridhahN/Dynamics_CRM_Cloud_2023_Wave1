@@ -38,6 +38,16 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyExactText((getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[2]"))),defaultAccountStatus,"Account Status");
 		return this;
 	}
+	
+	//Verify Documents Tab Order
+	public SupplierFormPage verifyDocumentsTabOrder() throws InterruptedException {
+		verifyDisplayed(getDriver().findElement(By.cssSelector("ul[aria-label='Account Form']>li[aria-label='ACTIVITIES']:nth-of-type(2)")),"second tab");
+		verifyDisplayed(getDriver().findElement(By.cssSelector("ul[aria-label='Account Form']>li[aria-label='DOCUMENTS']:nth-of-type(3)"))," after ACTIVITIES tab");
+		verifyDisplayed(getDriver().findElement(By.cssSelector("ul[aria-label='Account Form']>li[aria-label='TAX DOCUMENTS']:nth-of-type(4)"))," after DOCUMENTS tab");
+		Thread.sleep(2000);
+		return this;
+	}
+	
 
 	//Click Related and Activities
 	public SupplierFormPage clickRelatedActivities() throws InterruptedException   {
@@ -759,6 +769,12 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage pickPremierStartDate(String premierStartDate) throws InterruptedException {
 		Thread.sleep(1000);
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),premierStartDate,"Premier Start Date");
+		return this;
+	}
+		
+	public SupplierFormPage pickContractEffectiveDate(String contractEffectiveDate) throws InterruptedException {
+		Thread.sleep(1000);
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
 	}
 
