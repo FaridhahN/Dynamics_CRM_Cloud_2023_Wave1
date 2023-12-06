@@ -689,14 +689,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
-
-
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("(//span[text()='Contacts'])[2]")),"Contacts");
 		Thread.sleep(2000);
 		return this;
 	}
-
+	
+	
 	//Click Related and Contacts
 	public ContactsPage NavigateToContactsPage() throws InterruptedException   {
 		Thread.sleep(5000);
@@ -706,8 +705,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
-
-
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("(//span[text()='Contacts'])[2]")),"Contacts");
 		Thread.sleep(2000);

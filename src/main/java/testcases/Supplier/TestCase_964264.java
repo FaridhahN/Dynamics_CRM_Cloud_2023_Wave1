@@ -9,7 +9,7 @@ public class TestCase_964264  {
 	//Verify ‘DOCUMENTS’ Tab is placed right of ‘Activities’ Tab and left of ‘TAX DOCUMENTS’ Tab on Supplier Form.
 	
 	@Test
-	public void createSupplierTP(int iRowNumber, String sDataSheetName)throws Exception,InterruptedException {
+	public void documentsTab(int iRowNumber, String sDataSheetName)throws Exception,InterruptedException {
 		
 		//Access Login Page
 		new LoginPage()

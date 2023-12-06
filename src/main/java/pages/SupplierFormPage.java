@@ -550,6 +550,93 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		}
 		return this;
 	}
+	
+	//Click Related and Contracts
+		public SupplierFormPage clickRelatedContracts() throws InterruptedException   {
+			Thread.sleep(5000);
+
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("(//span[text()='Contracts'])[2]")),"Contracts");
+			Thread.sleep(2000);
+			return this;
+		}
+
+	
+	//Verify Active Contracts View
+	public SupplierFormPage activeContractsView() throws InterruptedException {
+
+		if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+		{
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath("//span[text()='Active Contracts']")),"Active Contracts View");
+			Thread.sleep(3000);			
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
+			List<WebElement> colmns = getDriver().findElements(By.xpath("//label[contains(@class,'ms-Label headerText')]"));
+			List<String> expectedcolumns =Arrays.asList("Contract Number","Description","Activation Method","Start Date","End Date");
+			List<String> actualcolumns=new ArrayList<String>();
+			for(WebElement col : colmns)
+			{
+				String data = col.getText();
+				//Array fix
+				if (data.isBlank()) {
+					System.out.println("Blank Value found in Column Header");
+				}else {
+					actualcolumns.add(data);
+					System.out.println("The Active Contracts View Actual column name is  : " +data);
+
+				}}
+			if(actualcolumns.equals(expectedcolumns))
+			{ 
+				setReport().log(Status.PASS, "The Actual columns : " + actualcolumns + " in 'Active Contracts View' matches all the expected columns  : " + expectedcolumns,	screenshotCapture()); }
+
+			else {
+				setReport().log(Status.FAIL, "The Actual columns : " + actualcolumns + " in 'Active Contracts View' doesn't match all the expected columns : " + expectedcolumns,screenshotCapture()); }
+
+		}
+		return this;
+	}
+	
+	//Verify inactive Contracts View
+		public SupplierFormPage inactiveContractsView() throws InterruptedException {
+
+			if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+			{
+				click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
+				Thread.sleep(5000);
+				click(getDriver().findElement(By.xpath("//span[text()='Inactive Contracts']")),"Inactive Contracts View");
+				Thread.sleep(3000);			
+				click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
+				List<WebElement> colmns = getDriver().findElements(By.xpath("//label[contains(@class,'ms-Label headerText')]"));
+				List<String> expectedcolumns =Arrays.asList("Contract Number","Description","Activation Method","Start Date","End Date");
+				List<String> actualcolumns=new ArrayList<String>();
+				for(WebElement col : colmns)
+				{
+					String data = col.getText();
+					//Array fix
+					if (data.isBlank()) {
+						System.out.println("Blank Value found in Column Header");
+					}else {
+						actualcolumns.add(data);
+						System.out.println("The Inactive Contracts View Actual column name is  : " +data);
+
+					}}
+				if(actualcolumns.equals(expectedcolumns))
+				{ 
+					setReport().log(Status.PASS, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' matches all the expected columns  : " + expectedcolumns,	screenshotCapture()); }
+
+				else {
+					setReport().log(Status.FAIL, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' doesn't match all the expected columns : " + expectedcolumns,screenshotCapture()); }
+
+			}
+			return this;
+		}
+
 
 	//Choose CAA Click on deactivate button
 	public SupplierFormPage clickOnCAAandDeactivate() throws InterruptedException {

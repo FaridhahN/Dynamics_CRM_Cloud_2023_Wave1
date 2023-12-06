@@ -21,16 +21,11 @@ public class TestCase_8948 {
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
-		//Search and select a memeber
-
+		//Search and select a member
 
 		.selectAccountsTab()
-
-
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
-
-
 		.clickRelatedContacts()
 		.doubleclickcontactwithoutEndDate()
 
