@@ -17,6 +17,7 @@ import java.util.Random;
 import org.junit.Assert; 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,7 +39,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyExactText((getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[2]"))),defaultAccountStatus,"Account Status");
 		return this;
 	}
-	
+
 	//Verify Documents Tab Order
 	public SupplierFormPage verifyDocumentsTabOrder() throws InterruptedException {
 		verifyDisplayed(getDriver().findElement(By.cssSelector("ul[aria-label='Account Form']>li[aria-label='ACTIVITIES']:nth-of-type(2)")),"second tab");
@@ -47,7 +48,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 
 	//Click Related and Activities
 	public SupplierFormPage clickRelatedActivities() throws InterruptedException   {
@@ -550,23 +551,23 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		}
 		return this;
 	}
-	
+
 	//Click Related and Contracts
-		public SupplierFormPage clickRelatedContracts() throws InterruptedException   {
-			Thread.sleep(5000);
+	public SupplierFormPage clickRelatedContracts() throws InterruptedException   {
+		Thread.sleep(5000);
 
-			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
-				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			}else {
-				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
-			}
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Contracts'])[2]")),"Contracts");
-			Thread.sleep(2000);
-			return this;
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Contracts'])[2]")),"Contracts");
+		Thread.sleep(2000);
+		return this;
+	}
 
-	
+
 	//Verify Active Contracts View
 	public SupplierFormPage activeContractsView() throws InterruptedException {
 
@@ -601,41 +602,41 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		}
 		return this;
 	}
-	
+
 	//Verify inactive Contracts View
-		public SupplierFormPage inactiveContractsView() throws InterruptedException {
+	public SupplierFormPage inactiveContractsView() throws InterruptedException {
 
-			if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+		if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+		{
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath("//span[text()='Inactive Contracts']")),"Inactive Contracts View");
+			Thread.sleep(3000);			
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
+			List<WebElement> colmns = getDriver().findElements(By.xpath("//label[contains(@class,'ms-Label headerText')]"));
+			List<String> expectedcolumns =Arrays.asList("Contract Number","Description","Activation Method","Start Date","End Date");
+			List<String> actualcolumns=new ArrayList<String>();
+			for(WebElement col : colmns)
 			{
-				click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
-				Thread.sleep(5000);
-				click(getDriver().findElement(By.xpath("//span[text()='Inactive Contracts']")),"Inactive Contracts View");
-				Thread.sleep(3000);			
-				click(getDriver().findElement(By.xpath("//span[@class='symbolFont SiteMap-symbol  ']")), "HamBurger Site Map Icon");
-				List<WebElement> colmns = getDriver().findElements(By.xpath("//label[contains(@class,'ms-Label headerText')]"));
-				List<String> expectedcolumns =Arrays.asList("Contract Number","Description","Activation Method","Start Date","End Date");
-				List<String> actualcolumns=new ArrayList<String>();
-				for(WebElement col : colmns)
-				{
-					String data = col.getText();
-					//Array fix
-					if (data.isBlank()) {
-						System.out.println("Blank Value found in Column Header");
-					}else {
-						actualcolumns.add(data);
-						System.out.println("The Inactive Contracts View Actual column name is  : " +data);
+				String data = col.getText();
+				//Array fix
+				if (data.isBlank()) {
+					System.out.println("Blank Value found in Column Header");
+				}else {
+					actualcolumns.add(data);
+					System.out.println("The Inactive Contracts View Actual column name is  : " +data);
 
-					}}
-				if(actualcolumns.equals(expectedcolumns))
-				{ 
-					setReport().log(Status.PASS, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' matches all the expected columns  : " + expectedcolumns,	screenshotCapture()); }
+				}}
+			if(actualcolumns.equals(expectedcolumns))
+			{ 
+				setReport().log(Status.PASS, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' matches all the expected columns  : " + expectedcolumns,	screenshotCapture()); }
 
-				else {
-					setReport().log(Status.FAIL, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' doesn't match all the expected columns : " + expectedcolumns,screenshotCapture()); }
+			else {
+				setReport().log(Status.FAIL, "The Actual columns : " + actualcolumns + " in 'Inactive Contracts View' doesn't match all the expected columns : " + expectedcolumns,screenshotCapture()); }
 
-			}
-			return this;
 		}
+		return this;
+	}
 
 
 	//Choose CAA Click on deactivate button
@@ -858,12 +859,24 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),premierStartDate,"Premier Start Date");
 		return this;
 	}
-		
+
 	public SupplierFormPage pickContractEffectiveDate(String contractEffectiveDate) throws InterruptedException {
 		Thread.sleep(1000);
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
 	}
+	
+	public SupplierFormPage clearContractEffectiveDate() throws InterruptedException {
+		Thread.sleep(1000);
+		WebElement ele =getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']"));
+		ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
+		Thread.sleep(3000);
+		ele.sendKeys(Keys.BACK_SPACE);
+		Thread.sleep(2000);
+		clickSave();
+		return this;
+	}	
+	
 
 	public SupplierFormPage recordChangeStatus(String recordChangeStatus) {
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']"))),recordChangeStatus," Record Change Status");
@@ -1025,15 +1038,33 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage clickSave() throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
+		Thread.sleep(3000);
+		
+		List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+
+		if(ignoreMessage.size()>0) {
+
+			click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");  }  
 		try
 		{
 			if ( getDriver().findElement(By.xpath("//span[contains(text(),'Save and Continue')]")).isDisplayed())
 			{
 				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and Continue')]")),"Save and continue");
 			}
-			else {
+			else {		
+					
 
 			}
+
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")));
+			Thread.sleep(5000);
+			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+			System.out.println(saveStatus);
+			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+			return this;    
+
+			
 		}
 		catch(Exception e)
 		{
@@ -1322,6 +1353,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-container']")),"Draft","Record Status"); 
 		Thread.sleep(2000);
+		return this;
+	}
+	
+	public SupplierFormPage contractEffectiveDateLock() throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
+		click(getDriver().findElement(By.xpath("//*[@title='Premier Start Date - Premier Member Start Date']")),"Premier Start Date");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
 		return this;
 	}
 
