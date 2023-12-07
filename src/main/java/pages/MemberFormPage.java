@@ -4,6 +4,7 @@ package pages;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -777,6 +778,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage verifyRelatedOptionisSorted() {
+		ArrayList<String> relatedoptions= new ArrayList<String> ();
+		List<WebElement>listOfOption=getDriver().findElements(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']//span[@class='pa-fg pa-fb pa-ds ']"));
+		for(int i=0;i<listOfOption.size();i++) {
+			relatedoptions.add(getDriver().findElement(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']//span[@class='pa-fg pa-fb pa-ds ']")).getText());
+		}
+		ArrayList<String> optionbeforeSort=new ArrayList<String> ();
+		optionbeforeSort.addAll(relatedoptions);
+		Collections.sort(relatedoptions);
+		Assert.assertTrue(relatedoptions.equals(optionbeforeSort));
+		return this;
+	}
+
+
+//Click Related button
+	public MemberFormPage clickRelatedButton() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related button");
+		return this;
+	}
+	
 	//Click New Activity- Task
 	public MemberFormPage clickNewTaskActivity() throws InterruptedException   {
 		click(getDriver().findElement(By.xpath("//button[contains(@title,'New Activity')]")),"New Activity");
@@ -1398,7 +1419,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage navigateToDoNotVerify() {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
@@ -1407,6 +1430,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]"))),"Do not Verify Address");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]"))),"Do not Verify Address");
+
+
+		return this;
+
+	}
+	
+	public MemberFormPage navigateToDoNotVerifyMemberEntryForm() {
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
+		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Main Phone')]"))),"Main Phone");
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Fax']"))),"Fax");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]"))),"Do not Verify Address");
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Website']"))),"Website");
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Country/Region']"))),"Country");
+		click((getDriver().findElement(By.xpath("//input[@aria-label='External Address ID']"))),"Country");
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Record']"))),"Country");
+		
 
 
 		return this;
@@ -7837,5 +7879,51 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+//Verify LOB and Account number are displayed under the account number widget
+	public MemberFormPage verifyWidgetunderMembership() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='MEMBERSHIP']/following-sibling::section[@aria-label='LINE OF BUSINESS']")).size(), "LOB Widget");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='MEMBERSHIP']/following-sibling::section[@aria-label='ACCOUNT NUMBERS']")).size(), "Account Nuymber Widget");
+		return this;
+		
+	}
+	
+	//Verify LOB and Account number are displayed under the account number widget
+		public MemberFormPage verifyMemberAttributeUnderFBO() {
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='FBO Information']/following-sibling::section[@aria-label='MEMBER ATTRIBUTES']")).size(), "Member Attributes");
+			return this;
+			
+		}
+	
+		//Verify LOB and Account number are displayed under the account number widget
+				public MemberFormPage verifyFeildsunderAdditionalCriteria() {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_applicationstartdate']")).size(), "Applicatio start date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberstartdate']")).size(), "Premieri start date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberenddate']")).size(), "Premieri end date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_requiremanualagassignment']")).size(), "Manual assignment");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroup']")).size(), "Affiliate Group");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroupeffectivedate']")).size(), "Affiliate Group effective date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premierowner']")).size(), "Premieri Owner");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_corporate']")).size(), "Corporate");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_camsflag']")).size(), "CAMS");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_donotroster']")).size(), "Do not roaster");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_receivedirectmail']")).size(), "Received email");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligible']")).size(), "Fee share eligible");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligibledate']")).size(), "Fee share eligible date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_businesskey']")).size(), "Business key");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_bkactive']")).size(), "bk active");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_paymententityid']")).size(), "Payment Entity");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordstatus']")).size(), "Record status");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordchangestatus']")).size(), "Record change status");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentinternalrep']")).size(), "Current internal rep");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentfieldrep']")).size(), "Current feidl rep");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_accountrank']")).size(), "Account Rank");
+					
+					
+					
 
+					return this;
+					
+				}
+			
+	
 	}
