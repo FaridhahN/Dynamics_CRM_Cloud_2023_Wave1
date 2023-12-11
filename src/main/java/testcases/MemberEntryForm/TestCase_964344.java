@@ -1,17 +1,19 @@
 package testcases.MemberEntryForm;
 
 import org.testng.annotations.Test;
+
+import pages.ContactsPage;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964339:_964339:Verify whether 'Additional Criteria' and Fields inside 'Miscellaneous' Tab  are available in the 'General' Tab of  the Member Entry Form.
+//TFS ID_964344:_964344:Verify whether Tab 'General Demographic' is renamed to 'General' in Member Entry form.
 
 
-public class TestCase_964339 {
+public class TestCase_964344 {
 
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
+	public void verifyGeneral(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 		//1. Login to CRM using member supervisor / member credentials
 		WebDriverServiceImpl.isMemberForm=true;
@@ -28,14 +30,9 @@ public class TestCase_964339 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.chooseMemberEntryForm()
-		.navigateToDoNotVerifyMemberEntryForm()
-		.navigatetoAdditionaCriteriaFromDonotVerify()	
-		.verifyFeildsunderAdditionalCriteria()
-		.verifyMemberAttributeUnderFBO()
-		.verifyWidgetunderMembership()
-		.navigatetoNYInformationFromAdditionalCriteria()
-		.verifyNYInformationUnderAdditionaCriteria()
+		.verifyGeneralTab()	
+
+
 		;
 
 	}

@@ -1,13 +1,12 @@
-package testcases.MemberEntryForm;
+package testcases.MemberFormChanges;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964339:_964339:Verify whether 'Additional Criteria' and Fields inside 'Miscellaneous' Tab  are available in the 'General' Tab of  the Member Entry Form.
+//TFS ID_964410:_964410:Verify 'Related' Tab is sorted Alphabetically.
 
-
-public class TestCase_964339 {
+public class TestCase_964410 {
 
 
 	@Test
@@ -28,14 +27,9 @@ public class TestCase_964339 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.chooseMemberEntryForm()
-		.navigateToDoNotVerifyMemberEntryForm()
-		.navigatetoAdditionaCriteriaFromDonotVerify()	
-		.verifyFeildsunderAdditionalCriteria()
-		.verifyMemberAttributeUnderFBO()
-		.verifyWidgetunderMembership()
-		.navigatetoNYInformationFromAdditionalCriteria()
-		.verifyNYInformationUnderAdditionaCriteria()
+		.chooseMemberForm()
+		.verifyRelatedOptionisSorted()	
+
 		;
 
 	}

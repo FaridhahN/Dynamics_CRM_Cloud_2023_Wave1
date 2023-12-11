@@ -1,17 +1,16 @@
-package testcases.MemberEntryForm;
+package testcases.MemberFormChanges;
 
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964339:_964339:Verify whether 'Additional Criteria' and Fields inside 'Miscellaneous' Tab  are available in the 'General' Tab of  the Member Entry Form.
+//TFS ID_964405:_964405:Verify 'Account Representatives' Tab is available on Member Form
 
-
-public class TestCase_964339 {
+public class TestCase_964403 {
 
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
+	public void VerifyAccountRepresentativesTab(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 		//1. Login to CRM using member supervisor / member credentials
 		WebDriverServiceImpl.isMemberForm=true;
@@ -28,14 +27,13 @@ public class TestCase_964339 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.chooseMemberEntryForm()
-		.navigateToDoNotVerifyMemberEntryForm()
-		.navigatetoAdditionaCriteriaFromDonotVerify()	
-		.verifyFeildsunderAdditionalCriteria()
-		.verifyMemberAttributeUnderFBO()
-		.verifyWidgetunderMembership()
-		.navigatetoNYInformationFromAdditionalCriteria()
-		.verifyNYInformationUnderAdditionaCriteria()
+		.chooseMemberForm()
+		.navigateToDoNotVerify()
+		.navigatetNYInformation()
+		.verifyNYInformationFeilds()
+		.verifyNyInformationTabisNotDisplayed()
+		
+
 		;
 
 	}

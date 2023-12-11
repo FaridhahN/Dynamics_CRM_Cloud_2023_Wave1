@@ -424,6 +424,28 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			Driver.failCount++;
 		} 
 	}
+	
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~		
+
+		public void clickAndEsc(WebElement ele,String field)  {
+			try {
+				//WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+				//			wait.until(ExpectedConditions.elementToBeClickable(ele));			
+				ele.click();
+				ele.sendKeys(Keys.ESCAPE);
+				ele.sendKeys(Keys.TAB);
+				setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
+			}
+			catch (InvalidElementStateException e) {
+				e.printStackTrace();
+				setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
+				Driver.failCount++;
+			} catch (WebDriverException e) {
+				e.printStackTrace();
+				setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
+				Driver.failCount++;
+			} 
+		}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void verifyDisabledFields(WebElement ele, String field) {
 

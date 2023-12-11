@@ -259,6 +259,60 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Verify NY information tab is not displayed
+	public MemberFormPage verifyNyInformationTabisNotDisplayed() {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='NY INFORMATION']")).size(), "NY information Tab");
+		return this;
+	}
+
+	//Verify Contact tab is not displayed
+	public MemberFormPage verifyContactTabisNotDisplayed() {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='CONTACT']")).size(), "Contact Tab");
+		return this;
+	}
+
+	//VErify Contact under Related tab
+	public MemberFormPage verifyGeneralTab() throws InterruptedException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")).size(), "General Demographic Tab");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@title='General']")).size(), "General Tab");
+		return this;
+	}
+
+	//VErify Contact under Related tab
+	public MemberFormPage verifyContactOption() throws InterruptedException {
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("(//span[text()='Contacts'])[2]")).size(), "Contact Option");
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//VErify Contact under Related tab
+	public MemberFormPage verifyActivitiesOption() throws InterruptedException {
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("(//*[text()='Activities'])[2]")).size(), "Ativities Option");
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(2000);
+		return this;
+	}
 	//Verify LOB required Error message
 	public MemberFormPage verifyLOBRequiredErrorMessage(String errorMessage) throws InterruptedException {
 		Thread.sleep(2000);
@@ -695,8 +749,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return this;
 	}
-	
-	
+
+
 	//Click Related and Contacts
 	public ContactsPage NavigateToContactsPage() throws InterruptedException   {
 		Thread.sleep(5000);
@@ -778,11 +832,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage verifyRelatedOptionisSorted() {
+	public MemberFormPage verifyRelatedOptionisSorted() throws InterruptedException {
+		clickRelatedButton();
 		ArrayList<String> relatedoptions= new ArrayList<String> ();
-		List<WebElement>listOfOption=getDriver().findElements(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']//span[@class='pa-fg pa-fb pa-ds ']"));
+		List<WebElement>listOfOption=getDriver().findElements(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')]"));
 		for(int i=0;i<listOfOption.size();i++) {
-			relatedoptions.add(getDriver().findElement(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']//span[@class='pa-fg pa-fb pa-ds ']")).getText());
+			relatedoptions.add(getDriver().findElement(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')]")).getText());
 		}
 		ArrayList<String> optionbeforeSort=new ArrayList<String> ();
 		optionbeforeSort.addAll(relatedoptions);
@@ -792,12 +847,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-//Click Related button
+	//Click Related button
 	public MemberFormPage clickRelatedButton() throws InterruptedException   {
 		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related button");
 		return this;
 	}
-	
+
 	//Click New Activity- Task
 	public MemberFormPage clickNewTaskActivity() throws InterruptedException   {
 		click(getDriver().findElement(By.xpath("//button[contains(@title,'New Activity')]")),"New Activity");
@@ -1420,7 +1475,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
-		click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
 		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
@@ -1435,7 +1490,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
+	public MemberFormPage verifyDonNotverifydefault() throws IOException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']/parent::div//preceding-sibling::div/div[@data-id='ix_donotverifyaddress']")).size(), "Don not verify element");
+		String defaultvale=getText(getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")));
+		assertTrue(defaultvale.contentEquals("No"), "Parent Entity code is not displayed");
+		return this;
+	}
+
+
 	public MemberFormPage navigateToDoNotVerifyMemberEntryForm() {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
@@ -1447,8 +1510,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click((getDriver().findElement(By.xpath("//input[@aria-label='Website']"))),"Website");
 		click((getDriver().findElement(By.xpath("//input[@aria-label='Country/Region']"))),"Country");
 		click((getDriver().findElement(By.xpath("//input[@aria-label='External Address ID']"))),"Country");
-		click((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Record']"))),"Country");
-		
 
 
 		return this;
@@ -1565,7 +1626,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;
 	}
-
+	public MemberFormPage verifyDocumentsTab() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@title='Documents']")).size(), "Documents Tab");
+		return this;
+	}
 
 
 
@@ -4940,13 +5004,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),fedTaxID,"Fed Tax ID Account Number");
 		return this;
 	}
-	
+
 	//To add existing Account Number
-		public MemberFormPage typeStaticAccountNumber(String number) {
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
-			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),number,"Number");
-			return this;
-		}
+	public MemberFormPage typeStaticAccountNumber(String number) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),number,"Number");
+		return this;
+	}
 
 	//Choose Existing Account Number -FedTax ID
 	public MemberFormPage doubleClickExistingAccountNumberFedTaxID() throws InterruptedException   {
@@ -5604,34 +5668,34 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
-	
+
 	//Choose Existing Account Number -Remitra
-		public MemberFormPage doubleClickExistingAccountNumberRemitra() throws InterruptedException   {
-			//Wave1 2023 Update
-			Thread.sleep(4000);
-			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div"));
-			System.out.println("# of Rows Including Header:"+ rowList.size());
-			for (int i = 1; i <=rowList.size(); i++) {
-				String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")).getText();
-				System.out.println(title);					
-				if (title.equals("Remitra")) {
-					Thread.sleep(3000);
-					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "Remitra");
-					Thread.sleep(3000);
-					break;								
-				}
-				else if (title.equals("---"))
-				{
+	public MemberFormPage doubleClickExistingAccountNumberRemitra() throws InterruptedException   {
+		//Wave1 2023 Update
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 1; i <=rowList.size(); i++) {
+			String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")).getText();
+			System.out.println(title);					
+			if (title.equals("Remitra")) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "Remitra");
+				Thread.sleep(3000);
+				break;								
+			}
+			else if (title.equals("---"))
+			{
 
-				}
+			}
 
-			}		
+		}		
 
-			return this;					
-		}
-	
-	
+		return this;					
+	}
+
+
 
 	public MemberFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
@@ -7302,17 +7366,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Select Account number type in account numbers window
-		public MemberFormPage chooseAccountNumberTypeRemitra() {
-			try {
-				Thread.sleep(2000);
-				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Number Type");
-				Thread.sleep(2000);
-				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Numbers Type"); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return this;
+	public MemberFormPage chooseAccountNumberTypeRemitra() {
+		try {
+			Thread.sleep(2000);
+			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Number Type");
+			Thread.sleep(2000);
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Remitra","Account Numbers Type"); 
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		return this;
+	}
 
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeGLN() {
@@ -7347,26 +7411,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
-	
+
 	//Type Remitra account number
-		public MemberFormPage typeAccountNumberRemitra() {
-			int min=111111111;
-			int max=999999999;
-			//Random randomGenerator = new Random();
-			int randomInt = (int)(Math.random() * (max - min + 1) + min);
-			System.out.println(randomInt);
-			String AccNumRemitra=String.valueOf(randomInt);
-			randomString=AccNumRemitra;
-			
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
-			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumRemitra,"Remitra Account Number");
-			try {
-				DataInputProvider.setCellData(AccNumRemitra.toString(), Driver.iTestCaseRowNum, "Remitra",Driver.sCategory);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return this;
+	public MemberFormPage typeAccountNumberRemitra() {
+		int min=111111111;
+		int max=999999999;
+		//Random randomGenerator = new Random();
+		int randomInt = (int)(Math.random() * (max - min + 1) + min);
+		System.out.println(randomInt);
+		String AccNumRemitra=String.valueOf(randomInt);
+		randomString=AccNumRemitra;
+
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumRemitra,"Remitra Account Number");
+		try {
+			DataInputProvider.setCellData(AccNumRemitra.toString(), Driver.iTestCaseRowNum, "Remitra",Driver.sCategory);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return this;
+	}
 
 
 	public MemberFormPage clickSaveAndClosInAccountNumbers() throws InterruptedException {
@@ -7879,51 +7943,124 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-//Verify LOB and Account number are displayed under the account number widget
+	//Verify LOB and Account number are displayed under the account number widget
 	public MemberFormPage verifyWidgetunderMembership() {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='MEMBERSHIP']/following-sibling::section[@aria-label='LINE OF BUSINESS']")).size(), "LOB Widget");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='MEMBERSHIP']/following-sibling::section[@aria-label='ACCOUNT NUMBERS']")).size(), "Account Nuymber Widget");
 		return this;
-		
-	}
-	
-	//Verify LOB and Account number are displayed under the account number widget
-		public MemberFormPage verifyMemberAttributeUnderFBO() {
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='FBO Information']/following-sibling::section[@aria-label='MEMBER ATTRIBUTES']")).size(), "Member Attributes");
-			return this;
-			
-		}
-	
-		//Verify LOB and Account number are displayed under the account number widget
-				public MemberFormPage verifyFeildsunderAdditionalCriteria() {
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_applicationstartdate']")).size(), "Applicatio start date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberstartdate']")).size(), "Premieri start date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberenddate']")).size(), "Premieri end date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_requiremanualagassignment']")).size(), "Manual assignment");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroup']")).size(), "Affiliate Group");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroupeffectivedate']")).size(), "Affiliate Group effective date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premierowner']")).size(), "Premieri Owner");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_corporate']")).size(), "Corporate");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_camsflag']")).size(), "CAMS");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_donotroster']")).size(), "Do not roaster");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_receivedirectmail']")).size(), "Received email");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligible']")).size(), "Fee share eligible");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligibledate']")).size(), "Fee share eligible date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_businesskey']")).size(), "Business key");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_bkactive']")).size(), "bk active");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_paymententityid']")).size(), "Payment Entity");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordstatus']")).size(), "Record status");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordchangestatus']")).size(), "Record change status");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentinternalrep']")).size(), "Current internal rep");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentfieldrep']")).size(), "Current feidl rep");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_accountrank']")).size(), "Account Rank");
-					
-					
-					
 
-					return this;
-					
-				}
-			
-	
 	}
+
+	//Verify LOB and Account number are displayed under the account number widget
+	public MemberFormPage verifyMemberAttributeUnderFBO() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='FBO Information']/following-sibling::section[@aria-label='MEMBER ATTRIBUTES']")).size(), "Member Attributes");
+		return this;
+
+	}
+
+	//Verify LOB and Account number are displayed under the account number widget
+	public MemberFormPage verifyFeildsunderAdditionalCriteria() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_applicationstartdate']")).size(), "Applicatio start date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberstartdate']")).size(), "Premieri start date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premiermemberenddate']")).size(), "Premieri end date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_requiremanualagassignment']")).size(), "Manual assignment");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroup']")).size(), "Affiliate Group");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_affiliategroupeffectivedate']")).size(), "Affiliate Group effective date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_premierowner']")).size(), "Premieri Owner");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_corporate']")).size(), "Corporate");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_camsflag']")).size(), "CAMS");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_donotroster']")).size(), "Do not roaster");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_receivedirectmail']")).size(), "Received email");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligible']")).size(), "Fee share eligible");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_feeshareeligibledate']")).size(), "Fee share eligible date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_businesskey']")).size(), "Business key");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_bkactive']")).size(), "bk active");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_paymententityid']")).size(), "Payment Entity");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordstatus']")).size(), "Record status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_recordchangestatus']")).size(), "Record change status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentinternalrep']")).size(), "Current internal rep");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_currentfieldrep']")).size(), "Current feidl rep");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']//div[@data-id='ix_accountrank']")).size(), "Account Rank");
+
+		return this;
+
+	}
+
+	//Verify LOB and Account number are displayed under the account number widget
+	public MemberFormPage verifyNYInformationFeilds() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'# of Member')]")).size(), "# of member");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'# of Estimated')]")).size(), "# of Estimated");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Commissioned Representative')]")).size(), "Commissioned Representative");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'CSA Commissioned Representative')]")).size(), "CSA Commissioned Representative");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Annual Revenue')]")).size(), "Annual Revenue");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'No. of Employees')]")).size(), "No of Employees");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Safe Harbor Instructions')]")).size(), "Safe Harbor Infromation");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'NAICS Code')]")).size(), "NAICS Code");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Communication Instruction')]")).size(), "Communication instruction");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'include vendor data before')]")).size(), "Do not include vendor data before");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'include wholesaler data before')]")).size(), "Do not include whole sales vendor data before");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Follow Email Activity')]")).size(), "Follow Email Activity");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Originating Lead')]")).size(), "Originating Lead");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Referred By')]")).size(), "Referred By");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Power Account')]")).size(), "Power Account");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='NY INFORMATION']//label[contains(text(),'Manage Eligibility')]")).size(), "Manage Eligibilty");
+
+		return this;
+
+	}
+
+	//Verify LOB and Account number are displayed under the account number widget
+	public MemberFormPage navigatetoNYInformationFromAdditionalCriteria() {
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")), "Applicatio start date");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Require Manual AG Assignment']")), "Manual assignment");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")), "Affiliate Group");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Corporate']")), "Affiliate Group effective date");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Exclude from Roster']")), "Premieri Owner");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Receive Direct Mail']")), "Corporate");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "CAMS");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new']")), "Do not roaster");
+
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")), "Received email");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Record Change Status']")), "Received email");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_issponsor.fieldControl-checkbox-select']")), "Is sponsor");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Corporate Rebate Fee Date']")), "Corporate Rebate Fee");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Food Service Parent Override']")), "Corporate Rebate Fee");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='FSRPT Flag']")), "Corporate Rebate Fee");
+
+		return this;
+
+	}
+	public MemberFormPage verifyNYInformationUnderAdditionaCriteria() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']/following-sibling::section[@aria-label='NY INFOMATION']")).size(), "NY Information");
+		return this;
+	}
+
+	public MemberFormPage verifyLOBTab() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='Rebate Payments']/following-sibling::li[@title='LOB']")).size(), "LOB Tab");
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Rebate Payments']/following-sibling::li[@title='LOB']")), "LOB Tab");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Active Line of Business')]")).size(), "Active Line of Business view");
+		return this;
+	}
+
+	public MemberFormPage verifyAccountRepresentative() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='Documents']/following-sibling::li[@title='Account Representatives']")).size(), "Account Representatives");
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Documents']/following-sibling::li[@title='Account Representatives']")), "Account Representatives");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Current Account Representatives')]")).size(), "Current Account Representative view");
+		return this;
+	}
+
+	public MemberFormPage verifyContactAccountAssociation() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='LOB']/following-sibling::li[@title='Contact Account Associations']")).size(), "Account Representatives");
+		click(getDriver().findElement(By.xpath("//li[@aria-label='LOB']/following-sibling::li[@title='Contact Account Associations']")), "Account Representatives");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Active Contact Account Associations')]")).size(), "Current Account Representative view");
+		return this;
+	}
+
+	public MemberFormPage verifyRebatePayments() {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='Account Representatives']/following-sibling::li[@title='Rebate Payments']")).size(), "Account Representatives");
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Account Representatives']/following-sibling::li[@title='Rebate Payments']")), "Account Representatives");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Current Rebate Payments')]")).size(), "Current Account Representative view");
+		return this;
+	}
+
+}
