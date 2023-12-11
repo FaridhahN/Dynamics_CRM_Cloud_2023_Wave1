@@ -7,9 +7,9 @@ import pages.LoginPage;
 import pages.MemberFormPage;
 import utils.DataInputProvider;
 
-//Test Case964250 Verify Column names on ‘Active Contracts’ View
+//Test Case 964246 : Verify ‘Active Contracts ‘view is available when ‘Contracts’ is chosen from Related Tab
 
-public class TestCase_964250 {
+public class TestCase_964246 {
 
 	@Test
 	public void VerifyActiveContractsView(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
@@ -25,9 +25,9 @@ public class TestCase_964250 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		.selectSupplierAccountFromSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		
-		//Verify Columns in Active Contracts View
+		//Verify  Active Contracts View is available for selection
 		.clickRelatedContracts()
-		.activeContractsView();
+		.chooseActiveContractsView();
 
 	}
 }

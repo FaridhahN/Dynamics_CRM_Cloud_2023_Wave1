@@ -48,6 +48,13 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
+	
+	public SupplierFormPage verifyDocumentsTab() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@data-id='tablist-DOCUMENTS']")).size(), "DOCUMENTS TAB");
+		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-DOCUMENTS']")), "DOCUMENTS TAB");
+		return this;
+	}
+
 
 
 	//Click Related and Activities
@@ -566,6 +573,23 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
+	
+	
+	//Choose Active Contracts View
+		public SupplierFormPage chooseActiveContractsView() throws InterruptedException {
+
+			if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+			{
+				click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//span[text()='Active Contracts']")),"Active Contracts View");
+				Thread.sleep(2000);
+			}
+				else {
+					//Do Nothing
+				}
+			return this;
+			}
 
 
 	//Verify Active Contracts View
@@ -584,8 +608,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			for(WebElement col : colmns)
 			{
 				String data = col.getText();
-				//Array fix
-				if (data.isBlank()) {
+					if (data.isBlank()) {
 					System.out.println("Blank Value found in Column Header");
 				}else {
 					actualcolumns.add(data);
@@ -1364,7 +1387,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
 		return this;
 	}
-
+	
+	
 	public SupplierFormPage recordStatusLock() throws InterruptedException {
 		Thread.sleep(3000);		
 		//verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus-locked-icon']")),"Record Status Lock");
