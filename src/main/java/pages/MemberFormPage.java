@@ -216,6 +216,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//		return this;	
 	//	}
 
+	public MemberFormPage clicksaveButton() {
+		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
+
+		return this;
+	}
+
+
+	public MemberFormPage verifyDuplicateMessage() {
+
+		Assert.assertTrue(getDriver().findElements(By.xpath("//*[text()='Ignore and save']")).size()>0);
+		click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save");
+		return this;
+	}
+
 	public MemberFormPage clickSave() throws InterruptedException {
 
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
@@ -1490,10 +1504,27 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	public MemberFormPage navigateToDoNotVerifyMEF() {
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+		}
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
+		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Main Phone']")),"Main phone");		
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Fax']"))),"Fax");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]"))),"Do not Verify Address");
+
+
+		return this;
+
+	}
 
 	public MemberFormPage verifyDonNotverifydefault() throws IOException {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']/parent::div//preceding-sibling::div/div[@data-id='ix_donotverifyaddress']")).size(), "Don not verify element");
-		String defaultvale=getText(getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")));
+		String defaultvale=getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")).getText();
 		assertTrue(defaultvale.contentEquals("No"), "Parent Entity code is not displayed");
 		return this;
 	}
@@ -1639,8 +1670,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),street1, "Street1");
 		return this;
 	}
+	
+	public MemberFormPage verifystreet1(String street) {
+		assertTrue(!((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']"))).getAttribute("value").contentEquals(street)));
+		return this;
+	}
 
-	//Navigate To Melissa
+	//Navigate To Melissa and verify Mellisa is not null
 	public MemberFormPage verifyMellissa() throws InterruptedException {
 
 		click(((getDriver().findElement(By.xpath("//input[@aria-label='Congressional District']")))), "Congressional District");
@@ -1661,6 +1697,28 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+
+	//Navigate To Melissa and verify Mellisa is not null
+	public MemberFormPage verifyMellissakeybaseisNotNull() throws InterruptedException {
+
+
+		verifIsNoTNullValue(getDriver().findElement(By.xpath("//input[@data-id='ix_melissaaddresskeybase.fieldControl-text-box-text']")),"Melissa Address Key");
+
+
+		return this;
+	}
+
+
+	//Navigate To Melissa and verify Mellisa is not null
+	public MemberFormPage verifyMellissakeybaseisNull() throws InterruptedException {
+
+
+		verifyNullValue(getDriver().findElement(By.xpath("//input[@data-id='ix_melissaaddresskeybase.fieldControl-text-box-text']")),"Melissa Address Key");
+
+
+		return this;
+	}
+
 
 	//Navigate To Mellissa
 	public MemberFormPage verifyMellissaisDisabled() throws InterruptedException {
@@ -5272,12 +5330,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Save And Close
 	public MemberFormPage clickSystemTab() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Clic System Tab");
-		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
+		if(getDriver().findElements(By.xpath("//li[contains(text(),'SYSTEM')]")).size()>0) {
+			click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Click System Tab");
+		}else {
+
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+
+			click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Click System Tab");	
+		}
 		return this;
 
 	}
+
+
+	//input[@aria-label='Congressional District']
 
 	public MemberFormPage pageRefreshWithGeneral() throws InterruptedException {
 		getDriver().navigate().refresh();

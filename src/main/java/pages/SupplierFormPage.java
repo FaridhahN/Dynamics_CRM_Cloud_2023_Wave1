@@ -1732,8 +1732,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 	
 	public SupplierFormPage verifyDonNotverifydefault() throws IOException {
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']/parent::div//preceding-sibling::div/div[@data-id='ix_donotverifyaddress']")).size(), "Don not verify element");
-		String defaultvale=getText(getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")));
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Do Not Verify Address')]")).size(), "Don not verify element");
+		String defaultvale=(getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")).getText());
 		assertTrue(defaultvale.contentEquals("No"), "Parent Entity code is not displayed");
 		return this;
 	}
@@ -1746,16 +1746,16 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
-		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]"))),"Do not Verify Address");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]"))),"Do not Verify Address");
-
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Fax')]")), "Fax");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Receive Direct Mail')]")), "Recieve Direct Mail");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]")), "Do not Verify Address");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Ownership']")), "Do not berify Address");
 
 		return this;
 
 	}
+
 
 	public SupplierFormPage addMemberRecord(String memberRecord) throws InterruptedException {
 		Thread.sleep(3000);

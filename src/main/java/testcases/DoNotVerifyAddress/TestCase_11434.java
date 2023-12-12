@@ -28,7 +28,7 @@ public class TestCase_11434 {
 		.selectAccountsTab()
 		.clickNewOnAccountsPage()
 		.chooseMemberEntryForm()
-		.navigateToDoNotVerify()
+		.navigateToDoNotVerifyMEF()
 		.verifyDonNotverifydefault()
 
 
