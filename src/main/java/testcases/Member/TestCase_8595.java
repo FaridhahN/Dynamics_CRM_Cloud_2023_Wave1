@@ -6,7 +6,7 @@ import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //Test Case 8811:Cloud - Verify newly added fields in Subaccounts view
 
-public class TestCase_8811 {
+public class TestCase_8595 {
 
 
 	@Test

@@ -4,13 +4,13 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//Test Case 8811:Cloud - Verify newly added fields in Subaccounts view
+// TFS ID_828599:_828599:Verifywhether "Supplier Record" Field is added to Member Entry Form
 
-public class TestCase_8811 {
+public class TestCase_828599 {
 
 
 	@Test
-	public void subAccountView(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
+	public void supplierRecordCheck(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 		//1. Login to CRM using member supervisor / member credentials
 		WebDriverServiceImpl.isMemberForm=true;
@@ -27,9 +27,14 @@ public class TestCase_8811 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectSubaccount()
-		.verifySubAccountView()
-
+		
+		.chooseMemberEntryForm()
+		.chooseApplicationnavigateToAdditionalCriteria()
+		
+		
+		.verifySupplierRecord()
+		
+		
 		;
 
 	}

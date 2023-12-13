@@ -34,6 +34,11 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Thread.sleep(10000);
 		return this;
 	}
+	public AccountsPage verifyUnsavedMEssage() {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//h1[@aria-label='Unsaved changes']")).size(), "UnsavedMessage");
+		return this;
+		
+	}
 
 	//select Active Member view
 

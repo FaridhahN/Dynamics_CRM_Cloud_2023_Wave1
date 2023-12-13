@@ -29,6 +29,9 @@ public class DashboardPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
 		return new AccountsPage();
 	}
+	
+	
+	
 
 	//Navigate To Activities option in the Dashboard
 	public SupplierFormPage navigateToActivitiesOption() throws InterruptedException {

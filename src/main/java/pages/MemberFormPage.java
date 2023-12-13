@@ -4098,6 +4098,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Verify Supplier Record below External ID
+	public MemberFormPage verifySupplierRecord() throws InterruptedException {
+	
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']//parent::div/following-sibling::div/div[@data-id='ix_supplierrecordid']")).size(), "Supplier Record");
+		return this;
+	}
+	
 	//Select sub accounts from Related
 	public MemberFormPage selectSubaccount() throws InterruptedException {	
 		Thread.sleep(3000);
@@ -4132,24 +4139,24 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
 	       builder = new Actions(getDriver());
 	      builder.moveToElement(element).release().perform();
-	   
 	      
-		je.executeScript("window.scrollBy(0,3000)");
-		je.executeScript("window.scrollBy(5000,0)");
-		je.executeScript("window.scrollTo(document.body.scrollHeight,0)");
-		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath("//*[text()='Direct Parent']")),"Direct Parent");
-		 element = getDriver().findElement(By.xpath("//*[text()='Direct Parent Relation Date']"));
-		je.executeScript("arguments[0].scrollIntoView();",element);
+	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	       builder = new Actions(getDriver());
+	      builder.moveToElement(element).clickAndHold().perform();
+	      
+	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	       builder = new Actions(getDriver());
+	      builder.moveToElement(element).perform();
+	      
+	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	       builder = new Actions(getDriver());
+	      builder.moveToElement(element).release().perform();
+	   
+verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_parentrelationship']/following-sibling::div[@col-id='ix_directparentrelationdate']")).size(), "dirvetionparent relatio date");
+verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_topparentrelationship']/following-sibling::div[@col-id='ix_issponsor']")).size(), "is sponsor");
+verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_issponsor']/following-sibling::div[@col-id='ix_sponsor']")).size(), "sponsor");
 
-		element = getDriver().findElement(By.xpath("//*[text()='Is Sponsor']"));
-		je.executeScript("arguments[0].scrollIntoView();",element);
-
-		element = getDriver().findElement(By.xpath("//*[text()='Sponsor']"));
-		je.executeScript("arguments[0].scrollIntoView();",element);
-
-
-		return this;
+return this;
 
 	}
 	//search in sub account
@@ -5232,6 +5239,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage verifyUnsavedMEssage() {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//h1[@aria-label='Unsaved changes']")).size(), "UnsavedMessage");
+		return this;
+		
+	}
 
 	//Verify account does not have one active premier membership error
 	public MemberFormPage verifyDPWithoutEntityMessage(String errMsg) throws InterruptedException {
