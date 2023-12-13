@@ -4117,16 +4117,29 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage verifySubAccountView() throws InterruptedException {
 		//Wave 2023  update
 		click(getDriver().findElement(By.xpath("//*[@class='symbolFont SiteMap-symbol  ']")),"Hamburger Icon");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 
 		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 
+		 WebElement element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	      Actions builder = new Actions(getDriver());
+	      builder.moveToElement(element).clickAndHold().perform();
+	      
+	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	       builder = new Actions(getDriver());
+	      builder.moveToElement(element).perform();
+	      
+	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+	       builder = new Actions(getDriver());
+	      builder.moveToElement(element).release().perform();
+	   
+	      
 		je.executeScript("window.scrollBy(0,3000)");
 		je.executeScript("window.scrollBy(5000,0)");
 		je.executeScript("window.scrollTo(document.body.scrollHeight,0)");
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[text()='Direct Parent']")),"Direct Parent");
-		WebElement element = getDriver().findElement(By.xpath("//*[text()='Direct Parent Relation Date']"));
+		 element = getDriver().findElement(By.xpath("//*[text()='Direct Parent Relation Date']"));
 		je.executeScript("arguments[0].scrollIntoView();",element);
 
 		element = getDriver().findElement(By.xpath("//*[text()='Is Sponsor']"));
@@ -4390,7 +4403,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='header_ix_accountstatus.fieldControl-option-set-select']"))),acountStatus,"Account Status");
 		return this;
 	}
+	
+	//Change Account Status
+		public MemberFormPage selectAccountStatusdropdown(String acountStatus) throws InterruptedException {
+			Thread.sleep(2000);
+			//Wave 2023 update
+			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']")))),acountStatus,"Account Status");
+			verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']"))),acountStatus,"Account Status");
+			return this;
+		}
 
+	
+	
 	//Verify no records found error message in add membership provider
 	public MemberFormPage verifyNoRecordsFoundMsgInAddMP() throws InterruptedException {
 		Thread.sleep(3000);
