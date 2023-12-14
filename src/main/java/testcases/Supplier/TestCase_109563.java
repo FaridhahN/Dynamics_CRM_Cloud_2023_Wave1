@@ -5,14 +5,14 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_ 9200:Cloud- Verify new Supplier Diversity Types and Sub Classifications are available
+// TFS ID_109563:_Verify whether following 'Sub Classification Types' are available for Supplier Types-'Disabled Business Enterprise', 'Service Disabled Veteran', 'Women Owned'.
 
 
-public class TestCase_9200 {
+public class TestCase_109563 {
 
 
 	@Test
-	public void verifySupplierDiversityInformation(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifySubclassificationtypesOnDiversityInfo(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Access Login Page		
 		new LoginPage()
@@ -28,31 +28,13 @@ public class TestCase_9200 {
 
 		//Search Existing Account using CRM#
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
-		//.selectAllSupplierView()
-
+		
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
 
 
 		//Add New Diversity Information
-		.selectDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType", sDataSheetName))
-		.verifyMinorityOwndSubClassificationOptions()
-		.addMinorityOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
-				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-				(DataInputProvider.getCellData_ColName(iRowNumber, "subClassification", sDataSheetName)))
-		.addNewDiversityInfo()
-		.verifyVeteranOwndSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType1", sDataSheetName))
-		.addVeteranOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType1", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-				(DataInputProvider.getCellData_ColName(iRowNumber, "subClassification1", sDataSheetName)))
-		.addNewDiversityInfo()
-		.addLGBTOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
-		.addNewDiversityInfo()
-		.addSmallBusinesDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName),
-				DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName))
+		.chooseRelatedDiversityInformation()
 		.addNewDiversityInfo()
 		.verifyWomenOwndSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType2", sDataSheetName))
 		.addWomenOwndDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType2", sDataSheetName),
