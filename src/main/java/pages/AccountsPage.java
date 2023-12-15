@@ -250,6 +250,21 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return new MemberFormPage();
 	}
 
+	//Select member account from Global search results -06/14/2023
+		public  ContactsPage selectContactFromSearchResults(String InnovatixID) throws InterruptedException {	
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
+			if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
+				getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
+			}
+			Thread.sleep(4000);
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]"))).perform();
+			doubleClick(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]")),"Search Result Record");
+			Thread.sleep(2500);
+			return new ContactsPage();
+		}	
+
 
 	//Select member account from Global search results -06/14/2023
 	public  SupplierFormPage selectSupplierAccountFromSearchResults(String crmNumberInput) throws InterruptedException {	

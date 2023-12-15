@@ -82,9 +82,8 @@ public class TestCase_8751 {
 		// 3.Open the Contact account association and update the relationship end date
 		// and terminated reason as "Terminated" on the contact account association then
 		// save it
-		.typeContactRelationshipEndDate(
-				DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
-
+		.typeContactRelationshipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
+				
 		// choose termination reason
 		.chooseContactTerminationReason(
 				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
@@ -98,7 +97,7 @@ public class TestCase_8751 {
 
 		.clickContactJobFunctionFromRelated()
 
-		.doubleClickOnJobFunction()
+		.doubleClickOnActiveJobFunction()
 
 		// Check job function
 		.verifyJobFunctionTerminationReason(

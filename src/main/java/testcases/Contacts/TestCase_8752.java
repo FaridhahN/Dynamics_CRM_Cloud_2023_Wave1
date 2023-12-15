@@ -112,7 +112,7 @@ public class TestCase_8752 {
 
 		.clickContactJobFunctionFromRelated()
 
-		.doubleClickOnJobFunction()
+		.doubleClickOnActiveJobFunction()
 
 		// Verify job function termination status
 		.verifyJobFunctionTerminationReason(
