@@ -33,7 +33,7 @@ public class TestCase_8947 {
 		.clickCAAFromRelated()
 		.doubleClickOnCAARecordunderContact(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName))
 
-		.typeContactRelationshipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))
+		.typeContactRelationshipEndDate()
 		.clickSaveAfterTerminationCAA()
 		
 		.verifyCaaRelationshipEndDateIsNotNull(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))

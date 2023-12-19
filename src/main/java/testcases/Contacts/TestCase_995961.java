@@ -5,12 +5,11 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-// TFS ID_828713:_Test case 11176: Verify when Contact's Contact Account Association is ended , Record Change Status changes to 'Needs Approval' using Supplier
-
-public class TestCase_828713 {
+// TFS ID_995961:_Test case 11176: Limited Member_Verify when Contact's Contact Account Association is ended , Record Change Status changes to 'Needs Approval' using Limited Member
+public class TestCase_995961 {
 
 	@Test
-	public void verifyCAANeedsApprovalBySupplier(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void verifyCAANeedsApprovalByLM(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -25,7 +24,7 @@ public class TestCase_828713 {
 				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
 		// Primary Account
-		.selectPrimaryAccountByClickingOnSearchLensIcon("Alice June Savage, MD")
+		.selectPrimaryAccountByClickingOnSearchLensIcon("Amal Hovhanisyan")
 
 		// Save the record
 		.clickSave()
@@ -43,6 +42,8 @@ public class TestCase_828713 {
 
 		.clickCAAFromRelated()
 		.doubleClickOnCAARecord()
+		
+		
 
 		//CAA End Date
 		.typeContactRelationshipEndDate()
@@ -51,7 +52,6 @@ public class TestCase_828713 {
 		//Verify Record Change Status =Needs Approval
 		.clickSummaryTab()
 		.verifyRecordChangeStatus("Needs Approval");
-		
 		
 		//Data Reset Not Required
 

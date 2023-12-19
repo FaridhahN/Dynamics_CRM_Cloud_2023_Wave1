@@ -82,7 +82,7 @@ public class TestCase_8751 {
 		// 3.Open the Contact account association and update the relationship end date
 		// and terminated reason as "Terminated" on the contact account association then
 		// save it
-		.typeContactRelationshipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
+		.typeContactRelationshipEndDate()
 				
 		// choose termination reason
 		.chooseContactTerminationReason(

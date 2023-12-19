@@ -5,12 +5,11 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-// TFS ID_828713:_Test case 11176: Verify when Contact's Contact Account Association is ended , Record Change Status changes to 'Needs Approval' using Supplier
-
-public class TestCase_828713 {
+// TFS ID_828710:_Test case 11248: Cloud : Supplier_Verify change in 'Receive all Communications' field of a Contact Account Association changes Record Change Status as 'Needs Approval'
+public class TestCase_828710 {
 
 	@Test
-	public void verifyCAANeedsApprovalBySupplier(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void verifyCAANeedsApprovalWhenReceiveAllCommIsChanged(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -25,7 +24,7 @@ public class TestCase_828713 {
 				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
 		// Primary Account
-		.selectPrimaryAccountByClickingOnSearchLensIcon("Alice June Savage, MD")
+		.selectPrimaryAccountByClickingOnSearchLensIcon("Anna M Ramirez")
 
 		// Save the record
 		.clickSave()
@@ -43,15 +42,16 @@ public class TestCase_828713 {
 
 		.clickCAAFromRelated()
 		.doubleClickOnCAARecord()
+		
+		
 
-		//CAA End Date
-		.typeContactRelationshipEndDate()
+		//Change Receive All Communications
+		.chooseReceiveAllCommunicationsOnCAA("No")
 		.clickSaveAndCloseInCAA()
 
 		//Verify Record Change Status =Needs Approval
 		.clickSummaryTab()
 		.verifyRecordChangeStatus("Needs Approval");
-		
 		
 		//Data Reset Not Required
 

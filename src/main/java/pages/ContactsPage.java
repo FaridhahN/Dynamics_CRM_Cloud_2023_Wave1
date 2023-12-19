@@ -1,7 +1,9 @@
 package pages;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -91,10 +93,13 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// type the contact first name and last name
 	public ContactsPage typeContactName(String firstName, String lastName) throws InterruptedException {
 		Thread.sleep(3000);
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String executiondate = dateFormat.format(date);
 		// Type first name
 		click(getDriver().findElement(
-				By.xpath("//*[@data-id='fullname_compositionLinkControl_firstname.fieldControl-text-box-text']")),
-				"First Name");
+				By.xpath("//*[@data-id='fullname_compositionLinkControl_firstname.fieldControl-text-box-text']"))
+				,"First Name");
 		Thread.sleep(2000);
 		type(((getDriver().findElement(
 				By.xpath("//*[@data-id='fullname_compositionLinkControl_firstname.fieldControl-text-box-text']")))),
@@ -107,7 +112,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		type(((getDriver().findElement(
 				By.xpath("//*[@data-id='fullname_compositionLinkControl_lastname.fieldControl-text-box-text']")))),
-				lastName, "Last Name");
+				lastName+ "_" + executiondate, "Last Name");
 
 		return this;
 	}
@@ -115,7 +120,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// select the primary account
 	public ContactsPage selectPrimaryAccount(String primaryAccount) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
-		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Account");
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
 		//Thread.sleep(55000);
 
@@ -138,13 +143,38 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
 	}
+	
+	
+	//Select Primary Account through Search Icon
+	
+	public ContactsPage selectPrimaryAccountByClickingOnSearchLensIcon(String pa) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
+		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account Search Icon");
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_infoContainer']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_infoContainer']/span[contains(@data-id,'parentcustomerid.fieldControl-name0_0_')]"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 1; i <=rowList.size(); i++) {
+			String primaryacc = getDriver().findElement(By.xpath("(//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_infoContainer']/span[contains(@data-id,'parentcustomerid.fieldControl-name0_0_')])["+i+"]")).getText();
+			System.out.println(primaryacc);
+			if (primaryacc.equals(pa)) {
+				WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(80));
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_')]")));
+				click(getDriver().findElement(By.xpath("(//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_infoContainer']/span[contains(@data-id,'parentcustomerid.fieldControl-name0_0_')])["+i+"]")),pa);
+				break;				
+			}
+		}
+		return this;
+	}
 
 	// Click Save button in contact summary page
 	public ContactsPage clickSave() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Save']")),
 				"Save");
 		Thread.sleep(5000);
-		Thread.sleep(10000);
+		Thread.sleep(5000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+		System.out.println(saveStatus);
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}
 
@@ -203,15 +233,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// verify contact record status
 	public ContactsPage verifyRecordChangeStatus(String recordChangeStatus) throws InterruptedException {
 		String recordStatusinUI = getAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),
-				"title", "Record Status");
+				getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),
+				"title", "Record Change Status");
 		if (recordStatusinUI.equalsIgnoreCase(recordChangeStatus)) {
 
-			setReport().log(Status.PASS, "Record Status " + recordStatusinUI + " is displayed right",
+			setReport().log(Status.PASS, "Record Change Status " + recordStatusinUI + " is displayed as expected",
 					screenshotCapture());
 
 		} else {
-			setReport().log(Status.FAIL, "Record Status " + recordStatusinUI + " is not displayed right",
+			setReport().log(Status.FAIL, "Record Change Status " + recordStatusinUI + " is NOT displayed as expected",
 					screenshotCapture());
 			Driver.failCount++;
 		}
@@ -290,6 +320,21 @@ public class ContactsPage extends WebDriverServiceImpl {
 				contactEndDate, "Contact End Date");
 		return this;
 	}
+	
+	// choose Receive All Communications on CAA
+		public ContactsPage chooseReceiveAllCommunicationsOnCAA(String receiveAllComm) throws InterruptedException {
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")),
+					"Record Status");
+			selectDropDownUsingVisibleText(
+					((getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")))),
+					receiveAllComm, "Receive All Communications");
+			Thread.sleep(3000);
+//			verifyExactText(getDriver().findElement(By.xpath("//*[contains(@id,'ix_receiveallcommunications.fieldControl-checkbox-select')][@value='"+receiveAllComm+"']")),
+//					receiveAllComm, "Receive All Communications");
+			return this;
+
+		}
 
 	// Click back arrow across all pages
 	public ContactsPage clickGoBack() throws InterruptedException {
@@ -455,10 +500,13 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}
 
 	// provide contact relationship end date 
-	public ContactsPage typeContactRelationshipEndDate(String contactRelationshipEndDate) {
+	public ContactsPage typeContactRelationshipEndDate() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String enddate = dateFormat.format(date);
 		type(((getDriver()
 				.findElement(By.xpath("//*[@data-id='ix_relationshipenddate.fieldControl-date-time-input']")))),
-				contactRelationshipEndDate, "Relationship End Date");
+				enddate, "Relationship End Date");
 		return this;
 	}
 
