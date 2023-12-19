@@ -1504,7 +1504,86 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+
+	public MemberFormPage verifyParticipationType() {
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select participationList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Participation Type']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> participationType =participationList.getOptions();	
+
+		for(int i=0;i<participationType.size();i++) {
+
+			selectoptions.add(participationType.get(i).getText());
+
+		}
+		//Participation type should not have Provider Select : MD
+		assertTrue(!(selectoptions.contains("Provider Select: MD")));
+		return this;
+	}
 	
+	public MemberFormPage verifyParticipationTypeOption(String participationTypeOption) {
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select participationList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Participation Type']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> participationType =participationList.getOptions();	
+
+		for(int i=0;i<participationType.size();i++) {
+
+			selectoptions.add(participationType.get(i).getText());
+
+		}
+		//Participation type should not have Provider Select : MD
+		assertTrue(selectoptions.contains(participationTypeOption));
+		return this;
+	}
+
+
+	public MemberFormPage verifyProviderSelectOption() throws InterruptedException {
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select participationType= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")));
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> option =participationType.getOptions();	
+
+		List<String> expectdoption = Arrays.asList("--Select--","Provider Select: MD","Provider Select: MD Grandfathered");		
+
+		
+		for(int i=0;i<option.size();i++) {
+
+			selectoptions.add(option.get(i).getText());
+
+		}
+		
+		if(selectoptions.containsAll(expectdoption))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + option + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + option + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+
+		return this;
+
+	}
+	
+	//Select Participation type
+		public MemberFormPage selectProviderSelectOption(String participationType) throws InterruptedException {
+			//Wave 2023 update to scroll
+			//		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+			//		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']"));
+			//		je.executeScript("arguments[0].scrollIntoView(true);",element);f
+			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type");
+			Thread.sleep(2000);
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type"); 
+			return this;
+		}
+
 	public MemberFormPage navigateToDoNotVerifyMEF() {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
@@ -1670,7 +1749,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),street1, "Street1");
 		return this;
 	}
-	
+
 	public MemberFormPage verifystreet1(String street) {
 		assertTrue(!((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']"))).getAttribute("value").contentEquals(street)));
 		return this;
@@ -2373,7 +2452,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage selectFBOOverrideMemberEntryForm(String selectMemberOverride) throws InterruptedException {
-		NavigatetoMiscellaneousTab();
+		//NavigatetoMiscellaneousTab();
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Manual Override')]")),"FBO Manual override");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO Manual Override']")),selectMemberOverride,"MemberOverride");
 		Thread.sleep(2000);
@@ -4100,11 +4179,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify Supplier Record below External ID
 	public MemberFormPage verifySupplierRecord() throws InterruptedException {
-	
+
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']//parent::div/following-sibling::div/div[@data-id='ix_supplierrecordid']")).size(), "Supplier Record");
 		return this;
 	}
-	
+
 	//Select sub accounts from Related
 	public MemberFormPage selectSubaccount() throws InterruptedException {	
 		Thread.sleep(3000);
@@ -4128,35 +4207,35 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 
-		 WebElement element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	      Actions builder = new Actions(getDriver());
-	      builder.moveToElement(element).clickAndHold().perform();
-	      
-	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	       builder = new Actions(getDriver());
-	      builder.moveToElement(element).perform();
-	      
-	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	       builder = new Actions(getDriver());
-	      builder.moveToElement(element).release().perform();
-	      
-	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	       builder = new Actions(getDriver());
-	      builder.moveToElement(element).clickAndHold().perform();
-	      
-	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	       builder = new Actions(getDriver());
-	      builder.moveToElement(element).perform();
-	      
-	       element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
-	       builder = new Actions(getDriver());
-	      builder.moveToElement(element).release().perform();
-	   
-verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_parentrelationship']/following-sibling::div[@col-id='ix_directparentrelationdate']")).size(), "dirvetionparent relatio date");
-verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_topparentrelationship']/following-sibling::div[@col-id='ix_issponsor']")).size(), "is sponsor");
-verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_issponsor']/following-sibling::div[@col-id='ix_sponsor']")).size(), "sponsor");
+		WebElement element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		Actions builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
 
-return this;
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_parentrelationship']/following-sibling::div[@col-id='ix_directparentrelationdate']")).size(), "dirvetionparent relatio date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_topparentrelationship']/following-sibling::div[@col-id='ix_issponsor']")).size(), "is sponsor");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_issponsor']/following-sibling::div[@col-id='ix_sponsor']")).size(), "sponsor");
+
+		return this;
 
 	}
 	//search in sub account
@@ -4410,18 +4489,18 @@ return this;
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='header_ix_accountstatus.fieldControl-option-set-select']"))),acountStatus,"Account Status");
 		return this;
 	}
-	
-	//Change Account Status
-		public MemberFormPage selectAccountStatusdropdown(String acountStatus) throws InterruptedException {
-			Thread.sleep(2000);
-			//Wave 2023 update
-			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']")))),acountStatus,"Account Status");
-			verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']"))),acountStatus,"Account Status");
-			return this;
-		}
 
-	
-	
+	//Change Account Status
+	public MemberFormPage selectAccountStatusdropdown(String acountStatus) throws InterruptedException {
+		Thread.sleep(2000);
+		//Wave 2023 update
+		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']")))),acountStatus,"Account Status");
+		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//select[@aria-label='Account Status']"))),acountStatus,"Account Status");
+		return this;
+	}
+
+
+
 	//Verify no records found error message in add membership provider
 	public MemberFormPage verifyNoRecordsFoundMsgInAddMP() throws InterruptedException {
 		Thread.sleep(3000);
@@ -5023,7 +5102,11 @@ return this;
 		return this;
 	}
 
-
+public MemberFormPage selectFBOManualOverride(String FBOManualOverride) {
+	selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_fbomanualoverride.fieldControl-checkbox-select']")), FBOManualOverride, "FBOManualOverride");
+	
+	return this;
+}
 
 	//Verify FBO Manual Override
 	public MemberFormPage VerifyFBOManualOverride(String FBOManualOverride) {
@@ -5242,7 +5325,7 @@ return this;
 	public MemberFormPage verifyUnsavedMEssage() {
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//h1[@aria-label='Unsaved changes']")).size(), "UnsavedMessage");
 		return this;
-		
+
 	}
 
 	//Verify account does not have one active premier membership error
@@ -8121,7 +8204,6 @@ return this;
 		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Receive Direct Mail']")), "Corporate");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "CAMS");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new']")), "Do not roaster");
-
 		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")), "Received email");
 		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Record Change Status']")), "Received email");
 		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_issponsor.fieldControl-checkbox-select']")), "Is sponsor");
