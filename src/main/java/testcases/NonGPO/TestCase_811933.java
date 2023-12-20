@@ -1,17 +1,16 @@
-package testcases.BusinessClassification;
+package testcases.NonGPO;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964307:_964307:Verify whether 'Correctional Healthcare' COT is available while creating new Account.
+//TFS ID_811933:_811933:Terminate a non GPO member
 
-public class TestCase_964307 {
+public class TestCase_811933 {
 
 
 	@Test
-	public void verifyCOT(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void terminate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -26,16 +25,11 @@ public class TestCase_964307 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 
-
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getDPData()
-
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
 		//3. Account Name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName)+1)
 
 		//Click on save 			
 		.clickSave() 
@@ -61,8 +55,9 @@ public class TestCase_964307 {
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
 
+
 		//Participation Type = Standard
-		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+		.selectParticipationType("Cellular Services Only")
 
 
 		//Direct Parent Entity Code = 673415
@@ -85,14 +80,12 @@ public class TestCase_964307 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
-
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -100,24 +93,6 @@ public class TestCase_964307 {
 		//Click on Save 
 		.clickSave() 
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		//.clickLOBSaveAndClose()
-		.clickLOBSaveAndCloseDev()
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -131,6 +106,8 @@ public class TestCase_964307 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
+		.clickGeneralTab()
+
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
 
@@ -140,7 +117,31 @@ public class TestCase_964307 {
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		
+		//9.Move the record status to draft and save  ***** Record moved to draft 
+		.chooseRecordStatusDraft()
+
+		//Click on Save 
+		.clickSave() 
+
+		//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened 
+		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		//.doubleClickOnNationalMembership()
+
+		//11.Provide end date = Any future date **** Account should be saved successfully 
+		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+
+		// End reason = Anything from dropdown,
+		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
+
+		// then save
+		.clickMembershipSaveAndClose()
+
+		//12.Verify the account status  ***** Account status should become terminated 
+		.pageRefresh()
+		.verifyAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "accountStatus", sDataSheetName))
+
+		//13.Verify Premier end date **** Premier end date should be populated with the same date  as National membership end date 
+		.verifyPremierEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		;
 	}
 }

@@ -5,10 +5,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964308:_964308:Verify whether user able to update newly created COTs 'Prison/Jail' and 'Correctional Healthcare' in an existing account.
+//TFS ID_978018:_978018:Verify whether on update COT - 'Charity', Business Classification 'Non Healthcare' is getting auto populated.
 
-
-public class TestCase_964308 {
+public class TestCase_978027 {
 
 
 	@Test
@@ -30,23 +29,44 @@ public class TestCase_964308 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.chooseMemberForm()
+
+		//Change the record status to draft
+		.navigateToDoNotVerify()
+		.navigateToAG()
+
+		.chooseRecordStatusDraft()
+		.clickSave()
+
 		//navigate To Business classification
+		.NavigateToSystemTab()
+		.clickGeneralTab()
 		.navigateToBusinessClassification()
 
-		//Clear class of Trade
+		//Clear class of Trade and select the COT
 		.clearClassOfTrade()
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
+		//Change the record status to published
+		.navigateToDoNotVerify()
+		.navigateToAG()
 
-		//Clear class of Trade and select second COT
+		.chooseRecordStatusPublished()
+		.clickSave()
+
+
+		//Data Reset
+		//navigate To Business classification
+		.NavigateToSystemTab()
+		.clickGeneralTab()
+		.navigateToBusinessClassification()
+
+		//Clear class of Trade and select the COT
 		.clearClassOfTrade()
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade1", sDataSheetName))
 		//Business Classification = Auto populated
-		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification1", sDataSheetName))
-
-
+		.clickSave()
 
 
 		;

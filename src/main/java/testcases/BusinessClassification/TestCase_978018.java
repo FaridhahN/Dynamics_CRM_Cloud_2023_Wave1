@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_978018:_978018:Verify whether on update COT - 'Charity', Business Classification 'Non Healthcare' is getting auto populated.
+//TFS ID_978027:_978027:Verify whether on update COT - 'Meals on Wheels', Business Classification 'Non Healthcare' is getting auto populated. 
 
 public class TestCase_978018 {
 

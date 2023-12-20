@@ -1,17 +1,16 @@
-package testcases.BusinessClassification;
+package testcases.NonGPO;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_964307:_964307:Verify whether 'Correctional Healthcare' COT is available while creating new Account.
+//TFS ID_44402:_44402:Create a new Non-GPO Member
 
-public class TestCase_964307 {
+public class TestCase_44402 {
 
 
 	@Test
-	public void verifyCOT(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void createNONGPO(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -26,16 +25,11 @@ public class TestCase_964307 {
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
 
-
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getDPData()
-
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
 		//3. Account Name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName)+1)
 
 		//Click on save 			
 		.clickSave() 
@@ -60,9 +54,10 @@ public class TestCase_964307 {
 
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
-
+		
+		
 		//Participation Type = Standard
-		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+		.selectParticipationType("Cellular Services Only")
 
 
 		//Direct Parent Entity Code = 673415
@@ -85,14 +80,12 @@ public class TestCase_964307 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
-
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -100,24 +93,6 @@ public class TestCase_964307 {
 		//Click on Save 
 		.clickSave() 
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		//.clickLOBSaveAndClose()
-		.clickLOBSaveAndCloseDev()
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -130,6 +105,15 @@ public class TestCase_964307 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+
+		.clickLineOfBusinesses()
+
+		//Invalid Method
+		//.verifyFoodServiceLOBisNotDisplayed()
+
+		.verifyLOBIsNotPresent(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
+
+		.clickGeneralTab()
 
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
