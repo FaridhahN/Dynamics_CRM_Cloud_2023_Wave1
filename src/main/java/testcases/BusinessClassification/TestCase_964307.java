@@ -1,4 +1,4 @@
-package testcases.Member;
+package testcases.BusinessClassification;
 
 import org.testng.annotations.Test;
 
