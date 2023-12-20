@@ -177,6 +177,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}
+	
+	// Click Save button in contact summary page
+		public ContactsPage clickSaveWithoutAssertion() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Save']")),
+					"Save");
+			Thread.sleep(3000);
+			return this;
+		}
 
 	// check if Innovatix contact id is created
 	public ContactsPage isInnovatixContactIDDisplayed() throws InterruptedException {
@@ -184,15 +192,24 @@ public class ContactsPage extends WebDriverServiceImpl {
 		String innovatixContactID = getAttribute(
 				getDriver().findElement(By.xpath("//*[@data-id='ix_innovatixcontactid.fieldControl-text-box-text']")),
 				"value", "Innovatix Contact Id");
+		
+		if (innovatixContactID==null) {
+			setReport().log(Status.FAIL, "Value is blank in Innovatix Contact ID"	,screenshotCapture());
+			Driver.failCount++;		
+		}
+		else {
 
-		setReport().log(Status.PASS, "Innovatix Contact ID " + innovatixContactID + " is displayed",
+			setReport().log(Status.PASS, "Innovatix Contact ID " + innovatixContactID + " is displayed",
 				screenshotCapture());
+		}
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_innovatixcontactid.fieldControl-text-box-text']")), "Innovatix Contact ID");
 		try {
 			DataInputProvider.setCellData(innovatixContactID.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",
 					Driver.properties.getProperty("DriverSheetName"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return this;
 	}
 
