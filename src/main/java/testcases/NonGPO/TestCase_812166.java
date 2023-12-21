@@ -161,10 +161,10 @@ public class TestCase_812166 {
 
 				// Choose Membership type 
 				.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-				.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider2", sDataSheetName))
+				.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 				//Provide any start date and click on save
-				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
+				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 
 				//Click on membership save and close
 				.clickQuickCreateMembershipSaveAndClose()			
@@ -182,7 +182,7 @@ public class TestCase_812166 {
 
 				//20.Verify the Premier start date **** Premier start date should be Acurity's start date 
 				.pageRefresh()
-				.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
+				.verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 
 				//21.Verify Premier end date ***** Premier end date should be blank 
 				.pageRefresh()

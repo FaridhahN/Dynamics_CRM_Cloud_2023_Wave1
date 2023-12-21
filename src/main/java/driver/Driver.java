@@ -206,8 +206,8 @@ public class Driver extends PreAndPost{
 				sTestClassName="testcases.AccountNumbersRemitra.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 				
-			}else if(sCategory.equalsIgnoreCase("NONGPO")) {
-				sTestClassName="testcases.NONGPO.".concat(sTestClassName);
+			}else if(sCategory.equalsIgnoreCase("NonGPO")) {
+				sTestClassName="testcases.NonGPO.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 			}
 
