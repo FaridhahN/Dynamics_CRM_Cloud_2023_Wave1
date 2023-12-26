@@ -408,6 +408,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectAccountType(String accountType) throws InterruptedException{
 		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+		}
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
+		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
@@ -628,6 +639,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	
 	//select Direct parent
 	public MemberFormPage selectDirectParentWithoutEnitiy(String directParent) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
@@ -1521,7 +1533,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		assertTrue(!(selectoptions.contains("Provider Select: MD")));
 		return this;
 	}
-	
+
 	public MemberFormPage verifyParticipationTypeOption(String participationTypeOption) {
 		ArrayList<String> selectoptions=new ArrayList<String>();
 		Select participationList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Participation Type']")));		
@@ -1549,13 +1561,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		List<String> expectdoption = Arrays.asList("--Select--","Provider Select: MD","Provider Select: MD Grandfathered");		
 
-		
+
 		for(int i=0;i<option.size();i++) {
 
 			selectoptions.add(option.get(i).getText());
 
 		}
-		
+
 		if(selectoptions.containsAll(expectdoption))
 		{		
 			Thread.sleep(3000);
@@ -1571,18 +1583,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
 	//Select Participation type
-		public MemberFormPage selectProviderSelectOption(String participationType) throws InterruptedException {
-			//Wave 2023 update to scroll
-			//		JavascriptExecutor je = (JavascriptExecutor) getDriver();
-			//		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']"));
-			//		je.executeScript("arguments[0].scrollIntoView(true);",element);f
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type");
-			Thread.sleep(2000);
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type"); 
-			return this;
-		}
+	public MemberFormPage selectProviderSelectOption(String participationType) throws InterruptedException {
+		//Wave 2023 update to scroll
+		//		JavascriptExecutor je = (JavascriptExecutor) getDriver();
+		//		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']"));
+		//		je.executeScript("arguments[0].scrollIntoView(true);",element);f
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type");
+		Thread.sleep(2000);
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")),participationType,"Participation type"); 
+		return this;
+	}
 
 	public MemberFormPage navigateToDoNotVerifyMEF() {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
@@ -5102,11 +5114,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-public MemberFormPage selectFBOManualOverride(String FBOManualOverride) {
-	selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_fbomanualoverride.fieldControl-checkbox-select']")), FBOManualOverride, "FBOManualOverride");
-	
-	return this;
-}
+	public MemberFormPage selectFBOManualOverride(String FBOManualOverride) {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_fbomanualoverride.fieldControl-checkbox-select']")), FBOManualOverride, "FBOManualOverride");
+
+		return this;
+	}
 
 	//Verify FBO Manual Override
 	public MemberFormPage VerifyFBOManualOverride(String FBOManualOverride) {
