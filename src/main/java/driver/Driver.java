@@ -210,7 +210,10 @@ public class Driver extends PreAndPost{
 				sTestClassName="testcases.NonGPO.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 			}
-
+			else if(sCategory.equalsIgnoreCase("BrandingApprovals")) {
+				sTestClassName="testcases.BrandingApprovals.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}
 				
 				
 			

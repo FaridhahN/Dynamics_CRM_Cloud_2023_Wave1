@@ -21,18 +21,8 @@ public class TestCase_828714 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 		.selectContactFromSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 		
-//		.clickNewOnContactsPage()
-//
-//		// 3. Provide First name = Any & Last name = Any
-//		.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
-//				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
-//
-//		// Primary Account
-//		.selectPrimaryAccountByClickingOnSearchLensIcon("Augustus Gay")
-
-
-							
-		// 5. Change the record Status
+						
+		// Change the record Status
 		.chooseRecordStatus("--Select--")
 
 		// Click on Save

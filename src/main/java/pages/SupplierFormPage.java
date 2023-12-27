@@ -881,6 +881,24 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);	
 		return this;
 	}
+	
+	public SupplierFormPage SelectRelatedBrandingApprovals() throws InterruptedException {
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Branding Approvals']")),"Branding Approvals");
+		Thread.sleep(4000);
+		return this;
+	}
+	
+	public SupplierFormPage verifyAddNewBrandingApprovalButton() {
+		List<WebElement> addNewBrandingApprvl=getDriver().findElements(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.AddNewStandard']"));
+		verifyElementisNotDisplayed(addNewBrandingApprvl.size(), "+ New Branding Approval");
+		return this;
+	}
 
 	public SupplierFormPage typeAccountName(String accountName) {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
@@ -1135,8 +1153,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage verifyMemberAttribute() {
-		List<WebElement> dpmatch=getDriver().findElements(By.xpath("//h3[contains(text(),'MEMBER ATTRIBUTES')]"));
-		verifyElementisNotDisplayed(dpmatch.size(), "Member Attributes");
+		List<WebElement> memAttributes=getDriver().findElements(By.xpath("//h3[contains(text(),'MEMBER ATTRIBUTES')]"));
+		verifyElementisNotDisplayed(memAttributes.size(), "Member Attributes");
 		return this;
 	}
 
