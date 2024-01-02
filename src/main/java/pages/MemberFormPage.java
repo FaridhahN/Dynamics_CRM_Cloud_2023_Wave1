@@ -3493,6 +3493,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[text()='Supplier Accounts']")),"Related > Supplier Accounts");
 		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
 		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'ViewSelector') and contains(text(),'Supplier Account Associated View')]")).size(), "View option");
 		return this;
 	}
 
@@ -3530,15 +3531,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Add Supplier Account
 	public MemberFormPage AddSupplierAccount(String supplier, String supplierRep, String purchasingPreference,String memberLevel, String startdate) throws InterruptedException {
 
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier, Lookup']")),"Supplier");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")),"Supplier");
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//input[@placeholder='Look for Supplier']")))),supplier,"Supplier");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")))),supplier,"Supplier");
 		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")),"Supplier");
 
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")),"Supplier Rep");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Rep']")),"Supplier Rep");
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//input[@aria-label='Supplier Rep, Lookup']")))),supplierRep,"Supplier Rep");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Rep']")))),supplierRep,"Supplier Rep");
 		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//li[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_resultsContainer']")),"Supplier Rep");
 
@@ -3595,11 +3596,33 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Navigate to Supplier Account Tab
 	public MemberFormPage navigateToSupplierAccountTab() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Supplier Account']")),"Supplier Account Tab");
-
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//select[@aria-label='Supplier Account Location Type']")).size(), "Supplier Account Location Type");
+		
 		return this;
 
 	}
 
+	//Verify Supplier Account Location Type
+	public MemberFormPage verifySupplierAccountLocationType(){
+		
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select supplierLocationType= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Supplier Account Location Type']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> option =supplierLocationType.getOptions();	
+
+		for(int i=0;i<option.size();i++) {
+
+			selectoptions.add(option.get(i).getText());
+
+		}
+		ArrayList<String> expectedOptions=new ArrayList<>(Arrays.asList("---","Bill To/Sold To","Ship To"));
+		System.out.println(selectoptions);
+		System.out.println(expectedOptions);
+		assertTrue((selectoptions.equals(expectedOptions)), "Supplier Account Location");
+
+		return this;
+	}
 	//Add Supplier Account details
 	public MemberFormPage addSupplierAccount(String Memberlevel, String locationtype, String retailAccount, String portfolio, String Audit, String attachdate, String latestattachDate, String orderDate, String Description) throws InterruptedException {
 
@@ -3623,6 +3646,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//button[@aria-label='New Account Number. Add New Account Number']")),"New Account Numbers");
 		verifIsNoTNullWithText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")),"Account auto populate");
 		verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//select[@aria-label='Account Number Type']")),"Account Number Type");
+		
 		return this;
 
 	}
@@ -4602,6 +4626,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
 
 
+
+		return this;		
+	}
+	
+	public MemberFormPage noMatchforSupplier(String supplier) throws InterruptedException {	
+		
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")),"Supplier");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")))),supplier,"Supplier");
+		Thread.sleep(10000);
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")).size(), "supplier");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(@data-id,'ix_parentaccountid.fieldControl-ix_businessclassification')]")).size(), "supplier");
+	
 
 		return this;		
 	}
@@ -7525,10 +7561,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage verifyAccountNameinAccountNumberPage() {
+		verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@aria-label='Account Number Type']")),"Supplier","Account Number Type");
+		
+		return this;
+	}
+	
 	//Verify the Account Name
 	public MemberFormPage verifyAccountName() {
 
-		verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
+		verifyExactText(getDriver().findElement(By.xpath("//div[@data-i'ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
 		return this;
 	}
 
