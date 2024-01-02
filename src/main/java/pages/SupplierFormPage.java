@@ -20,6 +20,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.AddHasCasting;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -48,7 +49,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 	public SupplierFormPage verifyDocumentsOptionRemovedOnRelatedTab() throws InterruptedException {
 		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
 			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
@@ -60,7 +61,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 	public SupplierFormPage verifyDocumentsTab() throws InterruptedException {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@data-id='tablist-DOCUMENTS']")).size(), "DOCUMENTS TAB");
 		click(getDriver().findElement(By.xpath("//*[@data-id='tablist-DOCUMENTS']")), "DOCUMENTS TAB");
@@ -108,7 +109,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//span[contains(@class,'symbolFont DropdownArrow-symbol')]")),"Dropdown Button");
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Information']")),"Inforamtion Dropdown Button");
+		click(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Information']")),"Information Dropdown Button");
 		Thread.sleep(4000);
 		List<WebElement> element=getDriver().findElements(By.xpath("//button/span[contains(text(),'Discard changes')]"));
 		if(element.size()>0) {
@@ -486,15 +487,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 		return this;
 	}
-	
+
 	//choose related>Diversity Information
-		public SupplierFormPage chooseRelatedDiversityInformation() throws InterruptedException {
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
-			Thread.sleep(4000);		
-			return this;
-		}
+	public SupplierFormPage chooseRelatedDiversityInformation() throws InterruptedException {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		click(getDriver().findElement(By.xpath("(//span[text()='Diversity Information'])[2]")),"Related > Diversity Information");
+		Thread.sleep(4000);		
+		return this;
+	}
 
 	//Verify Diversity Information Associated view
 	public SupplierFormPage diversityInfoAssociatedView() throws InterruptedException {
@@ -591,23 +592,23 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
-	
-	//Choose Active Contracts View
-		public SupplierFormPage chooseActiveContractsView() throws InterruptedException {
 
-			if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
-			{
-				click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
-				Thread.sleep(2000);
-				click(getDriver().findElement(By.xpath("//span[text()='Active Contracts']")),"Active Contracts View");
-				Thread.sleep(2000);
-			}
-				else {
-					//Do Nothing
-				}
-			return this;
-			}
+
+	//Choose Active Contracts View
+	public SupplierFormPage chooseActiveContractsView() throws InterruptedException {
+
+		if (getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")).isDisplayed())
+		{
+			click(getDriver().findElement(By.xpath("//span[@class='symbolFont ChevronDownMed-symbol  ']")),"Contracts View -Down Arrow");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//span[text()='Active Contracts']")),"Active Contracts View");
+			Thread.sleep(2000);
+		}
+		else {
+			//Do Nothing
+		}
+		return this;
+	}
 
 
 	//Verify Active Contracts View
@@ -626,7 +627,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			for(WebElement col : colmns)
 			{
 				String data = col.getText();
-					if (data.isBlank()) {
+				if (data.isBlank()) {
 					System.out.println("Blank Value found in Column Header");
 				}else {
 					actualcolumns.add(data);
@@ -881,33 +882,72 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);	
 		return this;
 	}
-	
+
 	//Choose Existing Branding Approval
-		public SupplierFormPage doubleClickAnyExistingBrandingApproval() throws InterruptedException   {
-			Thread.sleep(4000);
-			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label"));
-			System.out.println("# of Rows Including Header:"+ rowList.size());
-			for (int i = 1; i <=rowList.size(); i++) {
-				String text = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label)["+i+"]")).getText();
-				System.out.println(text);
-				if (text.equals("Use of Company Logo")) {
-					Thread.sleep(3000);
-					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label)["+i+"]")), "Use of Company Logo");
-					Thread.sleep(3000);
-					break;
-					}
-					else if (text.equals("Use of Product Images")) {
-						Thread.sleep(3000);
-						doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label)["+i+"]")), "Use of Product Images");
-						Thread.sleep(3000);	
-					}						
-				}					
+	public SupplierFormPage doubleClickAnyExistingBrandingApproval() throws InterruptedException   {
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 1; i <=rowList.size(); i++) {
+			String text = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label)["+i+"]")).getText();
+			System.out.println(text);
+			if (text.equals("Use of Company Logo")) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_approvaltype']//label)["+i+"]")), "Use of Company Logo");
+				Thread.sleep(3000);
+				break;
+			}
+			else if (text.equals("Use of Product Images")) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label)["+i+"]")), "Use of Product Images");
+				Thread.sleep(3000);	
+				break;
+			}						
+		}					
 
-			return this;					
-		}
+		return this;					
+	}
+	//Verify Branding Approvals Associated View is Displayed
+	public SupplierFormPage verifyBrandingApprvlAssocView() {
+		List<WebElement> brandingAprvlAssocView=getDriver().findElements(By.xpath("//span[text()='Branding Approvals Associated View']"));
+		verifyElementisDisplayed(brandingAprvlAssocView.size(), "Branding Approval Associated View");
+		return this;
+	}
 
-		
+	//click on Branding Approvals Associated View Drop Down
+	public SupplierFormPage clickBrandingApprvlAssocView() {
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Branding Approvals Associated View')]")));			
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Branding Approvals Associated View')]")),"Branding Approval Associated View Drop Down");
+		return this;
+	}
+
+	//click on Branding Approvals Associated View Drop Down
+	public SupplierFormPage selectActiveBrandingApprvlsView() {
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Active Branding Approvals')]")));	
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Active Branding Approvals')]")),"Active Branding Approvals");
+		return this;
+	}
+
+	//click on Branding Approvals Associated View Drop Down
+	public SupplierFormPage selectInactiveBrandingApprvlsView() {
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Inactive Branding Approvals')]")));	
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Inactive Branding Approvals')]")),"Inactive Branding Approvals");
+		return this;
+	}
+
+
+
+	//Verify Added Branding Approval is Displayed
+	public SupplierFormPage verifyAddedBrandingApprvlIsDisplayed(String approvaltype) {
+		List<WebElement> brandingAprvl=getDriver().findElements(By.xpath("//div[text()='" + approvaltype +"']"));
+		verifyElementisDisplayed(brandingAprvl.size(), approvaltype );
+		return this;
+	}
+
 	public SupplierFormPage selectRelatedBrandingApprovals() throws InterruptedException {
 		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
 			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
@@ -919,48 +959,105 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(4000);
 		return this;
 	}
-	
-	public SupplierFormPage verifyAddNewBrandingApprovalButton() {
+	//Branding Approval Button is NOT displayed
+	public SupplierFormPage verifyAddNewBrandingApprovalButtonIsNotDisplayed() {
 		List<WebElement> addNewBrandingApprvl=getDriver().findElements(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.AddNewStandard']"));
 		verifyElementisNotDisplayed(addNewBrandingApprvl.size(), "+ New Branding Approval");
 		return this;
 	}
-	
+
+	//Branding Approval Button is displayed
+	public SupplierFormPage verifyAddNewBrandingApprovalButtonIsDisplayed() {
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.AddNewStandard']")));
+		List<WebElement> addNewBrandingApprvl=getDriver().findElements(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.AddNewStandard']"));
+		verifyElementisDisplayed(addNewBrandingApprvl.size(), "+ New Branding Approval");
+		return this;
+	}
+
+	//Add New Branding Approval
+	public SupplierFormPage clickAddNewBrandingApprovalButton() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.AddNewStandard']")),"Branding Approval");
+		return this;
+	}
+
+	//Choose Start Date of Use
+	public SupplierFormPage typeStartDateOfUse() throws InterruptedException {
+		Thread.sleep(2000);
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String date1= dateFormat.format(date); 
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_startdateofuse.fieldControl-date-time-input']")),date1,"Start Date of Use");
+		return this;
+	}
+
+	//Choose Approval Date
+	public SupplierFormPage typeApprovalDate() throws InterruptedException {
+		Thread.sleep(2000);
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String date2= dateFormat.format(date); 
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaldate.fieldControl-date-time-input']")),date2,"Approval Date");
+		return this;
+	}
+
+	//Choose Approval Type
+	public SupplierFormPage selectApprovalType(String approvaltype) {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaltype.fieldControl-option-set-select']")),approvaltype,"Approval Type");
+		return this;
+	}
+
+	//Save & Close On Branding Approvals
+	public SupplierFormPage clickSaveAndCloseBrandingApprovals() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close Button");
+		Thread.sleep(3000);
+		return this;
+	}
+
+
 	//Deactivate All Branding Approvals
-		public SupplierFormPage deactivateAllBrandingApprovals() throws InterruptedException {
-			Actions a = new Actions(getDriver());
-			a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		//Select All Radio Button
-		public SupplierFormPage clickOnSelectAllRadioButton() throws InterruptedException {
-			Thread.sleep(2500);
-			Actions a = new Actions(getDriver());
-			a.moveToElement(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[3]"))).click().build().perform();
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		//Deactivate Button on Branding Approval
-		public SupplierFormPage verifyDeactivateButtonIsNotDisplayedBrandingApproval() throws InterruptedException {
-			Thread.sleep(2000);
-			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.Deactivate']")).size(),"Deactivate Button");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		
-	//click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
-//		Thread.sleep(3000);
-//		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
-//		Thread.sleep(2000);
-		
+	public SupplierFormPage deactivateAllBrandingApprovals() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@data-icon-name='CheckMark']")));
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Activate All Branding Approvals
+	public SupplierFormPage activateAllBrandingApprovals() throws InterruptedException {
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Activate']")), "Activate Button"); 
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Activate'])[2]")), "Confirm pop up Activate button");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Select All Radio Button
+	public SupplierFormPage clickOnSelectAllRadioButton() throws InterruptedException {
+		Thread.sleep(2500);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[3]"))).click().build().perform();
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Deactivate Button on Branding Approval
+	public SupplierFormPage verifyDeactivateButtonIsNotDisplayedBrandingApproval() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_branding|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_branding.Deactivate']")).size(),"Deactivate Button");
+		Thread.sleep(2000);
+		return this;
+	}
+
 
 	public SupplierFormPage typeAccountName(String accountName) {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
@@ -986,7 +1083,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
 	}
-	
+
 	public SupplierFormPage verifyContractsOption() throws InterruptedException {
 		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
 			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
@@ -998,7 +1095,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 	public SupplierFormPage clearContractEffectiveDate() throws InterruptedException {
 		Thread.sleep(1000);
 		WebElement ele =getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']"));
@@ -1009,7 +1106,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		clickSave();
 		return this;
 	}	
-	
+
 
 	public SupplierFormPage recordChangeStatus(String recordChangeStatus) {
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_recordchangestatus.fieldControl-option-set-select']"))),recordChangeStatus," Record Change Status");
@@ -1172,7 +1269,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		//click(getDriver().findElement(By.xpath("//*[@data-id='edit-form-save-btn']")),"Save");
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
 		Thread.sleep(3000);
-		
+
 		List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
 
 		if(ignoreMessage.size()>0) {
@@ -1185,7 +1282,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 				click(getDriver().findElement(By.xpath("//span[contains(text(),'Save and Continue')]")),"Save and continue");
 			}
 			else {		
-					
+
 
 			}
 
@@ -1197,7 +1294,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 			return this;    
 
-			
+
 		}
 		catch(Exception e)
 		{
@@ -1488,7 +1585,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 	public SupplierFormPage contractEffectiveDateLock() throws InterruptedException {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
@@ -1497,7 +1594,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
 		return this;
 	}
-	
+
 	public SupplierFormPage contractEffectiveDateIsEditable(String contractEffectiveDate) throws InterruptedException {
 		Thread.sleep(1500);
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
@@ -1509,7 +1606,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);	
 		return this;
 	}
-	
+
 	public SupplierFormPage contractEffectiveDateIsDateInputOnly(String invalidInputText, String errorMessage) throws InterruptedException {
 		Thread.sleep(1500);
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
@@ -1524,8 +1621,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
-	
+
+
 	public SupplierFormPage recordStatusLock() throws InterruptedException {
 		Thread.sleep(3000);		
 		//verifyDisplayed(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus-locked-icon']")),"Record Status Lock");
@@ -1825,7 +1922,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"Country");
 		return this;
 	}
-	
+
 	public SupplierFormPage navigateToPrimaryContact() {
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),"City");
@@ -1875,7 +1972,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyExactText((getDriver().findElement(By.xpath("//*[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_selected_tag']"))),TopParent,"Top Parent");
 		return this;
 	}
-	
+
 	public SupplierFormPage verifyDonNotverifydefault() throws IOException {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_externaladdressid']/parent::div//preceding-sibling::div/div[@data-id='ix_donotverifyaddress']")).size(), "Don not verify element");
 		String defaultvale=getText(getDriver().findElement(By.xpath("//select[@aria-label='Do Not Verify Address']/option[@data-selected='true']")));
@@ -2246,8 +2343,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	//Deactivate All Diversity Info
 	public SupplierFormPage deactivateAllDiversityInfo() throws InterruptedException {
-//		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
-//		wait.until(ExpectedConditions.elementToBeSelected(By.xpath("//i[@data-icon-name='CheckMark']")));
+		//		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
+		//		wait.until(ExpectedConditions.elementToBeSelected(By.xpath("//i[@data-icon-name='CheckMark']")));
 		Thread.sleep(2000);
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
@@ -2466,28 +2563,28 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 	//Verify Error message is displayed
-		public SupplierFormPage verifyBannerErrorText(String errormsg) throws InterruptedException {
-			Thread.sleep(3000);
-			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='warningNotification']")),errormsg,"Error Banner on Top");
-			System.out.println(errormsg);
-			Thread.sleep(2000);
-			return this;
-		}
-		
-			//Verify Branding Approvals fields not Editable
-				public SupplierFormPage verifyBrandingApprovalFieldsNotEditable(String accproperty) throws InterruptedException {
-					Thread.sleep(3000);
-					verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_startdateofuse.fieldControl-date-time-input']")),"Start Date of Use");
-					verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaldate.fieldControl-date-time-input']")),"Approval Date");
-					verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaltype.fieldControl-option-set-select']")),"Approval Type");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'"+accproperty+"')]")).size(),"Account Field Readonly");		
-					verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_name.fieldControl-text-box-text'][@readonly]")),"Approved By");
-					verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_enddateofuse.fieldControl-date-time-input']")),"End Date of Use");
-					Thread.sleep(2000);
-					return this;
-				}
+	public SupplierFormPage verifyBannerErrorText(String errormsg) throws InterruptedException {
+		Thread.sleep(3000);
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='warningNotification']")),errormsg,"Error Banner on Top");
+		System.out.println(errormsg);
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Verify Branding Approvals fields not Editable
+	public SupplierFormPage verifyBrandingApprovalFieldsNotEditable(String accproperty) throws InterruptedException {
+		Thread.sleep(3000);
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_startdateofuse.fieldControl-date-time-input']")),"Start Date of Use");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaldate.fieldControl-date-time-input']")),"Approval Date");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaltype.fieldControl-option-set-select']")),"Approval Type");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'"+accproperty+"')]")).size(),"Account Field Readonly");		
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_name.fieldControl-text-box-text'][@readonly]")),"Approved By");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_enddateofuse.fieldControl-date-time-input']")),"End Date of Use");
+		Thread.sleep(2000);
+		return this;
+	}
 
 	//Click OK on Account Number Error Message
 	public SupplierFormPage clickOKOnAccountNumberErrorMessage() throws InterruptedException {

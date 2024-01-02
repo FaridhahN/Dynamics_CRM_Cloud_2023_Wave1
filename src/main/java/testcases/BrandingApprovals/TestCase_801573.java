@@ -9,7 +9,7 @@ import utils.DataInputProvider;
 public class TestCase_801573 {
 
 	@Test
-	public void verifyDEactivateButtonOnBrandingApproval(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void verifyDeactivateButtonOnBrandingApproval(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		//1. Login to CRM 
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))

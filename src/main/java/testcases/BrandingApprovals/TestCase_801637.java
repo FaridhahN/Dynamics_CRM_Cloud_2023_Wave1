@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_828714:_Verify proper error is displayed when contact is saved with record status as null
+//TFS ID_801637:__Verify Supplier cannot create Branding Approvals
 public class TestCase_801637 {
 
 	@Test
@@ -23,7 +23,7 @@ public class TestCase_801637 {
 		
 		//Verify New Branding Approval Button
 		.selectRelatedBrandingApprovals()
-		.verifyAddNewBrandingApprovalButton()
+		.verifyAddNewBrandingApprovalButtonIsNotDisplayed()
 
 		;}
 }
