@@ -5927,13 +5927,39 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
+	
+	//Choose Existing Account Number -GLN
+		public MemberFormPage doubleClickExistingAccountNumberGLN() throws InterruptedException   {
+			//Wave1 2023 Update
+			Thread.sleep(4000);
+			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div"));
+			System.out.println("# of Rows Including Header:"+ rowList.size());
+			for (int i = 1; i <=rowList.size(); i++) {
+				String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")).getText();
+				System.out.println(title);					
+				if (title.equals("GLN")) {
+					Thread.sleep(3000);
+					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "GLN");
+					Thread.sleep(3000);
+					break;								
+				}
+				else if (title.equals("---"))
+				{
+
+				}
+
+			}		
+
+			return this;					
+		}
 
 
 
 	public MemberFormPage clickSaveInAccountNumbersEntity() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
 		Thread.sleep(10000);
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -7671,6 +7697,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+	
+	//Type GLN account number
+		public MemberFormPage typeAccountNumberGLN(String gln) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),gln,"GLN Account Number");
+			return this;
+		}
 
 
 	public MemberFormPage clickSaveAndClosInAccountNumbers() throws InterruptedException {

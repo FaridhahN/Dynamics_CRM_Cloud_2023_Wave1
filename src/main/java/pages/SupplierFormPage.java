@@ -8,8 +8,11 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -991,6 +994,22 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	//Choose End Date of Use
+	public SupplierFormPage typeEndDateOfUse() throws InterruptedException {
+		Thread.sleep(2000);
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String date1= dateFormat.format(date); 
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_enddateofuse.fieldControl-date-time-input']")),date1,"End Date of Use");
+		return this;
+	}
+
+	//Choose End Date of Use
+	public SupplierFormPage clearEndDateOfUse() throws InterruptedException {
+		clear(getDriver().findElement(By.xpath("//*[@data-id='ix_enddateofuse.fieldControl-date-time-input']")),"End Date of Use");
+		return this;
+	}
+
 	//Choose Approval Date
 	public SupplierFormPage typeApprovalDate() throws InterruptedException {
 		Thread.sleep(2000);
@@ -998,6 +1017,18 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Date date = new Date();
 		String date2= dateFormat.format(date); 
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_approvaldate.fieldControl-date-time-input']")),date2,"Approval Date");
+		return this;
+	}
+
+	//Enter Approval By
+	public SupplierFormPage typeApprovedBy(String name) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_name.fieldControl-text-box-text']")),name,"Approved By");
+		return this;
+	}
+
+	//Clear Approval By
+	public SupplierFormPage clearApprovedBy() throws InterruptedException {
+		clear(getDriver().findElement(By.xpath("//*[@data-id='ix_name.fieldControl-text-box-text']")),"Approved By");
 		return this;
 	}
 
@@ -1014,13 +1045,32 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	//Save  On Branding Approvals
+	public SupplierFormPage clickSaveOnBrandingApprovals() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_branding|NoRelationship|Form|Mscrm.Form.ix_branding.Save']")),"Save Button");
+		Thread.sleep(3000);
+		return this;
+	}
+
 
 	//Deactivate All Branding Approvals
 	public SupplierFormPage deactivateAllBrandingApprovals() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[@data-icon-name='CheckMark']")));
+		Thread.sleep(5000);
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Deactivate All Branding Approvals
+	public SupplierFormPage deactivateMultipleBrandingApprovals() throws InterruptedException {
+		Thread.sleep(5000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[5]"))).click().build().perform();
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
 		Thread.sleep(3000);
@@ -1033,6 +1083,20 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage activateAllBrandingApprovals() throws InterruptedException {
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[text()='Activate']")), "Activate Button"); 
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Activate'])[2]")), "Confirm pop up Activate button");
+		Thread.sleep(3000);
+		return this;
+	}
+
+
+	//Activate Multiple Branding Approvals
+	public SupplierFormPage activateMultipleBrandingApprovals() throws InterruptedException {
+		Thread.sleep(3000);
+		Actions a = new Actions(getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("(//i[@data-icon-name='CheckMark'])[5]"))).click().build().perform();
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//span[text()='Activate']")), "Activate Button"); 
 		Thread.sleep(3000);
