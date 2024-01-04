@@ -1,10 +1,20 @@
 package utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
+
+import org.openqa.selenium.By;
+
+import pages.MemberFormPage;
 
 public class TestUtils {
 
+	public static String date;
+	public static String enddate;
 	public static String getDate() {
 	LocalDate currentdate = LocalDate.now();
 	return ""+currentdate.getMonth()+currentdate.getDayOfMonth();
@@ -33,5 +43,27 @@ public class TestUtils {
 	    return sb.toString();
 	}
 
+	public static String todaysDate() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String enddate= dateFormat.format(date);
+		return enddate;
+		}
+	
+	//Enter End Date as FutureDate Date in Account Numbers
+		public static String  FutureEndDate(int number) {
+			DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+			Date date = new Date();
+
+			Calendar c = Calendar.getInstance();    
+			c.setTime(date);        
+			// manipulate date        
+			c.add(Calendar.DATE, number); 
+			// convert calendar to date      
+			Date currentDatePlusOne = c.getTime();
+
+			String enddate= dateFormat.format(currentDatePlusOne);			
+			return enddate;
+		}
 	
 }

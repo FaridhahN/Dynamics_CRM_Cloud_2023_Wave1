@@ -52,6 +52,22 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
+	
+public SupplierFormPage doubleClickMembership(String membership) throws InterruptedException {	
+		
+		for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
+			if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
+				Actions a = new Actions(getDriver());	
+				int j=i+1;
+				a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();	    
+				
+			}
+		}
+			
+		// a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).doubleClick().build().perform();
+		Thread.sleep(3000);
+		return this;
+	}
 
 	public SupplierFormPage verifyDocumentsOptionRemovedOnRelatedTab() throws InterruptedException {
 		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){

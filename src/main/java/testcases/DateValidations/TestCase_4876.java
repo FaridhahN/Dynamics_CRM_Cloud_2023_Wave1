@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
-//TFS ID_8496:_828406:Verify "Error Message" should display date's when Premier End date < TPRD for Supplier Accounts.
+//TFS ID_4876:_828402:Verify the Premier start date and DP relation date validation when the DPRD is less than Premier start date
 
-public class TestCase_8496{
+public class TestCase_4876{
 
 
 	@Test
@@ -30,21 +30,16 @@ public class TestCase_8496{
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectSupplierAccountFromSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
-		.selectMembership()
-
-		
-		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
-		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
-		.clickMembershipSave()
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.getThePremierStartDate()
+		.getPastDate(TestUtils.date)
+		.selectDirectParentRelationDate(TestUtils.enddate)
+		.typeDPReason("Test")
+		.clickSave()
 		//Date Restriction Error: Top Parent Relation Date 
 		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-		
 
-	//Data reset not required
+		//Data reset not required
 		;
 	}
 }

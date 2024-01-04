@@ -23,6 +23,7 @@ import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 
@@ -40,6 +41,7 @@ import driver.Driver;
 
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
+import utils.TestUtils;
 
 public class MemberFormPage extends WebDriverServiceImpl {
 	String attributevalue;
@@ -7752,8 +7754,64 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+public MemberFormPage doubleClickMembership(String membership) throws InterruptedException {	
+		
+		for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
+			if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
+				Actions a = new Actions(getDriver());	
+				int j=i+1;
+				a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();	    
+				
+			}
+		}
+			
+		// a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).doubleClick().build().perform();
+		Thread.sleep(3000);
+		return this;
+	}
+
+public MemberFormPage chooseTodayAsApplicationDate() throws InterruptedException {
+	Thread.sleep(15000);
+	DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+	Date date = new Date();
+	String todaydate= dateFormat.format(date);
+	WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]"));
+	JavascriptExecutor je = (JavascriptExecutor) getDriver();
+	je.executeScript("arguments[0].scrollIntoView();",element);
+
+	click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
+	click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
+	Thread.sleep(5000);
+	type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),todaydate, "Application Start Date");
+	return this;
+
+}
 
 
+
+	
+	//Enter End Date as past date from the given Date in Account Numbers
+			public MemberFormPage getPastDate(String givenDate) throws ParseException {
+				SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
+				Date date = new SimpleDateFormat("M/d/yyyy").parse(givenDate);
+
+				Calendar c = Calendar.getInstance();    
+				c.setTime(date);        
+				// manipulate date        
+				c.add(Calendar.DATE, -2); 
+				// convert calendar to date      
+				Date currentDatePlusOne = c.getTime();
+
+				TestUtils.enddate= dateform.format(currentDatePlusOne);			
+				
+				return this;
+			}
+
+	public MemberFormPage getThePremierStartDate() {
+		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")).getAttribute("Value");
+		return this;
+	}
+	
 	//Click Save Button
 	public MemberFormPage clickSaveAccountNumber() throws InterruptedException {
 
@@ -8335,5 +8393,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Current Rebate Payments')]")).size(), "Current Account Representative view");
 		return this;
 	}
+	
+	public MemberFormPage checkDP_TPRD(String premierStartDate) {
+		navigateToApplicationDate();
+		String dprd=getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getText();
+		String tprd=getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")).getText();
+		Assert.assertTrue(dprd.contentEquals(premierStartDate));
+		Assert.assertTrue(tprd.contentEquals(premierStartDate));
+		return this;
+	}
 
 }
+
