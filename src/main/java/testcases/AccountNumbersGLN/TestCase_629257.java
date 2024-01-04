@@ -10,7 +10,7 @@ public class TestCase_629257 {
 
 
 	@Test
-	public void verifyNumberfieldGLN(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyEndDateRestrictionGLN(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM as Member
 		new LoginPage()
@@ -29,12 +29,12 @@ public class TestCase_629257 {
 
 		.selectAccountNumbers()
 		.doubleClickExistingAccountNumberGLN()
-		
+
 		//Enter today's date as end date
 		.typeEndDateInAccountNumbers()
 		.clickSaveAccountNumber()
 		.verifyError("End date can't be today or future date")
-		
+
 		//Enter Future date as end date
 		.typeFutureEndDateInAccountNumbers()
 		.clickSaveAccountNumber()

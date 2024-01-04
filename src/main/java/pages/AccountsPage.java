@@ -5,6 +5,7 @@ import java.awt.AWTException;
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import services.WebDriverServiceImpl;
@@ -37,7 +38,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 	public AccountsPage verifyUnsavedMEssage() {
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//h1[@aria-label='Unsaved changes']")).size(), "UnsavedMessage");
 		return this;
-		
+
 	}
 
 	//select Active Member view
@@ -51,6 +52,30 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Thread.sleep(15000);
 		return this;
 	} 
+
+	//select Competitor LookUp view
+
+	public AccountsPage selectCompetitorLookUpView() throws InterruptedException {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'Competitor Lookup View')]")),"Competitor Lookup View");
+		Thread.sleep(10000);
+		Thread.sleep(5000);
+		return this;		
+
+	} 
+	// Verify Competitor LookUp View
+	public AccountsPage verifyFieldsInCompetitorLookUpView() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='name']")).size(), "Account Name");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='name']/following-sibling::div[@col-id='ix_accountstatus']")).size(), "Account Status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_accountstatus']/following-sibling::div[@col-id='customertypecode']")).size(), "Account Type");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='customertypecode']/following-sibling::div[@col-id='ix_membershipprovidertype']")).size(), "Membership Provider Type");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_membershipprovidertype']/following-sibling::div[@col-id='accountnumber']")).size(), "CRM Account #");
+		return this;
+
+	}
+
 	//Search accounts
 	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
 		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
@@ -251,19 +276,19 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}
 
 	//Select member account from Global search results -06/14/2023
-		public  ContactsPage selectContactFromSearchResults(String InnovatixID) throws InterruptedException {	
-			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
-			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
-			if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
-				getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
-			}
-			Thread.sleep(4000);
-			Actions action = new Actions(getDriver());
-			action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]"))).perform();
-			doubleClick(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]")),"Search Result Record");
-			Thread.sleep(2500);
-			return new ContactsPage();
-		}	
+	public  ContactsPage selectContactFromSearchResults(String InnovatixID) throws InterruptedException {	
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
+		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
+			getDriver().findElement(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).click();
+		}
+		Thread.sleep(4000);
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]"))).perform();
+		doubleClick(getDriver().findElement(By.xpath("//span[text()= "+InnovatixID+"]")),"Search Result Record");
+		Thread.sleep(2500);
+		return new ContactsPage();
+	}	
 
 
 	//Select Supplier account from Global search results -06/14/2023
