@@ -34,7 +34,7 @@ public class TestCase_828409 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//Navigate to the Record status feild
-		.navigateToAGDate()
+		//.navigateToAGDate()
 
 		//Record Status = Published
 		.chooseRecordStatusDraftfromTop()	
@@ -83,7 +83,7 @@ public class TestCase_828409 {
 		.clickGeneralTab()
 
 		//Navigate to the record status field 
-		.navigateToAGDate()
+		//.navigateToAGDate()
 
 		//Record Status = Published
 		.chooseRecordStatusDraftfromTop()	

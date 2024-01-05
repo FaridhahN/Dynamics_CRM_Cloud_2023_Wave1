@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
-//TFS ID_4876:_828402:Verify the Premier start date and DP relation date validation when the DPRD is less than Premier start date
+//TFS ID_1004976:_1004976:Verify whether user should not be able to update Start Date >  DPRD. 
 
-public class TestCase_4876{
+public class TestCase_1004976{
 
 
 	@Test
@@ -31,14 +31,15 @@ public class TestCase_4876{
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getThePremierStartDate()
-		.getPastDate(TestUtils.date, 2)
-		.selectDirectParentRelationDate(TestUtils.enddate)
-		.typeDPReason("Test")
-		.clickSave()
-		//Date Restriction Error: Top Parent Relation Date 
-		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		.navigateToApplicationDate()
+		.getDprd()
+		.getFutureDate(TestUtils.date, TestUtils.getRandomNumber(1))
 
+		.selectRelatedMembership()
+		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.typeMembershipStartDate(TestUtils.enddate)
+		.clickMembershipSave()
+		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		//Data reset not required
 		;
 	}

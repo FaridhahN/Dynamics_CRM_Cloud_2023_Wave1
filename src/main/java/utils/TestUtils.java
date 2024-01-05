@@ -1,6 +1,7 @@
 package utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -29,6 +30,16 @@ public class TestUtils {
 
 	    // this will convert any number sequence into 6 character.
 	    return String.format("%06d", number);
+	}
+	
+	public static int getRandomNumber(int digit) {
+	    // It will generate 6 digit random Number.
+	    // from 0 to 999999
+	    Random rnd = new Random();
+	    int number = rnd.nextInt(digit);
+
+	    // this will convert any number sequence into 6 character.
+	    return number;
 	}
 
 	
@@ -65,5 +76,21 @@ public class TestUtils {
 			String enddate= dateFormat.format(currentDatePlusOne);			
 			return enddate;
 		}
-	
+		
+		//Enter End Date as past date from the given Date in Account Numbers
+		public static String getPastDate(String givenDate, int number) throws ParseException {
+			SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
+			Date date = new SimpleDateFormat("M/d/yyyy").parse(givenDate);
+
+			Calendar c = Calendar.getInstance();    
+			c.setTime(date);        
+			// manipulate date        
+			c.add(Calendar.DATE, -number); 
+			// convert calendar to date      
+			Date currentDatePlusOne = c.getTime();
+
+			TestUtils.enddate= dateform.format(currentDatePlusOne);			
+			return TestUtils.enddate;
+		
+		}
 }

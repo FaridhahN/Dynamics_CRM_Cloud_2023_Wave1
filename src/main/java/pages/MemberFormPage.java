@@ -7791,14 +7791,31 @@ public MemberFormPage chooseTodayAsApplicationDate() throws InterruptedException
 
 	
 	//Enter End Date as past date from the given Date in Account Numbers
-			public MemberFormPage getPastDate(String givenDate) throws ParseException {
+			public MemberFormPage getPastDate(String givenDate, int number) throws ParseException {
 				SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
 				Date date = new SimpleDateFormat("M/d/yyyy").parse(givenDate);
 
 				Calendar c = Calendar.getInstance();    
 				c.setTime(date);        
 				// manipulate date        
-				c.add(Calendar.DATE, -2); 
+				c.add(Calendar.DATE, -(number+1)); 
+				// convert calendar to date      
+				Date currentDatePlusOne = c.getTime();
+
+				TestUtils.enddate= dateform.format(currentDatePlusOne);			
+				
+				return this;
+			}
+			
+			//Enter End Date as past date from the given Date in Account Numbers
+			public MemberFormPage getFutureDate(String givenDate, int number) throws ParseException {
+				SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
+				Date date = new SimpleDateFormat("M/d/yyyy").parse(givenDate);
+
+				Calendar c = Calendar.getInstance();    
+				c.setTime(date);        
+				// manipulate date        
+				c.add(Calendar.DATE, (number+1)); 
 				// convert calendar to date      
 				Date currentDatePlusOne = c.getTime();
 
@@ -7812,6 +7829,15 @@ public MemberFormPage chooseTodayAsApplicationDate() throws InterruptedException
 		return this;
 	}
 	
+	public MemberFormPage getDprd() {
+		TestUtils.date=getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getAttribute("Value");
+		return this;
+	}
+	
+	public MemberFormPage gettprd() {
+		TestUtils.date=getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")).getAttribute("Value");
+		return this;
+	}
 	//Click Save Button
 	public MemberFormPage clickSaveAccountNumber() throws InterruptedException {
 
@@ -8396,8 +8422,8 @@ public MemberFormPage chooseTodayAsApplicationDate() throws InterruptedException
 	
 	public MemberFormPage checkDP_TPRD(String premierStartDate) {
 		navigateToApplicationDate();
-		String dprd=getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getText();
-		String tprd=getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")).getText();
+		String dprd=getDriver().findElement(By.xpath("//input[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getAttribute("Value");
+		String tprd=getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")).getAttribute("Value");
 		Assert.assertTrue(dprd.contentEquals(premierStartDate));
 		Assert.assertTrue(tprd.contentEquals(premierStartDate));
 		return this;
