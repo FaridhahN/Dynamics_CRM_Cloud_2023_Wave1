@@ -15,7 +15,7 @@ public class TestCase_9641 {
 	public void SupplierAccountNumber(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 
-		new WebDriverServiceImpl();
+		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -33,9 +33,9 @@ public class TestCase_9641 {
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getAccountName()
-		.selectSupplierAccount()
-		.clickNeSupplierAccount()
-		.AddSupplierAccount(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "supplierRep", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchasingPreference", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "memberLevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startdate", sDataSheetName))
+		.selectRelatedSupplierAccounts()
+		.clickNewSupplierAccountButton()
+		.addSupplierAccountDetails(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "supplierRep", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchasingPreference", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "memberLevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startdate", sDataSheetName))
 		.saveSupplierAccount()
 		.navigateToAccountNumberTab()
 		

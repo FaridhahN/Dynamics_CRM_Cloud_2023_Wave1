@@ -15,7 +15,7 @@ public class TestCase_9638 {
 	public void SupplierAccountNumber(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 
-		new WebDriverServiceImpl();
+		
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -32,10 +32,10 @@ public class TestCase_9638 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-	.selectSupplierAccount()
-		.clickNeSupplierAccount()
+		.selectRelatedSupplierAccounts()
+		.clickNewSupplierAccountButton()
 		.noMatchforSupplier(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName));
-			;
+		;
 	}
 
 }

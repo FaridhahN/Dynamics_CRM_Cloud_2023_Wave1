@@ -33,9 +33,9 @@ public class TestCase_9205 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectSupplierAccount()
-		.clickNeSupplierAccount()
-		.AddSupplierAccount(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "supplierRep", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchasingPreference", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "memberLevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startdate", sDataSheetName))
+		.selectRelatedSupplierAccounts()
+		.clickNewSupplierAccountButton()
+		.addSupplierAccountDetails(DataInputProvider.getCellData_ColName(iRowNumber, "supplier", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "supplierRep", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchasingPreference", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "memberLevel", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "startdate", sDataSheetName))
 		.saveAndCloseSupplierAccount()
 		.doubleClickSupplierAccountNumbers()
 		.deActivateSupplierAccount()
