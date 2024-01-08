@@ -27,11 +27,7 @@ public class TestCase_1005586 {
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-
-
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
+		
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -131,9 +127,9 @@ public class TestCase_1005586 {
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
+		.chooseRecordStatusPublished()
+		.clickSave()
 		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-
-
 
 		;
 	}

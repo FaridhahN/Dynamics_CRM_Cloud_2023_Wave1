@@ -3027,6 +3027,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage clickLOBSaveAndCloseDev() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
 		Thread.sleep(5000);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 		Thread.sleep(5000);
 		return this;	

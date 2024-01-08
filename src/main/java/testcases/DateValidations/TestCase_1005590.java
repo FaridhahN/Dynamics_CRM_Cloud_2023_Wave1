@@ -7,10 +7,10 @@ import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1005564:_1005564:Verify whether user able to add Start Date < or<= DPRD for the new member account. 
+//TFS ID_1005590:_1005590:Verify whether user should not be able to add Start Date > TPRD for the new member account.
 
 
-public class TestCase_1005564 {
+public class TestCase_1005590 {
 
 
 	@Test
@@ -27,7 +27,7 @@ public class TestCase_1005564 {
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-
+		
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
@@ -69,20 +69,21 @@ public class TestCase_1005564 {
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
+		.getFutureDate(TestUtils.todaysDate(), 4)
 		.selectDirectParentRelationDate(TestUtils.todaysDate())
 
 		//Top Parent Relation =  OLM
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 
 		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( TestUtils.FutureEndDate(2))
+		.selectTopParentRelationDate( TestUtils.todaysDate())
 
 		//Click on Save 
 		.clickSave() 
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
+
 
 		//Country =USA
 		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
@@ -108,9 +109,9 @@ public class TestCase_1005564 {
 
 		// Classification Type = General GPO
 		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
+		.getFutureDate(TestUtils.todaysDate(), 1)
 		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(TestUtils.getPastDate(TestUtils.todaysDate(), 2))
+		.typeLineOfBusinessStartDate(TestUtils.enddate)
 
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
@@ -123,19 +124,15 @@ public class TestCase_1005564 {
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 		//Provide any start date and click on save
-		.typeMembershipStartDate(TestUtils.getPastDate(TestUtils.todaysDate(), 2))
+		.typeMembershipStartDate(TestUtils.enddate)
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
-
-		//8. Record Status = Published
 		.chooseRecordStatusPublished()
+		.clickSave()
+		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
 
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
 
 		;
 	}

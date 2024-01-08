@@ -32,14 +32,20 @@ public class TestCase_1004972{
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.navigateToApplicationDate()
-		.gettprd()
-		.getPastDate(TestUtils.date, TestUtils.getRandomNumber(1))
 
+		.getDprd()
+		.getPastDate(TestUtils.date, TestUtils.getRandomNumber(9))
+
+		.selectTopParentRelationDate(TestUtils.enddate)
+		.typeTPReason("Test")
+		.gettprd()
+		.getPastDate(TestUtils.date, TestUtils.getRandomNumber(9))
+
+		.clickSave()
 		.selectRelatedMembership()
 		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 		.typeMembershipStartDate(TestUtils.enddate)
-		.clickMembershipSave()
-		.clickGeneralTab()
+		.clickMembershipSaveAndClose()
 		.verifyPremierStartDate(TestUtils.enddate)
 		.clickSave()
 		.verifyErrorisNotDisplayed()

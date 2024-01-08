@@ -7,10 +7,10 @@ import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1005564:_1005564:Verify whether user able to add Start Date < or<= DPRD for the new member account. 
+//TFS ID_1005567:_1005567:Verify whether user able to add Start Date < or<= TPRD for the new member account.
+ 
 
-
-public class TestCase_1005564 {
+public class TestCase_1005567 {
 
 
 	@Test
@@ -69,13 +69,13 @@ public class TestCase_1005564 {
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(TestUtils.todaysDate())
-
+		.selectDirectParentRelationDate(TestUtils.FutureEndDate(2))
+		
 		//Top Parent Relation =  OLM
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 
 		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( TestUtils.FutureEndDate(2))
+		.selectTopParentRelationDate( TestUtils.todaysDate())
 
 		//Click on Save 
 		.clickSave() 

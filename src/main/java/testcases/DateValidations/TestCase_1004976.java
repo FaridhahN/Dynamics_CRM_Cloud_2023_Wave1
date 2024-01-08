@@ -33,7 +33,7 @@ public class TestCase_1004976{
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.navigateToApplicationDate()
 		.getDprd()
-		.getFutureDate(TestUtils.date, TestUtils.getRandomNumber(1))
+		.getFutureDate(TestUtils.date, TestUtils.getRandomNumber(9))
 
 		.selectRelatedMembership()
 		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
