@@ -6439,6 +6439,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click Related Membership
 	public MemberFormPage searchinMemberShip(String membership) throws InterruptedException   {
 		Thread.sleep(2000);
+		//01/09/2024 -updated quick find xpath
 		click(getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")),"search textbox");
 		typeAndEnter(((getDriver().findElement(By.xpath("//input[contains(@data-id,'quickFind_text')]")))),membership,"Membership");
 		Thread.sleep(6000);

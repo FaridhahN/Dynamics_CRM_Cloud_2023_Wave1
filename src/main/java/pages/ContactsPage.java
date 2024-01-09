@@ -81,11 +81,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	public ContactsPage selectAllContactView() throws InterruptedException {
 		Thread.sleep(3000);
-		// Click Drop down
-		click(getDriver().findElement(By.xpath("//span/i[@data-icon-name='ChevronDown']")),"Drop down");
+		// Click Drop down -01/09/2024
+		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelector')]/span/i[@data-icon-name='ChevronDown']")),"Drop down");
 		Thread.sleep(3000);
 		//Wave2 Update
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'All Contacts')]")), "All Contacts");
+		click(getDriver().findElement(By.xpath("//label[text()='All Contacts']")), "All Contacts");
 		Thread.sleep(10000);
 		return this;
 
@@ -395,8 +395,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// to choose an existing Active contact
 	public ContactsPage chooseActiveContact(String CrmNumber1) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='quickFind_text_1']")), "Find Criteria");
-		typeAndEnter(getDriver().findElement(By.xpath("//*[@data-id='quickFind_text_1']")), CrmNumber1,
+		click(getDriver().findElement(By.xpath("//*[contains(@data-id,'quickFind_text')]")), "Find Criteria");
+		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@data-id,'quickFind_text')]")), CrmNumber1,
 				"Find Criteria");
 		Thread.sleep(6000);
 		//Actions a = new Actions(getDriver());
@@ -910,7 +910,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 	}	
 	// Provide value for Job function as provided in the datasheet
 	public ContactsPage typeJobFunction(String jobFunction) throws InterruptedException {
-		Thread.sleep(3000);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']"))));
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),"Job Function");
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_jobfunctionnew.fieldControl-LookupResultsDropdown_ix_jobfunctionnew_textInputBox_with_filter_new']")),jobFunction, "Job Function");
 		Thread.sleep(5000);
