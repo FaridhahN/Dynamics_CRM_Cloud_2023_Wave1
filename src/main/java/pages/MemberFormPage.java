@@ -4455,6 +4455,29 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
+	
+	//Select DP
+		public MemberFormPage selectdP() throws InterruptedException {
+
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']"))).perform();
+			click(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']")),"DP name"); 
+			Thread.sleep(3000);
+			return this;	
+		}
+		
+		//Select TP
+				public MemberFormPage selectTP() throws InterruptedException {
+
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']"))).perform();
+					click(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']")),"TP name"); 
+					Thread.sleep(3000);
+					return this;	
+				}
+		
+		
+		
 
 	//Verify Primary contact name
 	public MemberFormPage verifyPrimaryContactValue(String verifyPrimaryContactValue) throws InterruptedException {
@@ -8346,6 +8369,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	//navigateto country
+		public MemberFormPage navigateToDP() {
+
+			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		return this;
+
+		}
 
 
 	public MemberFormPage naivagateToReferredByFromNACS() {
