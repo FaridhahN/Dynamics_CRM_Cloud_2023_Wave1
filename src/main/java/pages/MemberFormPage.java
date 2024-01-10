@@ -4457,25 +4457,23 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 	
 	//Select DP
-		public MemberFormPage selectdP() throws InterruptedException {
+	public MemberFormPage selectdP() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']"))).perform();
+		click(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']")),"DP name"); 
+		Thread.sleep(3000);
+		return this;	
+	}
+		
+		public MemberFormPage selectTP() throws InterruptedException {
 
 			Actions action = new Actions(getDriver());
-			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']"))).perform();
-			click(getDriver().findElement(By.xpath("//div[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_selected_tag_text']")),"DP name"); 
+			action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']"))).perform();
+			click(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']")),"TP name"); 
 			Thread.sleep(3000);
 			return this;	
 		}
-		
-		//Select TP
-				public MemberFormPage selectTP() throws InterruptedException {
-
-					Actions action = new Actions(getDriver());
-					action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']"))).perform();
-					click(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']")),"TP name"); 
-					Thread.sleep(3000);
-					return this;	
-				}
-		
 		
 		
 
@@ -7681,10 +7679,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//Verify the Account Name
 	public MemberFormPage verifyAccountName() {
 
-		verifyExactText(getDriver().findElement(By.xpath("//div[@data-i'ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
+		verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
 		return this;
 	}
 
@@ -7843,9 +7840,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
 			if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
-				Actions a = new Actions(getDriver());	
-				int j=i+1;
-				a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();	    
+				if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)[1]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label")==null)
+				{
+					Actions a = new Actions(getDriver());
+					int j=i+1;
+					a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();
+				}
+
 
 			}
 		}
@@ -8371,14 +8372,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 	
-	//navigateto country
-		public MemberFormPage navigateToDP() {
+	public MemberFormPage navigateToDP() {
 
-			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
-			click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		return this;
 
-		}
+	}
 
 
 	public MemberFormPage naivagateToReferredByFromNACS() {
@@ -8520,6 +8520,63 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		String tprd=getDriver().findElement(By.xpath("//input[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")).getAttribute("Value");
 		Assert.assertTrue(dprd.contentEquals(premierStartDate));
 		Assert.assertTrue(tprd.contentEquals(premierStartDate));
+		return this;
+	}
+	
+	public MemberFormPage CompareDPRDTPRD() {
+		navigateToDP();
+		getDprd();
+		String dprd=TestUtils.date;
+		navigateToApplicationDate();
+		gettprd();
+		String tprd=TestUtils.date;
+
+
+		if(dprd.compareTo(tprd)>0){          
+			TestUtils.enddate= tprd;
+
+		}else {      
+			TestUtils.enddate= dprd;   
+		}
+
+		return this;
+	}
+
+
+	public MemberFormPage CompareStartDateandEndDate() {
+		getThePremierStartDate();
+		String premierstartdate=TestUtils.date;
+
+		getThePremierEndDate();
+		String premierEndDate=TestUtils.date;
+
+
+		System.out.println(premierstartdate.compareTo(premierEndDate));
+		Assert.assertTrue(premierstartdate.compareTo(premierEndDate)>=0);
+		return this;
+	}
+
+	public MemberFormPage CompareStartDateandDPRD() {
+		navigateToDP();
+		getDprd();
+		String dprd=TestUtils.date;
+
+		getThePremierEndDate();
+		String premierEndDate=TestUtils.date;
+
+
+		System.out.println(dprd.compareTo(premierEndDate));
+		Assert.assertTrue(dprd.compareTo(premierEndDate)>=0);
+		return this;
+	}
+//Type Membership Start Date
+	public MemberFormPage getMembershipStartDate() {
+		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
+		return this;
+	}
+
+public MemberFormPage getThePremierEndDate() {
+		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")).getAttribute("Value");
 		return this;
 	}
 
