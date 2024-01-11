@@ -7840,7 +7840,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
 			if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
-				if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)[1]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label")==null)
+				System.out.println(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label"));
+				if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label").isEmpty())
 				{
 					Actions a = new Actions(getDriver());
 					int j=i+1;
