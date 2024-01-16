@@ -9,11 +9,11 @@ import utils.DataInputProvider;
 import utils.TestUtils;
 
 
-public class TestCase_828694 {
-//TFS ID_828694:_828694:Verify on End date any LOB,  "End date" should not be lesser than "Start date".
+public class TestCase_828688 {
+	//TFS ID_828688:_828688:Verify whether "Third Party Payee" Field is available , on selecting Third Party Level in "Reward/Rebate" Option
 
 	@Test
-	public void verifyFSLOBAddedautomatically(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifynewRewardrebate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -32,27 +32,17 @@ public class TestCase_828694 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-.chooseRecordStatusDraftfromTop()
-.clickSave()
+		.chooseRecordStatusDraftfromTop()
+		.clickSave()
 		//Navigate to LOB
 		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		//get the LOB start date and enter End date in past date
-		.getLOBStartDate()
-		
-		.getPastDate(TestUtils.date, 1)
-
-		.typeLOBEndDate(TestUtils.enddate)
-		.clickLOBSaveAndCloseWithoutGeneralTab()
-		
-		//verify Error message
-		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-	
-		//Data reset
-		//Publish the accoiunt
-		.clickGoBackandDiscardChanges()
-		.clickGeneralTab()
+		.verifyrewardrebatedropdown()
+		.selectverifyrewardrebatedropdown(DataInputProvider.getCellData_ColName(iRowNumber, "rewardrebate", sDataSheetName))
+		.selectthirdPartypayeeAccount(DataInputProvider.getCellData_ColName(iRowNumber, "thirdPartyPayee", sDataSheetName))
+		.selectverifyrewardrebatedropdown(DataInputProvider.getCellData_ColName(iRowNumber, "rewardrebate1", sDataSheetName))
+		.selectverifyrewardrebatedropdown("--Select--")
+		.clickLOBSaveAndCloseDev()
 		.chooseRecordStatusPublished()
 		.clickSave()
 		;

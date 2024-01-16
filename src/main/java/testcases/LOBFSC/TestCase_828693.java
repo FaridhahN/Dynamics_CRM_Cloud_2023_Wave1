@@ -9,11 +9,11 @@ import utils.DataInputProvider;
 import utils.TestUtils;
 
 
-public class TestCase_828694 {
-//TFS ID_828694:_828694:Verify on End date any LOB,  "End date" should not be lesser than "Start date".
+public class TestCase_828693 {
+	//TFS ID_828693:_828693:Verify on Create and  Update any Non GPO Account ,LOB Start Date Validation Error Message should not be thrown.
 
 	@Test
-	public void verifyFSLOBAddedautomatically(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyNONGPOLOBDate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -32,29 +32,19 @@ public class TestCase_828694 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-.chooseRecordStatusDraftfromTop()
-.clickSave()
-		//Navigate to LOB
-		.clickLineOfBusinesses()
-		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		//get the LOB start date and enter End date in past date
-		.getLOBStartDate()
-		
-		.getPastDate(TestUtils.date, 1)
-
-		.typeLOBEndDate(TestUtils.enddate)
-		.clickLOBSaveAndCloseWithoutGeneralTab()
-		
-		//verify Error message
-		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-	
-		//Data reset
-		//Publish the accoiunt
-		.clickGoBackandDiscardChanges()
-		.clickGeneralTab()
-		.chooseRecordStatusPublished()
+		.chooseRecordStatusDraftfromTop()
 		.clickSave()
+		//Navigate to Membership
+		.selectRelatedMembership()
+		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.getThePremierStartDate()
+
+		.getPastDate(TestUtils.date, TestUtils.getRandomNumber(1))
+
+		.typeMembershipStartDate(TestUtils.enddate)
+
+		.clickMembershipSaveAndClose()
+
 		;
 	}
 }

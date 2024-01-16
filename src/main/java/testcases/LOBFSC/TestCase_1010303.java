@@ -4,16 +4,15 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
-//Test Case 6960:Verify Food Services LOB is added automatically when Non-GPO Premier Membership is converted to GPO Premier Membership.
-//Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
 import utils.TestUtils;
+//TFS ID_1010303:_1010303:Verify date restriction logic is removed for LOB Start date against membership start date for existing user
 
 
-public class TestCase_828694 {
-//TFS ID_828694:_828694:Verify on End date any LOB,  "End date" should not be lesser than "Start date".
+public class TestCase_1010303 {
+
 
 	@Test
-	public void verifyFSLOBAddedautomatically(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void LOBDateValidation(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -32,29 +31,28 @@ public class TestCase_828694 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-.chooseRecordStatusDraftfromTop()
-.clickSave()
+
+		.selectRelatedMembership()
+		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.getThePremierStartDate()
+		.clickMembershipSaveAndClose()
+		
 		//Navigate to LOB
 		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 
-		//get the LOB start date and enter End date in past date
-		.getLOBStartDate()
-		
-		.getPastDate(TestUtils.date, 1)
+		.getPastDate(TestUtils.date, TestUtils.getRandomNumber(9))
+		// Start Date =Today's date
+		.typeLineOfBusinessStartDate(TestUtils.enddate)
 
-		.typeLOBEndDate(TestUtils.enddate)
-		.clickLOBSaveAndCloseWithoutGeneralTab()
-		
-		//verify Error message
-		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-	
-		//Data reset
-		//Publish the accoiunt
-		.clickGoBackandDiscardChanges()
-		.clickGeneralTab()
-		.chooseRecordStatusPublished()
-		.clickSave()
+		// Click on LOB Save 
+		.clickLOBSaveAndClose()
+
+
+
+		//Click on Save 
+		.clickSave() 
+		.verifyErrorisNotDisplayed()
 		;
 	}
 }

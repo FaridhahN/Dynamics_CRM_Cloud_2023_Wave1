@@ -4455,7 +4455,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
-	
+
 	//Select DP
 	public MemberFormPage selectdP() throws InterruptedException {
 
@@ -4465,17 +4465,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
-		
-		public MemberFormPage selectTP() throws InterruptedException {
 
-			Actions action = new Actions(getDriver());
-			action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']"))).perform();
-			click(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']")),"TP name"); 
-			Thread.sleep(3000);
-			return this;	
-		}
-		
-		
+	public MemberFormPage selectTP() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']"))).perform();
+		click(getDriver().findElement(By.xpath("//ul[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_SelectedRecordList']")),"TP name"); 
+		Thread.sleep(3000);
+		return this;	
+	}
+
+
 
 	//Verify Primary contact name
 	public MemberFormPage verifyPrimaryContactValue(String verifyPrimaryContactValue) throws InterruptedException {
@@ -7912,7 +7912,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage getThePremierStartDate() {
-		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")).getAttribute("Value");
+
+		//*[@data-id='ix_startdate.fieldControl-date-time-input']
+		if(getDriver().findElements(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")).size()>0) {
+			TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")).getAttribute("Value");	
+		}else {
+			TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")).getAttribute("Value");
+		}
 		return this;
 	}
 
@@ -8372,7 +8378,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
+
 	public MemberFormPage navigateToDP() {
 
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
@@ -8523,7 +8529,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Assert.assertTrue(tprd.contentEquals(premierStartDate));
 		return this;
 	}
-	
+
 	public MemberFormPage CompareDPRDTPRD() {
 		navigateToDP();
 		getDprd();
@@ -8570,16 +8576,83 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Assert.assertTrue(dprd.compareTo(premierEndDate)>=0);
 		return this;
 	}
-//Type Membership Start Date
+	//Type Membership Start Date
 	public MemberFormPage getMembershipStartDate() {
 		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
 		return this;
 	}
 
-public MemberFormPage getThePremierEndDate() {
+
+	public MemberFormPage getThePremierEndDate() {
 		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")).getAttribute("Value");
 		return this;
 	}
+
+	//Get LOB Start Date
+	public MemberFormPage getLOBStartDate() {
+		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
+		return this;
+	}
+
+	//Type LOB end date
+	public MemberFormPage typeLOBEndDate(String EndDate) {
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),EndDate,"End Date");
+		return this;
+	}
+	
+	public MemberFormPage verifyrewardrebatedropdown() throws InterruptedException {
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")), "---", "Reward rebate");
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select reardrebate= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")));		
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> rewardrebateoptions =reardrebate.getOptions();	
+		List<String> expectedRepresentativeType = Arrays.asList("---","Direct parent level","Facility level","Third party","Top parent level");		
+		
+		for(int i=0;i<rewardrebateoptions.size();i++) {
+
+			selectoptions.add(rewardrebateoptions.get(i).getText());
+
+		}
+		
+		if(expectedRepresentativeType.containsAll(selectoptions))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + rewardrebateoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + rewardrebateoptions + "  " + "- Option is not available in the list"  + " "+ expectedRepresentativeType ,	screenshotCapture());
+			Driver.failCount++;
+		}
+		return this;
+
+	}
+	
+	
+	public MemberFormPage selectverifyrewardrebatedropdown(String rewardrebatedropdown) throws InterruptedException {
+		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")))),rewardrebatedropdown,"rewardrebate dropdown");
+		Thread.sleep(4000);
+		return this;
+	}
+	
+
+	
+	public MemberFormPage selectthirdPartypayeeAccount(String payee) throws InterruptedException {
+	
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_3rdpartypayee.fieldControl-LookupResultsDropdown_ix_3rdpartypayee_textInputBox_with_filter_new']")),"Third party payee account");
+		Thread.sleep(1000);
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_3rdpartypayee.fieldControl-LookupResultsDropdown_ix_3rdpartypayee_textInputBox_with_filter_new']")))),payee,"Third party payee Account");
+		//Thread.sleep(120000);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@data-id,'ix_3rdpartypayee.fieldControl-accountnumber')]/span[contains(text(),'"+payee+"')]")));
+		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_3rdpartypayee.fieldControl-accountnumber')]/span[contains(text(),'"+payee+"')]")),"Rebate");
+
+		
+		return this;
+		
+	}
+	
 
 }
 
