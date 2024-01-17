@@ -27,14 +27,11 @@ public class TestCase_8837 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 
-			
-				 //Remove Bill to location from Parent Account .selectSubaccount()
-				 
-				 .filterbyLocation("Bill To") .ChangetheLocationtype()
-				 	
+
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
+		.navigateToRecordStatus()
 		//3. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
@@ -110,7 +107,8 @@ public class TestCase_8837 {
 
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
-
+		
+.navigateToRecordStatus()
 		.verifyAgEffectiveDateIsNull()
 		.verifyAffiliateGroupIsNull()
 		//				

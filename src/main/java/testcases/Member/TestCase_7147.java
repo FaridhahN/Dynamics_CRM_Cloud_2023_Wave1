@@ -115,8 +115,9 @@ public class TestCase_7147 {
 		/*
 		 * .verifyAgEffectiveDateIsNull() .verifyAffiliateGroupIsNull()
 		 */
-
-		//13. Verify "IS Corporate account" field
+		.navigateToDoNotVerify()
+		.navigatetoAdditionaCriteriaFromDonotVerify()
+			//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
 
 		//14. Verify Corporate parent name in the form
