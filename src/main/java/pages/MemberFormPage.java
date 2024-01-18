@@ -4878,6 +4878,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier End Date"); 
 		return this;
 	}
+	
+	public MemberFormPage verifyMembershipEndDateIsNull() {
+		verifIsNoTNullWithAttribute("aria-label",getDriver().findElement(By.xpath("//div[@col-id='ix_enddate' and @role='gridcell']//label")),"Premier End Date"); 
+		return this;
+	}
 
 	//Verify premier end date
 	public MemberFormPage verifyPremierEndDate(String verifyPremierEndDate) {
@@ -8619,7 +8624,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
 		return this;
 	}
+	
+	//Type Membership Start Date
+		public MemberFormPage getMembershipStartDateForEnddate() {
+			TestUtils.date=getDriver().findElement(By.xpath("//div[@col-id='ix_startdate' and @role='gridcell']//label")).getAttribute("aria-label");
+			return this;
+		}
 
+
+	//div[@col-id='ix_startdate' and @role='gridcell']//label
 
 	public MemberFormPage getThePremierEndDate() {
 		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")).getAttribute("Value");

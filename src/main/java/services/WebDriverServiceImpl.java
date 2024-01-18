@@ -173,6 +173,28 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		return bReturn;
 	}
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		public String verifIsNoTNullWithAttribute(String attribute, WebElement ele, String field) {	
+			String bReturn = "";
+			try {
+
+				bReturn = ele.getAttribute(attribute);
+				if(bReturn.isBlank() | bReturn.isEmpty() | bReturn.equalsIgnoreCase("---") ){
+					setReport().log(Status.FAIL, field+" is Empty ",screenshotCapture());
+					Driver.failCount++;
+				}
+				else {
+					setReport().log(Status.PASS, field+" contains "+bReturn,screenshotCapture());
+
+				}
+			} catch (WebDriverException e) {
+				setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
+				Driver.failCount++;
+				throw e;
+			}
+			return bReturn;
+		}
 	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

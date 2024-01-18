@@ -36,26 +36,33 @@ public class TestCase_11199 {
 		.chooseRecordStatusDraftfromTop()
 		.clickSave()
 		.selectRelatedMembership()
-		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
-		.getMembershipStartDate()
-		
+		.verifyMembershipEndDateIsNull()
+
+		.clickGeneralTab()
+		.navigateToDP()
+		.getDprd()
+
 		.getFutureDate(TestUtils.date, 2)
+		//7.  Click the + icon on the Line of Business Grid
 
-		.typeMembershipEndDate(TestUtils.enddate)
-		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
-		.clickMembershipSaveAndClose()
+		//Click add new membership
+		.clickMembershipAndAddNewMembership()
+
+		// Choose Membership type 
+		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+		//Provide any start date and click on save
+		.typeMembershipStartDate(TestUtils.enddate)
+
+		//Click on membership save and close
+		.clickQuickCreateMembershipSaveAndClose()
 		.chooseRecordStatusPublished()
 		.clickSave()
-		.verifyErrorisNotDisplayed()
-		.verifyAccountStatus("Terminated")
-		.CompareStartDateandEndDate()
-		//Date reset
 
-		//Change to draft
-		.chooseRecordStatusDraft()
-		.clickSave()
-		//7.  Click the + icon on the Line of Business Grid
+		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage2", sDataSheetName))
+
 		.clickLineOfBusinesses()
 
 		//Click New Line Of Business
@@ -68,25 +75,33 @@ public class TestCase_11199 {
 		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
 
 		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(TestUtils.getPastDate(TestUtils.todaysDate(), 2))
+		.typeLineOfBusinessStartDate(TestUtils.enddate)
 
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
 		.clickLOBSaveAndCloseDev()
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
 
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		//Provide any start date and click on save
-		.typeMembershipStartDate(TestUtils.getPastDate(TestUtils.todaysDate(), 2))
-
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
 		.chooseRecordStatusPublished()
 		.clickSave()
+		.verifyErrorisNotDisplayed()
+		.NavigateToSystemTab()
+		.clickGeneralTab()
+		.getThePremierStartDate()
+		.navigateToDP()
+		.getFutureDate(TestUtils.date, 2)
+		.selectDirectParentRelationDate(TestUtils.enddate)
+		.clickSave()
+		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		.selectDirectParentRelationDate(TestUtils.date)
+		.clickSave()
+		.navigateToApplicationDate()
+		.selectTopParentRelationDate(TestUtils.enddate)
+		.clickSave()
+		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage1", sDataSheetName))
+		.selectTopParentRelationDate(TestUtils.date)
+		.clickSave()
+
+
 
 		;
 	}
