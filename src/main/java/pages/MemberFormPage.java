@@ -3170,6 +3170,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return this;	
 	}
+	
+	//Click on Membership SAve and close //Quick create
+		public MemberFormPage clickQuickCreateMembershipSave_Close() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+			Thread.sleep(7000);
+			return this;	
+		}
 	//Click on Membership SAve and close 
 	public MemberFormPage clickMembershipSaveAndClose() throws InterruptedException {
 
@@ -3430,6 +3437,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_selected_tag_text']")),"National","Membership Entity");
 		return this;
 	}
+
+	//Double Click On National Membership
+		public MemberFormPage doubleClickOnMembershi() throws InterruptedException {	
+			//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='MscrmControls.Grid.ReadOnlyGrid|entity_control|account|7117ccdc-6223-4fd1-8e17-e210d527f53e|ix_membership|ix_account_ix_membership_AccountName|cc-grid|cc-grid-cell|cell-1-3']")),"National","Membership Provider");
+			Actions a = new Actions(getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-1-2']"))).doubleClick().build().perform();
+			Thread.sleep(3000);
+			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_membershipprovider.fieldControl-LookupResultsDropdown_ix_membershipprovider_selected_tag_text']")),"National","Membership Entity");
+			return this;
+		}
 
 	//Select TP Audit History
 	public MemberFormPage selectMembershipAuditHistory() throws InterruptedException {
@@ -6459,6 +6476,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
+	
+	//Click Related Membership
+		public MemberFormPage selectMembership() throws InterruptedException   {
+			Thread.sleep(2000);
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+			return this;
+		}
 
 	//Click Related Membership
 	public MemberFormPage selectRelatedMembership() throws InterruptedException   {
@@ -7900,6 +7929,28 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage doubleClickMembershipWithEndDAte(String membership) throws InterruptedException {	
+
+		for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
+			if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
+				System.out.println(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label"));
+				if(!(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label").isEmpty()))
+				{
+					Actions a = new Actions(getDriver());
+					int j=i+1;
+					a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();
+				}
+
+
+			}
+		}
+
+		// a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).doubleClick().build().perform();
+		Thread.sleep(3000);
+		return this;
+	}
+
+	
 	public MemberFormPage chooseTodayAsApplicationDate() throws InterruptedException {
 		Thread.sleep(15000);
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
@@ -8715,6 +8766,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 	
+	public MemberFormPage clickCancelButton() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateCancelBtn']")),"Cancel Button");
+		return this;
+	}
 
 }
 

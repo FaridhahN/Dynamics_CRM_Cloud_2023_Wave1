@@ -222,11 +222,14 @@ public class Driver extends PreAndPost{
 				sTestClassName="testcases.Competitors.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 			}
-				
+			else if(sCategory.equalsIgnoreCase("Membership")) {
+				sTestClassName="testcases.Membership.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}	
 				
 			
 			
-
+			
 						
 			//Create instance of the class during run time
 			Class<?> cls = Class.forName(sTestClassName);
