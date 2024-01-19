@@ -1922,7 +1922,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
-		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
+		click((getDriver().findElement(By.xpath("//label[contains(text(),'Phone')]"))),"Other Phone");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
@@ -1973,6 +1973,41 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		 */		return this;
 
 	}
+	
+	
+	//navigate to Record status
+		public MemberFormPage navigateToRecordStatusMEF() throws InterruptedException {
+			Thread.sleep(3000);
+			//Scroll down to make the record status field visible
+			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+			if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
+				click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+			}
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
+			click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+			click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+			click((getDriver().findElement(By.xpath("//label[contains(text(),'Phone')]"))),"Other Phone");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Do')]")),"Do Not Verify");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Website')]")),"Website");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Country')]")),"Country");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'External')]")),"External Address");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Supplier Record')]")),"Supplier Record");
+			navigateToAGDateMEF();
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")),"Premier Owner");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Corporate')]")),"Corporate");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'CAMS Flag')]")),"CAMS Flag");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Exclude from Roster')]")),"Exclude from Roster");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Receive Direct Mail");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible')]")),"Fee Share Eligible");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible Date')]")),"Fee Share Eligible Date");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Business Key')]")),"Business Key");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'BK Active')]")),"BK Active");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Payment Entity')]")),"Payment Entity");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Corporate Rebate')]")),"Corporate Rebate");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
+
+		return this;}
 
 	public MemberFormPage navigateToRecordStatusForMember() throws InterruptedException {
 		Thread.sleep(3000);
@@ -4666,7 +4701,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	public MemberFormPage selectTopParentRelationMEF(String topParentRelation) throws InterruptedException {
-
+		
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),topParentRelation,"Top Parent Relation");
 		Thread.sleep(1000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),topParentRelation,"Top Parent Relation"); 
@@ -4701,7 +4736,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select record status published
 	public MemberFormPage chooseRecordStatusPublishedMEF() throws InterruptedException {
 		Thread.sleep(3000);
-		navigateToRecordStatus();
+		navigateToRecordStatusMEF();
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
