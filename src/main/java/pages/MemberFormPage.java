@@ -178,7 +178,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage verifyCRMNumberIsDisplayed() throws InterruptedException {
 		Thread.sleep(5000);
 		CRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
-		System.out.println(CRMNumber);
+		System.out.println("crmnumber"+CRMNumber);
 		if (CRMNumber==null) {
 			setReport().log(Status.FAIL, "Value is blank in CRM Number"	,screenshotCapture());
 			Driver.failCount++;		
@@ -2103,19 +2103,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage createSubAccount(int count) throws InterruptedException, AWTException {
 		for(int i=1;i<=count;i++) {
-			selectAccountsTab();
-
-			clickNewOnAccountsPage();
+			selectSubaccount();
+			clickNewAccountInSubAccount();
 			chooseMemberForm();
 
 			//3. Account Name = Any
-			typeAccountName("MemberAccount1");
+			typeAccountName("MemberAccount"+i);
 
 			//Click on save 			
 			clickSave() ;
 
-			verifyCRMNumberIsDisplayed();
-			crmList.add(CRMNumber);
 			//5. Account Type = Member
 			selectAccountType("Member");
 
@@ -2124,7 +2121,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 			//Application Start Date = Today's Date
-			chooseApplicationDate("3/4/2021");
+			chooseApplicationDate(TestUtils.todaysDate());
 
 			//CAMS Flag = Yes
 			changeCAMSFlagAsYes();
@@ -2133,20 +2130,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			selectParticipationType("Pharmacy");
 
 
-			//Direct Parent Entity Code = 673415
-			selectDirectParent(topparent);
-
+			
 			//Direct Parent Relation = Managed
 			selectDirectParentRelationManaged(); 
 
 			//Direct Parent Relation date = Today's Date
-			selectDirectParentRelationDate("3/4/2021");
+			selectDirectParentRelationDate(TestUtils.todaysDate());
 
 			//Top Parent Relation =  OLM
 			selectTopParentRelation("OLM");
 
 			// Top Parent Relation Date = Today's Date
-			selectTopParentRelationDate( "3/4/2021");
+			selectTopParentRelationDate( TestUtils.todaysDate());
 
 			//Click on Save 
 			clickSave(); 
@@ -2179,7 +2174,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			selectLOBfClassificationType("General GPO");
 
 			// Start Date =Today's date
-			typeLineOfBusinessStartDate("3/4/2021");
+			typeLineOfBusinessStartDate(TestUtils.todaysDate());
 
 			// Click on LOB Save 
 			clickLOBSaveAndClose();
@@ -2192,7 +2187,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			selectMembershipProvider("National");
 
 			//Provide any start date and click on save
-			typeMembershipStartDate("3/4/2021");
+			typeMembershipStartDate(TestUtils.todaysDate());
 
 			//Click on membership save and close
 			clickQuickCreateMembershipSaveAndClose();
@@ -2200,6 +2195,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			//8. Record Status = Published
 			chooseRecordStatusPublished();;
 
+			verifyCRMNumberIsDisplayed();
+			crmList.add(CRMNumber);
 			//Click on Save 
 			clickSave() ;
 
