@@ -34,7 +34,7 @@ public class TestCase_8820 {
 
 		//4. Click on Add new account 
 		.clickNewAccountInSubAccount()
-
+		.navigateToApplicationDate()
 		//5. Verify Direct parent and Top parent are populated 
 		.verifyTopParent(WebDriverServiceImpl.Dpdata.get("TopParent_Name"))
 
