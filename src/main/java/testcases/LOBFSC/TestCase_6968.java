@@ -98,6 +98,9 @@ public class TestCase_6968 {
 		.clickSave() 
 
 		.selectAccountType("Member")
+		
+		.clickSave() 
+
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
@@ -213,6 +216,9 @@ public class TestCase_6968 {
 		.clickSave() 
 
 		.selectAccountType("Member")
+		
+		//Click on Save 
+				.clickSave() 
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()

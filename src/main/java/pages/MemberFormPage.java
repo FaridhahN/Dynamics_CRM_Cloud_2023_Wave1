@@ -877,8 +877,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click Related button
 	public MemberFormPage clickRelatedButton() throws InterruptedException   {
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related button");
-		return this;
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}		return this;
 	}
 
 	//Click New Activity- Task
@@ -1873,17 +1876,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select record status published
 	public MemberFormPage chooseRecordStatusPublished() throws InterruptedException {
 		Thread.sleep(3000);
-
-		navigateToDoNotVerify();
-		click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
-		//click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='Membership Provider Type - Membership Provider Type']"))," Membership Provider Type");
-		click(getDriver().findElement(By.xpath("//*[text()='MEMBER ATTRIBUTES']")),"MEMBER ATTRIBUTES");
-
+		navigateToRecordStatus();
+		selectPublished();
+		return this;
+	}
+	
+	
+	public MemberFormPage selectPublished() throws InterruptedException{
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(2000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 

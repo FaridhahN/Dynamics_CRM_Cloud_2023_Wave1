@@ -95,6 +95,8 @@ public class TestCase_6970 {
 		.clickSave() 
 
 		.selectAccountType("Member")
+		
+		.clickSave() 
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
@@ -215,10 +217,11 @@ public class TestCase_6970 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
+		.selectAccountType("Member")
 		//Click on Save 
 		.clickSave() 
 
-		.selectAccountType("Member")
+		
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()

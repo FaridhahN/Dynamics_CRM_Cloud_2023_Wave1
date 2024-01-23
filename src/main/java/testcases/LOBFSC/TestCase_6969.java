@@ -92,10 +92,16 @@ public class TestCase_6969 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
-		//Click on Save 
+	
+		//click on Save 
 		.clickSave() 
 
 		.selectAccountType("Member")
+		
+		//click on Save 
+				.clickSave() 
+
+
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
@@ -226,11 +232,11 @@ public class TestCase_6969 {
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
 
-		//Click on Save 
-		.clickSave() 
-
 		.selectAccountType("Member")
 
+		//Click on Save 
+		.clickSave() 
+		
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -263,7 +269,8 @@ public class TestCase_6969 {
 		.clickLOBSaveAndClose()
 
 		//8. Record Status = Published
-		.chooseRecordStatusPublished()
+		.chooseRecordStatusDraftfromTop()	
+		.selectPublished()
 
 		//Click on Save 
 		.clickSave() 
