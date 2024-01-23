@@ -3642,15 +3642,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Add Supplier Account
 	public MemberFormPage addSupplierAccountDetails(String supplier, String supplierRep, String purchasingPreference,String memberLevel, String startdate) throws InterruptedException {
 
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")),"Supplier");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierid.fieldControl-LookupResultsDropdown_ix_supplierid_textInputBox_with_filter_new']")),"Supplier");
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")))),supplier,"Supplier");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_supplierid.fieldControl-LookupResultsDropdown_ix_supplierid_textInputBox_with_filter_new']")))),supplier,"Supplier");
 		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")),"Supplier");
 
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Rep']")),"Supplier Rep");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_textInputBox_with_filter_new']")),"Supplier Rep");
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier Rep']")))),supplierRep,"Supplier Rep");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_textInputBox_with_filter_new']")))),supplierRep,"Supplier Rep");
 		Thread.sleep(9000);
 		click(getDriver().findElement(By.xpath("//li[@data-id='ix_suppliercontact.fieldControl-LookupResultsDropdown_ix_suppliercontact_resultsContainer']")),"Supplier Rep");
 
@@ -4769,8 +4769,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage noMatchforSupplier(String supplier) throws InterruptedException {	
 
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")),"Supplier");
-		type(((getDriver().findElement(By.xpath("//input[@aria-label='Look for Supplier']")))),supplier,"Supplier");
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierid.fieldControl-LookupResultsDropdown_ix_supplierid_textInputBox_with_filter_new']")),"Supplier");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_supplierid.fieldControl-LookupResultsDropdown_ix_supplierid_textInputBox_with_filter_new']")))),supplier,"Supplier");
 		Thread.sleep(10000);
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(@data-id,'ix_supplierid.fieldControl-ix_businessclassification')]")).size(), "supplier");
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(@data-id,'ix_parentaccountid.fieldControl-ix_businessclassification')]")).size(), "supplier");
