@@ -52,6 +52,17 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Thread.sleep(15000);
 		return this;
 	} 
+	
+	//Select the account from the default view
+	public MemberFormPage selectaccountfromdefaultView() {
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='ix_businessclassification' and @class='ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-value non-editable-cell']"))).build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"))).doubleClick().build().perform();
+		
+		
+		return new MemberFormPage();
+	}
+
 
 	//select Competitor LookUp view
 
@@ -132,6 +143,9 @@ public class AccountsPage extends WebDriverServiceImpl {
 	}	
 
 
+	
+	
+	
 	//Select Open Activities
 	public AccountsPage selectTerminatedView() throws InterruptedException   {
 		Thread.sleep(2000);

@@ -23,10 +23,13 @@ public class TestCase_10675 {
 		//2. Go to Workplace >> Take Any Member Account 
 	  	  .selectAccountsTab()		
 			.selectActiveMembers()
-			.selectAccountFromSearchResults()
+			.selectaccountfromdefaultView()
 
 		//3.Verify  NIACS code field access 
-			.clickNYInformationTab()
+			
+			.navigatetNYInformation()
+			.navigatetoNAICS()
+			.naivagateToReferredByFromNACS()
 			.verifyReferredByIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName));
 								
 			

@@ -22,10 +22,13 @@ public class TestCase_10674 {
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.selectActiveMembers()
-		.selectAccountFromSearchResults()
+		.selectaccountfromdefaultView()
 
 		//3.Verify  NIACS code field access 
-		.clickNYInformationTab()
+
+		.navigatetNYInformation()
+		.navigatetoNAICS()
+		.naivagateToReferredByFromNACS()
 		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName));
 
 
