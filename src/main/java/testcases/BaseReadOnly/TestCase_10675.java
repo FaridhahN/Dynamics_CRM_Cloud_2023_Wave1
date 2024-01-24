@@ -27,7 +27,7 @@ public class TestCase_10675 {
 
 		//3.Verify  NIACS code field access 
 			
-			.navigatetNYInformation()
+			.navigateToRecordStatus()
 			.navigatetoNAICS()
 			.naivagateToReferredByFromNACS()
 			.verifyReferredByIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName));

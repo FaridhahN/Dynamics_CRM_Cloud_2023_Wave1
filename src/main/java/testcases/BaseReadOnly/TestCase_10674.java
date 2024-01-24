@@ -26,7 +26,7 @@ public class TestCase_10674 {
 
 		//3.Verify  NIACS code field access 
 
-		.navigatetNYInformation()
+		.navigateToRecordStatus()
 		.navigatetoNAICS()
 		.naivagateToReferredByFromNACS()
 		.verifyEstimatedNumLocationsIsNotEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName));

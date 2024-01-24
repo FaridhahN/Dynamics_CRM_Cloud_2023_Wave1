@@ -29,7 +29,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 	}
 	
 	public AccountsPage selectContactsTab() throws InterruptedException {
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
 
 		if(copilotclosbutton.size()>0) {
@@ -76,8 +76,8 @@ public class DashboardPage extends WebDriverServiceImpl {
 	}
 
 	public ContactsPage selectContacts() throws InterruptedException {	
-		Thread.sleep(4000);
-		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Press to close copilot pane']"));
+		Thread.sleep(6000);
+		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
 
 		if(copilotclosbutton.size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");

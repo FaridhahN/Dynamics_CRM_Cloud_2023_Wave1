@@ -50,11 +50,15 @@ public class AccountsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Active Members')]")),"Active Members View");
 		Thread.sleep(15000);
 		Thread.sleep(15000);
+		
+		Thread.sleep(15000);
 		return this;
 	} 
 	
 	//Select the account from the default view
 	public MemberFormPage selectaccountfromdefaultView() {
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//div[@col-id='ix_businessclassification' and @class='ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-value non-editable-cell']"))));
 		Actions action = new Actions(getDriver());
 		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='ix_businessclassification' and @class='ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-value non-editable-cell']"))).build().perform();
 		action.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"))).doubleClick().build().perform();

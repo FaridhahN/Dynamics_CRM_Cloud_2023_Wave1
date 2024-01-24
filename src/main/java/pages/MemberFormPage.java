@@ -6045,7 +6045,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//+ New Account Representative
 	public MemberFormPage verifyAddNewAccountRepresentativeIsNotPresent() throws InterruptedException {
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Account Representatives')]")),"Account Representatives");
 		List<WebElement> accRep= getDriver().findElements(By.xpath("//span[contains(text(),'New Account Representative')]"));
 		verifyElementisNotDisplayed(accRep.size()," '+ New Account Representative  ' Button ");
