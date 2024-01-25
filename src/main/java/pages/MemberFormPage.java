@@ -6584,7 +6584,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Open Activities
 	public MemberFormPage selectOpenActivitiesView() throws InterruptedException   {
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+		List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
+		if(dropdown.size()>0) {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+		}else {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
+		}
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Open Activity Associated View')]")),"Open Activitiy Associtated View");
 		Thread.sleep(15000);

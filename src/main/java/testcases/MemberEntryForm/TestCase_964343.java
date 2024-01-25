@@ -30,8 +30,10 @@ public class TestCase_964343 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.chooseMemberEntryForm()
+		.clickSave()
 		.verifyContactOption()	;
-new ContactsPage()
+		new ContactsPage()
 		.clickNewOnContactsPage()
 
 		// 3. Provide First name = Any & Last name = Any
@@ -54,9 +56,9 @@ new ContactsPage()
 		// Click on Save
 		.clickSave()
 
-		
 
-		
+
+
 
 
 		;
