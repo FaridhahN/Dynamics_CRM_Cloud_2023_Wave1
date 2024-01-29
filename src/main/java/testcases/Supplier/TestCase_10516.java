@@ -32,7 +32,7 @@ public class TestCase_10516 {
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
 
-
+		.navigateToTPRD()
 		//verify Existing Primary Contact value 
 		.verifyPrimaryContactValue(DataInputProvider.getCellData_ColName(iRowNumber,"verifyPrimaryContactValue",sDataSheetName))
 
