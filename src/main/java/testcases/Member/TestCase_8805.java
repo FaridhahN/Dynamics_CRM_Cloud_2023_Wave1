@@ -70,6 +70,8 @@ public class TestCase_8805 {
 		//Click on Save
 
 		.clickSave() 
+		.navigateToDoNotVerifyMemberEntryForm()
+		
 
 		.selectFBOOverrideMemberEntryForm(DataInputProvider.getCellData_ColName(iRowNumber, "FBOManualOverride", sDataSheetName))
 

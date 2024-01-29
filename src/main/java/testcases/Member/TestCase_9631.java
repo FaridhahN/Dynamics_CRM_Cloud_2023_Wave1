@@ -179,6 +179,8 @@ public class TestCase_9631 {
 
 		//14. Verify Corporate parent name in the form
 		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
+		
+		.navigatefromCorporateParentToFoodServiceMEF()
 
 		//15. Verify "Is Food Service parent" field 
 		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))

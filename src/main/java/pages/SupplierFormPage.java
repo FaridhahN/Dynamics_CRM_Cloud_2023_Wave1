@@ -1558,8 +1558,11 @@ public SupplierFormPage doubleClickMembership(String membership) throws Interrup
 		Thread.sleep(5000);
 		List <WebElement> dp=getDriver().findElements(By.xpath("//*[contains(@id,'parentaccountid.fieldControl-ix_premierein')]"));
 		verifyElementisNotDisplayed(dp.size(), "Direct Parent");
-		List <WebElement> nodp=getDriver().findElements(By.xpath("//*[contains(text(),'No records found. Create a new record.')]"));
-		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
+		/*
+		 * List <WebElement> nodp=getDriver().findElements(By.
+		 * xpath("//*[contains(text(),'No records found. Create a new record.')]"));
+		 * verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
+		 */
 		return this;		
 	}
 

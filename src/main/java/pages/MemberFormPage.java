@@ -2534,7 +2534,6 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage selectFBOOverrideMemberEntryForm(String selectMemberOverride) throws InterruptedException {
-		NavigatetoMiscellaneousTab();
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'FBO Manual Override')]")),"FBO Manual override");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='FBO Manual Override']")),selectMemberOverride,"MemberOverride");
 		Thread.sleep(2000);
@@ -8622,6 +8621,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	
+	public MemberFormPage navigatefromCorporateParentToFoodServiceMEF() {
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")), "Corporate Start date");
+		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")), "Overrire");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_corporaterebatefeedate.fieldControl-date-time-input']")), "feedate");
+		clickAndTab(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")), "");
+		return this;
+
+	}
+
 	public MemberFormPage verifyNYInformationUnderAdditionaCriteria() {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@aria-label='Additional Criteria']/following-sibling::section[@aria-label='NY INFOMATION']")).size(), "NY Information");
 		return this;
