@@ -1262,9 +1262,8 @@ public SupplierFormPage doubleClickMembership(String membership) throws Interrup
 
 	//select Account Type
 	public SupplierFormPage verifyselectAccountTypeIsReadOnly(String accountType) throws InterruptedException{
-		click(getDriver().findElement(By.xpath("//select[@aria-label='Account Type']")),"Account Type");
-		selectDropDownUsingVisibleText((((getDriver().findElement(By.xpath("//select[@aria-label='Account Type']"))))),accountType,"Account Type") ;Thread.sleep(2000);
-		verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
+		String value=getDriver().findElement(By.xpath("//select[@aria-label='Account Type']")).getAttribute("disabled");
+		assertTrue(value.contains("true"));
 		return this;
 	}
 

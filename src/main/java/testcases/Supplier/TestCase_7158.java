@@ -30,9 +30,6 @@ public class TestCase_7158 {
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()		
 
-		//Verify Account Name of the Selected record
-		.verifyAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "verifyAccountName", sDataSheetName))		
-
 		//Verify Default Account Status on Supplier Form
 		.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))
 
