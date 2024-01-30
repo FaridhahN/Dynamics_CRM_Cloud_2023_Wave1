@@ -29,7 +29,7 @@ public class TestCase_828958 {
 
 		//4. Click on Add new account 
 		.clickNewAccountInSubAccount()
-
+		.chooseMemberForm()
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 

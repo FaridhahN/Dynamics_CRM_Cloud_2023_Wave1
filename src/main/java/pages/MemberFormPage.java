@@ -2364,7 +2364,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify AG is not null
 	public MemberFormPage verifyAffiliateGroupIsNotNull() {
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-SUMMARY_TAB_section_9']")),"SUMMARY TAB");
+		List<WebElement> affiliateGroup=getDriver().findElements(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']"));
+		if(affiliateGroup.size()>0) {
+			getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']")),"Affiliate Group");
+		}else {
 		getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group");
+		}
 		return this;
 	}
 
@@ -6054,6 +6059,33 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyElementisNotDisplayed(accRep.size()," '+ New Account Representative  ' Button ");
 		return this;
 	}
+	
+	//Choose Existing Account Number -DUNS
+		public MemberFormPage doubleClickExistingAccountNumberDUNS() throws InterruptedException   {
+			//Wave1 2023 Update
+			Thread.sleep(4000);
+			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div"));
+			System.out.println("# of Rows Including Header:"+ rowList.size());
+			for (int i = 1; i <=rowList.size(); i++) {
+				String title = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")).getText();
+				System.out.println(title);					
+				if (title.equals("DUNS")) {
+					Thread.sleep(3000);
+					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "HIN");
+					Thread.sleep(3000);
+					break;								
+				}
+				else if (title.equals("---"))
+				{
+
+				}
+
+			}		
+
+			return this;					
+		}
+
 	//Choose Existing Account Number -DEA
 	public MemberFormPage doubleClickExistingAccountNumberHIN() throws InterruptedException   {
 		//Wave1 2023 Update
@@ -6140,7 +6172,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return this;
 	}
+	
+	public MemberFormPage verifyAccountName() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Save']")),"Save");
+		Thread.sleep(10000);
+		Thread.sleep(5000);
+		return this;
+	}
 
+	
 	//Click New Contact
 	public MemberFormPage clickNewContact() throws InterruptedException   {
 		Thread.sleep(2000);
@@ -7790,11 +7830,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage verifyAccountName() {
-
-		verifyExactText(getDriver().findElement(By.xpath("//div[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_selected_tag_text']")), AccountName, "Account Name");
-		return this;
-	}
+	
 
 	//Verify the Accountnumber type is present in the dropdown
 
@@ -7838,6 +7874,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+	
+	//Select Account number type in account numbers window
+		public MemberFormPage chooseAccountNumberType(String  AccountnumberType) {
+			try {
+				Thread.sleep(2000);
+				selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),AccountnumberType,"Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),AccountnumberType,"Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeGLN() {
@@ -7892,6 +7941,26 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+	
+	//Type Remitra account number
+		public MemberFormPage typeAccountNumberDUNS() {
+			int min=111111111;
+			int max=999999999;
+			//Random randomGenerator = new Random();
+			int randomInt = (int)(Math.random() * (max - min + 1) + min);
+			System.out.println(randomInt);
+			String AccNumRemitra=String.valueOf(randomInt);
+			randomString=AccNumRemitra;
+
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")),"Number");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_number.fieldControl-text-box-text']")))),AccNumRemitra,"Remitra Account Number");
+			try {
+				DataInputProvider.setCellData(AccNumRemitra.toString(), Driver.iTestCaseRowNum, "Remitra",Driver.sCategory);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 	//Type GLN account number
 	public MemberFormPage typeAccountNumberGLN(String gln) {
