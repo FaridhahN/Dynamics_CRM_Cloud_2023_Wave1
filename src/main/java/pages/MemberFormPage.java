@@ -8873,6 +8873,21 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 		
 	}
+	
+	
+	public MemberFormPage thirdverifyPayee(String payee) throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_3rdpartypayee.fieldControl-LookupResultsDropdown_ix_3rdpartypayee_textInputBox_with_filter_new']")),"Third party payee account");
+		Thread.sleep(1000);
+		type(((getDriver().findElement(By.xpath("//input[@data-id='ix_3rdpartypayee.fieldControl-LookupResultsDropdown_ix_3rdpartypayee_textInputBox_with_filter_new']")))),payee,"Third party payee Account");
+		Thread.sleep(10000);
+		List <WebElement> nodp=getDriver().findElements(By.xpath("//*[contains(text(),'No records found. Create a new record.')]"));
+		verifyElementisDisplayed(nodp.size(), "No Direct Parent ");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_3rdpartypayee.fieldControl-LookupResultsDropdown_ix_3rdpartypayee_textInputBox_with_filter_new']")), "Third party payee button");
+		return this;
+		
+	}
+
 	//verify LOB sugesstions
 	
 	public MemberFormPage verifyLOBClassificationType(String LOB) {
