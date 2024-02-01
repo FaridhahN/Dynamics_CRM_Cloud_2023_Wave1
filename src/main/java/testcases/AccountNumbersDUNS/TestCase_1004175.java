@@ -3,22 +3,23 @@ package testcases.AccountNumbersDUNS;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_ 1004136:_1004136_Verify whether 'DUNS' Account number type is available in Account Number Type.
+//TFS ID_1004175:_1004175_Verify whether 'Number' field value is mandatory for creating DUNS Account Number 
 
-public class TestCase_1004136 {
 
-	  	
+public class TestCase_1004175 {
+
+
 	@Test
 	public void verifyAccountNumberDUNS(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
-		
+
 		//1. Login to CRM as Member
 		new LoginPage()
-			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
-			.clickNext()
-	  	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
-	  	    .clicSignin()
-	  	    .clicYesInStaySignedin()
-		
+		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
+		.clickNext()
+		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
+		.clicSignin()
+		.clicYesInStaySignedin()
+
 		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
@@ -29,19 +30,28 @@ public class TestCase_1004136 {
 		.clickAddNewAccountNumberInAccountNumbers()
 		.verifyAccountnumberTypedropdown("DUNS")
 		.chooseAccountNumberType("DUNS")
+
+		//Clcik Save button
+		.clickSaveAccountNumber()
+
+		//Verify Error message is displayed when the account number feild is left blank
+		.verifyAccountNumberErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
+		.clickOKOnAccountNumberErrorMessage()
+
 		.typeAccountNumberDUNS()
 		.typeStartDateInAccountNumbers()
+
 		.clickSaveAccountNumber()
+
 		.verifyNameAndCalculatedNameInAccountNumbers()
-		.clickSaveAccountNumber()
 		.clickGoBack()
-		
-							
+
+
 		//Data Reset
 		.selectAccountNumbers()
 		.doubleClickExistingAccountNumberDUNS()
 		.clickDeactivateInAccountNumbers()
 		;
-			
+
 	}
 }
