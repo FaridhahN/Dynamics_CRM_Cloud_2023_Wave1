@@ -27,7 +27,7 @@ public class TestCase_10758 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify HIN when Deactivated is removed from Member Form  
-		
+		.chooseMemberForm()
 		.verifyDEAIsNull()
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()

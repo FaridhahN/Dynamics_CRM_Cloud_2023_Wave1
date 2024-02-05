@@ -27,7 +27,7 @@ public class TestCase_10685 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify DEA is displayed on Member Form  
-		
+		.chooseMemberForm()
 		.verifyDEAIsNull()
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()

@@ -213,7 +213,7 @@ public class TestCase_8999 {
 		//Click on Save 
 		.clickSave() 
 
-		.selectAccountStatus("Terminated")
+		.selectAccountStatusdropdown("Terminated")
 
 		.clickSave()
 

@@ -27,7 +27,7 @@ public class TestCase_10684 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 		//3.Verify DEA when Deactivated is removed from Member Form  
-
+		.chooseMemberForm()
 		.verifyDEAIsNull()
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
@@ -36,6 +36,7 @@ public class TestCase_10684 {
 		.clickSaveInAccountNumbersEntity()
 		.clickGoBack()
 		.clickGeneralTab()
+		
 		.verifyDEA(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
 		.selectAccountNumbers()
 		.doubleClickExistingAccountNumberDEA()

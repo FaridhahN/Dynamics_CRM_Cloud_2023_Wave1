@@ -25,7 +25,7 @@ public class TestCase_10759 {
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
+		.chooseMemberForm()
 		//3.Verify HIN is displayed on Member Form  
 		
 		.verifyHINIsNull()
