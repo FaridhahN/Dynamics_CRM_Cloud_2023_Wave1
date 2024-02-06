@@ -5,13 +5,13 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1014380:_Verify Attachment Status is not defaulting to 'Attachment Requested' on New Contract Attachment Supplier
+//TFS ID 31543:_Test Case 9294 :Cloud-Verify Contract attachment supplier status list
 
-public class TestCase_1014380 {
+public class TestCase_31543 {
 
 
 	@Test
-	public void verifyContractAttachmentSupplierDefaultValue(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAttachmentStatusOptions(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Login to CRM using member & Innovatix User credentials
 		new LoginPage()
@@ -28,11 +28,13 @@ public class TestCase_1014380 {
 		.selectAllContractAttachentsView()	
 		.openFirstContractAttachment()
 		
-		//Access Contract Attachment Supplier and Verify Default value is NOT 'Attachment Requested'		
+		//Access Contract Attachment Supplier and Verify Attachment Status field Options		
 		.clickSuppliersTabOnCA()
 		.clickNewContractAttachmentSupplierButton()		
-		.verifyAttachmentStatusDefaultValueOnCASupplierIsNotAttachmentRequested();
-
+		
+		.verifyAttachmentStatusFieldOptionsOnCASupplier();
+		
 		//Data Reset -Not Required.
+		
 		}
 }

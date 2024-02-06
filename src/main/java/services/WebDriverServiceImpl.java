@@ -781,7 +781,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void selectDropDownUsingVisibleText(WebElement ele, String value,String field) {
 		try {
 			new Select(ele).selectByVisibleText(value);					
-			setReport().log(Status.PASS, field+" is selected with value  :' "+ value + " : as expected" ,screenshotCapture());
+			setReport().log(Status.PASS, field+" is selected with value  :' "+ value + " : ' as expected" ,screenshotCapture());
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL,  field+" could not be found",screenshotCapture());
 			Driver.failCount++;

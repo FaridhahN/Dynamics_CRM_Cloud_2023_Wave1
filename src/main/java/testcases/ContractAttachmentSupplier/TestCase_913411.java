@@ -5,13 +5,13 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1014380:_Verify Attachment Status is not defaulting to 'Attachment Requested' on New Contract Attachment Supplier
+//TFS ID_913411:_Verify whether 'Requested Eligibility from Supplier' is available in Attachment Status while creating new 'Contract attachment supplier'.
 
-public class TestCase_1014380 {
+public class TestCase_913411 {
 
 
 	@Test
-	public void verifyContractAttachmentSupplierDefaultValue(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAttachmentStatusOptions(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Login to CRM using member & Innovatix User credentials
 		new LoginPage()
@@ -28,11 +28,18 @@ public class TestCase_1014380 {
 		.selectAllContractAttachentsView()	
 		.openFirstContractAttachment()
 		
-		//Access Contract Attachment Supplier and Verify Default value is NOT 'Attachment Requested'		
+		//Access Contract Attachment Supplier and Verify Attachment Status field Options		
 		.clickSuppliersTabOnCA()
 		.clickNewContractAttachmentSupplierButton()		
-		.verifyAttachmentStatusDefaultValueOnCASupplierIsNotAttachmentRequested();
-
-		//Data Reset -Not Required.
+		
+		.selectAttachmentStatusOnCASupplier(DataInputProvider.getCellData_ColName(iRowNumber, "caSupplierAttachmentStatus", sDataSheetName))
+		
+		.clickSaveOnCASupplier()
+		
+		//Data Reset 
+		
+		.clickDeactivateOnCASupplier();
+		
+		
 		}
 }

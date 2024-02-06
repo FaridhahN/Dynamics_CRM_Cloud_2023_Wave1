@@ -13,7 +13,7 @@ public class TestCase_1014381 {
 	@Test
 	public void verifyContractAttachmentSupplierDefaultValue(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
-		//Login to CRM using member supervisor / member credentials 
+		//Login to CRM using member & Innovatix User credentials
 		new LoginPage()
 
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -32,7 +32,8 @@ public class TestCase_1014381 {
 		.clickSuppliersTabOnCA()
 		.clickNewContractAttachmentSupplierButton()		
 		.verifyAttachmentStatusDefaultValueOnCASupplierIsSelect();
-
+		
+		//Data Reset -Not Required.
 		
 		}
 }
