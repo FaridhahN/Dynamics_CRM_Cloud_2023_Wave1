@@ -383,6 +383,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	//Select Contract Attachments under Related tab
+		public ContractAttachmentPage selectRelatedContractAttachments() throws InterruptedException {
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.id("nav_ix_account_ix_contractattachment")), "Contract Attachments");
+			Thread.sleep(2000);
+			return new ContractAttachmentPage();
+		}
+
 
 	//select Account Type
 	public MemberFormPage verifyselectAccountTypeIsReadOnly(String accountType) throws InterruptedException{

@@ -151,8 +151,9 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	}
 
 	//Click Save on CA Supplier
-	public ContractAttachmentPage clickSaveOnCASupplier() {
+	public ContractAttachmentPage clickSaveOnCASupplier() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contractattachmentsupplier|NoRelationship|Form|Mscrm.Form.ix_contractattachmentsupplier.Save']")),"Save CA Supplier");
+		Thread.sleep(2000);
 		return this;
 
 	}
@@ -164,4 +165,33 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		return this;
 	}
+	
+	//Choose Existing CA using Contract Number
+		public ContractAttachmentPage doubleClickExistingContractAttachment(String contractNumber) throws InterruptedException   {
+			Thread.sleep(4000);
+			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label"));
+			System.out.println("# of Rows Including Header:"+ rowList.size());
+			for (int i = 2; i <=rowList.size(); i++) {
+				String contractNum = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")).getText();
+				System.out.println(contractNum);
+				if (contractNum.equals(contractNumber)) {
+					Thread.sleep(3000);
+					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")), "Contract Attachment" +" " + contractNumber);
+					Thread.sleep(3000);
+					break;				
+				}
+			}		
+
+			return this;					
+		}
+		
+		//Double click on Existing Contract Attachment Supplier -
+		
+		public ContractAttachmentPage doubleClickCASupplier() throws InterruptedException {
+			doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
+			Thread.sleep(3000);
+			return this;
+		}
+		
 }
