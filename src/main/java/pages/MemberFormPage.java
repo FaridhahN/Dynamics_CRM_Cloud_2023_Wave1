@@ -864,8 +864,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		clickRelatedButton();
 		ArrayList<String> relatedoptions= new ArrayList<String> ();
 		List<WebElement>listOfOption=getDriver().findElements(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')]"));
-		for(int i=0;i<listOfOption.size();i++) {
-			relatedoptions.add(getDriver().findElement(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')]")).getText());
+		for(int i=1;i<listOfOption.size();i++) {
+			relatedoptions.add(getDriver().findElement(By.xpath("(//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')])["+i+"]")).getText());
 		}
 		ArrayList<String> optionbeforeSort=new ArrayList<String> ();
 		optionbeforeSort.addAll(relatedoptions);
@@ -873,6 +873,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Assert.assertTrue(relatedoptions.equals(optionbeforeSort));
 		return this;
 	}
+	
+	public MemberFormPage verifyRelatedOption(String option, boolean isrequired) throws InterruptedException {
+		clickRelatedButton();
+		ArrayList<String> relatedoptions= new ArrayList<String> ();
+		List<WebElement>listOfOption=getDriver().findElements(By.xpath("//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')]"));
+		for(int i=1;i<listOfOption.size();i++) {
+			relatedoptions.add(getDriver().findElement(By.xpath("(//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')])["+i+"]")).getText());
+		}
+		
+		//div[@role="menuitem"]/span[contains(@data-id,'label')]
+		if(isrequired) {
+		Assert.assertTrue(relatedoptions.contains(option));
+		}else {
+			Assert.assertTrue(!(relatedoptions.contains(option)));
+		}
+		return this;
+	}
+	
+	
 
 
 	//Click Related button
@@ -6549,6 +6568,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}		
 
 		return this;					
+	}
+	
+	//Select Membership option
+	public MemberFormPage selectMembershipoption() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+		return this;
+		
 	}
 	
 	//Click Related Membership
