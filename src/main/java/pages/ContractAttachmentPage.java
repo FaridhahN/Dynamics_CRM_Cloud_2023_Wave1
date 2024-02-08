@@ -1,8 +1,11 @@
 package pages;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -55,11 +58,44 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	}
 
+	//choose Existing Supplier Account on CA Attachment Supplier
+	public ContractAttachmentPage chooseSupplierAccountOnCASupplier() {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_supplieraccount.fieldControl-LookupResultsDropdown_ix_supplieraccount_textInputBox_with_filter_new']")),"Supplier Account");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_supplieraccount.fieldControl-LookupResultsDropdown_ix_supplieraccount_search']")),"Supplier Account Search Icon");
+		click(getDriver().findElement(By.xpath("//*[contains(@data-id,'ix_supplieraccount.fieldControl-ix_supplierid')]")),"Supplier Account");
+		return this;
+	}
+
+
+	//choose Attachment Status Date on CA Attachment Supplier
+	public ContractAttachmentPage chooseAttachmentStatusDateOnCASupplier() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+		Date date = new Date();
+		String attachStatusDate= dateFormat.format(date);			
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),"Attachment Status Date"); 
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),"Attachment Status Date");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),attachStatusDate,"Attachment Status Date"); 
+		return this;
+	}
+	 
+	//type Tier on CA Supplier
+	public ContractAttachmentPage typeTierOnCASupplier(String tier) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_tier.fieldControl-text-box-text']")),"Tier");
+		type(getDriver().findElement(By.xpath("//*[@data-id='ix_tier.fieldControl-text-box-text']")),tier,"Tier");
+		return this;
+	}
+	
+	//type Tier on CA Supplier
+		public ContractAttachmentPage typeCommentsOnCASupplier(String comments) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_comments.fieldControl-text-box-text']")),"Comments");
+			type(getDriver().findElement(By.xpath("//*[@data-id='ix_comments.fieldControl-text-box-text']")),comments,"Comments");
+			return this;
+		}
+
 	//Default Value  on Attachment Status field is not 'Attachment Requested'
 	public ContractAttachmentPage verifyAttachmentStatusDefaultValueOnCASupplierIsNotAttachmentRequested() {
 		verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_supplierattachmentstatus.fieldControl-option-set-select']")),"Attachment Requested" ,"Attachment Status");
 		return this;
-
 	}
 
 	//Default Value  on Attachment Status field is '--Select--'
@@ -158,7 +194,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	}
 
-	//Click Save on CA Supplier
+	//Click Deactivate on CA Supplier
 	public ContractAttachmentPage clickDeactivateOnCASupplier() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contractattachmentsupplier|NoRelationship|Form|Mscrm.Form.ix_contractattachmentsupplier.Deactivate']")),"Deactivate On CA Supplier");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate On CA Supplier");
@@ -166,32 +202,41 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		return this;
 	}
 	
-	//Choose Existing CA using Contract Number
-		public ContractAttachmentPage doubleClickExistingContractAttachment(String contractNumber) throws InterruptedException   {
-			Thread.sleep(4000);
-			WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
-			List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label"));
-			System.out.println("# of Rows Including Header:"+ rowList.size());
-			for (int i = 2; i <=rowList.size(); i++) {
-				String contractNum = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")).getText();
-				System.out.println(contractNum);
-				if (contractNum.equals(contractNumber)) {
-					Thread.sleep(3000);
-					doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")), "Contract Attachment" +" " + contractNumber);
-					Thread.sleep(3000);
-					break;				
-				}
-			}		
-
-			return this;					
-		}
-		
-		//Double click on Existing Contract Attachment Supplier -
-		
-		public ContractAttachmentPage doubleClickCASupplier() throws InterruptedException {
-			doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
+	
+	//Click Activate on CA Supplier
+		public ContractAttachmentPage clickActivateOnCASupplier() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_contractattachmentsupplier|NoRelationship|Form|Mscrm.Form.ix_contractattachmentsupplier.Activate']")),"Activate On CA Supplier");
+			click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Activate On CA Supplier");
 			Thread.sleep(3000);
 			return this;
 		}
-		
+
+	//Choose Existing CA using Contract Number
+	public ContractAttachmentPage doubleClickExistingContractAttachment(String contractNumber) throws InterruptedException   {
+		Thread.sleep(4000);
+		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
+		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label"));
+		System.out.println("# of Rows Including Header:"+ rowList.size());
+		for (int i = 2; i <=rowList.size(); i++) {
+			String contractNum = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")).getText();
+			System.out.println(contractNum);
+			if (contractNum.equals(contractNumber)) {
+				Thread.sleep(3000);
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")), "Contract Attachment" +" " + contractNumber);
+				Thread.sleep(3000);
+				break;				
+			}
+		}		
+
+		return this;					
+	}
+
+	//Double click on Existing Contract Attachment Supplier -
+
+	public ContractAttachmentPage doubleClickCASupplier() throws InterruptedException {
+		doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
+		Thread.sleep(3000);
+		return this;
+	}
+
 }
