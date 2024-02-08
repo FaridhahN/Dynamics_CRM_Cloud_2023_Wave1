@@ -2018,7 +2018,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			}
 			click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 			click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-			click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+			List<WebElement> country=getDriver().findElements(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']"));
+			if(country.size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
+			}
 			click((getDriver().findElement(By.xpath("//label[contains(text(),'Phone')]"))),"Other Phone");
 			click(getDriver().findElement(By.xpath("//label[contains(text(),'Do')]")),"Do Not Verify");
 			click(getDriver().findElement(By.xpath("//label[contains(text(),'Website')]")),"Website");
@@ -8954,6 +8957,97 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			
 			return this;
 		}
+		
+		//Navigate to account Rank feild
+		public MemberFormPage navigateToAccountRanking() {
+			clickAndTab(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")), "Record status");
+			clickAndTab(getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")), "Record change status");
+			List<WebElement> premierroaster=getDriver().findElements(By.xpath("//label[contains(text(),'Premier Roster')]"));
+			if(premierroaster.size()>0) {
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Roster')]")),"Premier Roaster");
+			}
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Internal Rep')]")),"Current Internal Rep");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Field Rep')]")),"Current Field Rep");
+			click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Rank')]")),"Account Rank");
+			List<WebElement> feeshare=getDriver().findElements(By.xpath("//h2[@title='FEE SHARE']"));
+			if(feeshare.size()>0) {
+			click(getDriver().findElement(By.xpath("//h2[@title='FEE SHARE']")),"Account Rank");
+			
+			}
+			return this;
+		}
+		
+		public MemberFormPage verifyAccountRankingDisabled() {
+			assertTrue(getDriver().findElement(By.xpath("//select[@data-id='ix_accountrank.fieldControl-option-set-select' and @ disabled]")).isDisplayed());
+			return this;
+		}
+		
+		public MemberFormPage verifyAccountRankingEnabled() {
+			List<WebElement> accountRankfeild=getDriver().findElements(By.xpath("//select[@data-id='ix_accountrank.fieldControl-option-set-select' and @ disabled]"));
+			assertTrue(accountRankfeild.size()==0);
+			return this;
+		}
 
+
+	public MemberFormPage navigateToSponsorMEF() {
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Change Status')]")),"Record Change Status");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Internal Rep')]")),"Current Internal Rep");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Field Rep')]")),"Current Field Rep");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Rank')]")),"Account Rank");
+
+		return this;
+	}
+
+	public MemberFormPage verifyAccountRankingisNotMasked() {
+		
+		String accountRanking=getAttribute(getDriver().findElement(By.xpath("//Select[@data-id='ix_accountrank.fieldControl-option-set-select']")), "title", "Account Ranking");
+		assertTrue(!(accountRanking.contains("*")));
+			
+		return this;
+	}
+	
+	
+	public MemberFormPage verifyAccountRankingDropdown() throws InterruptedException {
+		
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select AccountRanking= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_accountrank.fieldControl-option-set-select']")));
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> option =AccountRanking.getOptions();	
+
+		List<String> expectdoption = Arrays.asList("--Select--","Gold","Silver","Bronze","House");		
+
+
+		for(int i=0;i<option.size();i++) {
+
+			selectoptions.add(option.get(i).getText());
+
+		}
+
+		if(selectoptions.containsAll(expectdoption))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + selectoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + selectoptions + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+return this;
+		
+	}
+	
+	public MemberFormPage selectccountRankingDropdown(String accountRanking) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_accountrank.fieldControl-option-set-select']")), accountRanking, "Accoun Ranking");
+		String selectedOption=getAttribute(getDriver().findElement(By.xpath("//Select[@data-id='ix_accountrank.fieldControl-option-set-select']")), "title", "Account Ranking");
+		assertTrue((selectedOption.contentEquals(accountRanking)));
+		
+		return this;
+				
+	}
+	
 }
 

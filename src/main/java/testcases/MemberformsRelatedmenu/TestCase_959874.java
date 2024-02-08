@@ -4,14 +4,14 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_959874:_959874:Verify the sorting of Related list for user without Smart PO sales team on new account - Member form
+//TFS ID_828604:_828604:Verify whether Account Ranking Field is Non Editable/Locked/Not Masked for Member.
 
 
 public class TestCase_959874 {
 
 
 	@Test
-	public void verifySmartPOSales(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
+	public void verifyAccountRanking(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
 	{
 		//1. Login to CRM using member supervisor / member credentials
 		WebDriverServiceImpl.isMemberForm=true;

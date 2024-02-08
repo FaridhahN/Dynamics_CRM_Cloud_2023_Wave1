@@ -100,7 +100,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.id("GlobalSearchBox")),"Global Search");
 		typeAndEnter(getDriver().findElement(By.id("GlobalSearchBox")),
 				crmNumberInput,"Global Search Input Box" );
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		if(!(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span")).isDisplayed())) {
 			if(getDriver().findElements(By.xpath("//*[@id='numberOfSyncedEntitiesInApp']//*[contains(text(),'We didn')]")).size()>0){
 				// click(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']")),"Clear button");
@@ -367,6 +367,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 
 	//Click on Discard changes
 	public AccountsPage clickOnDiscardChanges() throws InterruptedException {
+		
 		click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		Thread.sleep(3000);
 		return new AccountsPage();

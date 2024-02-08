@@ -240,7 +240,12 @@ public class Driver extends PreAndPost{
 			else if(sCategory.equalsIgnoreCase("MemberformsRelatedmenu")) {
 				sTestClassName="testcases.MemberformsRelatedmenu.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
-			}	
+			}
+			
+			else if(sCategory.equalsIgnoreCase("AccountRanking")) {
+				sTestClassName="testcases.AccountRanking.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}
 			
 			
 			
