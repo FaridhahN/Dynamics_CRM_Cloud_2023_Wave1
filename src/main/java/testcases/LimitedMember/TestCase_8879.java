@@ -23,6 +23,10 @@ public class TestCase_8879 {
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.chooseMemberForm()
+
+		.clickSave()
+		
 		.navigateToDoNotVerify()
 		.navigatetNYInformation()
 		//3.Verify  NIACS code field access 

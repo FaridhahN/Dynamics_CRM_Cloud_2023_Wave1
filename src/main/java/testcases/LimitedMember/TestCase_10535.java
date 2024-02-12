@@ -23,7 +23,9 @@ public class TestCase_10535 {
 		.selectAccountsTab()		
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.chooseMemberForm()
 
+		.clickSave()
 		//3.Verify following Fields are editable in Opened Member Account 
 		//Account Name
 		.verifyAccountNameIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
@@ -80,13 +82,13 @@ public class TestCase_10535 {
 		.verifyExternalAddressIDIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "externalAddressID", sDataSheetName))
 
 		.verifyEstLocIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "numEstLoc", sDataSheetName))
-		
+
 		.navigatetoNAICS()
-		
+
 		.verifyNAICSIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "nAICS", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "industryTitle", sDataSheetName))
-		
+
 		.naivagateToReferredByFromNACS()
-		
+
 		.verifyReferredByIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "referredBy", sDataSheetName))
 
 		.clickNyTabSave()

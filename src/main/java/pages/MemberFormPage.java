@@ -1384,7 +1384,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click Save And Close on Activity			
 	public MemberFormPage clickSaveAndCloseOnActivity() throws InterruptedException   {
-		click(getDriver().findElement(By.xpath("//span[text()='Save & Close']")),"Save & Close on Task Activity");
+		
+		List<WebElement> closeButton=getDriver().findElements(By.xpath("//section//span[text()='Save & Close']"));
+		if(closeButton.size()>0) {
+		click(getDriver().findElement(By.xpath("//section//span[text()='Save & Close']")),"Save & Close on Task Activity");
+		}
+		else {
+			click(getDriver().findElement(By.xpath("//section//span[text()='Save and Close']")),"Save & Close on Task Activity");
+		}
 		Thread.sleep(4000);
 		return this;
 	}
@@ -2631,6 +2638,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage navigateToCorporateParentMemberoForm() {
+		navigateToSponsorMemberForm();
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Sponsor')]")),"is Sponsor");
 		click(getDriver().findElement(By.xpath("//label[contains(@id,'ix_sponsor-field-label')]")),"Sponsor");
 		click(getDriver().findElement(By.xpath("//h2[@title='CORPORATE PARENT']")),"CP");
@@ -6284,8 +6292,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPETITORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Click Related and Competitors
 	public MemberFormPage clickCompetitors() throws InterruptedException   {
-		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Competitors')]")),"Competitors");
 		Thread.sleep(2000);
@@ -7690,10 +7702,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//remove Referred By
 	public MemberFormPage removeReferredBy() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Power Account')]")),"Power Account");
 		Thread.sleep(2000);
 		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//ul[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_SelectedRecordList']"))).perform();
-		Thread.sleep(2000);
+		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_selected_tag']"))).perform();
+		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_referredby.fieldControl-LookupResultsDropdown_ix_referredby_selected_tag_delete']")), "Clear X icon on Existing Referred By");
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//span[text()='Save']")),"NY Info Tab Save");
@@ -8763,12 +8776,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage verifyContactAccountAssociation() {
+	public MemberFormPage verifyContactAccountAssociation() throws InterruptedException {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='LOB']/following-sibling::li[@title='Contact Account Associations']")).size(), "Account Representatives");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='LOB']/following-sibling::li[@title='Contact Account Associations']")), "Account Representatives");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Active Contact Account Associations')]")).size(), "Current Account Representative view");
+		click(getDriver().findElement(By.xpath("//button[@data-lp-id='SubGridStandard:ix_contactaccountassociation-ix_contactaccountassociation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_contactaccountassociation.RefreshButton']")), "Refresh button");
+		Thread.sleep(5000);
 		return this;
+		
+		
 	}
+	
+
 
 	public MemberFormPage verifyRebatePayments() {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@aria-label='Account Representatives']/following-sibling::li[@title='Rebate Payments']")).size(), "Account Representatives");
@@ -9047,6 +9066,22 @@ return this;
 		
 		return this;
 				
+	}
+	
+	
+	public String getPrimaryContactName() throws IOException
+	{
+		String accountName=getTextValue(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_text']")),"PrimaryContact");
+		return accountName;
+	}
+	
+	public MemberFormPage verifyPrimaryAccountNameinCAA() throws IOException, InterruptedException{
+		Thread.sleep(200);
+		String name=getPrimaryContactName();
+		verifyContactAccountAssociation();
+		String accountname=getDriver().findElement(By.xpath("//div[@class='ag-center-cols-container']//div[@aria-label='Press SPACE to select this row.']//span")).getText();
+		assertTrue(name.contentEquals(accountname));
+		return this;
 	}
 	
 }

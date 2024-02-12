@@ -24,6 +24,10 @@ public class TestCase_9649 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		.chooseMemberForm()
+
+		.clickSave()
+		
 		.navigateToDoNotVerify()
 		.navigatetNYInformation()
 

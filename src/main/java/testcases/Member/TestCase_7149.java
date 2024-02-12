@@ -30,14 +30,14 @@ public class TestCase_7149 {
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
-		
+
 		//Account name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 		// Account  Type = Member
 		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
-		
+
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
@@ -46,7 +46,7 @@ public class TestCase_7149 {
 
 		//Store/Location type = Shipto
 		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))
-		
+
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged()  
 
@@ -99,6 +99,8 @@ public class TestCase_7149 {
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
 
+		.navigateToApplicationDate()
+		.navigateToCorporateParentMemberoForm()
 
 		//13. Verify "IS Corporate accoun" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))

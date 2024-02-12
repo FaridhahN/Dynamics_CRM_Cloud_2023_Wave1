@@ -175,6 +175,9 @@ public class TestCase_7150 {
 
 		.verifyAffiliateGroupIsNotNull()
 		.verifyAgEffectiveDateIsNotNull()
+		
+		.navigateToApplicationDate()
+		.navigateToCorporateParentMemberoForm()
 
 		//10. Verify "IS Corporate account" field
 		//13. Verify "IS Corporate account" field
