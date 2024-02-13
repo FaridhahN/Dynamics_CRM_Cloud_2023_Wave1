@@ -1513,6 +1513,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(6000);
 		return new MemberFormPage();
 	}
+	
+	// Click back from Contact To Member Form
+		public MemberFormPage verifyCAA() throws InterruptedException {
+			Thread.sleep(4000);
+			click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
+			Thread.sleep(6000);
+			return new MemberFormPage();
+		}
 
+	
 
 }
