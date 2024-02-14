@@ -13,6 +13,7 @@ public class TestCase_8877 {
 	@Test
 	public void verifyMembershipEntity(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
+		try {
 		//1. Login to CRM as Limited member 
 		new LoginPage()
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -46,37 +47,45 @@ public class TestCase_8877 {
 
 		new DashboardPage()
 
+		//2. Go to Workplace >> Take Any Member Account 
 		.selectAccountsTab()		
-		.clickNewOnAccountsPage()
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.chooseMemberForm()
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
-		//Direct Parent Entity Code = 673415
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
-		//Direct Parent Relation = Managed
-		.selectDirectParentRelationManaged() 
-
-		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-
-		//Top Parent Relation =  OLM
-		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
-
-		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
 
 		//Click on Save 
 		.clickSave() 
 
+		.navigateToDP()
 		.EnterPrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName))
 		.clickGeneralTab()
 		.clickSave()
 		.navigateToDP()
-		.updatePrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName1", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName1", sDataSheetName));
-
-
+		.updatePrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName1", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName1", sDataSheetName))
+		.clickSave()
+		.EndCAA()
+		.clickSave()
 		;
+		}catch(Exception e) {
+			new DashboardPage()
+
+			//2. Go to Workplace >> Take Any Member Account 
+			.selectAccountsTab()		
+			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
+			.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+			.chooseMemberForm()
+.verifyContactAccountAssociation()
+
+			//Click on Save 
+			
+			.EndCAA()
+			.clickSave()
+
+			
+			;
+		}
+		
 		//Data Reset -Not Required
 
 

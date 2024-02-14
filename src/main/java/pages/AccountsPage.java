@@ -55,6 +55,20 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return this;
 	} 
 	
+	//select Active Member view
+
+		public AccountsPage selectInActiveMembers() throws InterruptedException {
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
+			Thread.sleep(5000);
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'Inactive Accounts')]")),"InActive Members View");
+			Thread.sleep(15000);
+			Thread.sleep(15000);
+			
+			Thread.sleep(15000);
+			return this;
+		} 
+	
 	//Select the account from the default view
 	public MemberFormPage selectaccountfromdefaultView() {
 		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(30));
@@ -115,19 +129,24 @@ public class AccountsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+public AccountsPage searchinfilter(String crmNumberInput) throws InterruptedException {
+	
+	WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(15));
+	wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+	Thread.sleep(3000);
+	typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
+	//06/14/2023 -Due to Active Member Taking Long Time to load
+	Thread.sleep(5000);
+	return this;
 
+}
 	public  AccountsPage searchAccountFromFilter(String crmNumberInput) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ViewSelecto')]")),"Select a view");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Accounts')]")),"All Accounts");
 		Thread.sleep(15000);
 		Thread.sleep(15000);
-		WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(15));
-		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
-		Thread.sleep(3000);
-		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
-		//06/14/2023 -Due to Active Member Taking Long Time to load
-		Thread.sleep(5000);
-		return this;
+		searchinfilter(crmNumberInput);
+				return this;
 	}
 
 
@@ -184,6 +203,19 @@ public class AccountsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return new MemberFormPage();
 	}	
+	
+	
+	//Select member account from Global search results -06/14/2023
+		public  MemberFormPage selectInactiveAccount(String crmNumberInput) throws InterruptedException {	
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//div[@col-id='name'and contains(@class,'ag-cell')]"))));
+			Thread.sleep(4000);
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name'and contains(@class,'ag-cell')]"))).perform();
+			doubleClick(getDriver().findElement(By.xpath("//div[@col-id='name'and contains(@class,'ag-cell')]")),"Search Result Record");
+			Thread.sleep(5000);
+			return new MemberFormPage();
+		}	
 
 
 	//Select All Prospects view

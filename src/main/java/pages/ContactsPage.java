@@ -1522,6 +1522,33 @@ public class ContactsPage extends WebDriverServiceImpl {
 			return new MemberFormPage();
 		}
 
-	
+	//Deactivate the contact
+		
+		public ContactsPage clickDeactivateButton() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Deactivate']")), "Deactivate Button");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deactivate Button");
+			Thread.sleep(4000);
+			
+			return this;
+		}
+		
+		
+		//Verify the Deactivated contact
+		
+				public ContactsPage verifyContactDeactivated() throws InterruptedException {
+					Thread.sleep(2000);
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")).size(), "Activate Button");
+					return this;
+				}
+		//Activate Account
+				public ContactsPage Activateccount() throws InterruptedException {
+					click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")), "Activate Button");
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deacivate Button");
+					Thread.sleep(4000);
+					return this;
+				}
 
 }

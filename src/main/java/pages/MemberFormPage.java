@@ -3245,12 +3245,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on Membership SAve and close //Quick create
 	public MemberFormPage clickQuickCreateMembershipSaveAndClose() throws InterruptedException {
-		
+
 		//Updated on 2/12/2024 based on Ticket 1010274
-		
-		
+
+
 		//click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
-		
+
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
 		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
@@ -4761,7 +4761,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage clickMembershipSaveAndCloseMEF() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
+		//Changes as part of Premier promise
+		//	click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
 		Thread.sleep(7000);
 		//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		//Changes as part of Ticket 833703
@@ -9109,27 +9112,44 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		createnewContact(updatename, updatelastname);
 		verifyPrimaryAccountNameinCAA();
 		verifyrelationEndDate(lastnmae+", "+firstname);
-		
+
 		return this;
 	}
-	
-	
+
+	public MemberFormPage EndCAA() throws InterruptedException, IOException {
+
+
+		Thread.sleep(4000);
+		List<WebElement> checkbox=getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"));
+		for(int i=1;i<=checkbox.size();i++) {
+			Actions actions=new Actions(getDriver());
+			actions.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"))).doubleClick().build().perform();
+
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_relationshipenddate.fieldControl-date-time-input']")),TestUtils.todaysDate(),"Relation End Date");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactaccountassociation|NoRelationship|Form|Mscrm.Form.ix_contactaccountassociation.SaveAndClose']")),"Save And Close button");
+			Thread.sleep(4000);
+		}
+
+		return this;
+	}
+
+
 	public MemberFormPage EnterPrimaryAccount(String firstname, String lastnmae) throws InterruptedException, IOException {
 		clicktheMagnifyingGlass();
 		createnewContact(firstname, lastnmae);
 		verifyPrimaryAccountNameinCAA();
-		
+
 		return this;
 	}
 	public MemberFormPage verifyrelationEndDate(String firstname) throws InterruptedException, IOException {
-		
-	String endDate=getAttribute(getDriver().findElement(By.xpath("//span[contains(text(),'"+firstname+"')]/ancestor::div[@col-id='ix_contact']/following-sibling::div[@col-id='ix_relationshipenddate']//label")), "aria-label", "End Date");
-	assertTrue((endDate.isEmpty()), "No Relationshipt End Date");
-	
-	return this;
-	
+
+		String endDate=getAttribute(getDriver().findElement(By.xpath("//span[contains(text(),'"+firstname+"')]/ancestor::div[@col-id='ix_contact']/following-sibling::div[@col-id='ix_relationshipenddate']//label")), "aria-label", "End Date");
+		assertTrue((endDate.isEmpty()), "No Relationshipt End Date");
+
+		return this;
+
 	}
-	
+
 
 
 	public MemberFormPage clicktheMagnifyingGlass() {
@@ -9152,6 +9172,41 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	public MemberFormPage verifyActivateButton() {
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size(),"Activate Button");
+		return this;
+	}
+	public MemberFormPage ActivateAccount() throws InterruptedException {
+		if(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")),"Activate Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
+			Thread.sleep(5000);
+			System.out.println(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")));
+			assertTrue(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size()==0);
+		}
+		return this;
+	}
+	
+	
+	public MemberFormPage verifyDeactivateButton() throws InterruptedException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Deactivate')]")).size(), "Deactivate Button");
+		return this;
+	}
+	
+	public MemberFormPage clickDeactivate() throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size(), "Activate Button");
+		
+		Thread.sleep(5000);
+		return this;
+	}
+	
+	
+//Activa
 
 }
 
