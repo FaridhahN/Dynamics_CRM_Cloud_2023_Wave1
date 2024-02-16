@@ -1,4 +1,4 @@
-package testcases.SecurityMemberSupervisor;
+package testcases.LimitedMember;
 
 import org.testng.annotations.Test;
 
@@ -7,12 +7,12 @@ import utils.DataInputProvider;
 
 //******COMPLETED******
 
-//TFD ID_5034:_695262_Cloud : Verify Member supervisor has access to deactivate a contact
+//TFD ID_4546:_828060_Cloud : Verify if Limited member can edit the primary account of a contact
 
-public class TestCase_5034 {
+public class TestCase_4546 {
 
 	@Test
-	public void validateContactDeactivate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void validateContactCAA(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM as member supervisor
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -28,9 +28,15 @@ public class TestCase_5034 {
 
 		// 2. Go to any active contact which has an active contact account association
 		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.clickDeactivateButton()
-		.verifyContactDeactivated()
-		.Activateccount()
-	
-	;}
+
+		.addAnotherPrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
+
+		.clickSave()
+		.clickCAAFromRelated()
+		.verifyNewCAA(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
+		.DeactivaeAccount(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))	
+		//Data Reset
+
+		;
+	}
 }

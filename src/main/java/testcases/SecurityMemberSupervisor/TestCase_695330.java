@@ -7,9 +7,10 @@ import utils.DataInputProvider;
 
 //******COMPLETED******
 
-//TFD ID_5034:_695262_Cloud : Verify Member supervisor has access to deactivate a contact
+//TFD ID_695330:_695330_Verify "Employee Id" *& "Hire Date" Fields Read Only  on User and Information forms_Member Supervisor Login
 
-public class TestCase_5034 {
+
+public class TestCase_695330 {
 
 	@Test
 	public void validateContactDeactivate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
@@ -19,18 +20,13 @@ public class TestCase_5034 {
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
-		// Go to Contacts
-		.selectContacts()
-
-		//Navigate to All Account
-
-		.selectAllContactView()
-
-		// 2. Go to any active contact which has an active contact account association
-		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.clickDeactivateButton()
-		.verifyContactDeactivated()
-		.Activateccount()
-	
-	;}
+		// Go to AdvanceSettings
+		.selectAdvanceSetting()
+		.navigatetoAdvanceSettings("Business Management")	
+		.navigateToUserOption()
+		.clickUsers()
+		.selectUsers()
+		.verifyId_HireFeild()
+		
+		;}
 }

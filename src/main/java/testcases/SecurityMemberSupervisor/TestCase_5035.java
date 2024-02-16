@@ -7,12 +7,12 @@ import utils.DataInputProvider;
 
 //******COMPLETED******
 
-//TFD ID_5034:_695262_Cloud : Verify Member supervisor has access to deactivate a contact
+//TFD ID_5035:_32865_Cloud : Verify Active Contact account association view does not show end dated records_Member Supervisor Login
 
-public class TestCase_5034 {
+public class TestCase_5035 {
 
 	@Test
-	public void validateContactDeactivate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void validateContactCAA(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM as member supervisor
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -28,9 +28,11 @@ public class TestCase_5034 {
 
 		// 2. Go to any active contact which has an active contact account association
 		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.clickDeactivateButton()
-		.verifyContactDeactivated()
-		.Activateccount()
-	
-	;}
+		.verifyDeactivatedAcocunt(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		
+		.verifyActivatedAcocunt(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		//Data Reset
+		
+	;
+	}
 }

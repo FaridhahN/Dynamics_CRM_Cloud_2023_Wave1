@@ -36,6 +36,8 @@ import utils.DataInputProvider;
 
 public class ContactsPage extends WebDriverServiceImpl {
 
+	public static String CRMNumber;
+	
 	// Click New on contacts page
 	public ContactsPage clickNewOnContactsPage() {
 		click(getDriver().findElement(
@@ -143,10 +145,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'parentcustomerid.fieldControl-name0_0_0')]")),primaryAccount);
 		return this;
 	}
-	
-	
+
+
 	//Select Primary Account through Search Icon
-	
+
 	public ContactsPage selectPrimaryAccountByClickingOnSearchLensIcon(String pa) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account Search Icon");
@@ -177,14 +179,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}
-	
+
 	// Click Save button in contact summary page
-		public ContactsPage clickSaveWithoutAssertion() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Save']")),
-					"Save");
-			Thread.sleep(3000);
-			return this;
-		}
+	public ContactsPage clickSaveWithoutAssertion() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Save']")),
+				"Save");
+		Thread.sleep(3000);
+		return this;
+	}
 
 	// check if Innovatix contact id is created
 	public ContactsPage isInnovatixContactIDDisplayed() throws InterruptedException {
@@ -192,7 +194,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		String innovatixContactID = getAttribute(
 				getDriver().findElement(By.xpath("//*[@data-id='ix_innovatixcontactid.fieldControl-text-box-text']")),
 				"value", "Innovatix Contact Id");
-		
+
 		if (innovatixContactID==null) {
 			setReport().log(Status.FAIL, "Value is blank in Innovatix Contact ID"	,screenshotCapture());
 			Driver.failCount++;		
@@ -200,8 +202,9 @@ public class ContactsPage extends WebDriverServiceImpl {
 		else {
 
 			setReport().log(Status.PASS, "Innovatix Contact ID " + innovatixContactID + " is displayed",
-				screenshotCapture());
+					screenshotCapture());
 		}
+		CRMNumber=innovatixContactID;
 		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_innovatixcontactid.fieldControl-text-box-text']")), "Innovatix Contact ID");
 		try {
 			DataInputProvider.setCellData(innovatixContactID.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",
@@ -209,6 +212,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		
 		return this;
 	}
@@ -337,21 +341,21 @@ public class ContactsPage extends WebDriverServiceImpl {
 				contactEndDate, "Contact End Date");
 		return this;
 	}
-	
-	// choose Receive All Communications on CAA
-		public ContactsPage chooseReceiveAllCommunicationsOnCAA(String receiveAllComm) throws InterruptedException {
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")),
-					"Record Status");
-			selectDropDownUsingVisibleText(
-					((getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")))),
-					receiveAllComm, "Receive All Communications");
-			Thread.sleep(3000);
-//			verifyExactText(getDriver().findElement(By.xpath("//*[contains(@id,'ix_receiveallcommunications.fieldControl-checkbox-select')][@value='"+receiveAllComm+"']")),
-//					receiveAllComm, "Receive All Communications");
-			return this;
 
-		}
+	// choose Receive All Communications on CAA
+	public ContactsPage chooseReceiveAllCommunicationsOnCAA(String receiveAllComm) throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")),
+				"Record Status");
+		selectDropDownUsingVisibleText(
+				((getDriver().findElement(By.xpath("//*[@data-id='ix_receiveallcommunications.fieldControl-checkbox-select']")))),
+				receiveAllComm, "Receive All Communications");
+		Thread.sleep(3000);
+		//			verifyExactText(getDriver().findElement(By.xpath("//*[contains(@id,'ix_receiveallcommunications.fieldControl-checkbox-select')][@value='"+receiveAllComm+"']")),
+		//					receiveAllComm, "Receive All Communications");
+		return this;
+
+	}
 
 	// Click back arrow across all pages
 	public ContactsPage clickGoBack() throws InterruptedException {
@@ -477,7 +481,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),"Account");
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_account.fieldControl-LookupResultsDropdown_ix_account_textInputBox_with_filter_new']")),account, "Account");
+		List<WebElement> accountid=getDriver().findElements(By.xpath("//span[contains(@data-id,'ix_account.fieldControl-accountnumber')]//span[contains(text(),'"+account+"')]"));
+		if(accountid.size()>0) {
+			click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_account.fieldControl-accountnumber')]//span[contains(text(),'"+account+"')]")),account);
+		}else {
 		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_account.fieldControl-name0_0_0')]")),account);
+		}
 		return this;
 	}
 
@@ -774,6 +783,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
+	
+	// double click on the old CAA record
+		public ContactsPage verifyNewCAA(String PrimaryAccount) throws InterruptedException {
+			
+			Thread.sleep(2000);
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') and contains(text(),'"+PrimaryAccount+"')]")).size(), "Primary Account");
+			
+			return this;					
+		}
 
 
 	// choose contact termination reason
@@ -867,6 +885,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
+	
+	// Account is in draft message should not be displayed
+		public ContactsPage VerifyErrorMessageNotDisplayed() throws InterruptedException {
+			Thread.sleep(2000);
+
+			List<WebElement> message=getDriver().findElements(By.xpath("//*[@data-id='errorDialog_subtitle']"));
+
+			verifyElementisNotDisplayed(message.size(), "error message");
+			return this;
+		}
 
 	//Click OK on Error Message
 	public ContactsPage clickOKOnErrorMessage() throws InterruptedException {
@@ -1309,6 +1337,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return this;
 	}
+	
+	
+	// Click save button in the Contact Communication page Without Script Error
+		public ContactsPage clickSaveAndCloseInContactCommunicationWithoutScriptError() throws InterruptedException {
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactcommunication|NoRelationship|Form|Mscrm.Form.ix_contactcommunication.SaveAndClose']")),"Save and Save");
+			Thread.sleep(5000);
+			return this;
+		}
+	
 
 	// Provide value for Contact Communication as provided in the datasheet
 	public ContactsPage typeContactCommunication1(String contactCommunication) throws InterruptedException {
@@ -1513,42 +1551,119 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(6000);
 		return new MemberFormPage();
 	}
-	
+
 	// Click back from Contact To Member Form
-		public MemberFormPage verifyCAA() throws InterruptedException {
-			Thread.sleep(4000);
-			click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
-			Thread.sleep(6000);
-			return new MemberFormPage();
-		}
+	public MemberFormPage verifyCAA() throws InterruptedException {
+		Thread.sleep(4000);
+		click(getDriver().findElement(By.xpath("//*[@title='Go back']")), "Go Back");
+		Thread.sleep(6000);
+		return new MemberFormPage();
+	}
 
 	//Deactivate the contact
+
+	public ContactsPage clickDeactivateButton() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Deactivate']")), "Deactivate Button");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deactivate Button");
+		Thread.sleep(4000);
+
+		return this;
+	}
+
+
+	//Verify the Deactivated contact
+
+	public ContactsPage verifyContactDeactivated() throws InterruptedException {
+		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")).size(), "Activate Button");
+		return this;
+	}
+	//Activate Account
+	public ContactsPage Activateccount() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")), "Activate Button");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deacivate Button");
+		Thread.sleep(4000);
+		return this;
+	}
+
+	public ContactsPage verifyDeactivatedAcocunt(String account) throws InterruptedException {
+		String pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
+		int start=(pagination.indexOf('f')+2);
+		int last=(pagination.indexOf('f')+3);
+		int totalcount=Integer.parseInt(pagination.substring(start,last));
+
+		clickCAAFromRelated();
 		
-		public ContactsPage clickDeactivateButton() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Deactivate']")), "Deactivate Button");
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deactivate Button");
-			Thread.sleep(4000);
-			
-			return this;
-		}
+		DeactivaeAccount(account);
+		clickSummaryTab();
+		pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
+
+		start=(pagination.indexOf('f')+2);
+		 last=(pagination.indexOf('f')+3);
+		int aftercount=Integer.parseInt(pagination.substring(start,last));
+		
+		assertTrue(aftercount<totalcount);
+
+		return this;
+	}
+	
+	public ContactsPage doubleClickAccount(String account) throws InterruptedException{
+		Actions actions=new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') and contains(text(),'"+account+"')]"))).doubleClick().build().perform();
+		return this;
+	}
+	public ContactsPage DeactivaeAccount(String account) throws InterruptedException
+	
+	{
+		doubleClickAccount(account);
+		typeContactRelationshipEndDate();
+		clickSaveAndCloseInCAA();
+		return this;
+	}
+	public ContactsPage verifyActivatedAcocunt(String account) throws InterruptedException {
+		String pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
+
+		int start=(pagination.indexOf('f')+2);
+		int last=(pagination.indexOf('f')+3);
+		int totalcount=Integer.parseInt(pagination.substring(start,last));
+
+		
+		clickCAAFromRelated();
+		clickAddCAA();
+		typeAccountInCAA(account);
+		clickSaveAndCloseInCAA();
+		clickSummaryTab();
+		
+		pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
+		start=(pagination.indexOf('f')+2);
+		 last=(pagination.indexOf('f')+3);
+		int aftercount=Integer.parseInt(pagination.substring(start,last));
 		
 		
-		//Verify the Deactivated contact
+		assertTrue(aftercount>totalcount);
+
 		
-				public ContactsPage verifyContactDeactivated() throws InterruptedException {
-					Thread.sleep(2000);
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")).size(), "Activate Button");
-					return this;
-				}
-		//Activate Account
-				public ContactsPage Activateccount() throws InterruptedException {
-					click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.Activate']")), "Activate Button");
-					Thread.sleep(2000);
-					click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deacivate Button");
-					Thread.sleep(4000);
-					return this;
-				}
+				return this;
+	}
+	
+	
+	public ContactsPage addnewCommunicationPublications() {
+		
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Contact Communication Commands']")),"Contact Communication Commands");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'New Contact Communication')]")),"New Contact Communication");
+		
+		return this;
+	}
+	
+	public ContactsPage clickandsaveCAA() throws InterruptedException{
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactaccountassociation|NoRelationship|Form|Mscrm.Form.ix_contactaccountassociation.SaveAndClose']")),"Contact Communication Commands");
+		Thread.sleep(2000);
+		return this;
+	}
+	
+
 
 }

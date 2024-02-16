@@ -251,6 +251,12 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("SecurityMemberSupervisor")) {
 				sTestClassName="testcases.SecurityMemberSupervisor.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("SecuritySupplier")) {
+				sTestClassName="testcases.SecuritySupplier.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("SecuritySupplierSupervisor")) {
+				sTestClassName="testcases.SecuritySupplierSupervisor.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}
 			
 			

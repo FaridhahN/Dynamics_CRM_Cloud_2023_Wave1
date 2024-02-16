@@ -1,4 +1,4 @@
-package testcases.SecurityMemberSupervisor;
+package testcases.SecuritySupplier;
 
 import org.testng.annotations.Test;
 
@@ -7,7 +7,7 @@ import utils.DataInputProvider;
 
 //******COMPLETED******
 
-//TFD ID_5034:_695262_Cloud : Verify Member supervisor has access to deactivate a contact
+//TFD ID_5034:_696809_Cloud : Verify Supplier cannot deactivate a contact
 
 public class TestCase_5034 {
 

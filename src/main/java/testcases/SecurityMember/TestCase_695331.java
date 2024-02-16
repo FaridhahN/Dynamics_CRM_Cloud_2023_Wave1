@@ -1,4 +1,4 @@
-package testcases.SecurityMemberSupervisor;
+package testcases.SecurityMember;
 
 import org.testng.annotations.Test;
 
@@ -7,9 +7,9 @@ import utils.DataInputProvider;
 
 //******COMPLETED******
 
-//TFD ID_5034:_695262_Cloud : Verify Member supervisor has access to deactivate a contact
+//TFD ID_695331:_695331_Verify "Employee Id" *& "Hire Date" Fields Read Only  on User and Information forms _Member Login
 
-public class TestCase_5034 {
+public class TestCase_695331 {
 
 	@Test
 	public void validateContactDeactivate(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
@@ -19,18 +19,13 @@ public class TestCase_5034 {
 		.clickNext().typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))
 		.clicSignin().clicYesInStaySignedin()
 
-		// Go to Contacts
-		.selectContacts()
-
-		//Navigate to All Account
-
-		.selectAllContactView()
-
-		// 2. Go to any active contact which has an active contact account association
-		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.clickDeactivateButton()
-		.verifyContactDeactivated()
-		.Activateccount()
-	
-	;}
+		// Go to AdvanceSettings
+		.selectAdvanceSetting()
+		.navigatetoAdvanceSettings("Business Management")	
+		.navigateToUserOption()
+		.clickUsers()
+		.selectUsers()
+		.verifyId_HireFeild()
+		
+		;}
 }
