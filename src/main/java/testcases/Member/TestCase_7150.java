@@ -102,6 +102,8 @@ public class TestCase_7150 {
 		//Verify Premier start date is auto populated
 		.verifyPremierStartDateIsAutoPopulated()
 
+		.navigateToApplicationDate()
+		.navigateToCorporateParentMemberoForm()
 
 		//13. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
