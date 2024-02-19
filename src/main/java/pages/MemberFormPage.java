@@ -4577,10 +4577,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Update primary contact
 	public MemberFormPage updateMemberPrimaryContact(String updateMemberPrimaryContact) throws InterruptedException {
-		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']"))).perform();
-		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon"); 
-		Thread.sleep(3000);
+		clearDP();
 		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),updateMemberPrimaryContact,"Primary Contact");
 		Thread.sleep(4000);
@@ -8655,6 +8652,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	
+	public MemberFormPage navigateToPrmiaryAccount() {
+
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		return this;
+
+	}
 
 
 	public MemberFormPage naivagateToReferredByFromNACS() {
@@ -9206,7 +9211,53 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 	
 	
-//Activa
+//Select Activity under three dot menu
+	public MemberFormPage createNewTaskFromThreeDot() {
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+
+		click(getDriver().findElement(By.xpath("//*[normalize-space()='task']")),"New Task Activity");
+
+		return this;
+	}
+	
+	//Select Phone under three dot menu
+		public MemberFormPage createNewPhoneFromThreeDot() {
+
+			click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'phonecall')]")),"New Task Activity");
+
+			return this;
+		}
+	
+		//Select Phone under three dot menu
+				public MemberFormPage createNewAppointmentFromThreeDot() {
+
+					click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+
+					click(getDriver().findElement(By.xpath("//span[contains(text(),'appointment')]")),"New Task Activity");
+
+					return this;
+				}
+	
+	
+	//Verify the Subject Feild is concatenated
+		public MemberFormPage verifytheSubjectFeild(String entitycode, String accountName) {
+
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+":", "Subject is not autopou");
+			return this;
+		}
+		
+		//Enter the Appointment Details
+		public MemberFormPage EnterAppointmentDetailsWithQuickSuject(String subject) throws InterruptedException, IOException   {
+
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+			Thread.sleep(10000);
+			return this;
+		}
 
 }
 

@@ -257,6 +257,15 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("SecuritySupplierSupervisor")) {
 				sTestClassName="testcases.SecuritySupplierSupervisor.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("SecurityInnovatixUser")) {
+				sTestClassName="testcases.SecurityInnovatixUser.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("SecurityLimitedMember")) {
+				sTestClassName="testcases.SecurityLimitedMember.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("Accounts")) {
+				sTestClassName="testcases.Accounts.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}
 			
 			
@@ -327,6 +336,7 @@ public void Reports(ITestResult result) throws Exception
 				DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
 				test.log(Status.FAIL, MarkupHelper.createLabel(sTestCaseID+" FAILED :", ExtentColor.RED));
 			}
+			
 			}
 			else
 			{   

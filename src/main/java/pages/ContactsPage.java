@@ -37,7 +37,7 @@ import utils.DataInputProvider;
 public class ContactsPage extends WebDriverServiceImpl {
 
 	public static String CRMNumber;
-	
+
 	// Click New on contacts page
 	public ContactsPage clickNewOnContactsPage() {
 		click(getDriver().findElement(
@@ -213,7 +213,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 			e.printStackTrace();
 		}
 
-		
+
 		return this;
 	}
 
@@ -397,6 +397,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Refresh CAA
+	public ContactsPage refreshCAA() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Active Contact Account Associations')]")).size(), "Current Account Representative view");
+		Thread.sleep(7000);
+		click(getDriver().findElement(By.xpath("//button[@data-lp-id='SubGridStandard:ix_contactaccountassociation-ix_contactaccountassociation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_contactaccountassociation.RefreshButton']")), "Refresh button");
+		Thread.sleep(7000);
+		return this;
+
+
+	}
 	// to choose an existing Active contact
 	public ContactsPage chooseActiveContact(String CrmNumber1) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(@data-id,'quickFind_text')]")), "Find Criteria");
@@ -485,7 +495,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		if(accountid.size()>0) {
 			click(getDriver().findElement(By.xpath("//span[contains(@data-id,'ix_account.fieldControl-accountnumber')]//span[contains(text(),'"+account+"')]")),account);
 		}else {
-		click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_account.fieldControl-name0_0_0')]")),account);
+			click(getDriver().findElement(By.xpath("//*[contains(@id,'ix_account.fieldControl-name0_0_0')]")),account);
 		}
 		return this;
 	}
@@ -783,16 +793,23 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 		return this;					
 	}
-	
-	// double click on the old CAA record
-		public ContactsPage verifyNewCAA(String PrimaryAccount) throws InterruptedException {
-			
-			Thread.sleep(2000);
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') and contains(text(),'"+PrimaryAccount+"')]")).size(), "Primary Account");
-			
-			return this;					
-		}
 
+	// double click on the old CAA record
+	public ContactsPage verifyNewCAA(String PrimaryAccount) throws InterruptedException {
+
+		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') and contains(text(),'"+PrimaryAccount+"')]")).size(), "Primary Account");
+
+		return this;					
+	}
+
+	// double click on the old CAA record
+	public ContactsPage verifyNewCAAContactname(String PrimaryAccount) throws InterruptedException {
+		Actions actions =new Actions(getDriver());	
+		actions.moveToElement(getDriver().findElement(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') ]//span[contains(text(),'"+PrimaryAccount+"')]"))).build().perform();
+		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).doubleClick().build().perform();
+		return this;
+	}
 
 	// choose contact termination reason
 	public ContactsPage verifyNullinCaaTerminationReason(String contactTerminationReason) throws InterruptedException {
@@ -885,16 +902,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
-	
+
 	// Account is in draft message should not be displayed
-		public ContactsPage VerifyErrorMessageNotDisplayed() throws InterruptedException {
-			Thread.sleep(2000);
+	public ContactsPage VerifyErrorMessageNotDisplayed() throws InterruptedException {
+		Thread.sleep(2000);
 
-			List<WebElement> message=getDriver().findElements(By.xpath("//*[@data-id='errorDialog_subtitle']"));
+		List<WebElement> message=getDriver().findElements(By.xpath("//*[@data-id='errorDialog_subtitle']"));
 
-			verifyElementisNotDisplayed(message.size(), "error message");
-			return this;
-		}
+		verifyElementisNotDisplayed(message.size(), "error message");
+		return this;
+	}
 
 	//Click OK on Error Message
 	public ContactsPage clickOKOnErrorMessage() throws InterruptedException {
@@ -1337,16 +1354,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return this;
 	}
-	
-	
+
+
 	// Click save button in the Contact Communication page Without Script Error
-		public ContactsPage clickSaveAndCloseInContactCommunicationWithoutScriptError() throws InterruptedException {
-			Thread.sleep(3000);
-			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactcommunication|NoRelationship|Form|Mscrm.Form.ix_contactcommunication.SaveAndClose']")),"Save and Save");
-			Thread.sleep(5000);
-			return this;
-		}
-	
+	public ContactsPage clickSaveAndCloseInContactCommunicationWithoutScriptError() throws InterruptedException {
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactcommunication|NoRelationship|Form|Mscrm.Form.ix_contactcommunication.SaveAndClose']")),"Save and Save");
+		Thread.sleep(5000);
+		return this;
+	}
+
 
 	// Provide value for Contact Communication as provided in the datasheet
 	public ContactsPage typeContactCommunication1(String contactCommunication) throws InterruptedException {
@@ -1596,27 +1613,35 @@ public class ContactsPage extends WebDriverServiceImpl {
 		int totalcount=Integer.parseInt(pagination.substring(start,last));
 
 		clickCAAFromRelated();
-		
+
 		DeactivaeAccount(account);
 		clickSummaryTab();
 		pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
 
 		start=(pagination.indexOf('f')+2);
-		 last=(pagination.indexOf('f')+3);
+		last=(pagination.indexOf('f')+3);
 		int aftercount=Integer.parseInt(pagination.substring(start,last));
-		
+
 		assertTrue(aftercount<totalcount);
 
 		return this;
 	}
-	
+
 	public ContactsPage doubleClickAccount(String account) throws InterruptedException{
 		Actions actions=new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') and contains(text(),'"+account+"')]"))).doubleClick().build().perform();
 		return this;
 	}
+	public ContactsPage doubleClickcotactName(String account) throws InterruptedException{
+		Actions actions=new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//div[@role='row' and contains(@class,'ag-row-no-focus')]//div[contains(@class,'ms-TooltipHost') ]//span[contains(text(),'"+account+"')]"))).build().perform();
+		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).doubleClick().build().perform();
+		return this;
+	}
+
+	//
 	public ContactsPage DeactivaeAccount(String account) throws InterruptedException
-	
+
 	{
 		doubleClickAccount(account);
 		typeContactRelationshipEndDate();
@@ -1630,40 +1655,40 @@ public class ContactsPage extends WebDriverServiceImpl {
 		int last=(pagination.indexOf('f')+3);
 		int totalcount=Integer.parseInt(pagination.substring(start,last));
 
-		
+
 		clickCAAFromRelated();
 		clickAddCAA();
 		typeAccountInCAA(account);
 		clickSaveAndCloseInCAA();
 		clickSummaryTab();
-		
+
 		pagination=getDriver().findElement(By.xpath("//span[contains(@class,'statusContainer')]")).getText();
 		start=(pagination.indexOf('f')+2);
-		 last=(pagination.indexOf('f')+3);
+		last=(pagination.indexOf('f')+3);
 		int aftercount=Integer.parseInt(pagination.substring(start,last));
-		
-		
+
+
 		assertTrue(aftercount>totalcount);
 
-		
-				return this;
-	}
-	
-	
-	public ContactsPage addnewCommunicationPublications() {
-		
-		click(getDriver().findElement(By.xpath("//*[@aria-label='Contact Communication Commands']")),"Contact Communication Commands");
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'New Contact Communication')]")),"New Contact Communication");
-		
+
 		return this;
 	}
-	
+
+
+	public ContactsPage addnewCommunicationPublications() {
+
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Contact Communication Commands']")),"Contact Communication Commands");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'New Contact Communication')]")),"New Contact Communication");
+
+		return this;
+	}
+
 	public ContactsPage clickandsaveCAA() throws InterruptedException{
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contactaccountassociation|NoRelationship|Form|Mscrm.Form.ix_contactaccountassociation.SaveAndClose']")),"Contact Communication Commands");
 		Thread.sleep(2000);
 		return this;
 	}
-	
+
 
 
 }
