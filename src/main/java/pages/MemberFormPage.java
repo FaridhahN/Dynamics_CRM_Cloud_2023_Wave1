@@ -1032,7 +1032,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		if(element.size()>0) {
 			click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Discard changes')]")),"Discard Changes");
 		}
-
+		Thread.sleep(5000);
 		verifyIsDisplayed(getDriver().findElement(By.xpath("//label[contains(text(),'Quick Subject')]")));
 		return this;
 	}
@@ -1153,6 +1153,23 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}
+
+	
+	//Enter the Appointment Details
+		public MemberFormPage EnterAppointmentDetailsWithQuickSubject(String subject,String letterdetails) throws InterruptedException, IOException   {
+			
+			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+			
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+			Thread.sleep(10000);
+			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+			System.out.println(saveStatus);
+			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+			return this;
+		}
+
+	
+	
 
 	//click the Recurrence Meeting
 
@@ -6804,7 +6821,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
 		if(checkmark.size()>0) {
-			click(getDriver().findElement(By.xpath("//i[contains(@class,'ms-Checkbox-checkmark checkmark')]")),"Checkbox");
+			Actions actions= new Actions(getDriver());
+			actions.moveToElement(getDriver().findElement(By.xpath("//div[contains(text(),'Activity Type')]/ancestor::div[@col-id='activitytypecode']/preceding-sibling::div[@col-id='__row_status']//div[@class='ag-header-cell-comp-wrapper']//input[@type='checkbox']"))).click().build().perform();
 			Thread.sleep(2000);
 			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
 			Thread.sleep(4000);
@@ -9214,7 +9232,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 //Select Activity under three dot menu
 	public MemberFormPage createNewTaskFromThreeDot() {
 
-		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
 
 		click(getDriver().findElement(By.xpath("//*[normalize-space()='task']")),"New Task Activity");
 
@@ -9224,7 +9242,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Phone under three dot menu
 		public MemberFormPage createNewPhoneFromThreeDot() {
 
-			click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
 
 			click(getDriver().findElement(By.xpath("//span[contains(text(),'phonecall')]")),"New Task Activity");
 
@@ -9234,7 +9252,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//Select Phone under three dot menu
 				public MemberFormPage createNewAppointmentFromThreeDot() {
 
-					click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton']")),"More Button");
+					click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
 
 					click(getDriver().findElement(By.xpath("//span[contains(text(),'appointment')]")),"New Task Activity");
 
