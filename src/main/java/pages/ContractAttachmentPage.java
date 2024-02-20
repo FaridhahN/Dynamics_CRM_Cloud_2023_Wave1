@@ -238,13 +238,13 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		return this;
 	}
-	
+
 	//Verify Warning Notification on CA.
-		public ContractAttachmentPage verifyWarningNotification() throws InterruptedException {
-			verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='warningNotification']")),"Read-only: You don't have access to edit this record.","Warning Notification");
-			Thread.sleep(3000);
-			return this;
-		}
+	public ContractAttachmentPage verifyWarningNotification() throws InterruptedException {
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='warningNotification']")),"Read-only: You don't have access to edit this record.","Warning Notification");
+		Thread.sleep(3000);
+		return this;
+	}
 	//Verify LastResponse Date Disabled
 	public ContractAttachmentPage verifyLastResponseDateIsDisabled() throws InterruptedException {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[contains(@data-id,'tabpanel')]//h2")),"Don't forget to change the Status Date when changing the Attachment Status!","Header Section of Last Response Date");
@@ -262,31 +262,113 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
-		
-	//Verify Initiated By and Termination Reason fields are disabled. -
-		public ContractAttachmentPage verifyInitiatiedByTerminationReasonAreDisabled() throws InterruptedException {
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='PriceActivationDetails_Sec']//h2")),"Price Activation Details","Header Section of Initiated By and Termination Reason Fields");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_negotiationstatus.fieldControl-text-box-text']")),"Negotiation Status");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_priceexpirationdate.fieldControl-date-time-input']")),"Price Expiration Date");
-			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_initiatedby.fieldControl-text-box-text']")),"Initiated By");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_tierdescriptionfromsca.fieldControl-text-box-text']")),"Tier");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_customtierdescription.fieldControl-text-box-text']")),"Custom Tier Description");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_suppliercomments.fieldControl-text-box-text']")),"Custom Tier Description");
-			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-text-box-text']")),"Termination Reason");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		//Scroll to Price Activation Details
-		
-		public ContractAttachmentPage scrollToPriceActivationDetails() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select-container']")),"Attachment Status");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"Attachment Status Reason");
-			click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),"Attachment Status Date");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		
 
+	//Verify Initiated By and Termination Reason fields are disabled. -
+	public ContractAttachmentPage verifyInitiatiedByTerminationReasonAreDisabled() throws InterruptedException {
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='PriceActivationDetails_Sec']//h2")),"Price Activation Details","Header Section of Initiated By and Termination Reason Fields");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_negotiationstatus.fieldControl-text-box-text']")),"Negotiation Status");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_priceexpirationdate.fieldControl-date-time-input']")),"Price Expiration Date");
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_initiatedby.fieldControl-text-box-text']")),"Initiated By");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_tierdescriptionfromsca.fieldControl-text-box-text']")),"Tier");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_customtierdescription.fieldControl-text-box-text']")),"Custom Tier Description");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_suppliercomments.fieldControl-text-box-text']")),"Custom Tier Description");
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-text-box-text']")),"Termination Reason");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Scroll to Price Activation Details
+
+	public ContractAttachmentPage scrollToPriceActivationDetails() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select-container']")),"Attachment Status");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"Attachment Status Reason");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),"Attachment Status Date");
+		Thread.sleep(2000);
+		return this;
+	}
+	//Select Attachment Status on CA 
+	public ContractAttachmentPage selectAttachmentStatusOnCA(String caAttachmentStatus) {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),caAttachmentStatus," Attachment Status on CA");
+		return this;
+
+	}
+
+	//Select Attachment Status Reason on CA 
+	public ContractAttachmentPage selectAttachmentStatusReasonOnCA(String caAttachmentStatusReason) {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),caAttachmentStatusReason," Attachment Status Reason on CA");
+		return this;
+
+	}	
+	//	
+
+	//Click Save on CA
+	public ContractAttachmentPage clickSaveOnCA() {
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Save']"))," Save on CA");
+		return this;
+
+	}
+
+	//Verify Attachment Status Reason field drop down options on CA Supplier
+	@SuppressWarnings("unlikely-arg-type")
+	public ContractAttachmentPage verifyAttachmentStatusReasonSuccesorContractUpdateIsNotPresent() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Create Actual blank Array List
+		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		//loop through DOM and add dropdown values into mylist for comparison
+		for (WebElement ele:mylist) {			
+			String data =ele.getText();
+			actualAttachmentStatusReason.add(data);			
+			System.out.println("The Actual Attachment Status is : "  + " " +data);				
+			Thread.sleep(3000);
+			if(actualAttachmentStatusReason.equals("Successor Contract Update"))
+			{	Thread.sleep(2000);	
+			setReport().log(Status.FAIL, "Attachment Status ' "+   " Successor Contract Update  " +  "  " + " ' Option is NOT available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			Driver.failCount++;
+
+			} 
+			else {
+				setReport().log(Status.PASS, "Attachment Status ' " + " Successor Contract Update " +  " '  Option is NOT available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+			}
+
+		}
+
+		return this;
+	}
+	
+	//Verify Attachment Status Reason when Attachment Status is Approved.
+		@SuppressWarnings("unlikely-arg-type")
+		public ContractAttachmentPage verifyAttachmentStatusReasonOptionsForApprovedStatus() throws InterruptedException {
+			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+			// Create Expected Array List
+			List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
+			//Create Actual blank Array List
+			List<String> actualAttachmentStatusReason=new ArrayList<String>();	
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> mylist =attachmentStatusReason.getOptions();		
+			//loop through DOM and add dropdown values into mylist for comparison
+			for (WebElement ele:mylist) {			
+				String data =ele.getText();
+				actualAttachmentStatusReason.add(data);			
+				System.out.println("The Actual Attachment Status is : "  + " " +data);				
+				Thread.sleep(3000);
+				if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "Attachment Status ' " + "   " + data + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ expectedAttachmentStatusReason,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "Attachment Status ' "+   "   " + data + "  " + " ' Option is not available in the list"  + "::::= > "+ expectedAttachmentStatusReason ,	screenshotCapture());
+					Driver.failCount++;
+				}
+
+			}
+
+			return this;
+		}
+	
 }
