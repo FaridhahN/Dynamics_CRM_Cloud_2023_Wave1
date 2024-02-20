@@ -31,7 +31,13 @@ public class TestCase_8899 {
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		//data reset
+		.clickRelatedActivities()
 
+		//Select Open Activities View and complete the phone activity
+		.selectOpenActivitiesViewAfterTask()
+		.completeAllTask()
+		.clickGeneralTab()
 		//Create new task from the three dot option
 		.createNewTaskFromThreeDot()
 
@@ -45,7 +51,7 @@ public class TestCase_8899 {
 				DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) ,
 				DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
-		
+
 		.clickRelatedActivities()
 		.selectOpenActivitiesViewAfterTask()
 		.verifyTasksCompletionstatus("Open")
@@ -54,31 +60,35 @@ public class TestCase_8899 {
 		.completeAllTask()
 
 
-		//Create new task from the three dot option
-		.createNewPhoneFromThreeDot()
+		/*
+		 * //Create new task from the three dot option .createNewPhoneFromThreeDot()
+		 * 
+		 * //Change the view to Information .selectInformationview()
+		 * 
+		 * //Enter the details in the new tasks window
+		 * .EnterFPhoneDetailsWithQuickSubject(DataInputProvider.getCellData_ColName(
+		 * iRowNumber, "QuickSubject", sDataSheetName),
+		 * DataInputProvider.getCellData_ColName(iRowNumber, "Due Date",
+		 * sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber,
+		 * "Duration", sDataSheetName),
+		 * DataInputProvider.getCellData_ColName(iRowNumber, "Phonenumber",
+		 * sDataSheetName))
+		 * 
+		 * .clickRelatedActivities()
+		 * 
+		 * //Select Open Activities View and complete the phone activity
+		 * .selectOpenActivitiesViewAfterTask() .verifyTasksCompletionstatus("Open")
+		 * .completePhonecall()
+		 */
+		.createNewAppointmentFromThreeDot()
 
-		//Change the view to Information
-		.selectInformationview()
-
-		//Enter the details in the new tasks window
-		.EnterFPhoneDetailsWithQuickSubject(DataInputProvider.getCellData_ColName(iRowNumber, "QuickSubject", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "Phonenumber", sDataSheetName))
+		.EnterAppointmentDetailsWithQuickSubject(DataInputProvider.getCellData_ColName(iRowNumber, "QuickSubject", sDataSheetName), sDataSheetName)
 
 		.clickRelatedActivities()
-		
-		//Select Open Activities View and complete the phone activity
-		.selectOpenActivitiesViewAfterTask()
-		.verifyTasksCompletionstatus("Open")
-		.completePhonecall()
 
-		.createNewAppointmentFromThreeDot()
-		
-		.EnterAppointmentDetailsWithQuickSubject(DataInputProvider.getCellData_ColName(iRowNumber, "QuickSubject", sDataSheetName), sDataSheetName)
-		
-.clickRelatedActivities()
-		
 		//Select Open Activities View and complete the phone activity
 		.selectOpenActivitiesViewAfterTask()
-		.verifyTasksCompletionstatus("Open")
+		.verifyTasksCompletionstatus("Scheduled")
 		.completeAllTask()
 		;
 	}

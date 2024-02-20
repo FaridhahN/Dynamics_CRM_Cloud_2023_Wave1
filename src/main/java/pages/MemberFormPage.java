@@ -1160,7 +1160,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			
 			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 			
-			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
 			Thread.sleep(10000);
 			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 			System.out.println(saveStatus);
@@ -4594,7 +4594,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Update primary contact
 	public MemberFormPage updateMemberPrimaryContact(String updateMemberPrimaryContact) throws InterruptedException {
-		clearDP();
+		clearPrimaryAccount();
 		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
 		type(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),updateMemberPrimaryContact,"Primary Contact");
 		Thread.sleep(4000);
@@ -5875,7 +5875,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public MemberFormPage changeRecordStatus(String ChangeRecordStatus){
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Change Record Status");
-
+click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
 		click(getDriver().findElement(By.id("ix_recordchangestatus")),"Change Record Status");
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.id("ix_recordchangestatus_d")))),ChangeRecordStatus,"Change Record Status");
 		verifyExactText(getDriver().findElement(By.id("ix_recordchangestatus")),ChangeRecordStatus,"Change Record Status"); 
@@ -9121,9 +9121,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage clearPrimaryAccount() throws InterruptedException {
 		Actions action = new Actions(getDriver());
+		if(getDriver().findElements(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']")).size()>0){
 		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']"))).perform();
 		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon"); 
 		Thread.sleep(3000);
+		}
 		return this;
 
 	}
@@ -9274,6 +9276,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 			Thread.sleep(10000);
+			return this;
+		}
+
+		//Type street1
+		public MemberFormPage typeRandStreet1(String street1) {
+			Random rand = new Random();
+			String address = rand.nextInt(2, 3)+street1;
+			
+			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+			type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),address, "Street1");
 			return this;
 		}
 
