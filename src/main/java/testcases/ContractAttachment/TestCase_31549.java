@@ -1,9 +1,8 @@
 package testcases.ContractAttachment;
 
-import org.testng.annotations.Test;
 
+import org.testng.annotations.Test;
 import pages.LoginPage;
-import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_31549:_Test Case 9300 :Cloud-Verify "Approved as Primary" and  "Approved as Secondary" Attachment Status Reason is available for Approved CA's
 public class TestCase_31549 {
@@ -31,13 +30,22 @@ public class TestCase_31549 {
 		.selectRelatedContractAttachments()		
 		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
 		
-		//Choose any Attachment Status that has Attachment Status Reason "Successor Contract Update" and save.
+		//Choose any Attachment Status that has Attachment Status as "Approved" 
 		.selectAttachmentStatusOnCA(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatus", sDataSheetName))
 		
-	.verifyAttachmentStatusReasonOptionsForApprovedStatus()
+		//Verify "Approved as Primary and Approved as Secondary" Attachment Status Reason is Present
+		.verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsPresent()
+		
+		//Choose any Attachment Status that has Attachment Status OTHER THAN Approved.
+		.selectAttachmentStatusOnCA(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatus1", sDataSheetName))
+		
+		//Verify "Approved as Primary and Approved as Secondary" Attachment Status Reason is Present
+		.verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsNotPresent()
+		
+		
 		//Data Reset 		
+		//Not required
 		
 		;
-		
 		}
 }

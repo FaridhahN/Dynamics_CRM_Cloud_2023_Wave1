@@ -309,7 +309,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	}
 
-	//Verify Attachment Status Reason field drop down options on CA Supplier
+	//Verify Attachment Status Reason 'Successor contract Update'
 	@SuppressWarnings("unlikely-arg-type")
 	public ContractAttachmentPage verifyAttachmentStatusReasonSuccesorContractUpdateIsNotPresent() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
@@ -322,53 +322,83 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		for (WebElement ele:mylist) {			
 			String data =ele.getText();
 			actualAttachmentStatusReason.add(data);			
-			System.out.println("The Actual Attachment Status is : "  + " " +data);				
+			System.out.println("The Actual Attachment Status Reason is : "  + " " +data);				
 			Thread.sleep(3000);
 			if(actualAttachmentStatusReason.equals("Successor Contract Update"))
 			{	Thread.sleep(2000);	
-			setReport().log(Status.FAIL, "Attachment Status ' "+   " Successor Contract Update  " +  "  " + " ' Option is NOT available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			setReport().log(Status.FAIL, "Attachment Status Reason' "+   " Successor Contract Update  " +  "  " + " ' Option is NOT available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
 			Driver.failCount++;
 
 			} 
 			else {
-				setReport().log(Status.PASS, "Attachment Status ' " + " Successor Contract Update " +  " '  Option is NOT available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+				setReport().log(Status.PASS, "Attachment Status Reason ' " + " Successor Contract Update " +  " '  Option is NOT available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
 			}
 
 		}
 
 		return this;
 	}
-	
+
 	//Verify Attachment Status Reason when Attachment Status is Approved.
-		@SuppressWarnings("unlikely-arg-type")
-		public ContractAttachmentPage verifyAttachmentStatusReasonOptionsForApprovedStatus() throws InterruptedException {
-			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
-			// Create Expected Array List
-			List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
-			//Create Actual blank Array List
-			List<String> actualAttachmentStatusReason=new ArrayList<String>();	
-			//Create temp Array List > add  actual options  from DOM for comparison
-			List<WebElement> mylist =attachmentStatusReason.getOptions();		
-			//loop through DOM and add dropdown values into mylist for comparison
-			for (WebElement ele:mylist) {			
-				String data =ele.getText();
-				actualAttachmentStatusReason.add(data);			
-				System.out.println("The Actual Attachment Status is : "  + " " +data);				
-				Thread.sleep(3000);
-				if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
-				{		
-					Thread.sleep(3000);
-					setReport().log(Status.PASS, "Attachment Status ' " + "   " + data + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ expectedAttachmentStatusReason,	screenshotCapture());
-
-				} 
-				else {
-					setReport().log(Status.FAIL, "Attachment Status ' "+   "   " + data + "  " + " ' Option is not available in the list"  + "::::= > "+ expectedAttachmentStatusReason ,	screenshotCapture());
-					Driver.failCount++;
-				}
-
-			}
-
-			return this;
+	public ContractAttachmentPage verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsPresent() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		// Create Expected Array List
+		List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
+		//Create Actual blank Array List
+		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		//loop through DOM and add dropdown values into mylist for comparison
+		for (WebElement ele:mylist) {			
+			String data =ele.getText();
+			actualAttachmentStatusReason.add(data);			
+			System.out.println("The Actual Attachment Status Reason is : "  + " " +data);				
+			Thread.sleep(3000);
 		}
-	
+		if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "Attachment Status Reason ' " + "   " + expectedAttachmentStatusReason + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + expectedAttachmentStatusReason + "  " + " ' Option is not available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			Driver.failCount++;
+		}
+		return this;
+	}
+
+
+	//Verify Attachment Status Reasons (Approved as Primary","Approved as Secondary) is NOT present when Attachment Status is OTHER THAN Approved.
+	public ContractAttachmentPage verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsNotPresent() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		// Create Expected Array List
+		List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
+		//Create Actual blank Array List
+		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		//loop through DOM and add dropdown values into mylist for comparison
+		for (WebElement ele:mylist) {			
+			String data =ele.getText();
+			actualAttachmentStatusReason.add(data);			
+			System.out.println("The Actual Attachment Status is Reason : "  + " " +data);				
+			Thread.sleep(3000);
+		}
+		if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
+		{		
+
+			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + expectedAttachmentStatusReason + "  " + " ' Option is not available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			Driver.failCount++;
+		} 
+		else {
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "Attachment Status Reason' " + "   " + expectedAttachmentStatusReason + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+
+		}
+		return this;
+	}
+
 }
