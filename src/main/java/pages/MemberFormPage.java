@@ -5882,8 +5882,15 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		return this;
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
-
-
+	public MemberFormPage changeRecordStatusoption(String ChangeRecordStatus){
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Change Record Status");
+click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
+		click(getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),"Change Record Status");
+		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")))),ChangeRecordStatus,"Change Record Status");
+		return this;
+	}
+	
+	
 	public MemberFormPage validateXMLFieldValues() {
 		try{
 			String filePath = "C:\\Users\\blogg\\Desktop\\input.xml";
@@ -6819,7 +6826,7 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 
 	public MemberFormPage completeAllTask() throws InterruptedException {
 
-		List<WebElement> checkmark= getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan')]"));
+		List<WebElement> checkmark= getDriver().findElements(By.xpath("//*[@col-id='activitytypecode']//label[contains(@class,'option')]"));
 		if(checkmark.size()>0) {
 			Actions actions= new Actions(getDriver());
 			actions.moveToElement(getDriver().findElement(By.xpath("//div[contains(text(),'Activity Type')]/ancestor::div[@col-id='activitytypecode']/preceding-sibling::div[@col-id='__row_status']//div[@class='ag-header-cell-comp-wrapper']//input[@type='checkbox']"))).click().build().perform();
@@ -9206,7 +9213,7 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		if(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")),"Activate Button");
 			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 			System.out.println(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")));
 			assertTrue(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size()==0);
 		}
@@ -9219,10 +9226,14 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		return this;
 	}
 	
+	public MemberFormPage verifyDeactivateButtonPresent() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Deactivate')]")).size(), "Deactivate Button");
+		return this;
+	}
+	
 	public MemberFormPage clickDeactivate() throws InterruptedException {
 		
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
-		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
+		clickDeactivateButton();
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size(), "Activate Button");
 		
@@ -9231,12 +9242,23 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 	}
 	
 	
+	public MemberFormPage clickDeactivateButton()throws InterruptedException  {
+		
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
+		
+		return this;
+	}
+	
 //Select Activity under three dot menu
 	public MemberFormPage createNewTaskFromThreeDot() {
 
 		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
 
-		click(getDriver().findElement(By.xpath("//*[normalize-space()='task']")),"New Task Activity");
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//*[normalize-space()='task']"))).click().build().perform();
+		
+		
 
 		return this;
 	}
@@ -9282,7 +9304,7 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		//Type street1
 		public MemberFormPage typeRandStreet1(String street1) {
 			Random rand = new Random();
-			String address = rand.nextInt(2, 3)+street1;
+			String address = rand.nextInt(1, 99)+street1;
 			
 			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 			type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),address, "Street1");

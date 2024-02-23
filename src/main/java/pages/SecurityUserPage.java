@@ -65,6 +65,31 @@ public SecurityUserPage selectUsers() {
 
 public SecurityUserPage verifyId_HireFeild() {
 
+	navigateToOrganizationUnit();
+	navigateToID();
+	
+	List<WebElement> id=getDriver().findElements(By.xpath("//div[@id='employeeid']//div[contains(@class,'Locked')]"));
+	assertTrue(id.size()>0);
+	
+	List<WebElement> hiredate=getDriver().findElements(By.xpath("//div[@id='ix_hiredate']//div[contains(@class,'Locked')]"));
+	assertTrue(id.size()>0);
+	return this;
+}
+
+public SecurityUserPage verifyId_Department() {
+
+	navigateToOrganizationUnit();
+	navigateToDepartment();
+	
+	List<WebElement> id=getDriver().findElements(By.xpath("//td[@title='Department']"));
+	assertTrue(id.size()>0);
+	
+	List<WebElement> hiredate=getDriver().findElements(By.xpath("//td[@title='Sub Department']"));
+	assertTrue(id.size()>0);
+	return this;
+}
+
+public SecurityUserPage navigateToOrganizationUnit() {
 	List<WebElement> detailstab=getDriver().findElements(By.xpath("//div[@name='DETAILS_TAB']/div[@aria-expanded='true']"));
 	if(detailstab.size()>0) {
 		Actions actions =new Actions(getDriver());
@@ -76,16 +101,8 @@ public SecurityUserPage verifyId_HireFeild() {
 	if(adminTab.size()>0) {
 		click(getDriver().findElement(By.xpath("//img[@id='ADMINISTRATION_TAB_Expander']")),"Details Tab");
 	}
-	navigateToID();
-	
-	List<WebElement> id=getDriver().findElements(By.xpath("//div[@id='employeeid']//div[contains(@class,'Locked')]"));
-	assertTrue(id.size()>0);
-	
-	List<WebElement> hiredate=getDriver().findElements(By.xpath("//div[@id='ix_hiredate']//div[contains(@class,'Locked')]"));
-	assertTrue(id.size()>0);
 	return this;
 }
-
 
 public SecurityUserPage navigateToID() {
 	Actions actions =new Actions(getDriver());
@@ -110,6 +127,40 @@ public SecurityUserPage navigateToID() {
 	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Employee Id')]"))).click().build().perform();
 	actions.sendKeys(Keys.TAB);
 	
+		return this;
+}
+
+public SecurityUserPage navigateToDepartment() {
+	Actions actions =new Actions(getDriver());
+	actions.moveToElement(getDriver().findElement(By.xpath("//a[contains(text(),'POSTS')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	actions.sendKeys(Keys.TAB);
+	actions.sendKeys(Keys.TAB);
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Full Name')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Nickname')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Primary Email')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Mobile Phone')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Employee Id')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Territory')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Site')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
+	
+	actions.moveToElement(getDriver().findElement(By.xpath("//div[@name='SUMMARY_TAB']//span[contains(text(),'Business Unit')]"))).click().build().perform();
+	actions.sendKeys(Keys.TAB);
 		return this;
 }
 //
