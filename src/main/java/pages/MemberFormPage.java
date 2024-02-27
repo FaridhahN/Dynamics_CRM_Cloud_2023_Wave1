@@ -1154,22 +1154,22 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	
-	//Enter the Appointment Details
-		public MemberFormPage EnterAppointmentDetailsWithQuickSubject(String subject,String letterdetails) throws InterruptedException, IOException   {
-			
-			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-			
-			click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
-			Thread.sleep(10000);
-			String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
-			System.out.println(saveStatus);
-			assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
-			return this;
-		}
 
-	
-	
+	//Enter the Appointment Details
+	public MemberFormPage EnterAppointmentDetailsWithQuickSubject(String subject,String letterdetails) throws InterruptedException, IOException   {
+
+		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
+		Thread.sleep(10000);
+		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+		System.out.println(saveStatus);
+		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		return this;
+	}
+
+
+
 
 	//click the Recurrence Meeting
 
@@ -5875,7 +5875,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public MemberFormPage changeRecordStatus(String ChangeRecordStatus){
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Change Record Status");
-click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
 		click(getDriver().findElement(By.id("ix_recordchangestatus")),"Change Record Status");
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.id("ix_recordchangestatus_d")))),ChangeRecordStatus,"Change Record Status");
 		verifyExactText(getDriver().findElement(By.id("ix_recordchangestatus")),ChangeRecordStatus,"Change Record Status"); 
@@ -5884,13 +5884,13 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 	public MemberFormPage changeRecordStatusoption(String ChangeRecordStatus){
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Change Record Status");
-click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]")),"Account type");
 		click(getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")),"Change Record Status");
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_recordchangestatus.fieldControl-option-set-select']")))),ChangeRecordStatus,"Change Record Status");
 		return this;
 	}
-	
-	
+
+
 	public MemberFormPage validateXMLFieldValues() {
 		try{
 			String filePath = "C:\\Users\\blogg\\Desktop\\input.xml";
@@ -8677,8 +8677,8 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		return this;
 
 	}
-	
-	
+
+
 	public MemberFormPage navigateToPrmiaryAccount() {
 
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
@@ -9129,9 +9129,9 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 	public MemberFormPage clearPrimaryAccount() throws InterruptedException {
 		Actions action = new Actions(getDriver());
 		if(getDriver().findElements(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']")).size()>0){
-		action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']"))).perform();
-		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon"); 
-		Thread.sleep(3000);
+			action.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']"))).perform();
+			click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag_delete']")),"Clear Icon"); 
+			Thread.sleep(3000);
 		}
 		return this;
 
@@ -9219,97 +9219,171 @@ click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Type')]
 		}
 		return this;
 	}
-	
-	
+
+
 	public MemberFormPage verifyDeactivateButton() throws InterruptedException {
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Deactivate')]")).size(), "Deactivate Button");
 		return this;
 	}
-	
+
 	public MemberFormPage verifyDeactivateButtonPresent() throws InterruptedException {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Deactivate')]")).size(), "Deactivate Button");
 		return this;
 	}
-	
+
 	public MemberFormPage clickDeactivate() throws InterruptedException {
-		
+
 		clickDeactivateButton();
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'status: Inactive')]")).size(), "Inacitve Status");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Activate']")).size(), "Activate Button");
-		
+
 		Thread.sleep(5000);
 		return this;
 	}
-	
-	
+
+
 	public MemberFormPage clickDeactivateButton()throws InterruptedException  {
-		
+
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
-		
+
 		return this;
 	}
-	
-//Select Activity under three dot menu
+
+	//Select Activity under three dot menu
 	public MemberFormPage createNewTaskFromThreeDot() {
 
 		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
 
 		Actions action = new Actions(getDriver());
 		action.moveToElement(getDriver().findElement(By.xpath("//*[normalize-space()='task']"))).click().build().perform();
+
+
+
+		return this;
+	}
+
+	//Select Phone under three dot menu
+	public MemberFormPage createNewPhoneFromThreeDot() {
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
+
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'phonecall')]")),"New Task Activity");
+
+		return this;
+	}
+
+	//Select Phone under three dot menu
+	public MemberFormPage createNewAppointmentFromThreeDot() {
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
+
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'appointment')]")),"New Task Activity");
+
+		return this;
+	}
+
+
+	//Verify the Subject Feild is concatenated
+	public MemberFormPage verifytheSubjectFeild(String entitycode, String accountName) {
+
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+":", "Subject is not autopou");
+		return this;
+	}
+
+	//Enter the Appointment Details
+	public MemberFormPage EnterAppointmentDetailsWithQuickSuject(String subject) throws InterruptedException, IOException   {
+
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
+		Thread.sleep(10000);
+		return this;
+	}
+
+	//Type street1
+	public MemberFormPage typeRandStreet1(String street1) {
+		Random rand = new Random();
+		String address = rand.nextInt(1, 99)+street1;
+
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),address, "Street1");
+		return this;
+	}
+
+	//Navigate To Pipeline
+	public  MemberFormPage navigateToPiepline() throws InterruptedException {
+
+		Thread.sleep(2000);
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		click(getDriver().findElement(By.xpath("//span[@data-id='label_relatedEntity_nav_ix_account_ix_pipeline_Account']")),"Membership");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Click new Pipeline button
+	public  MemberFormPage clickNewPipeline() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_pipeline.AddNewStandard']")),"New Pipeline button");
+		Thread.sleep(3000);
+		return this;
+	}
+
+	//Currently verifing pipeline stage fields.
+	//verify Pipeline page
+	public  MemberFormPage verifyPipelinePage() throws InterruptedException {
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Pipeline Stage']")).size(), "Pipeline stage label");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")).size(), "Pipeline stage text box");
+		return this;
+
+	}
+	
+	//Enter the pipelineStage option in advance lookup
+	public  MemberFormPage enterPipeleinStage(String pipelineStage) throws InterruptedException {
 		
-		
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")),"Pipeline");
+		Actions actions =new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-Lookup_ix_pipelinestage_microsoftIcon_searchButton']"))).click().build().perform();
+		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_advlookup']"))).click().build().perform();
+		type(getDriver().findElement(By.xpath("//input[@placeholder='Search' and contains(@aria-labelledby,'advanced_lookup')]")),pipelineStage,"PipelineStageoption");
 
 		return this;
 	}
 	
-	//Select Phone under three dot menu
-		public MemberFormPage createNewPhoneFromThreeDot() {
 
-			click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
-
-			click(getDriver().findElement(By.xpath("//span[contains(text(),'phonecall')]")),"New Task Activity");
-
-			return this;
-		}
-	
-		//Select Phone under three dot menu
-				public MemberFormPage createNewAppointmentFromThreeDot() {
-
-					click(getDriver().findElement(By.xpath("//button[@data-id='OverflowButton' and @title='More commands for Account']")),"More Button");
-
-					click(getDriver().findElement(By.xpath("//span[contains(text(),'appointment')]")),"New Task Activity");
-
-					return this;
-				}
-	
-	
-	//Verify the Subject Feild is concatenated
-		public MemberFormPage verifytheSubjectFeild(String entitycode, String accountName) {
-
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")), entitycode+": "+accountName+":", "Subject is not autopou");
-			return this;
-		}
+	//verify Pipeline Stage option
+	public  MemberFormPage verifyPipelineStageOption(String pipelineStage) throws InterruptedException {
 		
-		//Enter the Appointment Details
-		public MemberFormPage EnterAppointmentDetailsWithQuickSuject(String subject) throws InterruptedException, IOException   {
+		enterPipeleinStage(pipelineStage);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
 
-			type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[contains(@class,'ag-row-even ag-row-no-focus ag-row')]//div[@col-id='ix_name']//button"))));
 
-			click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
-			Thread.sleep(10000);
-			return this;
-		}
+		String result=getDriver().findElement(By.xpath("//div[contains(@class,'ag-row-even ag-row-no-focus ag-row')]//div[@col-id='ix_name']//button")).getAttribute("aria-label");		
+		assertTrue(pipelineStage.contentEquals(result), "Pipeline Stage is displayed");		
+		return this;
 
-		//Type street1
-		public MemberFormPage typeRandStreet1(String street1) {
-			Random rand = new Random();
-			String address = rand.nextInt(1, 99)+street1;
+	}
+	
+	//verify Pipeline Stage option
+		public  MemberFormPage verifyPipelineStageOptionisNotDisplayed(String pipelineStage) throws InterruptedException {
 			
-			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
-			type(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))),address, "Street1");
+			enterPipeleinStage(pipelineStage);
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+			wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//span[contains(text(),'We didn’t find a match')]"))));
+
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'We didn’t find a match')]")).size(), "Pipeline Stage");		
 			return this;
+
 		}
 
+	
+	
+	
 }
 

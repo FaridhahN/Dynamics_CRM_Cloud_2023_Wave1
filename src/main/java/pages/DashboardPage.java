@@ -17,6 +17,19 @@ import services.WebDriverServiceImpl;
 public class DashboardPage extends WebDriverServiceImpl {
 
 	static String mainwindow;
+	
+	
+	//Change from workplace to Marketing
+	public MarketingPage changeToMarketing() throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//button[@id='areaSwitcherId']/span[contains(text(),'Workplace')]")),"Workplace");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Marketing')]")),"Marketing");
+		Thread.sleep(2000);
+		return new MarketingPage();
+		
+	}
+	
 	//Click on Accounts in My work
 	public AccountsPage selectAccountsTab() throws InterruptedException {
 
