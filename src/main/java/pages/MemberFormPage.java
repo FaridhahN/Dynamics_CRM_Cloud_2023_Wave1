@@ -9341,23 +9341,29 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
-	//Enter the pipelineStage option in advance lookup
-	public  MemberFormPage enterPipeleinStage(String pipelineStage) throws InterruptedException {
-		
+
+	//Navigate tO Advance Lookup
+	public  MemberFormPage navigateToAdvanceLookupinPipelineStage() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")),"Pipeline");
 		Actions actions =new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-Lookup_ix_pipelinestage_microsoftIcon_searchButton']"))).click().build().perform();
 		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_advlookup']"))).click().build().perform();
+		
+	
+	return this;	
+	}
+	//Enter the pipelineStage option in advance lookup
+	public  MemberFormPage enterPipeleinStage(String pipelineStage) throws InterruptedException {
+		navigateToAdvanceLookupinPipelineStage();
 		type(getDriver().findElement(By.xpath("//input[@placeholder='Search' and contains(@aria-labelledby,'advanced_lookup')]")),pipelineStage,"PipelineStageoption");
 
 		return this;
 	}
-	
+
 
 	//verify Pipeline Stage option
 	public  MemberFormPage verifyPipelineStageOption(String pipelineStage) throws InterruptedException {
-		
+
 		enterPipeleinStage(pipelineStage);
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
 
@@ -9368,22 +9374,200 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+
+	//verify Pipeline Stage option
+	public  MemberFormPage verifyPipelineStageOptionisNotDisplayed(String pipelineStage) throws InterruptedException {
+
+		enterPipeleinStage(pipelineStage);
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//span[contains(text(),'We didn’t find a match')]"))));
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'We didn’t find a match')]")).size(), "Pipeline Stage");		
+		return this;
+
+	}
+
+	//Enter the pipeleindetails
+	public  MemberFormPage enterPipeleinDetails(String pipelineType, String anticipateddate, String pipelineStage, String category, String leadSource,String annualizedsales, String notes) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_pipelinetype.fieldControl-option-set-select']")), pipelineType, "pipelineType");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasingmonth.fieldControl-date-time-input']")),anticipateddate,"Anticipated Date");
+		selectPipelineStage(pipelineStage);
+		selectRevenueCategory(category);
+		selectPipeleinLead(leadSource);
+		enterAnnualizedsales(annualizedsales);
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Feeshare");
+		type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_notes.fieldControl-text-box-text']")),notes,"Notes");
+		return this;
+	}
+
+	//Click Sae and Close button
+	public  MemberFormPage clickSaveAndCloseinPipleine() throws InterruptedException { 
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.SaveAndClose']")),"Save and Close Button");
+		return this;
+	}
+
+
+	//Select pipeline stage from the lookup
+	public  MemberFormPage selectPipelineStage(String pipelineStage) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")),pipelineStage,"pipelineStage");
+
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//li[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_resultsContainer'  and contains(@aria-label,'"+pipelineStage+"')]"))));
+
+		click(getDriver().findElement(By.xpath("//li[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_resultsContainer'  and contains(@aria-label,'"+pipelineStage+"')]")),"Pipeline Stage");
+		return this;
+	}
+
+
+	//Select pipeline Lead from the lookup
+	public  MemberFormPage selectPipeleinLead(String leadSource) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelineleadsources.fieldControl-LookupResultsDropdown_ix_pipelineleadsources_textInputBox_with_filter_new']")),leadSource,"leadSource");
+
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelineleadsources.fieldControl-LookupResultsDropdown_ix_pipelineleadsources_infoContainer']//span[contains(text(),'"+leadSource+"')]"))));
+
+		click(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelineleadsources.fieldControl-LookupResultsDropdown_ix_pipelineleadsources_infoContainer']//span[contains(text(),'"+leadSource+"')]")),"leadSource");
+		return this;
+	}
+
+
+	//Select pipeline stage from the lookup
+	public  MemberFormPage selectRevenueCategory(String Category) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_textInputBox_with_filter_new']")),Category,"Category");
+
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//li[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_resultsContainer']//span[contains(@data-id,'ix_revenuecategory.fieldControl-ix_name')]//span[contains(text(),'"+Category+"')]"))));
+
+		click(getDriver().findElement(By.xpath("//li[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_resultsContainer']//span[contains(@data-id,'ix_revenuecategory.fieldControl-ix_name')]//span[contains(text(),'"+Category+"')]")),"Category");
+		return this;
+	}
+
+
+
+	//Horizonatal scroll to Notes in pipline
+	public  MemberFormPage navigateToNotes(String notes) throws InterruptedException {
+
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+		WebElement element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		Actions builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+		js.executeScript("window.scrollTo(0,0)");
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).clickAndHold().perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).perform();
+
+
+		element = getDriver().findElement(By.cssSelector(".ag-body-horizontal-scroll-viewport"));
+		builder = new Actions(getDriver());
+		builder.moveToElement(element).release().perform();
+
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_notes']//label[contains(@class,'labelRoot') and @aria-label='"+notes+"']")).size(),"Notes");
+
+		return this;
+	}
+
+	//Double click and open the existing pipelein
+	public  MemberFormPage deactivatePipeLine() throws InterruptedException {
+
+		List<WebElement> rows=getDriver().findElements(By.xpath("//div[@class='ag-center-cols-container']//div[contains(@class,'ag-row')]"));
+
+		for(int i=1;i<=rows.size();i++) {
+
+			Actions builder = new Actions(getDriver());
+			builder.moveToElement(getDriver().findElement(By.xpath("(//div[@class='ag-center-cols-container']//div[contains(@class,'ag-row')])[1]"))).doubleClick().build().perform();
+			clickDeactivateButtonInPipeline();
+			Thread.sleep(2000);
+			clickGoBackButton();
+			Thread.sleep(2000);
+		}
+
+		return this;
+	}
+
+	//click deactivate button in pipeline
+	public MemberFormPage clickDeactivateButtonInPipeline() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.Deactivate']")),"Deactivate Button");
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Okay Id");
+		Thread.sleep(2000);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.Activate']")).size(), "Activate Button");
+		return this;
+	}
+
+	//Enter Anualised Sales
+	public MemberFormPage enterAnnualizedsales(String annualizedsales) {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_annualizedsales.fieldControl-currency-text-input']")),annualizedsales,"annualizedsales");
+		return this;
+
+	}
 	
 	//verify Pipeline Stage option
-		public  MemberFormPage verifyPipelineStageOptionisNotDisplayed(String pipelineStage) throws InterruptedException {
-			
-			enterPipeleinStage(pipelineStage);
-			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
-
-			wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//span[contains(text(),'We didn’t find a match')]"))));
-
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'We didn’t find a match')]")).size(), "Pipeline Stage");		
+		public  MemberFormPage verifyPipelineStageAllOption() throws InterruptedException {
+			List<String> expectdoption = Arrays.asList("1 - Outreach","2 - Initial Discussion","3 - Proposal/Negotiations","4 - Contract Sent","Business At Risk - 50%","Business At Risk – 75%","Business At Risk – Lost","Business At Risk – Saved","Opportunity Lost","Won");
+			List<String> pipelineStageMenu=new ArrayList<String>();
+			List<WebElement> pipeleinStageOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
+			for(int i =1;i<=pipeleinStageOptions.size();i++) {
+				pipelineStageMenu.add(getDriver().findElement(By.xpath("//div[@col-id='ix_name']//button//span")).getText());
+			}
+				
+			assertTrue(pipelineStageMenu.containsAll(expectdoption), "Pipeline Stage is displayed");		
 			return this;
 
 		}
 
-	
-	
-	
 }
 
