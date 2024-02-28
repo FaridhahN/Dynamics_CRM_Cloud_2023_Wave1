@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
@@ -9345,10 +9346,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Navigate tO Advance Lookup
 	public  MemberFormPage navigateToAdvanceLookupinPipelineStage() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")),"Pipeline");
+		Thread.sleep(1000);
 		Actions actions =new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-Lookup_ix_pipelinestage_microsoftIcon_searchButton']"))).click().build().perform();
+		Thread.sleep(2000);
 		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_advlookup']"))).click().build().perform();
-		
+		Thread.sleep(3000);
 	
 	return this;	
 	}
@@ -9407,6 +9410,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.SaveAndClose']")),"Save and Close Button");
 		return this;
 	}
+
+	
+	//Click Sae and Close button
+		public  MemberFormPage clicksaveinPipeline() throws InterruptedException { 
+
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.Save']")),"Save Button");
+			return this;
+		}
 
 
 	//Select pipeline stage from the lookup
@@ -9561,13 +9572,54 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			List<String> pipelineStageMenu=new ArrayList<String>();
 			List<WebElement> pipeleinStageOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
 			for(int i =1;i<=pipeleinStageOptions.size();i++) {
-				pipelineStageMenu.add(getDriver().findElement(By.xpath("//div[@col-id='ix_name']//button//span")).getText());
+				pipelineStageMenu.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_name']//button//span)["+i+"]")).getText());
 			}
 				
 			assertTrue(pipelineStageMenu.containsAll(expectdoption), "Pipeline Stage is displayed");		
 			return this;
 
 		}
-
+		
+		//verify probbility feild is locked
+				public  MemberFormPage verifyProbabilityFieldisLocked() throws InterruptedException {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")).size(), "Probability field is locked");
+				return this;	
+				}
+		
+//verify Probability feild is Auto populated
+				public  MemberFormPage verifyProbabilityAutopopulated(String pipelineStage) throws InterruptedException {
+					HashMap<String, String> probabilityValue=new HashMap<String, String>();
+					probabilityValue.put("1 - Outreach", "5");
+					probabilityValue.put("2 - Initial Discussion", "20");
+					probabilityValue.put("3 - Proposal/Negotiations", "50");
+					probabilityValue.put("4 - Contract Sent", "90");
+					probabilityValue.put("Business At Risk - 50%", "50");
+					probabilityValue.put("Business At Risk - 75%", "75");
+					probabilityValue.put("Business At Risk – Lost", "100");
+					probabilityValue.put("Business At Risk – Saved", "0");
+					probabilityValue.put("Opportunity Lost", "0");
+					probabilityValue.put("Won", "100");
+					selectPipelineStage(pipelineStage);
+					verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(pipelineStage), "Probability feild");
+					return this;
+				}
+				
+				//Enter the pipeleindetails
+				public  MemberFormPage enterPipeleinDetailsWithoutLeadsource(String pipelineType, String anticipateddate, String pipelineStage, String category,String annualizedsales, String notes) throws InterruptedException {
+					selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_pipelinetype.fieldControl-option-set-select']")), pipelineType, "pipelineType");
+					type(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasingmonth.fieldControl-date-time-input']")),anticipateddate,"Anticipated Date");
+					selectPipelineStage(pipelineStage);
+					selectRevenueCategory(category);
+					enterAnnualizedsales(annualizedsales);
+					clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Feeshare");
+					type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_notes.fieldControl-text-box-text']")),notes,"Notes");
+					return this;
+				}
+				
+				//verifyError Message
+				public  MemberFormPage verifyLeadSourceMandatory() throws InterruptedException {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Pipeline Lead Source : Required fields must be filled in.')]")).size(), "Lead source is mandatory");
+				return this;
+				}
 }
 
