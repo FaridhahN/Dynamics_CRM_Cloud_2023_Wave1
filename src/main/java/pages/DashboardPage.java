@@ -57,9 +57,17 @@ public class DashboardPage extends WebDriverServiceImpl {
 		Thread.sleep(6000);
 		List<WebElement> copilotclosbutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
 
+		List<WebElement> copilotclosebutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']"));
+
+
 		if(copilotclosbutton.size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
 		}
+
+		if(copilotclosebutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']")),"co pilot Close button");
+		}
+
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Contacts']")));
