@@ -3,12 +3,12 @@ package testcases.Pipeline;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_1004926:_1004926:_Verify Pipeline lead source is mandatory field in Multipipeline
 import utils.TestUtils;
 
-public class TestCase_1004923 {
+//TFS ID_9669:28459_Cloud : Pipeline - Validate Prospect account type cannot have Pipeline stage as "Won"
 
-//TFS ID 1004923	
+public class TestCase_9669 {
+
 	@Test
 	public void verifyPipelineStage(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
@@ -27,14 +27,9 @@ public class TestCase_1004923 {
 
 		.navigateToPiepline()
 		.clickNewPipeline()
-		.verifyPipelinePage()
-		.enterPipeleinDetailsWithoutLeadsource(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineType", sDataSheetName), TestUtils.todaysDate(), DataInputProvider.getCellData_ColName(iRowNumber, "pipelineStage", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "annualizedsales", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "notes", sDataSheetName))
+		.enterPipeleinDetails(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineType", sDataSheetName), TestUtils.todaysDate(), DataInputProvider.getCellData_ColName(iRowNumber, "pipelineStage", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "leadSource", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "annualizedsales", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "notes", sDataSheetName))
 		.clicksaveinPipeline()
-		.verifyLeadSourceMandatory()
-		
+		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		;
-
-
-
 	}
 }

@@ -3,12 +3,10 @@ package testcases.Pipeline;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
-//TFS ID_1004926:_1004926:_Verify Pipeline lead source is mandatory field in Multipipeline
-import utils.TestUtils;
 
-public class TestCase_1004923 {
+//TFS ID_973784:_973784:_Verify existing Pipeline stage 3 - Analysis Presented has been removed from CRM
+public class TestCase_973784 {
 
-//TFS ID 1004923	
 	@Test
 	public void verifyPipelineStage(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
@@ -28,11 +26,7 @@ public class TestCase_1004923 {
 		.navigateToPiepline()
 		.clickNewPipeline()
 		.verifyPipelinePage()
-		.enterPipeleinDetailsWithoutLeadsource(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineType", sDataSheetName), TestUtils.todaysDate(), DataInputProvider.getCellData_ColName(iRowNumber, "pipelineStage", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "annualizedsales", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "notes", sDataSheetName))
-		.clicksaveinPipeline()
-		.verifyLeadSourceMandatory()
-		
-		;
+		.verifyPipelineStageOptionisNotDisplayed(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineStage", sDataSheetName));
 
 
 
