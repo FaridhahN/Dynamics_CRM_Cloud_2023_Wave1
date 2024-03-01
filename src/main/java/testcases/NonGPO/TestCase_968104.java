@@ -93,7 +93,7 @@ public class TestCase_968104 {
 		//Click on Save 
 		.clickSave() 
 
-		
+
 		.clickMembershipAndAddNewMembership()
 
 		// Choose Membership type 
@@ -144,17 +144,17 @@ public class TestCase_968104 {
 		.clickSave() 
 
 		//Click add new membership
-				.clickMembershipAndAddNewMembership()
+		.clickMembershipAndAddNewMembership()
 
-				// Choose Membership type 
-				.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-				.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		// Choose Membership type 
+		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
+		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
-				//Provide any start date and click on save
-				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+		//Provide any start date and click on save
+		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
 
-				//Click on membership save and close
-				.clickQuickCreateMembershipSaveAndClose()
+		//Click on membership save and close
+		.clickQuickCreateMembershipSaveAndClose()
 
 
 		;

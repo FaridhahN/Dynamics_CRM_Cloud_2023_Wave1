@@ -25,7 +25,7 @@ public class TestCase_7543 {
 		.changeMemberForm()
 
 		//3.Move the record status to draft then save
-		.chooseRecordStatusDraft()
+		.chooseRecordStatusDraftfromTop()
 
 		//Click on Save 
 		.clickSave() 
