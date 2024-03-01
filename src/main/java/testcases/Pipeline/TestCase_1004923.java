@@ -6,7 +6,7 @@ import utils.DataInputProvider;
 //TFS ID_1004926:_1004926:_Verify Pipeline lead source is mandatory field in Multipipeline
 import utils.TestUtils;
 
-public class TestCase_1004926 {
+public class TestCase_1004923 {
 
 
 	@Test

@@ -9621,5 +9621,21 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Pipeline Lead Source : Required fields must be filled in.')]")).size(), "Lead source is mandatory");
 				return this;
 				}
+				
+				//Verify Admin fee
+				public  MemberFormPage verifyAdminFee(String adminfee) throws InterruptedException {
+					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")), adminfee, "Admin Fedd");
+					return this;
+				}
+				
+				//Clear DP
+				public MemberFormPage clearRevenueCategory() throws InterruptedException {
+
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_text']"))).perform();
+					click(getDriver().findElement(By.xpath("//button[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_delete']")),"Clear Icon"); 
+					Thread.sleep(3000);
+					return this;	
+				}
 }
 
