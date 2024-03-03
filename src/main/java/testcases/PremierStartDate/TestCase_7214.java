@@ -183,7 +183,7 @@ public class TestCase_7214 {
 		 .typeMembershipStartDate("5/5/2021")
 		  
 		  //Click on membership save and close
-		  .clickSaveAndCloseOnActivity()
+		  .clickSave_Close()
 		  
 		  //Verify
 		  .verifyPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
