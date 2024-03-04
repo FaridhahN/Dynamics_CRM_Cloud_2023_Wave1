@@ -37,6 +37,10 @@ public class TestCase_964341 {
 		.verifyActivitiesOption()
 		//Click Activities Tab
 		.selectRelatedActivities()
+		
+		//DataReset
+				.completeAllTask()
+				
 
 		//Select Open Activities View
 		.selectOpenActivitiesView()
@@ -54,6 +58,8 @@ public class TestCase_964341 {
 				DataInputProvider.getCellData_ColName(iRowNumber, "Due Date", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "Duration", sDataSheetName) ,
 				DataInputProvider.getCellData_ColName(iRowNumber, "TaskDetails", sDataSheetName))
+		
+		
 
 		//Verify the activity is created sucessfully
 

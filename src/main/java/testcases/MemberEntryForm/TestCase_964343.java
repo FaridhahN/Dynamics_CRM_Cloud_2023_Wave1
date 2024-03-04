@@ -32,32 +32,18 @@ public class TestCase_964343 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.chooseMemberEntryForm()
 		.clickSave()
-		.verifyContactOption()	;
-		new ContactsPage()
+		.verifyContactOption()
+		.NavigateToContactsPage()
+		
 		.clickNewOnContactsPage()
 
 		// 3. Provide First name = Any & Last name = Any
-		.typeContactName((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
+		.createnewContact((DataInputProvider.getCellData_ColName(iRowNumber, "firstName", sDataSheetName)),
 				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
-		// Primary Account = 1000155094
-		.selectPrimaryAccount(
-				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
-
-		// Save the record
-		.clickSave()
-
-		// 4. Observe the Innovatix Contact ID field
-		.isInnovatixContactIDDisplayed()
-
-		// 5. Change the record start from Draft to Published
-		.chooseRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
-
-		// Click on Save
-		.clickSave()
-
-
-
+		
+		//Verify Error message 
+		.VerifyErrorMessageNotDisplayed()
 
 
 

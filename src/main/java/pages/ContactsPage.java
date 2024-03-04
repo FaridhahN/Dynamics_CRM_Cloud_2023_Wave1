@@ -40,10 +40,19 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public static String CRMNumber;
 
 	// Click New on contacts page
+	
 	public ContactsPage clickNewOnContactsPage() {
-		click(getDriver().findElement(
-				By.xpath("//*[@data-id='contact|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.contact.NewRecord']")),
-				"New");
+		
+		if(getDriver().findElements(By.xpath("//*[@data-id='contact|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.contact.NewRecord']")).size()>0) {
+			click(getDriver().findElement(
+					By.xpath("//*[@data-id='contact|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.contact.NewRecord']")),
+					"New");
+			
+		}
+		
+		if(getDriver().findElements(By.xpath("//*[@data-id='contact|NoRelationship|SubGridAssociated|Mscrm.SubGrid.contact.AddNewStandard']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='contact|NoRelationship|SubGridAssociated|Mscrm.SubGrid.contact.AddNewStandard']")),"New button");
+		}
 		return this;
 	}
 
@@ -1825,6 +1834,15 @@ public class ContactsPage extends WebDriverServiceImpl {
 			return this;
 		}
 		
+		
+		public ContactsPage createnewContact(String firstName, String SecondName) throws InterruptedException {
+			type(getDriver().findElement(By.xpath("//input[@data-id='firstname.fieldControl-text-box-text']")),firstName, "First NAme");
+			type(getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")),SecondName, "Last NAme");
+			click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Click save and Close");
+			Thread.sleep(5000);
+		
+			return this;
+		}
 		
 	
 }

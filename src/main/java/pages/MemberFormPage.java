@@ -885,9 +885,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			relatedoptions.add(getDriver().findElement(By.xpath("(//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')])["+i+"]")).getText());
 		}
 		ArrayList<String> optionbeforeSort=new ArrayList<String> ();
+		
 		optionbeforeSort.addAll(relatedoptions);
+		for(String option: optionbeforeSort) {
+			System.out.println(option);
+		}
 		Collections.sort(relatedoptions);
 		Assert.assertTrue(relatedoptions.equals(optionbeforeSort));
+		for(String option: relatedoptions) {
+			System.out.println(option);
+		}
 		return this;
 	}
 
@@ -1044,10 +1051,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).sendKeys(Keys.TAB).build().perform();
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
 		//Changed on 10/11/2023
 		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
+		
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 
 		Thread.sleep(10000);
@@ -6704,13 +6712,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
 		click(getDriver().findElement(By.xpath("(//*[text()='Activities'])[2]")),"Activities");
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		return this;
 	}
 
 	//Select Open Activities
 	public MemberFormPage selectOpenActivitiesView() throws InterruptedException   {
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
 		if(dropdown.size()>0) {
 			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
@@ -6845,7 +6853,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Letter')]")),"Confirm Delete Button");
 			}
 		}
-
+		Thread.sleep(10000);
 		return this;
 	}
 
