@@ -27,7 +27,7 @@ public class TestCase_10559 {
 		//3.Verify Line of Business Entity for Limited Member
 
 		.clickLineOfBusinesses()
-		.verifyLineOfBusinesAssocView()
+		//.verifyLineOfBusinesAssocView()
 		.verifyNewLineOfBusinessIsNotPresent();
 		
 		

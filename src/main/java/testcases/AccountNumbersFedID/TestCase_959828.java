@@ -64,6 +64,10 @@ public class TestCase_959828 {
 		//Save the information
 		.clickSave()
 		
+		//
+		.clickRelatedActivities()
+		.clickGeneralTab()
+		
 		//Choose Record Status as Published
 		.recordStatusPublished(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatusPublished", sDataSheetName))
 		

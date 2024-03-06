@@ -23,6 +23,7 @@ import static org.testng.Assert.assertTrue;
 import java.awt.AWTException;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6993,7 +6994,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Click on Membership save and close and Verify Membership Error Message
 	public MemberFormPage verifyMembershipErrorMessage(String errormessage) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
 		Thread.sleep(5000);
 		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='errorDialog_subtitle']")),errormessage,"Membership Error Message");
 		Thread.sleep(2000);
@@ -9636,7 +9637,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					return this;
 				}
 				
-				//Clear DP
+				//Clear Revenue Category
 				public MemberFormPage clearRevenueCategory() throws InterruptedException {
 
 					Actions action = new Actions(getDriver());
@@ -9645,5 +9646,48 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					Thread.sleep(3000);
 					return this;	
 				}
+				
+				
+				//Verif NAF
+				public MemberFormPage verifyNAF() throws InterruptedException {
+					navigateToSysteminPipeline();
+					navigateToSGeneralinPipeline();
+					Thread.sleep(4000);
+					String GAF =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectedgaf.fieldControl-currency-text-input']")), "title","GAF");
+					GAF=GAF.replace("$", "");
+					double GAFNo=Double.valueOf(GAF);
+					
+					String Feeshare =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")), "title","Fee share");
+					double Feeshareno=Double.valueOf(Feeshare);
+					System.out.println(Feeshareno/100.0);
+					double NAF=GAFNo*(1-(Feeshareno/100.0));
+					String.format("%.2f",new BigDecimal(NAF));
+					String NAFString=getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectednaf.fieldControl-currency-text-input']")), "title","NAF");
+							
+					assertTrue(NAFString.contentEquals("$"+NAF),NAFString+" "+NAF+"NAF calculated correctly" );
+					return this;
+				}
+				
+				public MemberFormPage navigateToSysteminPipeline() {
+					click(getDriver().findElement(By.xpath("//li[@aria-label='System']")),"System Tab");
+					
+					return this;
+				}
+				
+				public MemberFormPage navigateToSGeneralinPipeline() {
+					click(getDriver().findElement(By.xpath("//li[@aria-label='General']")),"GeneralTab");
+					
+					return this;
+				}
+				
+				public MemberFormPage clearFeeshare() throws InterruptedException {
+					
+					clear(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Fee share");
+					
+					return this;
+				}
+				
+				
+				
 }
 
