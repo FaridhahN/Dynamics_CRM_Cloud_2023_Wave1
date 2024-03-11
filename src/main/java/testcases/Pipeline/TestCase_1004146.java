@@ -5,11 +5,9 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_994612:_994612:Verify newly added lead sources are added in Pipeline UI 
+//TFS ID_1004146:_1004146:Verify the "Current business growth" pipeline type is removed from Pipeline
 
-
-
-public class TestCase_994612 {
+public class TestCase_1004146 {
 
 	@Test
 	public void verifyPipelineStage(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
@@ -29,9 +27,7 @@ public class TestCase_994612 {
 
 		.navigateToPiepline()
 		.clickNewPipeline()
-		.selectPipeleinLead(DataInputProvider.getCellData_ColName(iRowNumber, "leadSource", sDataSheetName))
-		.clearLeadResource()
-		.selectPipeleinLead(DataInputProvider.getCellData_ColName(iRowNumber, "leadSource1", sDataSheetName))
+		.verifyPipelineType(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineType", sDataSheetName))
 		;
 	}
 }

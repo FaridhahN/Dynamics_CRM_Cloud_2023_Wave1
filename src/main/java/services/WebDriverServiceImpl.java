@@ -752,6 +752,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		String bReturn = "";
 		try {
 			bReturn=  ele.getAttribute(attribute);
+			System.out.println(bReturn);
 			setReport().log(Status.PASS, bReturn+" is displayed in :"+field,screenshotCapture());
 		} catch (WebDriverException e) {
 			setReport().log(Status.FAIL, ele+"could not be found",screenshotCapture());
@@ -956,7 +957,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	public void verifyExactAttribute(WebElement ele, String attribute, String value,String field) {
 		try {
 			if(getAttribute(ele, attribute,field).equals(value)) {
-				System.out.println(attribute);
+				System.out.println(value);
 				setReport().log(Status.PASS, "The ' "+field+ "  ' contains "+ ": "+value,screenshotCapture());
 			}else {
 				setReport().log(Status.FAIL, "The  '"+field+ " ' does not contains "+ ": "+value,screenshotCapture());

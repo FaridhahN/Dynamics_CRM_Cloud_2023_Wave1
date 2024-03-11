@@ -51,6 +51,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	String Classificationafter;
 	String State;
 	String topparent;
+	String feeshare;
 	ArrayList<String> crmList= new ArrayList<String>();
 
 	//Enter account name
@@ -886,7 +887,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			relatedoptions.add(getDriver().findElement(By.xpath("(//div[@data-id='related_area_Related - Common']/following-sibling::div[@role='menuitem']/span[contains(@data-id,'label')])["+i+"]")).getText());
 		}
 		ArrayList<String> optionbeforeSort=new ArrayList<String> ();
-		
+
 		optionbeforeSort.addAll(relatedoptions);
 		for(String option: optionbeforeSort) {
 			System.out.println(option);
@@ -1056,7 +1057,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
 		//Changed on 10/11/2023
 		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
-		
+
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 
 		Thread.sleep(10000);
@@ -1353,9 +1354,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String due = dateFormat.format(date);
-		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Down Arrow to fill due date on the right hand top corner");
-		Thread.sleep(2000);
+		//click(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),"Down Arrow to fill due date on the right hand top corner");
+		Thread.sleep(3000);
 		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),due,"Due");
+
 		Thread.sleep(2000);
 		return this;
 	}
@@ -1372,7 +1374,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify added  Task's Subject value in Open Activity Associated View 
 	public MemberFormPage verifyTaskSubjectOnOpenActivityAssocView(String accountname) throws InterruptedException   {
 		Thread.sleep(4000);
-		verifyExactText(getDriver().findElement(By.xpath("//div[@col-id='subject']//a/span")), accountname, "Task Suject on Open Activity Associatged View");
+		verifyExactAttribute(getDriver().findElement(By.xpath("//div[@col-id='subject']//a")),"aria-label", accountname, "Task Suject on Open Activity Associatged View");
 		Thread.sleep(2000);
 		return this;
 	}
@@ -8680,9 +8682,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	}
 
-	public MemberFormPage navigateToDP() {
+	public MemberFormPage navigateToDP() throws InterruptedException {
 
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		Thread.sleep(2000);
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		return this;
 
@@ -8857,7 +8860,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage CompareDPRDTPRD() {
+	public MemberFormPage CompareDPRDTPRD() throws InterruptedException {
 		navigateToDP();
 		getDprd();
 		String dprd=TestUtils.date;
@@ -8890,7 +8893,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage CompareStartDateandDPRD() {
+	public MemberFormPage CompareStartDateandDPRD() throws InterruptedException {
 		navigateToDP();
 		getDprd();
 		String dprd=TestUtils.date;
@@ -9194,12 +9197,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 
-	public MemberFormPage clicktheMagnifyingGlass() {
+	public MemberFormPage clicktheMagnifyingGlass() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
-
+		Thread.sleep(4000);
 		Actions actions=new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_search']"))).click().build().perform();
 		click(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_addNewBtnContainer']")),"Add new Contact");
+		Thread.sleep(5000);
+		
 		return this;
 	}
 
@@ -9342,6 +9347,63 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Click new Multiple pipeline
+	public  MemberFormPage clickNewMultiplePipeline() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|SubGridAssociated|ix.ix_pipeline.Button0.AddMultiplePipelines']")),"New Pipeline button");
+		Thread.sleep(3000);
+		getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@data-id='MscrmControls.WebResource.WebResourceHtmlControl-FullPageWebResource']")));
+		return this;
+	}
+
+
+	//Verify Lead source in Multiple pipeline
+	public  MemberFormPage verifyLeadSourcePipeline() throws InterruptedException {
+		Select LeadSourcePipeline= new  Select(getDriver().findElement(By.xpath("//select[@id='selPipelineLeadSource0']")));		
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =LeadSourcePipeline.getOptions();		
+		assertTrue(!(mylist.contains("Parachute")), "Parachute");
+		assertTrue(!(mylist.contains("EyePro")), "EyePro");
+		return this;
+	}
+
+	//Verify Lead source in Multiple pipeline
+	public  MemberFormPage verifyPipelineType(String pipelineType) throws InterruptedException {
+		Select pipelineTypes= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_pipelinetype.fieldControl-option-set-select']")));		
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =pipelineTypes.getOptions();		
+		assertTrue(!(mylist.contains(pipelineType)), "pipelineType");
+
+		return this;
+	}
+
+
+
+	//Verify Pipeline initiative is not displayed
+	public  MemberFormPage verifyPipelineInititativeisNotDisplayed() throws InterruptedException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Pipeline Initiative')]")).size(), "Pipeline Initiative");
+		return this;
+	}
+
+
+	//Verify Pipeline initiative is not displayed
+	public  MemberFormPage verifyPipelineInititativeisNotDisplayedMulti() throws InterruptedException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//th[contains(text(),'Pipeline Initiatives')]")).size(), "Pipeline Initiative");
+		return this;
+	}
+
+	//Verify Pipeline Stage in Multiple pipeline
+	public  MemberFormPage verifyPipelineStageinMultipipelein(String pipelineStage) throws InterruptedException {
+		Select LeadSourcePipeline= new  Select(getDriver().findElement(By.xpath("//select[@id='selPipelineLeadSource0']")));		
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> mylist =LeadSourcePipeline.getOptions();		
+		assertTrue(!(mylist.contains(pipelineStage)), "pipelineStage");
+		
+		return this;
+	}
+
+
+
+
 	//Currently verifing pipeline stage fields.
 	//verify Pipeline page
 	public  MemberFormPage verifyPipelinePage() throws InterruptedException {
@@ -9361,8 +9423,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		actions.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_advlookup']"))).click().build().perform();
 		Thread.sleep(3000);
-	
-	return this;	
+
+		return this;	
 	}
 	//Enter the pipelineStage option in advance lookup
 	public  MemberFormPage enterPipeleinStage(String pipelineStage) throws InterruptedException {
@@ -9417,16 +9479,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public  MemberFormPage clickSaveAndCloseinPipleine() throws InterruptedException { 
 
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.SaveAndClose']")),"Save and Close Button");
+		Thread.sleep(6000);
 		return this;
 	}
 
-	
-	//Click Sae and Close button
-		public  MemberFormPage clicksaveinPipeline() throws InterruptedException { 
 
-			click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.Save']")),"Save Button");
-			return this;
-		}
+	//Click Sae and Close button
+	public  MemberFormPage clicksaveinPipeline() throws InterruptedException { 
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipeline|NoRelationship|Form|Mscrm.Form.ix_pipeline.Save']")),"Save Button");
+		return this;
+	}
 
 
 	//Select pipeline stage from the lookup
@@ -9574,120 +9637,236 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
-	
-	//verify Pipeline Stage option
-		public  MemberFormPage verifyPipelineStageAllOption() throws InterruptedException {
-			List<String> expectdoption = Arrays.asList("1 - Outreach","2 - Initial Discussion","3 - Proposal/Negotiations","4 - Contract Sent","Business At Risk - 50%","Business At Risk – 75%","Business At Risk – Lost","Business At Risk – Saved","Opportunity Lost","Won");
-			List<String> pipelineStageMenu=new ArrayList<String>();
-			List<WebElement> pipeleinStageOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
-			for(int i =1;i<=pipeleinStageOptions.size();i++) {
-				pipelineStageMenu.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_name']//button//span)["+i+"]")).getText());
-			}
-				
-			assertTrue(pipelineStageMenu.containsAll(expectdoption), "Pipeline Stage is displayed");		
-			return this;
 
+	//verify Pipeline Stage option
+	public  MemberFormPage verifyPipelineStageAllOption() throws InterruptedException {
+		List<String> expectdoption = Arrays.asList("1 - Outreach","2 - Initial Discussion","3 - Proposal/Negotiations","4 - Contract Sent","Business At Risk - 50%","Business At Risk – 75%","Business At Risk – Lost","Business At Risk – Saved","Opportunity Lost","Won");
+		List<String> pipelineStageMenu=new ArrayList<String>();
+		List<WebElement> pipeleinStageOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
+		for(int i =1;i<=pipeleinStageOptions.size();i++) {
+			pipelineStageMenu.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_name']//button//span)["+i+"]")).getText());
+		}
+
+		assertTrue(pipelineStageMenu.containsAll(expectdoption), "Pipeline Stage is displayed");		
+		return this;
+
+	}
+
+	//verify probbility feild is locked
+	public  MemberFormPage verifyProbabilityFieldisLocked() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")).size(), "Probability field is locked");
+		return this;	
+	}
+
+	//verify Probability feild is Auto populated
+	public  MemberFormPage verifyProbabilityAutopopulated(String pipelineStage) throws InterruptedException {
+		HashMap<String, String> probabilityValue=new HashMap<String, String>();
+		probabilityValue.put("1 - Outreach", "5");
+		probabilityValue.put("2 - Initial Discussion", "20");
+		probabilityValue.put("3 - Proposal/Negotiations", "50");
+		probabilityValue.put("4 - Contract Sent", "90");
+		probabilityValue.put("Business At Risk - 50%", "50");
+		probabilityValue.put("Business At Risk - 75%", "75");
+		probabilityValue.put("Business At Risk – Lost", "100");
+		probabilityValue.put("Business At Risk – Saved", "0");
+		probabilityValue.put("Opportunity Lost", "0");
+		probabilityValue.put("Won", "100");
+		selectPipelineStage(pipelineStage);
+		verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(pipelineStage), "Probability feild");
+		return this;
+	}
+
+	//Enter the pipeleindetails
+	public  MemberFormPage enterPipeleinDetailsWithoutLeadsource(String pipelineType, String anticipateddate, String pipelineStage, String category,String annualizedsales, String notes) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_pipelinetype.fieldControl-option-set-select']")), pipelineType, "pipelineType");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasingmonth.fieldControl-date-time-input']")),anticipateddate,"Anticipated Date");
+		selectPipelineStage(pipelineStage);
+		selectRevenueCategory(category);
+		enterAnnualizedsales(annualizedsales);
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Feeshare");
+		type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_notes.fieldControl-text-box-text']")),notes,"Notes");
+		return this;
+	}
+
+	//verifyError Message
+	public  MemberFormPage verifyLeadSourceMandatory() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Pipeline Lead Source : Required fields must be filled in.')]")).size(), "Lead source is mandatory");
+		return this;
+	}
+
+	//Verify Admin fee
+	public  MemberFormPage verifyAdminFee(String adminfee) throws InterruptedException {
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")), adminfee, "Admin Fedd");
+		return this;
+	}
+
+	//Clear Revenue Category
+	public MemberFormPage clearRevenueCategory() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_text']"))).perform();
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_delete']")),"Clear Icon"); 
+		Thread.sleep(3000);
+		return this;	
+	}
+
+
+	//Verif NAF
+	public MemberFormPage verifyNAF() throws InterruptedException {
+		navigateToSysteminPipeline();
+		navigateToSGeneralinPipeline();
+		Thread.sleep(4000);
+		String GAF =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectedgaf.fieldControl-currency-text-input']")), "title","GAF");
+		GAF=GAF.replace("$", "");
+		double GAFNo=Double.valueOf(GAF);
+
+		String Feeshare =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")), "title","Fee share");
+		double Feeshareno=Double.valueOf(Feeshare);
+		System.out.println(Feeshareno/100.0);
+		double NAF=GAFNo*(1-(Feeshareno/100.0));
+		String.format("%.2f",new BigDecimal(NAF));
+		String NAFString=getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectednaf.fieldControl-currency-text-input']")), "title","NAF");
+
+		assertTrue(NAFString.contentEquals("$"+NAF),NAFString+" "+NAF+"NAF calculated correctly" );
+		return this;
+	}
+
+	public MemberFormPage navigateToSysteminPipeline() {
+		click(getDriver().findElement(By.xpath("//li[@aria-label='System']")),"System Tab");
+
+		return this;
+	}
+
+	public MemberFormPage navigateToSGeneralinPipeline() {
+		click(getDriver().findElement(By.xpath("//li[@aria-label='General']")),"GeneralTab");
+
+		return this;
+	}
+
+	public MemberFormPage clearFeeshare() throws InterruptedException {
+
+		clear(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Fee share");
+
+		return this;
+	}
+
+
+	//Clear Lead Resource
+	public MemberFormPage clearLeadResource() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelineleadsources.fieldControl-LookupResultsDropdown_ix_pipelineleadsources_selected_tag']"))).perform();
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipelineleadsources.fieldControl-LookupResultsDropdown_ix_pipelineleadsources_selected_tag_delete']")),"Clear Icon"); 
+		Thread.sleep(3000);
+		return this;	
+	}
+
+	//Clear feeshare in Multiple Pipeline
+	public MemberFormPage clearFeeshareInMultiplePipeline() throws InterruptedException{
+
+		clear(getDriver().findElement(By.id("txtFeeShare0")),"Fee share");
+		return this;
+	}
+
+	//Clear feeshare in Multiple Pipeline
+	public MemberFormPage enterFeeshareInMultiplePipeline(String feeshare) throws InterruptedException{
+
+		type(getDriver().findElement(By.id("txtFeeShare0")),feeshare,"Fee share");
+		return this;
+	}
+
+	//Enter Multiplepipeline value
+	public MemberFormPage enterMultiplePipelein() throws InterruptedException {
+
+		return this;
+	}
+
+	//Enter Multiplepipeline value
+	public MemberFormPage selectPipelineStageinMultipipeline(String pipelineStage) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@id='selPipelineStage0']")), pipelineStage, "pipelineStage");
+
+		return this;
+	}
+
+	public MemberFormPage selectLeadSourceinMultipipeline(String leadSource) throws InterruptedException {
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@id='selPipelineLeadSource0']")), leadSource, "Lead source");
+
+		return this;
+	}
+
+	public MemberFormPage clickSaveAndCloseMultipipleine() throws InterruptedException {
+		Actions actions =new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//div[@id='dvTable']/following-sibling::div/button[@id='btnSave']"))).click().build().perform();
+		Thread.sleep(4000);
+
+		return this;
+	}
+
+	//vERify Alert is displayed
+	public MemberFormPage verifyAlertIsDisplayed(String errormessage) throws InterruptedException {
+
+
+		String alertText=getDriver().switchTo().alert().getText();
+		getDriver().switchTo().alert().accept();
+		System.out.println(alertText);
+		System.out.println(errormessage);
+		assertTrue(alertText.contentEquals(errormessage));
+
+		return this;
+	}
+	// verify pipeleinStage is not displayed
+	public MemberFormPage verifyPipelineStageisNotDisplayed(String pipelineStage) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_textInputBox_with_filter_new']")),pipelineStage,"pipelineStage");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_No_Records_Text']")).size(), pipelineStage);
+		return this;
+	}
+	
+	//Open the existign pipeline
+	public MemberFormPage openExistingPipeline() throws InterruptedException {
+		Actions actions = new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='ix_pipelinetype' and contains(@class,'ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-value non-editable-cell')]"))).doubleClick().build().perform();
+	
+return this;
+	}
+	
+	//Open the existign pipeline
+		public MemberFormPage enterAdminFee(String adminefee) throws InterruptedException {
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")),adminefee,"Admin Fee");
+	return this;
+		}
+	
+		
+		public MemberFormPage clickFBO() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//div[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_selected_tag_text']")),"FBO");
+			return this;
+		}
+	
+		//Navigate To Pipeline
+		public  MemberFormPage navigateToPieplineFeeShare() throws InterruptedException {
+
+			Thread.sleep(2000);
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			click(getDriver().findElement(By.xpath("//span[@data-id='label_relatedEntity_nav_ix_account_ix_pipelinefeeshare_accountid']")),"Membership");
+			Thread.sleep(3000);
+			return this;
+		}	
+		
+		
+		//get the fee share from FBO
+		public  MemberFormPage getFeeShareFromFBO() throws InterruptedException {
+			feeshare=getTextValue(getDriver().findElement(By.xpath("//div[@col-id='ix_feeshare']//label[contains(@class,'ms-Label labelRootStyles')]/div[contains(@class,'ms-TooltipHost')]")),"FEE share");
+		return this;
 		}
 		
-		//verify probbility feild is locked
-				public  MemberFormPage verifyProbabilityFieldisLocked() throws InterruptedException {
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")).size(), "Probability field is locked");
-				return this;	
-				}
-		
-//verify Probability feild is Auto populated
-				public  MemberFormPage verifyProbabilityAutopopulated(String pipelineStage) throws InterruptedException {
-					HashMap<String, String> probabilityValue=new HashMap<String, String>();
-					probabilityValue.put("1 - Outreach", "5");
-					probabilityValue.put("2 - Initial Discussion", "20");
-					probabilityValue.put("3 - Proposal/Negotiations", "50");
-					probabilityValue.put("4 - Contract Sent", "90");
-					probabilityValue.put("Business At Risk - 50%", "50");
-					probabilityValue.put("Business At Risk - 75%", "75");
-					probabilityValue.put("Business At Risk – Lost", "100");
-					probabilityValue.put("Business At Risk – Saved", "0");
-					probabilityValue.put("Opportunity Lost", "0");
-					probabilityValue.put("Won", "100");
-					selectPipelineStage(pipelineStage);
-					verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(pipelineStage), "Probability feild");
-					return this;
-				}
-				
-				//Enter the pipeleindetails
-				public  MemberFormPage enterPipeleinDetailsWithoutLeadsource(String pipelineType, String anticipateddate, String pipelineStage, String category,String annualizedsales, String notes) throws InterruptedException {
-					selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_pipelinetype.fieldControl-option-set-select']")), pipelineType, "pipelineType");
-					type(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasingmonth.fieldControl-date-time-input']")),anticipateddate,"Anticipated Date");
-					selectPipelineStage(pipelineStage);
-					selectRevenueCategory(category);
-					enterAnnualizedsales(annualizedsales);
-					clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Feeshare");
-					type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_notes.fieldControl-text-box-text']")),notes,"Notes");
-					return this;
-				}
-				
-				//verifyError Message
-				public  MemberFormPage verifyLeadSourceMandatory() throws InterruptedException {
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Pipeline Lead Source : Required fields must be filled in.')]")).size(), "Lead source is mandatory");
+		//get the fee share from FBO
+				public  MemberFormPage getFeeShare() throws InterruptedException {
+					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),feeshare,"FEE share");
 				return this;
 				}
-				
-				//Verify Admin fee
-				public  MemberFormPage verifyAdminFee(String adminfee) throws InterruptedException {
-					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")), adminfee, "Admin Fedd");
-					return this;
-				}
-				
-				//Clear Revenue Category
-				public MemberFormPage clearRevenueCategory() throws InterruptedException {
-
-					Actions action = new Actions(getDriver());
-					action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_text']"))).perform();
-					click(getDriver().findElement(By.xpath("//button[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_selected_tag_delete']")),"Clear Icon"); 
-					Thread.sleep(3000);
-					return this;	
-				}
-				
-				
-				//Verif NAF
-				public MemberFormPage verifyNAF() throws InterruptedException {
-					navigateToSysteminPipeline();
-					navigateToSGeneralinPipeline();
-					Thread.sleep(4000);
-					String GAF =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectedgaf.fieldControl-currency-text-input']")), "title","GAF");
-					GAF=GAF.replace("$", "");
-					double GAFNo=Double.valueOf(GAF);
-					
-					String Feeshare =getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")), "title","Fee share");
-					double Feeshareno=Double.valueOf(Feeshare);
-					System.out.println(Feeshareno/100.0);
-					double NAF=GAFNo*(1-(Feeshareno/100.0));
-					String.format("%.2f",new BigDecimal(NAF));
-					String NAFString=getAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_projectednaf.fieldControl-currency-text-input']")), "title","NAF");
-							
-					assertTrue(NAFString.contentEquals("$"+NAF),NAFString+" "+NAF+"NAF calculated correctly" );
-					return this;
-				}
-				
-				public MemberFormPage navigateToSysteminPipeline() {
-					click(getDriver().findElement(By.xpath("//li[@aria-label='System']")),"System Tab");
-					
-					return this;
-				}
-				
-				public MemberFormPage navigateToSGeneralinPipeline() {
-					click(getDriver().findElement(By.xpath("//li[@aria-label='General']")),"GeneralTab");
-					
-					return this;
-				}
-				
-				public MemberFormPage clearFeeshare() throws InterruptedException {
-					
-					clear(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),"Fee share");
-					
-					return this;
-				}
-				
-				
-				
+		//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']
 }
 

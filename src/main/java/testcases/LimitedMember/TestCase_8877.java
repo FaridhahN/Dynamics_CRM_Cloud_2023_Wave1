@@ -58,6 +58,7 @@ public class TestCase_8877 {
 		.clickSave() 
 
 		.navigateToDP()
+		.clearPrimaryAccount()
 		.EnterPrimaryAccount(DataInputProvider.getCellData_ColName(iRowNumber, "contactFirstName", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "contactLastName", sDataSheetName))
 		.clickGeneralTab()
 		.clickSave()

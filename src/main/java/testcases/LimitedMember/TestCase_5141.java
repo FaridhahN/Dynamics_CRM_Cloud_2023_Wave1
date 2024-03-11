@@ -39,7 +39,7 @@ public class TestCase_5141 {
 
 		.navigateToDP()
 		.verifyPrimaryContactIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
-		.clicksaveButton()
+		.clickSave()
 
 		.verifyPrimaryAccountNameinCAA()
 
@@ -50,22 +50,14 @@ public class TestCase_5141 {
 		.selectAccountsTab()		
 
 		//2. From the left navigation column ,Go to Accounts > +New
-		.clickNewOnAccountsPage()
-		.chooseMemberForm()
-		.navigateToRecordStatus()
-		.selectAccountType("Member")
-		//3. Account Name = Any
-		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumber", sDataSheetName)) 
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
-		//Click on save 			
-		.clickSave() 
-
-		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()
 
 		.navigateToDP()
+		.clearPrimaryAccount()
 		.verifyPrimaryContactIsEditable(DataInputProvider.getCellData_ColName(iRowNumber, "primaryContact", sDataSheetName))
-		.clicksaveButton()
+		.clickSave()
 
 		.verifyPrimaryAccountNameinCAA()
 

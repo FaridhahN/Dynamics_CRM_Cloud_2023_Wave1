@@ -5,11 +5,10 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_994612:_994612:Verify newly added lead sources are added in Pipeline UI 
+//TFS ID_994596:_994596:Verify the Business at risk 25% pipeline stage is removed in UI
+ 
 
-
-
-public class TestCase_994612 {
+public class TestCase_994596 {
 
 	@Test
 	public void verifyPipelineStage(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
@@ -29,9 +28,7 @@ public class TestCase_994612 {
 
 		.navigateToPiepline()
 		.clickNewPipeline()
-		.selectPipeleinLead(DataInputProvider.getCellData_ColName(iRowNumber, "leadSource", sDataSheetName))
-		.clearLeadResource()
-		.selectPipeleinLead(DataInputProvider.getCellData_ColName(iRowNumber, "leadSource1", sDataSheetName))
+		.verifyPipelineStageisNotDisplayed(DataInputProvider.getCellData_ColName(iRowNumber, "pipelineStage", sDataSheetName))
 		;
 	}
 }

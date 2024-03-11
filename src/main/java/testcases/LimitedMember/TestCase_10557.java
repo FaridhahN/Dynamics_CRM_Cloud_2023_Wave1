@@ -37,7 +37,7 @@ public class TestCase_10557 {
 				
 					
 		//Data Reset
-		.selectAndMarkComplete();
+		.completeAllTask();
 		
 		
 			
