@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -9760,6 +9761,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
+	
+	
 
 	//Clear feeshare in Multiple Pipeline
 	public MemberFormPage clearFeeshareInMultiplePipeline() throws InterruptedException{
@@ -9867,6 +9870,57 @@ return this;
 					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),feeshare,"FEE share");
 				return this;
 				}
-		//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']
+				
+				//verify Probability feild is Auto populated
+				public  MemberFormPage verifyPipeleinProbability(String pipelineStage) throws InterruptedException {
+					HashMap<String, String> probabilityValue=new HashMap<String, String>();
+					probabilityValue.put("1 - Outreach", "5");
+					probabilityValue.put("2 - Initial Discussion", "20");
+					probabilityValue.put("3 - Proposal/Negotiations", "50");
+					probabilityValue.put("4 - Contract Sent", "90");
+					probabilityValue.put("Business At Risk - 50%", "50");
+					probabilityValue.put("Business At Risk - 75%", "75");
+					probabilityValue.put("Business At Risk – Lost", "100");
+					probabilityValue.put("Business At Risk – Saved", "0");
+					probabilityValue.put("Opportunity Lost", "0");
+					probabilityValue.put("Won", "100");
+					for(String keys:probabilityValue.keySet()) {
+						
+						enterPipeleinStage(keys);
+						verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(keys), "Probability feild");
+						clearStageinAdvanceFind();
+						
+					}
+					return this;
+				}
+				
+				//ClearPipeline Stage
+				public MemberFormPage clearPipeleinStage() throws InterruptedException {
+
+					Actions action = new Actions(getDriver());
+					action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_text']"))).perform();
+					click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_delete']")),"Clear Icon"); 
+					Thread.sleep(3000);
+					return this;	
+				}
+				
+				//Clear Lead Resource
+				public MemberFormPage clearStageinAdvanceFind() throws InterruptedException {
+
+					clear(getDriver().findElement(By.xpath("//input[@placeholder='Search' and contains(@aria-labelledby,'advanced_lookup')]")),"Clear Icon"); 
+					Thread.sleep(3000);
+					
+					return this;	
+				}
+
+		public MemberFormPage verifyNotificationisNotDisplayed() {
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@data-id='notificationWrapper']")).size(), "NotificationWrapper");
+			return this;
+		}
+				
 }
+
+
+
+
 
