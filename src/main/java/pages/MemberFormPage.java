@@ -1,22 +1,6 @@
 package pages;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import com.aventstack.extentreports.Status;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -29,6 +13,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -39,9 +34,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import com.aventstack.extentreports.Status;
 
 import driver.Driver;
-
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
@@ -3289,6 +3289,22 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Click on Membership SAve and close //Quick create
+	public MemberFormPage clickQuickCreateMembershipSave() throws InterruptedException {
+
+		//Updated on 2/12/2024 based on Ticket 1010274
+
+
+		//click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.Save']")),"Save");
+		Thread.sleep(5000);
+		return this;	
+	}
+
+
+
+
+	//Click on Membership SAve and close //Quick create
 	public MemberFormPage clickQuickCreateMembershipSave_Close() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
 		Thread.sleep(7000);
@@ -3305,6 +3321,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;	
 	}	
 
+
+	//Clcikc Membership Save and Close button
+	public MemberFormPage clickMembershipSaveAndCloseButton() throws InterruptedException {
+
+		Thread.sleep(5000);
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
+		Thread.sleep(5000);
+		return this;	
+	}	
 	//Verify LOB required Error message
 	public MemberFormPage verifyReactivateErrorMessage() throws InterruptedException {
 		String errorMessage="Please re-activate the account by creating the membership";
@@ -4380,7 +4405,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//Scroll down to make the record status field visible
+		if(getDriver().findElements(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//Scroll down to make the record status field visible
+		}
 		click(getDriver().findElement(By.xpath("//*[@title='Membership Provider Type - Membership Provider Type']"))," Membership Provider Type");
 		click(getDriver().findElement(By.xpath("//*[text()='MEMBER ATTRIBUTES']")),"MEMBER ATTRIBUTES");
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
@@ -9205,7 +9232,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		actions.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_search']"))).click().build().perform();
 		click(getDriver().findElement(By.xpath("//button[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_addNewBtnContainer']")),"Add new Contact");
 		Thread.sleep(5000);
-		
+
 		return this;
 	}
 
@@ -9398,7 +9425,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//Create temp Array List > add  actual options  from DOM for comparison
 		List<WebElement> mylist =LeadSourcePipeline.getOptions();		
 		assertTrue(!(mylist.contains(pipelineStage)), "pipelineStage");
-		
+
 		return this;
 	}
 
@@ -9761,8 +9788,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		return this;	
 	}
-	
-	
+
+
 
 	//Clear feeshare in Multiple Pipeline
 	public MemberFormPage clearFeeshareInMultiplePipeline() throws InterruptedException{
@@ -9823,101 +9850,267 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_No_Records_Text']")).size(), pipelineStage);
 		return this;
 	}
-	
+
 	//Open the existign pipeline
 	public MemberFormPage openExistingPipeline() throws InterruptedException {
 		Actions actions = new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='ix_pipelinetype' and contains(@class,'ag-cell ag-cell-not-inline-editing ag-cell-normal-height ag-cell-value non-editable-cell')]"))).doubleClick().build().perform();
-	
-return this;
+
+		return this;
+	}
+
+	//Open the existign pipeline
+	public MemberFormPage enterAdminFee(String adminefee) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")),adminefee,"Admin Fee");
+		return this;
+	}
+
+
+	public MemberFormPage clickFBO() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//div[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_selected_tag_text']")),"FBO");
+		return this;
+	}
+
+	//Navigate To Pipeline
+	public  MemberFormPage navigateToPieplineFeeShare() throws InterruptedException {
+
+		Thread.sleep(2000);
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		click(getDriver().findElement(By.xpath("//span[@data-id='label_relatedEntity_nav_ix_account_ix_pipelinefeeshare_accountid']")),"Membership");
+		Thread.sleep(3000);
+		return this;
+	}	
+
+
+	//get the fee share from FBO
+	public  MemberFormPage getFeeShareFromFBO() throws InterruptedException {
+		feeshare=getTextValue(getDriver().findElement(By.xpath("//div[@col-id='ix_feeshare']//label[contains(@class,'ms-Label labelRootStyles')]/div[contains(@class,'ms-TooltipHost')]")),"FEE share");
+		return this;
+	}
+
+	//get the fee share from FBO
+	public  MemberFormPage getFeeShare() throws InterruptedException {
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),feeshare,"FEE share");
+		return this;
+	}
+
+	//verify Probability feild is Auto populated
+	public  MemberFormPage verifyPipeleinProbability(String pipelineStage) throws InterruptedException {
+		HashMap<String, String> probabilityValue=new HashMap<String, String>();
+		probabilityValue.put("1 - Outreach", "5");
+		probabilityValue.put("2 - Initial Discussion", "20");
+		probabilityValue.put("3 - Proposal/Negotiations", "50");
+		probabilityValue.put("4 - Contract Sent", "90");
+		probabilityValue.put("Business At Risk - 50%", "50");
+		probabilityValue.put("Business At Risk - 75%", "75");
+		probabilityValue.put("Business At Risk – Lost", "100");
+		probabilityValue.put("Business At Risk – Saved", "0");
+		probabilityValue.put("Opportunity Lost", "0");
+		probabilityValue.put("Won", "100");
+		for(String keys:probabilityValue.keySet()) {
+
+			enterPipeleinStage(keys);
+			verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(keys), "Probability feild");
+			clearStageinAdvanceFind();
+
+		}
+		return this;
+	}
+
+	//ClearPipeline Stage
+	public MemberFormPage clearPipeleinStage() throws InterruptedException {
+
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_text']"))).perform();
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_delete']")),"Clear Icon"); 
+		Thread.sleep(3000);
+		return this;	
+	}
+
+	//Clear Lead Resource
+	public MemberFormPage clearStageinAdvanceFind() throws InterruptedException {
+
+		clear(getDriver().findElement(By.xpath("//input[@placeholder='Search' and contains(@aria-labelledby,'advanced_lookup')]")),"Clear Icon"); 
+		Thread.sleep(3000);
+
+		return this;	
+	}
+
+	public MemberFormPage verifyNotificationisNotDisplayed() {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@data-id='notificationWrapper']")).size(), "NotificationWrapper");
+		return this;
+	}
+
+	public MemberFormPage verifyRevenueCategory() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_textInputBox_with_filter_new']")),"Category");
+		Thread.sleep(1000);
+		Actions actions =new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_search']"))).click().build().perform();
+		Thread.sleep(2000);
+		actions.moveToElement(getDriver().findElement(By.xpath("//a[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_advancedLookupBtnContainer']"))).click().build().perform();
+		Thread.sleep(3000);
+
+
+		return this;
+
+	}
+
+	//verify Revenue Category option
+	public  MemberFormPage verifyRevenueCategorAllOption() throws InterruptedException {
+		List<String> expectdoption = Arrays.asList("American Express","Blood Distribution","Blood Products","Capital Equipment","Facilities Management","Food","Laboratory","Medical Supply","Pharmacy","Rx Distribution","Technology","Vaccines");
+		List<String> revenueCategory=new ArrayList<String>();
+		List<WebElement> revenueCategoryOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
+		for(int i =1;i<=revenueCategoryOptions.size();i++) {
+			revenueCategory.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_name']//button//span)["+i+"]")).getText());
+		}
+		System.out.println(revenueCategory);
+		System.out.println(expectdoption);
+		assertTrue(revenueCategory.containsAll(expectdoption), "Revenue Category is displayed");		
+		return this;
+
+	}
+
+	//verify Revenue Category option
+	public  MemberFormPage verifyRevenueOptionisNotDisplayed() throws InterruptedException {
+		List<String> expectdoption = Arrays.asList("Food Distribution","Imaging","Office Supplies","Services (w/o AMEX)","Medical Supply Distribution","Enterals & Devices","Telecommunications");
+		List<String> revenueCategory=new ArrayList<String>();
+		List<WebElement> revenueCategoryOptions=getDriver().findElements(By.xpath("//div[@col-id='ix_name']//button//span"));
+		for(int i =1;i<=revenueCategoryOptions.size();i++) {
+			revenueCategory.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_name']//button//span)["+i+"]")).getText());
+		}
+		System.out.println(expectdoption);
+		System.out.println(revenueCategory);
+		for(String options:expectdoption) {
+			assertTrue(!(revenueCategory.contains(options)), "Revenue Category is Updated");
+		}
+
+		return this;
+
+	}
+
+
+	//Clear the revenue Category and select other value for Revenue CAtegory
+
+	public  MemberFormPage clearandEnterOtherCategory() throws InterruptedException {
+		List<String> expectdoption = Arrays.asList("American Express","Blood Distribution","Blood Products","Capital Equipment","Facilities Management","Food","Laboratory","Medical Supply","Pharmacy","Rx Distribution","Technology","Vaccines");
+		Thread.sleep(4000);
+		for(String options:expectdoption) {
+			clearRevenueCategory();
+			selectRevenueCategory(options);
+			clicksaveinPipeline();
+			verifyErrorisNotDisplayed();
+		}
+		return this;
+	}
+
+
+	//Click New Membership category button
+
+	public MemberFormPage clickNewMembershipCategory() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membershipcategory|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_membershipcategory.AddNewStandard']")),"New Membership CAtegory");
+
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//h1[contains(text(),'Quick Create: Membership Category')]"))));
+
+
+
+		return this;
+	}
+
+	public MemberFormPage verifyMembershipCategoryQuickForm() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_membershipid-FieldSectionItemContainer']//label[contains(text(),'Membership')]")).size(), "Membership Title");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_membershipid-FieldSectionItemContainer']//label[contains(text(),'Membership Provider')]")).size(), "Membership Provider Title");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@data-id='ix_membershipid.fieldControl-LookupResultsDropdown_ix_membershipid_SelectedRecordList']")).size(), "Membership Textbox");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_membershipprogramcategory.fieldControl-LookupResultsDropdown_ix_membershipprogramcategory_textInputBox_with_filter_new']")).size(), "Membership Category");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@data-id='quickCreateRoot']//input[@data-id='ix_startdate.fieldControl-date-time-input']")).size(), "StartDate");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")).size(), "Save and Close button in the aucik form");
+		return this;
+	}
+
+	//Enter the Membership program category
+	public MemberFormPage enterNewMembershipCategory(String membershipCategory) throws InterruptedException {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_membershipprogramcategory.fieldControl-LookupResultsDropdown_ix_membershipprogramcategory_textInputBox_with_filter_new']")),membershipCategory,"membershipCategory");
+
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-id='ix_membershipprogramcategory.fieldControl-LookupResultsDropdown_ix_membershipprogramcategory_infoContainer']//span[contains(text(),'"+membershipCategory+"')]")));
+
+		click(getDriver().findElement(By.xpath("//div[@data-id='ix_membershipprogramcategory.fieldControl-LookupResultsDropdown_ix_membershipprogramcategory_infoContainer']//span[contains(text(),'"+membershipCategory+"')]")),"membershipCategory");
+
+		return this;
+
+	}
+
+	//Type membership end date
+	public MemberFormPage typeMembershipCategoryStratDate(String startDate) {
+		type(((getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),startDate,"End Date");
+		return this;
+	}
+
+
+	//Click Save and Close
+	public MemberFormPage clickSaveAndCloseinMembershipCategory() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+		return this;
+	}
+
+	//Click Clcik Cancel in Quicl create Form
+	public MemberFormPage clickCancelinMembershipCategory() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateCancelBtn']")),"Cancel");
+		return this;
+	}
+
+	//Select all membership categories checkbox
+	public MemberFormPage clickSelectAllCheckBox() throws InterruptedException {
+		Thread.sleep(2000);
+		
+		Actions action=new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//label/*[contains(text(),'Membership Category')]/ancestor::div[contains(@class,'pcf-grid-header ')]/preceding-sibling::div[contains(@class,'pcf-grid-header ')]//label"))).click().build().perform();
+		Thread.sleep(2000);
+		
+
+		return this;
+	}
+
+	//click Deactivate in MEmbershipCategory
+	public MemberFormPage clickDeactivateButtoninCategory() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membershipcategory|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_membershipcategory.Deactivate']")),"Deactivate Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Deactivate Button");
+		return this;
 	}
 	
-	//Open the existign pipeline
-		public MemberFormPage enterAdminFee(String adminefee) throws InterruptedException {
-			type(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")),adminefee,"Admin Fee");
-	return this;
-		}
-	
-		
-		public MemberFormPage clickFBO() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//div[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_selected_tag_text']")),"FBO");
+	//click Edit in MEmbershipCategory
+		public MemberFormPage clickEditButtoninCategory() {
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_membershipcategory|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_membershipcategory.Edit']")),"Edit Button");
+			
 			return this;
 		}
-	
-		//Navigate To Pipeline
-		public  MemberFormPage navigateToPieplineFeeShare() throws InterruptedException {
-
-			Thread.sleep(2000);
-			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
-				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			}else {
-				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
-			}
-			click(getDriver().findElement(By.xpath("//span[@data-id='label_relatedEntity_nav_ix_account_ix_pipelinefeeshare_accountid']")),"Membership");
-			Thread.sleep(3000);
-			return this;
-		}	
 		
-		
-		//get the fee share from FBO
-		public  MemberFormPage getFeeShareFromFBO() throws InterruptedException {
-			feeshare=getTextValue(getDriver().findElement(By.xpath("//div[@col-id='ix_feeshare']//label[contains(@class,'ms-Label labelRootStyles')]/div[contains(@class,'ms-TooltipHost')]")),"FEE share");
-		return this;
-		}
-		
-		//get the fee share from FBO
-				public  MemberFormPage getFeeShare() throws InterruptedException {
-					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),feeshare,"FEE share");
-				return this;
-				}
-				
-				//verify Probability feild is Auto populated
-				public  MemberFormPage verifyPipeleinProbability(String pipelineStage) throws InterruptedException {
-					HashMap<String, String> probabilityValue=new HashMap<String, String>();
-					probabilityValue.put("1 - Outreach", "5");
-					probabilityValue.put("2 - Initial Discussion", "20");
-					probabilityValue.put("3 - Proposal/Negotiations", "50");
-					probabilityValue.put("4 - Contract Sent", "90");
-					probabilityValue.put("Business At Risk - 50%", "50");
-					probabilityValue.put("Business At Risk - 75%", "75");
-					probabilityValue.put("Business At Risk – Lost", "100");
-					probabilityValue.put("Business At Risk – Saved", "0");
-					probabilityValue.put("Opportunity Lost", "0");
-					probabilityValue.put("Won", "100");
-					for(String keys:probabilityValue.keySet()) {
-						
-						enterPipeleinStage(keys);
-						verifyExactAttribute(getDriver().findElement(By.xpath("//input[@data-id='ix_probabilityvalue.fieldControl-whole-number-text-input' and @readonly]")), "value", probabilityValue.get(keys), "Probability feild");
-						clearStageinAdvanceFind();
-						
-					}
+		//Enter End Date in MembershipCategory(){
+				public MemberFormPage typeMembershipCategoryEndDate(String endDate) {
+					type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),endDate,"End Date");
 					return this;
 				}
+		
+		//Click save and Close
+				public MemberFormPage clickSaveAndCloseMembershipCategory() throws InterruptedException {
 				
-				//ClearPipeline Stage
-				public MemberFormPage clearPipeleinStage() throws InterruptedException {
-
-					Actions action = new Actions(getDriver());
-					action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_text']"))).perform();
-					click(getDriver().findElement(By.xpath("//button[@data-id='ix_pipelinestage.fieldControl-LookupResultsDropdown_ix_pipelinestage_selected_tag_delete']")),"Clear Icon"); 
-					Thread.sleep(3000);
-					return this;	
+					click(getDriver().findElement(By.xpath("//button[@data-id='ix_membershipcategory|NoRelationship|Form|Mscrm.Form.ix_membershipcategory.SaveAndClose']")),"Save and close button");
+					Thread.sleep(4000);
+					return this;
 				}
-				
-				//Clear Lead Resource
-				public MemberFormPage clearStageinAdvanceFind() throws InterruptedException {
+		
+		
+		
+	
 
-					clear(getDriver().findElement(By.xpath("//input[@placeholder='Search' and contains(@aria-labelledby,'advanced_lookup')]")),"Clear Icon"); 
-					Thread.sleep(3000);
-					
-					return this;	
-				}
 
-		public MemberFormPage verifyNotificationisNotDisplayed() {
-			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@data-id='notificationWrapper']")).size(), "NotificationWrapper");
-			return this;
-		}
-				
+
 }
 
 
