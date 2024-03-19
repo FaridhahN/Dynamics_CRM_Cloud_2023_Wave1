@@ -10106,7 +10106,37 @@ public class MemberFormPage extends WebDriverServiceImpl {
 				}
 		
 		
-		
+		//Verify Mandatory feild error message is Displayed
+				public MemberFormPage verifyMandatoryerrormessage() {
+					
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='ix_membershipprogramcategory-error-message' and contains(text(),'Membership Category: Required fields must be filled in.')]")).size(), "Membership Categoris  required error message");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@data-id='ix_startdate-error-message' and contains(text(),'Start Date: Required fields must be filled in.')]")).size(), "Start date required error message");
+					return this;
+					
+				}
+				
+				//Click System Tab in MembershipCategories Page
+				public MemberFormPage clickSystemTabinCategory() {
+					click(getDriver().findElement(By.xpath("//li[@aria-label='System' and contains(text(),'System')]")),"System tab in Membership Cateogry");
+					return this;
+				}
+				
+				//Verify System Tab in the MembershipCategory
+				public MemberFormPage verifySystemInCategory() {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Owner - Owner Id']")).size(), "Owner");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Status - Status of the Membership Category']")).size(), "Status");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Created On - Date and time when the record was created.']")).size(), "Created on Date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Created By - Unique identifier of the user who created the record.']")).size(), "Created By");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Modified On - Date and time when the record was modified.']")).size(), "Modified Date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Modified By - Unique identifier of the user who modified the record.']")).size(), "Modified By");
+					return this;
+				}
+				
+				//Click General Tab in the membership Category
+				public MemberFormPage clickGeneralTabinCategory() {
+					click(getDriver().findElement(By.xpath("//li[@aria-label='General']")),"General tab in Membership Cateogry");
+					return this;
+				}
 	
 
 
