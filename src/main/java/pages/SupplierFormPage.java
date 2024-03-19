@@ -1739,7 +1739,7 @@ public SupplierFormPage doubleClickMembership(String membership) throws Interrup
 	}
 
 	public SupplierFormPage clickAddNewMembershipProviderSave() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
 		Thread.sleep(10000);
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
 
