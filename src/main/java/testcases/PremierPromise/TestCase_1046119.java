@@ -8,9 +8,9 @@ import utils.DataInputProvider;
 //TFS ID_980320:_980320_Verify whether user able to add Program - 'Premier Promise' in new 'Member' account.
 import utils.TestUtils;
 
-public class TestCase_980320 {
+public class TestCase_1046119 {
 
-//	TFS ID_980320:_980320_Verify whether user able to add Program - 'Premier Promise' in new 'Member' account.
+	//	TFS ID_1046119:_1046119_Verify whether user able to Deactivatea Program - 'Premier Promise' on new account.  
 
 	@Test
 	public void createMemberverifyPremierPromise(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
@@ -157,6 +157,12 @@ public class TestCase_980320 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSave()
 
+		//Verify Error message is not displayed
+		.verifyErrorisNotDisplayed()
+
+		//Deactivate Membership
+		.clickDeactivateButton()	
+		
 		//Verify Error message is not displayed
 		.verifyErrorisNotDisplayed()
 
