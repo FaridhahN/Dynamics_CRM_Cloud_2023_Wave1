@@ -10138,6 +10138,27 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					return this;
 				}
 	
+				//verify MembershipCategroy is Displayed after membership has been created
+				public MemberFormPage verifyMembershipCAtegory() {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@data-id='form-sectionHeader-MembershipCategoriesSection']")).size(), "Memberhip CAtegories Header");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_membershipcategory|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_membershipcategory.AddNewStandard']")).size(), "New Memmbership CAtegories button");
+					return this;
+				}
+				
+				//verify MembershipCategroy feilds
+				public MemberFormPage verifyMembershipCAtegoryFeilds() {
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("///div[contains(@col-id,'ix_emsattributecode')]")).size(), "EMS Attribute");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@col-id,'modifiedby')]")).size(), "Modified By");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@col-id,'modifiedon')]")).size(), "Modified on");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@col-id,'ix_startdate')]")).size(), "Start Date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@col-id,'ix_enddate')]")).size(), "Ends Date");
+					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@col-id,'ix_membershipprogramcategory')]")).size(), "Membership CAtegroy");
+					
+					
+					return this;
+				}
+				
+				
 
 
 
