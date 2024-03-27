@@ -175,6 +175,9 @@ public class TestCase_8783 {
 		//Enter the Street1 address info
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))		
 
+		//City = NY
+				.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
+				
 		//Enter the Zip Code address info
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))	
 

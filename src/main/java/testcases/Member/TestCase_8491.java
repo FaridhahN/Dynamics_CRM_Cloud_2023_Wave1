@@ -45,6 +45,7 @@ public class TestCase_8491 {
 
 		new DashboardPage()
 		.selectAccountsTab()
+		.clickOnDiscardChanges()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.chooseMemberForm()

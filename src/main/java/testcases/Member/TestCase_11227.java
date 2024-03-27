@@ -29,17 +29,17 @@ public class TestCase_11227 {
 
 		.selectTerminatedView()
 		.openFirstTermninatedAcoount()
-
+		.chooseMemberForm()
 		//Navigate to the Record status feild
 		.navigateToAGDate()
 
 		//Record Status = Draft
 		.chooseRecordStatusDraftfromTop()	
 		.clickSave()
-		
+
 		//Verify Account is int Draft message
 		.VerifyDraftMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-		
+
 		//Change to published status
 		.chooseRecordStatusPublished()
 		.clickSave()

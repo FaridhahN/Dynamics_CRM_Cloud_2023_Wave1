@@ -43,7 +43,17 @@ public class TestCase_9631 {
 		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
+		//Direct Parent Relation = Managed
+		.selectDirectParentRelationManaged() 
 
+		//Direct Parent Relation date = Today's Date
+		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+
+		//DP exception reason = Any
+		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))
+
+
+		.clickTab(5)
 
 		//Top Parent Relation =  OLM
 		.selectTopParentRelationMEF(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
@@ -74,15 +84,6 @@ public class TestCase_9631 {
 
 		//Participation Type = Standard
 		.selectParticipationTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
-
-		//Direct Parent Relation = Managed
-		.selectDirectParentRelationManaged() 
-
-		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
-
-		//DP exception reason = Any
-		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))
 
 		//Click on Save 
 		// .clickSave() 
@@ -179,7 +180,7 @@ public class TestCase_9631 {
 
 		//14. Verify Corporate parent name in the form
 		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-		
+
 		.navigatefromCorporateParentToFoodServiceMEF()
 
 		//15. Verify "Is Food Service parent" field 

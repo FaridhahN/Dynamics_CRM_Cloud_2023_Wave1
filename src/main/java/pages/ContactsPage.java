@@ -186,6 +186,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
+		clickSaveDuplicateDetected();
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}

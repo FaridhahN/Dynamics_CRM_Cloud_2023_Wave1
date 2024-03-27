@@ -25,7 +25,7 @@ public class TestCase_828713 {
 				(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName)))
 
 		// Primary Account
-		.selectPrimaryAccountByClickingOnSearchLensIcon("Alice June Savage, MD")
+		.selectPrimaryAccountByClickingOnSearchLensIcon("Allergy Asthma and Immunology, PLLC")
 
 		// Save the record
 		.clickSave()

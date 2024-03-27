@@ -33,6 +33,7 @@ public class TestCase_8948 {
 		.typeContactEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))
 
 		.clickSave()// Add contact account association with any member and create Job
+		
 		.doubleClickOnCAARecordunderContact(DataInputProvider.getCellData_ColName(iRowNumber, "lastName", sDataSheetName))
 
 		.verifyCaaRelationshipEndDateIsNotNull(DataInputProvider.getCellData_ColName(iRowNumber, "contactEndDate", sDataSheetName))

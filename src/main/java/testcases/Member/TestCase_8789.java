@@ -81,6 +81,9 @@ public class TestCase_8789 {
 		//Verify BC auto updated to Non-healthcare as per CoT
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
+		
+		// Click on Save 
+				.clickSave() 
 		//5. Go to Membership and Click on add new membership
 		.clickAddNewMembership()
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))

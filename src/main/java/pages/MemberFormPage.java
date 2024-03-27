@@ -87,7 +87,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+	if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0) {
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
+	}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
@@ -2661,9 +2663,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage navigateToCorporateParent() {
 		navigateToSponsor();
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Sponsor')]")),"is Sponsor");
-		click(getDriver().findElement(By.xpath("//label[contains(@id,'ix_sponsor-field-label')]")),"Sponsor");
-		click(getDriver().findElement(By.xpath("//h2[@title='Corporate Parent']")),"CP");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")),"is Sponsor");
+		Actions actions = new Actions(getDriver());
+		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).build().perform();
+		
+		//click(getDriver().findElement(By.xpath("//h2[@title='Corporate Parent']")),"CP");
 
 
 		return this;
@@ -2672,7 +2676,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage navigateToCorporateParentMemberoForm() {
 		navigateToSponsorMemberForm();
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Sponsor')]")),"is Sponsor");
-		click(getDriver().findElement(By.xpath("//label[contains(@id,'ix_sponsor-field-label')]")),"Sponsor");
+		Actions actions = new Actions(getDriver());
+		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).build().perform();
 		click(getDriver().findElement(By.xpath("//h2[@title='CORPORATE PARENT']")),"CP");
 
 
@@ -4557,6 +4562,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage typeDPReason(String DPReason) {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")))),"DP Reason");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_dpexceptionreason.fieldControl-text-box-text']")))),DPReason,"DP Reason");
+		return this;
+	}
+	
+	//Click Tab
+	public MemberFormPage clickTab(int number)  throws InterruptedException {
+		for(int i=0;i<number;i++) {
+			Actions a =new Actions(getDriver());
+			a.sendKeys(Keys.TAB).build().perform();
+			Thread.sleep(3000);
+		}
 		return this;
 	}
 
@@ -8831,10 +8846,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	public MemberFormPage navigatefromCorporateParentToFoodServiceMEF() {
-		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")), "Corporate Start date");
+		
 		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")), "Overrire");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_corporaterebatefeedate.fieldControl-date-time-input']")), "feedate");
-		clickAndTab(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")), "");
 		return this;
 
 	}
@@ -10158,7 +10172,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 					return this;
 				}
 				
-				
+				//VErify Contact under Related tab
+				public ContractAttachmentPage navigateToContractAttachmentOption() throws InterruptedException {
+					if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){
+						click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+					}else {
+						click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+					}
+					Thread.sleep(2000);
+					Thread.sleep(3000);
+					click(getDriver().findElement(By.xpath("(//span[contains(text(),'Contract Attachments')])[2]")),"Contract Attachments");
+					Thread.sleep(2000);
+					
+					return new ContractAttachmentPage();
+				}
 
 
 

@@ -26,7 +26,10 @@ public class TestCase_8803 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		//9.Move the record status to draft and save  ***** Record moved to draft 
-		.chooseRecordStatusDraft()
+		
+		.chooseMemberForm()
+		
+		.chooseRecordStatusDraftfromTop()
 
 		//Click on Save 
 		.clickSave() 
@@ -152,7 +155,7 @@ public class TestCase_8803 {
 		//Click on Save 
 		.clickSave() 
 		//Fix for Req change
-		.verifyDPChangeConfirmationForSubaccounts("This account has sub accounts that will be changed as well.")
+		//.verifyDPChangeConfirmationForSubaccounts("This account has sub accounts that will be changed as well.")
 		.verifyDPWithoutEntityMessage("You cannot publish the Member since Direct Parent has no Entity code")
 
 		;

@@ -2431,9 +2431,9 @@ public SupplierFormPage doubleClickMembership(String membership) throws Interrup
 		Actions a = new Actions(getDriver());
 		a.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='CheckMark']"))).click().build().perform();
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate Button"); 
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])")), "Deactivate Button"); 
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[3]")), "Deactivate");
+		click(getDriver().findElement(By.xpath("(//span[text()='Deactivate'])[2]")), "Deactivate");
 		Thread.sleep(2000);
 
 		//Wave2 Update - 08/21/2023 -Reverting back as the Select All button is available back 

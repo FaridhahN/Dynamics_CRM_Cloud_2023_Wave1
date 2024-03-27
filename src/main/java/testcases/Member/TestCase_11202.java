@@ -25,6 +25,8 @@ public class TestCase_11202 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		.chooseMemberForm()
+		
 		//Change the account status to Active from terminated
 		.navigateToApplicationDate()
 
