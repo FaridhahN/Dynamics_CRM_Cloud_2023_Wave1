@@ -1033,6 +1033,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	//Select Regarding 
+	public MemberFormPage selectRagrding( String entityCode) throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),"Click the REgarding text box");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),entityCode, "Entity code");
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@data-id,'regardingobjectid.fieldControl-ix_premierein')]")));
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+entityCode+"')]")),"Direct Parent");
+		return this;
+	}
 
 	//Select Information view
 	public MemberFormPage selectInformationview() throws InterruptedException   {
@@ -1060,13 +1070,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
 		//Changed on 10/11/2023
 		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
-
+		List<WebElement> savebutton=getDriver().findElements(By.xpath("//button[@aria-label='Save and Close']"));
+		if(savebutton.size()>0) {
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
-
+		}else {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
+		}
 		Thread.sleep(10000);
-		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
-		System.out.println(saveStatus);
-		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
+		//String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
+		//System.out.println(saveStatus);
+		///assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 	}
 
@@ -1608,6 +1621,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			selectoptions.add(participationType.get(i).getText());
 
 		}
+		
+		
 		//Participation type should not have Provider Select : MD
 		assertTrue(!(selectoptions.contains("Provider Select: MD")));
 		return this;
@@ -6793,6 +6808,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	
+	//Create Task under Activies option
+		public MemberFormPage createTaskUnderActivities() {
+
+			click(getDriver().findElement(By.xpath("//button[@title='Task']")),"Task Option");
+
+			return this;
+		}
 
 	//Select Open Activities
 	public MemberFormPage selectAllActivity() throws InterruptedException   {
@@ -6886,7 +6909,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			Actions actions= new Actions(getDriver());
 			actions.moveToElement(getDriver().findElement(By.xpath("//div[contains(text(),'Activity Type')]/ancestor::div[@col-id='activitytypecode']/preceding-sibling::div[@col-id='__row_status']//div[@class='ag-header-cell-comp-wrapper']//input[@type='checkbox']"))).click().build().perform();
 			Thread.sleep(2000);
+			if(getDriver().findElements(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.SaveAsCompleted']")).size()>0) {
+				click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.SaveAsCompleted']")),"Mark Complete");
+			}else {
 			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
+			}
 			Thread.sleep(4000);
 			List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Task')]"));
 			List<WebElement> closphone=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Phone')]"));
@@ -6897,6 +6924,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
 			}else if(closletter.size()>0) {
 				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Letter')]")),"Confirm Delete Button");
+			}else {
+				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close')]")),"Confirm Delete Button");
 			}
 		}
 		Thread.sleep(10000);

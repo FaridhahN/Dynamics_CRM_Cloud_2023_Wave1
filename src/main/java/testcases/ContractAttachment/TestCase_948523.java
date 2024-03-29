@@ -1,22 +1,18 @@
 package testcases.ContractAttachment;
 
-
-
-//TFS ID_813042:_813042:Verify "Successor Contract Update" attachment reason can not be saved for inappropriate attachment status
-
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_31550:_Test Case 9301 :Cloud-Verify availability of new Supplier Contract Attachment Statuses
 import utils.TestUtils;
+//TFS ID_948523:_948523_Verify 'Assigned To' field on Contract Attachment should populate with 'Owner' field's value(of related Contract) when Attachment Status is updated to 'Sent to Contract Attachment'
 
-public class TestCase_813042 {
+public class TestCase_948523 {
 
 
 	@Test
-	public void verifyAttachmentStatusOptions(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAddContractAttachment(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Login to CRM using member & Innovatix User credentials
 		new LoginPage()
@@ -71,45 +67,28 @@ public class TestCase_813042 {
 		.enterAttachmentTeamComment(DataInputProvider.getCellData_ColName(iRowNumber, "cAttachmentTeamComment", sDataSheetName))
 
 		//Click save button
+		.clickSaveAndCloseButtonContractAttachment()
+
+		//Open the save Contract Attachment
+		.selectExistingContractAttachment()
+
+		//Select the Attachment Status
+		.selectAttachmentStatus("Sent to Contract Attachment")
+
+		//Save button 
 		.clickSaveButtonContractAttachment()
 
-		//Click Supplier on CA
-		.clickSuppliersTabOnCA()
+		//Navigate To the System Tab
+		.clickSystemTabOnCA()
+
+		//Verify the Assigned Field
+		.verifyAssginedToFeild(DataInputProvider.getCellData_ColName(iRowNumber, "cassignedField", sDataSheetName))
 
 
-		//Click General Tab
-		.clickGeneralTabInContractAttachment()
-
-		//click Tire Requested
-		
-		//Change the Attachment Status
-		.selectAttachmentStatus("Approved")
-
-		//Verify Attachment Reason
-		.verifyAttachmentReasons()
-
-
-		//Select Attachment Reasons
-		.selectAttachmentReasons("Successor Contract Update")
-		
-		//click save button
-		.clickSaveButtonContractAttachment()
-
-		//Change the Attachment Status
-		.selectAttachmentStatus("“Canceled")
-
-
-		//Verify Attachment Reason is not displayed
-		.verifyAttachmentReasonsisDeleted()
-		
-		
-		//Data Reset 
+		//Data Reset -Deactivate Contract Attachment
 		.clickGoBackandDiscardChanges()
-
-		//Select All Existing contract Attachment and click deactivate 
 		.selectAllExistingContractAttachment()
 		.clickDeactivateonContractAttachment()
-
 
 		;
 	}

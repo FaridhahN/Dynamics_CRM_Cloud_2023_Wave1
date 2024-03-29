@@ -5,9 +5,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_799505:_799505:Verify Vendor status and vendor status date have been removed from contract attachment page
+//TFS ID_913698:_913698_Verify 'Request ID' field is removed in Contract Attachment
 
-public class TestCase_799505 {
+public class TestCase_913698 {
 
 
 	@Test
@@ -30,8 +30,8 @@ public class TestCase_799505 {
 		//Click New CA
 		.clickNewOnCA()
 		
-		//Verify Vendor status and Vendor status date is not displayed
-		.verifyVendorStatusIsNotDisplayed()
+		//Request IDnot displayed
+		.verifyRequestIDIsNotDisplayed()
 		
 		;
 		//Data Reset -Not Required.

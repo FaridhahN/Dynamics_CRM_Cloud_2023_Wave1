@@ -114,6 +114,29 @@ public class DashboardPage extends WebDriverServiceImpl {
 		Thread.sleep(15000);
 		return new SupplierFormPage();
 	}
+	
+	
+	//Navigate To Activities option in the Dashboard
+		public MemberFormPage navigateToActivitiesTab() throws InterruptedException {
+
+			Thread.sleep(5000);
+			List<WebElement> copilotclosebutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
+			List<WebElement> copilotclosebutton1= getDriver().findElements(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']"));
+
+			if(copilotclosebutton.size()>0) {
+				click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
+			}
+			if(copilotclosebutton1.size()>0) {
+				click(getDriver().findElement(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']")),"co pilot Close button");
+			}
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+			
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@aria-label='Activities']")));
+
+			click(getDriver().findElement(By.xpath("//li[@aria-label='Activities']")),"Activities Tab");
+			Thread.sleep(15000);
+			return new MemberFormPage();
+		}
 	public AccountsPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
 
