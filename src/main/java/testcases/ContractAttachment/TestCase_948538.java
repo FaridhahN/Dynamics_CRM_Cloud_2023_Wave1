@@ -6,9 +6,10 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
-//TFS ID_948523:_948523_Verify 'Assigned To' field on Contract Attachment should populate with 'Owner' field's value(of related Contract) when Attachment Status is updated to 'Sent to Contract Attachment'
+//TFS ID_948538:_948538_Verify 'Assigned To' field on Contract Attachment should NOT populate with 'Owner' field's value(of related Contract) when creating CA with Attachment Status is NOT 'Sent to Contract Attachment'
 
-public class TestCase_948523 {
+
+public class TestCase_948538 {
 
 
 	@Test
@@ -38,13 +39,13 @@ public class TestCase_948523 {
 
 		//Verify New View in Contract Attachement
 		.verifyDefaultViewinContractAttachment()
-		
+
 		//Select Existing Contract Attachment
 		.selectAllExistingContractAttachment()
-		
+
 		//Deactivate
 		.clickDeactivateonContractAttachment()
-		
+
 		//Click New Button in Contract Attachment
 		.clickNewContractAttachmentButton()
 
@@ -54,6 +55,7 @@ public class TestCase_948523 {
 
 		//Select Attachment Status
 		.selectAttachmentStatus(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatus", sDataSheetName))
+
 
 		//Select Attachment status date
 
@@ -73,22 +75,13 @@ public class TestCase_948523 {
 		.enterAttachmentTeamComment(DataInputProvider.getCellData_ColName(iRowNumber, "cAttachmentTeamComment", sDataSheetName))
 
 		//Click save button
-		.clickSaveAndCloseButtonContractAttachment()
-
-		//Open the save Contract Attachment
-		.selectExistingContractAttachment()
-
-		//Select the Attachment Status
-		.selectAttachmentStatus("Sent to Contract Attachment")
-
-		//Save button 
 		.clickSaveButtonContractAttachment()
 
 		//Navigate To the System Tab
 		.clickSystemTabOnCA()
 
 		//Verify the Assigned Field
-		.verifyAssginedToFeild(DataInputProvider.getCellData_ColName(iRowNumber, "cassignedField", sDataSheetName))
+		.verifyAssginedToFeildUser(DataInputProvider.getCellData_ColName(iRowNumber, "userName", sDataSheetName))
 
 
 		//Data Reset -Deactivate Contract Attachment

@@ -93,4 +93,14 @@ public class TestUtils {
 			return TestUtils.enddate;
 		
 		}
+		
+		
+		//Enter End Date as past date from the given Date in Account Numbers
+				public static int compareDate(String date1, String date2) throws ParseException {
+					SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
+					Date fdate1 = new SimpleDateFormat("M/d/yyyy").parse(date1);
+					Date fdate2 = new SimpleDateFormat("M/d/yyyy").parse(date2);
+					return fdate1.compareTo(fdate2);
+				
+				}
 }

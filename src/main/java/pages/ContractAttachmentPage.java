@@ -541,17 +541,21 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	//Select All existing Contract Attachment
 	public ContractAttachmentPage selectAllExistingContractAttachment() throws InterruptedException, AWTException { 
+		if(getDriver().findElements(By.xpath("//input[@aria-label='Toggle selection of all rows']")).size()>0) {
 		Actions actions=new Actions(getDriver());
 		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Toggle selection of all rows']"))).click().build().perform();
+		}
 		return this;
 	}
 
 	//Click Deactivate for Contract Attachment	
 	public ContractAttachmentPage clickDeactivateonContractAttachment() throws InterruptedException, AWTException {
-
+		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")).size()>0) {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
 		Thread.sleep(7000);
+		}
+		
 		return this;
 
 	}
@@ -742,8 +746,9 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		
 		//Select the Existing Contract Attachment
 		public ContractAttachmentPage selectExistingContractAttachment() throws InterruptedException   {
-			
-			click(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']")),"Select The Row");
+			Actions actions= new Actions(getDriver());
+			actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).click().build().perform();
+			Thread.sleep(2000);
 			clickEditButton();
 			
 			return this;
@@ -761,10 +766,36 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		//Click Verify the Assigned To Field
 
 				public ContractAttachmentPage verifyAssginedToFeild(String AssignedToFeild) throws InterruptedException {
+					String AssignedType;
+					if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
+						AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
+						
+					}else{
+					 AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getAttribute("title");
+					}
 					
-					String AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getAttribute("title");
+					System.out.println(AssignedType);
+					System.out.println(AssignedToFeild);
 					assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
 					return this;
+					
+
+				}
+				
+				public ContractAttachmentPage verifyAssginedToFeildUser(String AssignedToFeild) throws InterruptedException {
+					String AssignedType;
+					if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
+						AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
+						
+					}else{
+					 AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getText();
+					}
+					
+					System.out.println(AssignedType);
+					System.out.println(AssignedToFeild);
+					assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
+					return this;
+					
 
 				}
 		

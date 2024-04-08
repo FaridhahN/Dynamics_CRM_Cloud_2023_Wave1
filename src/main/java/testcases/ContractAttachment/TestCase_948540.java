@@ -6,9 +6,9 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
-//TFS ID_948523:_948523_Verify 'Assigned To' field on Contract Attachment should populate with 'Owner' field's value(of related Contract) when Attachment Status is updated to 'Sent to Contract Attachment'
+//TFS ID_948540:_948540_Verify 'Assigned To' field on Contract Attachment should NOT populate with 'Owner' field's value(of related Contract) when Attachment Status is updated to other than 'Sent to Contract Attachment'
 
-public class TestCase_948523 {
+public class TestCase_948540 {
 
 
 	@Test
@@ -79,7 +79,7 @@ public class TestCase_948523 {
 		.selectExistingContractAttachment()
 
 		//Select the Attachment Status
-		.selectAttachmentStatus("Sent to Contract Attachment")
+		.selectAttachmentStatus("Sent to Distributor")
 
 		//Save button 
 		.clickSaveButtonContractAttachment()
@@ -88,7 +88,7 @@ public class TestCase_948523 {
 		.clickSystemTabOnCA()
 
 		//Verify the Assigned Field
-		.verifyAssginedToFeild(DataInputProvider.getCellData_ColName(iRowNumber, "cassignedField", sDataSheetName))
+		.verifyAssginedToFeildUser(DataInputProvider.getCellData_ColName(iRowNumber, "userName", sDataSheetName))
 
 
 		//Data Reset -Deactivate Contract Attachment

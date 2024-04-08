@@ -4708,6 +4708,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactText((getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_selected_tag']"))), verifyPrimaryContactValue,"Primary Contact");
 		return this;
 	}
+	
+
+	//Verify Primary contact name is null
+	public MemberFormPage verifyPrimaryContactNullValue() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")).size(), "Primary Contat Null");
+		
+		return this;
+	}
 
 	//Verify default membership provider
 	public MemberFormPage verifyDefaultMembershipProvider() {
@@ -6376,6 +6384,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(((getDriver().findElement(By.xpath("//input[@data-id='lastname.fieldControl-text-box-text']")))),contactLastName,"Contact Last Name");
 		type(((getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")))),email2,"Email");
 		type(((getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")))),mainPhone,"Mobile Phone");
+		type(((getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")))),mainPhone,"Business Phone");
 		//Changed on Sep 15 after member form changes implemented
 
 		//click(getDriver().findElement(By.xpath("//button[text()='Save and Close']")),"Save and Close");
@@ -6391,6 +6400,31 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(11000);
 		return this;
 	}
+	
+	
+	//click Additional Information
+	public MemberFormPage clickAdditionalInfromation() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Additional Information']")),"Additional information");
+		return this;
+	}
+	
+	//Double click the existing contact
+	public MemberFormPage doubleclickexistingConact() throws InterruptedException {
+		
+		Actions actions=new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).doubleClick().build().perform();
+		return this;
+	}
+	
+	//Verify phone number
+	public MemberFormPage verifyPhonenumber(String number) throws InterruptedException {
+		assertTrue( getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")).getAttribute("title").contains(number));
+		assertTrue( getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")).getAttribute("title").contains(number));
+		return this;
+	}
+	
+	//input[@data-id="mobilephone.fieldControl-phone-text-input"]
+	
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~COMPETITORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	//Click Related and Competitors
 	public MemberFormPage clickCompetitors() throws InterruptedException   {
