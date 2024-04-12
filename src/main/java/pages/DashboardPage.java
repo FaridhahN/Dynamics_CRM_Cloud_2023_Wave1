@@ -94,6 +94,26 @@ public class DashboardPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//span[text()='Contract Attachments']")),"Contract Attachments");
 		return new ContractAttachmentPage();
 	}
+	
+	
+	public ContractsPage selectContractsTab() throws InterruptedException {
+		Thread.sleep(2000);
+		List<WebElement> copilotclosebutton= getDriver().findElements(By.xpath("//button[@aria-label='Copilot menu' and @data-pa-landmark-active-element='true']"));
+		List<WebElement> copilotclosebutton1= getDriver().findElements(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']"));
+
+		if(copilotclosebutton.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Press to close copilot pane']")),"co pilot Close button");
+		}
+		if(copilotclosebutton1.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']")),"co pilot Close button");
+		}
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Contracts')]")));
+
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Contracts')]")),"Contracts");
+		return new ContractsPage();
+	}
 
 
 
