@@ -1,39 +1,36 @@
-package testcases_COT;
-
+package testcases.ProgramMembership;
 import org.testng.annotations.Test;
-
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1045635:_1045635_Verify whether Group is updated as 'Hospital' on update Class of trade as Eye, Ear, Nose and Throat for the new account.
 
-public class TestCase_1045635 {
+//TFS ID_10998:_827915:Verify Program membership is inherited to a newly created location type account in draft status
+
+public class TestCase_10998 {
 
 
 	@Test
-	public void verifyCOT(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void creatcreateNewShipToAcc(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
-
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
 		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
 		.clicSignin()
-
 		.clicYesInStaySignedin()
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-
-
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 
+
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
 
+		.navigateToRecordStatus()
 		//3. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
@@ -52,20 +49,15 @@ public class TestCase_1045635 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
-		//Verify Group
-		.verifyGroup(DataInputProvider.getCellData_ColName(iRowNumber, "verifyGroup", sDataSheetName))
 		//Account Status = Auto Populated to Active
 		.verifyDefaultAccountStatus()	
 
-		//Application Start Date = Today's Date
-		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
+		//Store/Location type = Bill To
+		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))	
+
 
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
-
-		//Participation Type = Standard
-		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
-
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -87,14 +79,12 @@ public class TestCase_1045635 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
-
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -102,48 +92,23 @@ public class TestCase_1045635 {
 		//Click on Save 
 		.clickSave() 
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
-
-		//Click New Line Of Business
-		.clickAddNewLineOfBusiness()
-
-		// Line of Business =General GPO
-		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
-
-		// Classification Type = General GPO
-		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
-
-		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
-
-		// Click on LOB Save 
-		//.clickLOBSaveAndClose()
-		.clickLOBSaveAndCloseDev()
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
-
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
-
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
-
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
 
 		//Click on Save 
 		.clickSave() 
 
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
+		//Verify Surpass membership is displayed
+		.selectMembership()
+		.verifyMembership(false, "SURPASS")
 
+		//click General Tab
+		.clickGeneralTab()
+		
+		//Data Reset
+
+		.chooseLocationType("Ship To")
+
+		.clickSave()
 		;
 
-		
 	}
 }

@@ -1411,7 +1411,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 
 	public SupplierFormPage navigateToCRM() throws InterruptedException {
-		
+
 		click(getDriver().findElement(By.xpath("//h2[contains(text(),'DIVERSITY INFORMATION')]")),"DIVERSITY INFORMATION");
 		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
 		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='ix_tollfreeno.fieldControl-text-box-text']")),"Toll Free");
@@ -1424,26 +1424,26 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 		return this;
 	}
-	
+
 	public SupplierFormPage crmNumberIsDisplayed() throws InterruptedException {
-		
+
 		Thread.sleep(5000);
 		navigateToCRM();
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
 		verifyDisplayed(getDriver().findElement(By.xpath("//input[@data-id='accountnumber.fieldControl-text-box-text']")), "CRM Lock symbol");
-	
+
 		try {
 			DataInputProvider.setCellData(sCRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
 			assertNotNull(sCRMNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return this;
 	}
 
 
-	
+
 	//Select TP Audit History
 	public SupplierFormPage selectMembershipAuditHistory() throws InterruptedException {
 		Thread.sleep(2000);
@@ -2827,104 +2827,125 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'# of Member')]")).size(), "# of Member");
 		return this;
 	}
-	
+
 	//Change the view
-		public SupplierFormPage changeTheContractView(String view) throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//div[@title='Select a view']")),"Select a View");
-			click(getDriver().findElement(By.xpath("//span[contains(text(),'"+view+"')]")),"Select a view");
-			Thread.sleep(4000);
-			return this;
+	public SupplierFormPage changeTheContractView(String view) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//div[@title='Select a view']")),"Select a View");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+view+"')]")),"Select a view");
+		Thread.sleep(4000);
+		return this;
+	}
+
+	//verify the Column Header
+	public SupplierFormPage verifyColumnHeader() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Contract Number')]")).size(), "Contract Number");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Description')]")).size(), "Description");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Activation Method')]")).size(), "Activation Method");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Start Date')]")).size(), "Start Date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'End Date')]")).size(), "End Date");
+		Thread.sleep(4000);
+		return this;
+	}
+
+
+	//verify Value in the contract
+	public SupplierFormPage verifyValueinContract() throws InterruptedException {
+		String contractNumber= getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)[2]")).getText();
+		String contractDescripition= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractdescription' and @role='gridcell']//label/div)[2]")).getText();
+		String activationMethod= getDriver().findElement(By.xpath("(//div[@col-id='ix_vendoractivationmethod' and @role='gridcell']//label/div)[2]")).getText();
+		String startDate= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractstart' and @role='gridcell']//label/div)[2]")).getText();
+		String EndDate= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)[2]")).getText();
+
+		Actions actions=new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)[2]"))).doubleClick().build().perform();
+		assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Contract Number']")), "contractNumber").contentEquals(contractNumber));
+		assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Description']")), "Description").contentEquals(contractDescripition));
+		assertTrue(verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//select[@aria-label='Activation Method']")), "activationMethod").contentEquals(activationMethod));
+		assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")), "Start of the Date").contentEquals(startDate));
+		assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")), "Date of End Date").contentEquals(EndDate));
+		Thread.sleep(4000);
+		return this;
+	}
+
+
+	//verify end date are old
+	public SupplierFormPage verifyOlderEndDate() throws InterruptedException, ParseException {
+		List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
+		List<String> dates=new ArrayList<String>();
+		for(int i=1;i<endDate.size();i++) {
+			dates.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)["+i+"]")).getText());
 		}
-		
-		//verify the Column Header
-				public SupplierFormPage verifyColumnHeader() throws InterruptedException {
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Contract Number')]")).size(), "Contract Number");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Description')]")).size(), "Description");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Activation Method')]")).size(), "Activation Method");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'Start Date')]")).size(), "Start Date");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//*[contains(text(),'End Date')]")).size(), "End Date");
-					Thread.sleep(4000);
-					return this;
-				}
-		
-				
-				//verify Value in the contract
-				public SupplierFormPage verifyValueinContract() throws InterruptedException {
-					String contractNumber= getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)[2]")).getText();
-					String contractDescripition= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractdescription' and @role='gridcell']//label/div)[2]")).getText();
-					String activationMethod= getDriver().findElement(By.xpath("(//div[@col-id='ix_vendoractivationmethod' and @role='gridcell']//label/div)[2]")).getText();
-					String startDate= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractstart' and @role='gridcell']//label/div)[2]")).getText();
-					String EndDate= getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)[2]")).getText();
-					
-					Actions actions=new Actions(getDriver());
-					actions.moveToElement(getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)[2]"))).doubleClick().build().perform();
-					assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Contract Number']")), "contractNumber").contentEquals(contractNumber));
-					assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Description']")), "Description").contentEquals(contractDescripition));
-					assertTrue(verifIsNoTNullWithTitleAttribute(getDriver().findElement(By.xpath("//select[@aria-label='Activation Method']")), "activationMethod").contentEquals(activationMethod));
-					assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")), "Start of the Date").contentEquals(startDate));
-					assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")), "Date of End Date").contentEquals(EndDate));
-					Thread.sleep(4000);
-					return this;
-				}
-		
-		
-				//verify end date are old
-				public SupplierFormPage verifyOlderEndDate() throws InterruptedException, ParseException {
-					List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
-					List<String> dates=new ArrayList<String>();
-					for(int i=1;i<endDate.size();i++) {
-						dates.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)["+i+"]")).getText());
-					}
-					String todayDate=TestUtils.todaysDate();
-					for(String date:dates) {
-						assertTrue(TestUtils.compareDate(date,todayDate )<0);
-					}
-					
-					return this;
-				}
-				
-				//verify end date are old
-				public SupplierFormPage verifyNewerEndDate() throws InterruptedException, ParseException {
-					List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
-					List<String> dates=new ArrayList<String>();
-					for(int i=1;i<endDate.size();i++) {
-						dates.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)["+i+"]")).getText());
-					}
-					String todayDate=TestUtils.todaysDate();
-					for(String date:dates) {
-						assertTrue(TestUtils.compareDate(date,todayDate )>=0);
-					}
-					
-					return this;
-				}
-				
-				
-				//Navigate to System Tab in the contract page
-				public SupplierFormPage navigateToContractSystemTab() throws InterruptedException {
-					click(getDriver().findElement(By.xpath("//li[@title='System']")),"System Tab");
-					Thread.sleep(4000);
-					return this;
-				}
-				
-					
-				
-				//verify Status of the Contract is not deactive
-				public SupplierFormPage verifyStatusOfContract() throws InterruptedException {
-					changeTheContractView("Inactive Contracts");
-					List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
-					for(int i=1;i<endDate.size();i++) {
-						Actions actions=new Actions(getDriver());
-						actions.moveToElement(getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)["+i+"]"))).doubleClick().build().perform();
-						navigateToContractSystemTab();
-						assertTrue((getDriver().findElement(By.xpath("//select[@aria-label='Status']")).getAttribute("title").contentEquals("Active")));
-						clickGoBackButton();
-						changeTheContractView("Inactive Contracts");
-						Thread.sleep(4000);
-					}
-					
-					return this;
-				}
-	
+		String todayDate=TestUtils.todaysDate();
+		for(String date:dates) {
+			assertTrue(TestUtils.compareDate(date,todayDate )<0);
+		}
+
+		return this;
+	}
+
+	//verify end date are old
+	public SupplierFormPage verifyNewerEndDate() throws InterruptedException, ParseException {
+		List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
+		List<String> dates=new ArrayList<String>();
+		for(int i=1;i<endDate.size();i++) {
+			dates.add(getDriver().findElement(By.xpath("(//div[@col-id='ix_contractend' and @role='gridcell']//label/div)["+i+"]")).getText());
+		}
+		String todayDate=TestUtils.todaysDate();
+		for(String date:dates) {
+			assertTrue(TestUtils.compareDate(date,todayDate )>=0);
+		}
+
+		return this;
+	}
+
+
+	//Navigate to System Tab in the contract page
+	public SupplierFormPage navigateToContractSystemTab() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[@title='System']")),"System Tab");
+		Thread.sleep(4000);
+		return this;
+	}
+
+
+
+	//verify Status of the Contract is not deactive
+	public SupplierFormPage verifyStatusOfContract() throws InterruptedException {
+		changeTheContractView("Inactive Contracts");
+		List<WebElement> endDate=getDriver().findElements(By.xpath("//div[@col-id='ix_contractend' and @role='gridcell']//label/div"));
+		for(int i=1;i<endDate.size();i++) {
+			Actions actions=new Actions(getDriver());
+			actions.moveToElement(getDriver().findElement(By.xpath("(//div[@col-id='ix_number' and @role='gridcell']//label/div)["+i+"]"))).doubleClick().build().perform();
+			navigateToContractSystemTab();
+			assertTrue((getDriver().findElement(By.xpath("//select[@aria-label='Status']")).getAttribute("title").contentEquals("Active")));
+			clickGoBackButton();
+			changeTheContractView("Inactive Contracts");
+			Thread.sleep(4000);
+		}
+
+		return this;
+	}
+
+	//Click Related Membership
+	public SupplierFormPage verifyMembership(Boolean isPresent, String membership) throws InterruptedException   {
+		if(isPresent) {
+
+			verifyDisplayed(getDriver().findElement(By.xpath("//div[@col-id='ix_membershipprovider']//a//span[contains(text(),'"+membership+"')]")),"Membership");
+
+		}else {
+
+			verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(text(),'No data available')]")),"Error Message");
+
+		}
+		return this;
+	}
+
+	//Verify no extra membership is created
+
+	public SupplierFormPage verifyNoAddOnInMemberShip() throws InterruptedException   {
+		assertTrue(getDriver().findElements(By.xpath("//div[@col-id='ix_membershipprovider']//a")).size()==1);
+		return this;
+	}
+
 }
 
 

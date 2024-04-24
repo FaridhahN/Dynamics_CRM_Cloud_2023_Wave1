@@ -111,7 +111,7 @@ public class LoginPage extends WebDriverServiceImpl{
 			
 		}
 		
-		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(35));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[@aria-checked='false']"))));
 		//Thread.sleep(000);
 		return this;

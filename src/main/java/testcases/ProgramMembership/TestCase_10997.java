@@ -1,18 +1,18 @@
-package testcases_COT;
+package testcases.ProgramMembership;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1045678:_1045678_:Verify whether Group is updated as 'Alternate Markets' on update Class of trade as Meals on Wheels for the new account.
+//TFS ID_10997:_827914:Verify Program membership is inherited to a newly created account converted from prospect in draft status
 
 
-public class TestCase_1045678 {
+public class TestCase_10997 {
 
 
 	@Test
-	public void verifyCOT(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void createMember(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
@@ -30,7 +30,6 @@ public class TestCase_1045678 {
 
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getDPData()
 
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
@@ -53,8 +52,6 @@ public class TestCase_1045678 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
-		//Verify Group
-		.verifyGroup(DataInputProvider.getCellData_ColName(iRowNumber, "verifyGroup", sDataSheetName))
 		//Account Status = Auto Populated to Active
 		.verifyDefaultAccountStatus()	
 
@@ -88,7 +85,7 @@ public class TestCase_1045678 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
+
 
 		//Country =USA
 		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
@@ -134,17 +131,14 @@ public class TestCase_1045678 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
-
 		//Click on Save 
 		.clickSave() 
 
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
-
+		//Verify Surpass membership is displayed
+		.selectMembership()
+		.verifyMembership(false, "SURPASS")
 		;
 
-		
+
 	}
 }

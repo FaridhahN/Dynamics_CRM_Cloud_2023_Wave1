@@ -1,6 +1,7 @@
 package pages;
 
 
+import static org.testng.Assert.ARRAY_MISMATCH_TEMPLATE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -406,11 +407,19 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//select Account Type
 	public MemberFormPage verifyselectAccountTypeIsReadOnly(String accountType) throws InterruptedException{
-		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Account Type");
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")))),accountType,"Account type");
-		Thread.sleep(2000);
-		verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
-		return this;
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@aria-label='Secured Account Type']")).size(), "accountType");
+		//Application Update below code is not working
+		/*
+		 * click(getDriver().findElement(By.xpath(
+		 * "//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']"))
+		 * ,"Account Type");
+		 * selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath(
+		 * "//*[@data-id='customertypecode.fieldControl-option-set-select']")))),
+		 * accountType,"Account type"); Thread.sleep(2000);
+		 * verifyTextDoesNotMatchTitleAttribute(getDriver().findElement(By.xpath(
+		 * "//*[@data-id='customertypecode.fieldControl-option-set-select']")),
+		 * accountType,"Account type");
+		 */	return this;
 	}
 
 
@@ -437,7 +446,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+		clickTab(3);
+		clickAndTab(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
 		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
@@ -1653,7 +1663,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//Create temp Array List > add  actual options  from DOM for comparison
 		List<WebElement> option =participationType.getOptions();	
 
-		List<String> expectdoption = Arrays.asList("--Select--","Provider Select: MD","Provider Select: MD Grandfathered");		
+		List<String> expectdoption = Arrays.asList("---","Provider Select: MD","Provider Select: MD Grandfathered");		
 
 
 		for(int i=0;i<option.size();i++) {
@@ -1665,11 +1675,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		if(selectoptions.containsAll(expectdoption))
 		{		
 			Thread.sleep(3000);
-			setReport().log(Status.PASS, "RepresentativeType- " + "   " + option + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + selectoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
 
 		} 
 		else {
-			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + option + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + selectoptions + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
 			Driver.failCount++;
 		}
 
@@ -3674,7 +3684,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Select Prescription Data
-	public MemberFormPage selectPrescriptionData() throws InterruptedException {
+	public MemberFormPage selectProgramCategories() throws InterruptedException {
 		Thread.sleep(2000);
 		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
 			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
@@ -3682,11 +3692,34 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//*[text()='Prescription Data']")),"Related > Prescription Data");
+		click(getDriver().findElement(By.xpath("//*[text()='Program Categories']")),"Related > Program Categories");
 		//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
 		Thread.sleep(2000);
 		return this;
 	}
+	//Verify Program categories page is loaded
+	
+		public MemberFormPage verifyProgramCategoryPage() throws InterruptedException {
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Program Category Associated View')]")).size(),"Program Category view" );
+			return this;
+	}
+	
+	
+	//Select Prescription Data
+		public MemberFormPage selectPrescriptionData() throws InterruptedException {
+			Thread.sleep(2000);
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//*[text()='Prescription Data']")),"Related > Prescription Data");
+			//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
+			Thread.sleep(2000);
+			return this;
+		}
+		
 
 	//Select Patient Serivces
 	public MemberFormPage selectPatientServices() throws InterruptedException {
@@ -5066,6 +5099,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+	//Verify whether membership is Null and if not Terminate it
+	public MemberFormPage verifyAndEndMembership(String memberhip, String EndReason) throws InterruptedException {
+		if(getDriver().findElement(By.xpath("//div[@col-id='ix_enddate' and @role='gridcell']//label")).getAttribute("aria-label").contentEquals(null)) {
+			doubleClickMembership(memberhip);
+			typeMembershipEndDate(TestUtils.todaysDate());
+			selectMembershipEndReason(EndReason);
+			clickMembershipSaveAndClose();
+		}
+		return this;
+	}
+	
 	//Type membership end date
 	public MemberFormPage typeMembershipEndDate(String EndDate) {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")),"End Date");
@@ -6773,7 +6817,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	//Click Related Membership
+	//search in Membership
 	public MemberFormPage searchinMemberShip(String membership) throws InterruptedException   {
 		Thread.sleep(2000);
 		//01/09/2024 -updated quick find xpath
@@ -6786,16 +6830,34 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Click Related Membership
 	public MemberFormPage verifyMembership(Boolean isPresent, String membership) throws InterruptedException   {
 		if(isPresent) {
+			boolean isSurpass =false;
+			for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
+				if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
+					if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label").isEmpty())
+					{
+					isSurpass=true;	
+					}
+
+				}
+			}
+			assertTrue(isSurpass);
 
 			verifyDisplayed(getDriver().findElement(By.xpath("//div[@col-id='ix_membershipprovider']//a//span[contains(text(),'"+membership+"')]")),"Membership");
 
 		}else {
-
-			verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(text(),'No data available')]")),"Error Message");
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_membershipprovider']//a//span[contains(text(),'"+membership+"')]")).size(), "Membership");
+			//verifyDisplayed(getDriver().findElement(By.xpath("//span[contains(text(),'No data available')]")),"Error Message");
 
 		}
 		return this;
 	}
+	
+	
+	public MemberFormPage verifyMembershipStartDate(String membershipstartDate) throws InterruptedException   {
+		assertTrue(!(getDriver().findElement(By.xpath("//div[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRootStyles')]")).getAttribute("aria-label").contentEquals(membershipstartDate)));
+		return this;
+	}
+	
 
 
 
@@ -10252,8 +10314,87 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return new ContractAttachmentPage();
 	}
 
-
-
+//Add New Program Categories
+	public MemberFormPage clickProgramCategories() { 
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_programcategory|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_programcategory.AddNewStandard']")),"New Program Category");
+	return this;	
+	}
+	
+	//Add NEw Category
+	public MemberFormPage addProgramCategories(String categoryName, String EMSCode) {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_name.fieldControl-text-box-text']")),categoryName,"Category Name");
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_emsattributecode.fieldControl-text-box-text']")),EMSCode,"EMSCode");
+		
+		return this;
+	}
+	
+	//Click save butoon
+	public MemberFormPage saveAndCloseProgramCategories() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_programcategory|NoRelationship|Form|Mscrm.Form.ix_programcategory.SaveAndClose']")),"Click save Button");
+		return this;
+	}
+	
+	//Verify Program Categories created is displayed
+	public MemberFormPage verifyProgramCategoriesCreated(String categoryName) {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_name']//a//span[contains(text(),'"+categoryName+"')]")).size(), "Program Categories");
+		return this;
+	}
+	
+	
+	//Select ProgramCategories
+	public MemberFormPage selectProgramCategories(String categoryName) {
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='ix_name']//a//span[contains(text(),'"+categoryName+"')]"))).click().build().perform();
+		return this;
+	}
+	
+	//Delete the Program Categories
+	public MemberFormPage deleteProgramCategories(String categoryName) {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_programcategory|NoRelationship|Form|Mscrm.Form.ix_programcategory.Delete']")),"Delete Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Delete Confirm Button");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_name']//a//span[contains(text(),'"+categoryName+"')]")).size(), "Program Categories");		
+		return this;
+	}
+	
+	//Select View
+	public MemberFormPage selectProgramCategoryView(String categoryView) {
+		click(getDriver().findElement(By.xpath("//span[contains(@id,'ViewSelector')]")),"View Selecotr");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+categoryView+"')]")),categoryView+" View Selecotr");
+		return this;
+	}
+	
+	//Deactivate the Program Categories
+		public MemberFormPage deactivateProgramCategories(String categoryName) {
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_programcategory|NoRelationship|Form|Mscrm.Form.ix_programcategory.Deactivate']")),"Delete Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Delete Confirm Button");
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@col-id='ix_name']//a//span[contains(text(),'"+categoryName+"')]")).size(), "Program Categories");		
+			return this;
+		}
+	
+		//SEarch the membership
+		public MemberFormPage searchmemberShip(String membership) throws InterruptedException {
+			Thread.sleep(2000);
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Membership Filter by keyword']")),membership,"Memberhsip keyword");
+			Thread.sleep(2000);
+			click(getDriver().findElement(By.xpath("//button[@title='Start search']")),"go Button");
+			return this;
+			
+		}
+		
+		//End membership 
+		public MemberFormPage endDateandDeleteMembership(String membership) throws InterruptedException{
+			if(getDriver().findElements(By.xpath("//div[@col-id='ix_membershipprovider']//a//span[contains(text(),'"+membership+"')]")).size()>0) {
+				doubleClickMembership(membership);
+				typeMembershipEndDate(TestUtils.todaysDate());
+				selectMembershipEndReason("Change");
+				clickQuickCreateMembershipSave();
+				clickDeactivateMembershipProvider();
+				clickGoBack();
+			}
+			
+			return this;
+		}
+		
 }
 
 

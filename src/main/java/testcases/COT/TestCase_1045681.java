@@ -1,15 +1,14 @@
-package testcases_COT;
+package testcases.COT;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1045667:_1045667_:Verify whether Group is updated as 'Alternate Markets' on update Class of trade as Charity for the existing account.
+//TFS ID_1045681:_1045681_:Verify whether Group is updated as 'Alternate Markets' on update Class of trade as Meals on Wheels for the existing account.
 
 
-
-public class TestCase_1045667 {
+public class TestCase_1045681 {
 
 
 	@Test

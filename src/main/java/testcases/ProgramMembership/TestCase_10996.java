@@ -1,49 +1,59 @@
-package testcases_COT;
+package testcases.ProgramMembership;
 
 import org.testng.annotations.Test;
-
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_1045664:_1045664_:Verify whether Group is updated as 'Alternate Markets' on update Class of trade as Charity  for the new account.
+//TFS ID_10996:_827913:Verify Program membership is inherited to a newly created account in draft status
 
-public class TestCase_1045664 {
+public class TestCase_10996 {
 
 
 	@Test
-	public void verifyCOT(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyProgramMembership(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException 
+	{
 
+		new WebDriverServiceImpl();
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage()
-
 		.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 		.clickNext()
 		.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
 		.clicSignin()
-
 		.clicYesInStaySignedin()
 
-		//2. From the left navigation column ,Go to Accounts > +New
+		//2.Go to Workplace > Accounts and search for EIN 673415 
 		.selectAccountsTab()
-
-
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		
+		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getDPData()
+		.selectSubaccount()
 
-		.clickNewOnAccountsPage()
-		.chooseMemberForm()
 
-		//3. Account Name = Any
+		//4. Click on Add new account 
+		.clickNewAccountInSubAccount()
+
+		
+		//6. Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))
 
-		//Click on save 			
+		//Top Parent Relation =  OLM
+		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
+
+		//Top Parent Relation Date = Today's Date
+		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+
+		//type TP reason
+		.typeTPReason(DataInputProvider.getCellData_ColName(iRowNumber, "tpReason", sDataSheetName))
+
+		//Click on save 
 		.clickSave() 
 
-		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
+		//7. Verify CRM Account # is generated 
+		.verifyCRMNumberIsDisplayed()
 
-		//5. Account Type = Member
+		//8 Account  Type = Member
 		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 		//Class of Trade =Any
@@ -52,8 +62,6 @@ public class TestCase_1045664 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
-		//Verify Group
-		.verifyGroup(DataInputProvider.getCellData_ColName(iRowNumber, "verifyGroup", sDataSheetName))
 		//Account Status = Auto Populated to Active
 		.verifyDefaultAccountStatus()	
 
@@ -66,44 +74,32 @@ public class TestCase_1045664 {
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
 
-
-		//Direct Parent Entity Code = 673415
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
 
-		//Top Parent Relation =  OLM
-		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
-
-		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		//DP exception reason = Any
+		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))
 
 		//Click on Save 
 		.clickSave() 
 
-		//6. Street 1 = Any
+		//9. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
-		
-
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
-
 		//Type Zip code
-		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
+		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
 
-		//Click on Save 
+		//Click on Save
 		.clickSave() 
 
-		//7.  Click the + icon on the Line of Business Grid
-		.clickLineOfBusinesses()
+		// 10.Click the + icon on the Line of Business Grid
+		.clickLineOfBusinessesMEF()
 
 		//Click New Line Of Business
 		.clickAddNewLineOfBusiness()
@@ -119,7 +115,9 @@ public class TestCase_1045664 {
 
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
+		
 		.clickLOBSaveAndCloseDev()
+
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -133,17 +131,14 @@ public class TestCase_1045664 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
-		//8. Record Status = Published
-		.chooseRecordStatusPublished()
-
-		//Click on Save 
+				//Click on Save 
 		.clickSave() 
 
-		//9. Verify Entity code is generated 
-		.entityCodeIsDisplayed()
-
-		;
-
+		//Verify Surpass membership is displayed
+		.selectMembership()
+		.verifyMembership(false, "SURPASS")
 		
+		;
 	}
+
 }

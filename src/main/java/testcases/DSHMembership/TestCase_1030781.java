@@ -1,13 +1,16 @@
-package testcases.Member;
-
+package testcases.DSHMembership;
+				  
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-//TFS ID_8786:Cloud - Validate (Member/Supplier) Account Type once set to value other than Prospect cannot change.
+import utils.TestUtils;
+//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
+//Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
+//Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
 
-public class TestCase_8786 {
+public class TestCase_1030781 {
 
 
 	@Test
@@ -27,8 +30,8 @@ public class TestCase_8786 {
 		.selectAccountsTab()
 
 
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.getDPData()
 
 		.clickNewOnAccountsPage()
@@ -43,6 +46,8 @@ public class TestCase_8786 {
 		//4. Verify CRM Account # is generated 
 		.verifyCRMNumberIsDisplayed()	
 
+		//5. Account Type = Member
+		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
@@ -50,10 +55,8 @@ public class TestCase_8786 {
 		//Business Classification = Auto populated
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
-		//Navigate to Account Status
-		.navigateToState()
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()
+		.verifyDefaultAccountStatus()	
 
 		//Application Start Date = Today's Date
 		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
@@ -63,6 +66,7 @@ public class TestCase_8786 {
 
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
+
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
@@ -84,12 +88,14 @@ public class TestCase_8786 {
 
 		//6. Street 1 = Any
 		.typeStreet1(DataInputProvider.getCellData_ColName(iRowNumber, "street1", sDataSheetName))
+		
+
+		//Country =USA
+		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//City = NY
 		.typeCity(DataInputProvider.getCellData_ColName(iRowNumber, "city", sDataSheetName))
 
-		//Country =USA
-		.typeCountry(DataInputProvider.getCellData_ColName(iRowNumber, "country", sDataSheetName))
 
 		//Type Zip code
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "ZipCode", sDataSheetName))
@@ -113,8 +119,8 @@ public class TestCase_8786 {
 		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
 
 		// Click on LOB Save 
-		.clickLOBSaveAndClose()
-
+		//.clickLOBSaveAndClose()
+		.clickLOBSaveAndCloseDev()
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
@@ -128,77 +134,64 @@ public class TestCase_8786 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
-		//Click on Save 
-		.clickSave()
-
-		//5. Account Type = Member
-		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
-
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
 
 		//Click on Save 
-		.clickSave()	 
+		.clickSave() 
 
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 		
-		//5. Account Type = Member
-		.verifyselectAccountTypeIsReadOnly("Prospect")
-	
-
-		//Verify Premier start date is auto populated
-		.verifyPremierStartDateIsAutoPopulated()
-
-		.verifyAffiliateGroupIsNotNull()
-		.verifyAgEffectiveDateIsNotNull()
-
-		//13. Verify "IS Corporate account" field
-		.verifyIsCorporateAccount(WebDriverServiceImpl.Dpdata.get("IsCorporate"))
-
-		//14. Verify Corporate parent name in the form
-		.verifyCorporateParentName(WebDriverServiceImpl.Dpdata.get("CorporateName"))
-
-		//15. Verify "Is Food Service parent" field 
-		.verifyIsFoodServiceParent(WebDriverServiceImpl.Dpdata.get("isFoodService"))
-
-		//16 Verify Food Service parent name in the form 
-		.verifyFoodServiceParentName(WebDriverServiceImpl.Dpdata.get("FoodServiceName"))
-
-		//17 Verify Sponsor field 
-		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
-
-		//16 Verify "Is Sponsor" field 
-		.verifyIsSponsor(WebDriverServiceImpl.Dpdata.get("isSponsor"))
-
-		//FBO details verification
-		//Verify "Is FBO" field 
-
-		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
-
-		//FBO
-		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
-
-		//FBORD
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-
+		//Choose Draft
+		.chooseRecordStatusDraft()
 		
+		//Click Save
+		.clickSave()
+
+		//Add DSH Membership
 		
-		;
-		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application
+		//Click add new membership
+				.clickMembershipAndAddNewMembership()
 
-		/*	//16  Go to > and click on Membership entity and double click on the Top parent membership entity
-		.goToMembershipPage(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-		//.doubleClickOnNationalMembership()
+				// Choose Membership type 
+				.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType1", sDataSheetName))
+				.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider1", sDataSheetName))
 
-		//17 Click on > and go to Audit history 
-		.selectMembershipAuditHistory()
+				//Provide any start date and click on save
+				.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate1", sDataSheetName))
 
-		//18 Verify "Is Member Add mail sent" flag turned from No to Yes 
-		.verifyIsMemberAddMailSent()
+				//Click on membership save and close
+				.clickQuickCreateMembershipSaveAndClose()
 
-		//19 Verify the time-stamp on which the flag gets updated 
-		.verifyTimeStampInTPMembershipAuditHistory()
-		;*/
+		//navigate to membership
+				.selectMembership()
+				
+				
+				//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened 
+				
+				.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+				//11.Provide end date = Any future date **** Account should be saved successfully 
+				.typeMembershipEndDate(TestUtils.todaysDate())
+
+				// End reason = Anything from dropdown,
+				.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
+
+				// then save
+				.clickMembershipSaveAndClose()
+
+				//navigate to membership
+				.selectMembership()
+				
+				
+				//Double click DSH membership
+				.doubleClickMembershipWithEndDAte(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider1", sDataSheetName))
+				
+//Verify End date
+				.verifyEndDate(TestUtils.todaysDate())
+				;
+
+
 	}
 }
