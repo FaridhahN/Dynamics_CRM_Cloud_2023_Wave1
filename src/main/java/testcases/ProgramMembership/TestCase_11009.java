@@ -1,16 +1,12 @@
 package testcases.ProgramMembership;
 
 import org.testng.annotations.Test;
-
-import pages.AccountsPage;
-import pages.DashboardPage;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-import utils.TestUtils;
-//TFS ID_10996:_827913:Verify Program membership is inherited to a newly created account in draft status
+//TFS ID_11009:_827926:Verify Program membership is inherited to a newly created account on publish
 
-public class TestCase_10999 {
+public class TestCase_11009 {
 
 
 	@Test
@@ -32,18 +28,6 @@ public class TestCase_10999 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
-		//Navigate to Membership
-		.selectMembership()
-
-		//SEarch for SURPASS
-		.searchmemberShip("SURPASS Core")
-
-		//End and delete the membership
-		.endDateandDeleteMembership("SURPASS Core")
-
-		//Search for the membership
-
 		.selectSubaccount()
 
 
@@ -147,67 +131,22 @@ public class TestCase_10999 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
-		//publish the member
-		.chooseRecordStatusPublished()
 		//Click on Save 
 		.clickSave() 
 
-		.entityCodeIsDisplayed()
-		//Verify Surpass membership is displayed
-		.selectMembership()
-		.verifyMembership(false, "SURPASS core")
-
-		;
-
-		new DashboardPage()
-
-		.selectAccountsTab()
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
-		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
-		//change to Draft
-		.chooseRecordStatusDraftfromTop()
-
-		//click save button
-		.clickSave()
-
-		//Add a new membership
-		//Navigate to membership page
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
-
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType1", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider1", sDataSheetName))
-
-		//Provide any start date and click on save
-		.typeMembershipStartDate(TestUtils.todaysDate())
-
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
-
 		.chooseRecordStatusPublished()
 
+		//Click on Save 
 		.clickSave()
-
-		;
-
-		new DashboardPage()
-
-		.selectAccountsTab()
-		.searchAccount(WebDriverServiceImpl.CRMNumber)
-
-		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-		.selectAccountFromGlobalSearchResults(WebDriverServiceImpl.CRMNumber)
 
 		//Verify Surpass membership is displayed
 		.selectMembership()
-		.verifyMembership(false, "SURPASS Core");
-
-
 		
+		.searchinMemberShip("SURPASS Core")
+
+		.verifyMembership(true, "SURPASS Core")
+
+		;
 	}
 
 }

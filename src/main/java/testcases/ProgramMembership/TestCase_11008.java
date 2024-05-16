@@ -9,10 +9,9 @@ import pages.MemberFormPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 import utils.TestUtils;
-//TFS ID_11006:_827923: Verify Program membership is inherited when dp change where account has active program membership already
+//TFS ID_11008:_827925:Verify Program membership is inherited when dp change on a published account but in draft status
 
-
-public class TestCase_11006 {
+public class TestCase_11008 {
 
 
 	@Test
@@ -23,6 +22,7 @@ public class TestCase_11006 {
 			//1. Login to CRM using member supervisor / member credentials 
 			new LoginPage()
 
+
 			.typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
 			.clickNext()
 			.typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
@@ -31,43 +31,19 @@ public class TestCase_11006 {
 
 			//2.Go to Workplace > Accounts and search for EIN 673415 
 			.selectAccountsTab()
-			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
-
-			//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
-			.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
-
-			//Check whether SURPASS is End Dated
-			.selectMembership()
-
-			//Search for Surpass
-			.searchinMemberShip("SURPASS Core")
-
-			//End Date Surpass
-			.verifyAndEndMembership("SURPASS Core", TestUtils.todaysDate())
-
-			//click save 
-			.clickSave()
-
-			;
-			new DashboardPage()
-			.selectAccountsTab()
 			.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
 			//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 			.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
-			//Navigate to Membership
-			.selectMembership()
+			//change to Draft
+			.chooseRecordStatusDraftfromTop()
 
-			//SEarch for SURPASS
-			.searchmemberShip("SURPASS Core")
+			.clickSave()
 
-			.verifyMembership(true, "SURPASS Core")
+			//navigate to LOB
+			.clickLineOfBusinesses()
 
-			//Get Membership Date
-			.getMembershipStartDate()
-
-			//Click General
 			.clickGeneralTab()
 
 			//Change the DP
@@ -100,9 +76,11 @@ public class TestCase_11006 {
 			//publish the account
 			.chooseRecordStatusPublished()
 
-
 			//click save
 			.clickSave()
+
+			.pageRefresh()
+
 
 			//Navigate to Membership
 			.selectMembership()
@@ -112,8 +90,11 @@ public class TestCase_11006 {
 
 			.verifyMembership(true, "SURPASS Core")
 
-			.verifyMembershipStartDate(TestUtils.date)
+			.verifyMembershipStartDate(TestUtils.todaysDate())
+
 			//Data Reset
+			//End and delete the membership
+			.endDateandDeleteMembership("SURPASS Core")
 
 
 			//General Tab
@@ -147,9 +128,8 @@ public class TestCase_11006 {
 
 
 			//click save
-			.clickSave()
+			.clickSave();
 
-			;
 		}catch(Exception e) {
 
 			new MemberFormPage()
@@ -188,7 +168,6 @@ public class TestCase_11006 {
 			.clickSave();
 
 		}
-
 
 		;
 

@@ -87,14 +87,19 @@ public class LoginPage extends WebDriverServiceImpl{
 	//Click on Yes in stay signed in window
 	public DashboardPage clicYesInStaySignedin() throws InterruptedException {
 		Thread.sleep(5000);
-		if(getDriver().findElements(By.xpath("//div[contains(text(),'More information required')]")).size()>0)	{
-			click(getDriver().findElement(By.xpath("//input[@id='idSubmit_ProofUp_Redirect']")),"Next Button");
-		}
-		Thread.sleep(5000);
-		if(getDriver().findElements(By.xpath("//h2[contains(text(),'Microsoft Authenticator')]")).size()>0) {
-			click(getDriver().findElement(By.xpath("//a[contains(text(),'Skip setup')]")),"Skip Setup");
-		}
-				Thread.sleep(5000);
+		
+		/*
+		 * Below code is for MFA setup 
+		 */
+		
+		//if(getDriver().findElements(By.xpath("//div[contains(text(),'More information required')]")).size()>0)	{
+			//click(getDriver().findElement(By.xpath("//input[@id='idSubmit_ProofUp_Redirect']")),"Next Button");
+	//	}
+	//	Thread.sleep(5000);
+	//	if(getDriver().findElements(By.xpath("//h2[contains(text(),'Microsoft Authenticator')]")).size()>0) {
+		//	click(getDriver().findElement(By.xpath("//a[contains(text(),'Skip setup')]")),"Skip Setup");
+		//}
+			//	Thread.sleep(5000);
 		if(getDriver().findElements(By.id("idSIButton9")).size()>0){
 			click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
 		}

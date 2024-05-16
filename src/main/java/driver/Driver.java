@@ -158,21 +158,21 @@ public class Driver extends PreAndPost{
 				System.out.println("Executing : " + sTestCaseID);
 
 			}
-			
+
 			else if(sCategory.equalsIgnoreCase("BaseReadOnly"))
 			{
 				sTestClassName="testcases.BaseReadOnly.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 
 			}
-			
+
 			else if(sCategory.equalsIgnoreCase("AccountNumbers"))
 			{
 				sTestClassName="testcases.AccountNumbers.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 
 			}
-			
+
 			else if(sCategory.equalsIgnoreCase("MemberEntryForm"))
 			{
 				sTestClassName="testcases.MemberEntryForm.".concat(sTestClassName);
@@ -185,7 +185,7 @@ public class Driver extends PreAndPost{
 				System.out.println("Executing : " + sTestCaseID);
 
 			}
-			
+
 			else if(sCategory.equalsIgnoreCase("AGRules"))
 			{
 				sTestClassName="testcases.AGRules.".concat(sTestClassName);
@@ -201,11 +201,11 @@ public class Driver extends PreAndPost{
 			{
 				sTestClassName="testcases.AccountNumbersFedID.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
-				
+
 			}else if(sCategory.equalsIgnoreCase("AccountNumbersRemitra")) {
 				sTestClassName="testcases.AccountNumbersRemitra.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
-				
+
 			}else if(sCategory.equalsIgnoreCase("NonGPO")) {
 				sTestClassName="testcases.NonGPO.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
@@ -241,7 +241,7 @@ public class Driver extends PreAndPost{
 				sTestClassName="testcases.MemberformsRelatedmenu.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
 			}
-			
+
 			else if(sCategory.equalsIgnoreCase("AccountRanking")) {
 				sTestClassName="testcases.AccountRanking.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
@@ -293,14 +293,24 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("ProgramMembership")) {
 				sTestClassName="testcases.ProgramMembership.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
+
+			}else if(sCategory.equalsIgnoreCase("BuisnessPartner")) {
+				sTestClassName="testcases.BuisnessPartner.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("PriceActivation")) {
+				sTestClassName="testcases.PriceActivation.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("ContractVolume")) {
+				sTestClassName="testcases.ContractVolume.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}
 			
 			
-			
-			
-			
-			
-						
+
+
+
+
+
 			//Create instance of the class during run time
 			Class<?> cls = Class.forName(sTestClassName);
 			Object clsInstance = (Object) cls.getDeclaredConstructor().newInstance();
@@ -318,7 +328,7 @@ public class Driver extends PreAndPost{
 			else
 			{
 				throw new SkipException("Skipping execution for  :"+sTestCaseID);
-				
+
 			}
 
 		}
@@ -328,58 +338,58 @@ public class Driver extends PreAndPost{
 
 
 
-@AfterMethod
-public void Reports(ITestResult result) throws Exception
-{
-	if(sRunMode.equalsIgnoreCase("yes")) {
-		try
-		{
-			String sTimeStamp=new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new Date());
-			if(result.getStatus() == ITestResult.FAILURE)
+	@AfterMethod
+	public void Reports(ITestResult result) throws Exception
+	{
+		if(sRunMode.equalsIgnoreCase("yes")) {
+			try
 			{
-				System.out.println(sTestCaseID + " is FAILED ");
-				DataInputProvider.setCellData("Failed", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
-				DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
-				test.log(Status.FAIL, MarkupHelper.createLabel(sTestCaseID+" FAILED due to below issues:", ExtentColor.RED));
-				test.fail(result.getThrowable());
-			}	
-			else if(result.getStatus() == ITestResult.SKIP)
+				String sTimeStamp=new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss").format(new Date());
+				if(result.getStatus() == ITestResult.FAILURE)
+				{
+					System.out.println(sTestCaseID + " is FAILED ");
+					DataInputProvider.setCellData("Failed", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
+					DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
+					test.log(Status.FAIL, MarkupHelper.createLabel(sTestCaseID+" FAILED due to below issues:", ExtentColor.RED));
+					test.fail(result.getThrowable());
+				}	
+				else if(result.getStatus() == ITestResult.SKIP)
+				{
+					System.out.println("SKIPPING .. " + sTestCaseID );
+					DataInputProvider.setCellData("No Run", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
+					DataInputProvider.setCellData("", iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));			
+					test.log(Status.SKIP, MarkupHelper.createLabel(sTestCaseID+" SKIPPED", ExtentColor.YELLOW));
+					test.skip(result.getThrowable());
+				}
+				else if(result.getStatus() == ITestResult.SUCCESS)
+				{ System.out.println("Completed execution for " + sTestCaseID + result.getStatus());
+				if (failCount==0 )
+				{	
+					DataInputProvider.setCellData("PASSED", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
+					DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
+					test.log(Status.PASS, MarkupHelper.createLabel(sTestCaseID+" PASSED", ExtentColor.GREEN));
+				}
+				else
+				{
+					DataInputProvider.setCellData("Failed", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
+					DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
+					test.log(Status.FAIL, MarkupHelper.createLabel(sTestCaseID+" FAILED :", ExtentColor.RED));
+				}
+
+				}
+				else
+				{   
+					//			System.out.println("After method SKIPPING .. " + sTestCaseID );  	
+					//			DataInputProvider.setCellData("No Run", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
+					//			DataInputProvider.setCellData("", iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));			
+					//			test.log(Status.SKIP, MarkupHelper.createLabel(sTestCaseID+" SKIPPED", ExtentColor.ORANGE));
+					//			test.skip(result.getThrowable());
+				}
+			}
+			catch(Exception e)
 			{
-				System.out.println("SKIPPING .. " + sTestCaseID );
-				DataInputProvider.setCellData("No Run", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
-				DataInputProvider.setCellData("", iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));			
-				test.log(Status.SKIP, MarkupHelper.createLabel(sTestCaseID+" SKIPPED", ExtentColor.YELLOW));
-				test.skip(result.getThrowable());
+				e.printStackTrace();
 			}
-			else if(result.getStatus() == ITestResult.SUCCESS)
-			{ System.out.println("Completed execution for " + sTestCaseID + result.getStatus());
-			if (failCount==0 )
-			{	
-				DataInputProvider.setCellData("PASSED", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
-				DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
-				test.log(Status.PASS, MarkupHelper.createLabel(sTestCaseID+" PASSED", ExtentColor.GREEN));
-			}
-			else
-			{
-				DataInputProvider.setCellData("Failed", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
-				DataInputProvider.setCellData(sTimeStamp, iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));
-				test.log(Status.FAIL, MarkupHelper.createLabel(sTestCaseID+" FAILED :", ExtentColor.RED));
-			}
-			
-			}
-			else
-			{   
-//			System.out.println("After method SKIPPING .. " + sTestCaseID );  	
-//			DataInputProvider.setCellData("No Run", iTestCaseRowNumDriver, "Result",Driver.properties.getProperty("DriverSheetName"));
-//			DataInputProvider.setCellData("", iTestCaseRowNumDriver, "TimeStamp",Driver.properties.getProperty("DriverSheetName"));			
-//			test.log(Status.SKIP, MarkupHelper.createLabel(sTestCaseID+" SKIPPED", ExtentColor.ORANGE));
-//			test.skip(result.getThrowable());
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
 		}
 	}
-}
 }

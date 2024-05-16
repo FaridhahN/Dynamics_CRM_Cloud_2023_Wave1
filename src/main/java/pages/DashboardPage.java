@@ -92,6 +92,8 @@ public class DashboardPage extends WebDriverServiceImpl {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Contract Attachments']")));
 
 		click(getDriver().findElement(By.xpath("//span[text()='Contract Attachments']")),"Contract Attachments");
+		
+		Thread.sleep(10000);
 		return new ContractAttachmentPage();
 	}
 	

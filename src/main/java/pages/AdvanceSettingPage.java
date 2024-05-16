@@ -40,6 +40,7 @@ public class AdvanceSettingPage extends WebDriverServiceImpl {
 	public static String mainwindow;
 	public static String childWindow;
 	//select existing contact
+	
 	public AdvanceSettingPage navigatetoAdvanceSettings(String pageName) throws InterruptedException {
 		Thread.sleep(5000);
 		Thread.sleep(5000);
@@ -87,9 +88,11 @@ public SecurityPage navigateToUserOption() {
 
 	return new SecurityPage();
 }
+public AdvanceFindPage clickAdvancefindButton() {
+	click(getDriver().findElement(By.xpath("//span[@id='advancedFindImage']")),"Advance Find button");
+	return new AdvanceFindPage();
+}
 
-
-//div[@name="DETAILS_TAB"]/div[@aria-expanded="true"]
 
 //
 

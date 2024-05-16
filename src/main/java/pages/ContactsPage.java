@@ -2016,6 +2016,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//button[@data-id='contact|NoRelationship|Form|Mscrm.Form.contact.RefreshModernButton']")),"Refresh Button");
 			return this;
 		}
+		
+		
+		
+		
 }
 
 

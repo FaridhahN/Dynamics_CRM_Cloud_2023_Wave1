@@ -5,6 +5,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.awt.AWTException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -48,6 +49,34 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	}
 
+
+	//Click New Contract Button
+	public ContractAttachmentPage createNewCotnractAttachment(String member, String contract, String AttachmentStatus, String AttachmentStatusDate) throws InterruptedException, ParseException, AWTException {
+
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_accountid.fieldControl-LookupResultsDropdown_ix_accountid_textInputBox_with_filter_new']")),"Member");
+
+		Thread.sleep(2000);
+
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_accountid.fieldControl-LookupResultsDropdown_ix_accountid_textInputBox_with_filter_new']")),member,"Member");
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+member+"')]")));
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+member+"')]")),"member");
+
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_contractid.fieldControl-LookupResultsDropdown_ix_contractid_textInputBox_with_filter_new']")),"Contract");
+
+		Thread.sleep(2000);
+
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_contractid.fieldControl-LookupResultsDropdown_ix_contractid_textInputBox_with_filter_new']")),contract,"Contract");
+		wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+contract+"')]")));
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+contract+"')]")),"member");
+
+		selectAttachmentStatusOnCA(AttachmentStatus);
+
+		enterContractAttahmentstatusDate(AttachmentStatusDate);
+
+		return this;	
+	}
 	//Click Suppliers Tab on CA
 
 	public ContractAttachmentPage clickSuppliersTabOnCA() throws InterruptedException {
@@ -345,6 +374,114 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		return this;
 	}
 
+	//Verify Attachment Status reason
+	public ContractAttachmentPage verifyAttachmentStatusReason() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Create Actual blank Array List
+		List<String> option=new ArrayList<String>();	
+
+		List<WebElement> statusoption =attachmentStatusReason.getOptions();
+		List<String> expectdoption = Arrays.asList("---","New Supplier Account(s) added","Document(s) Updated","Re-engagement","New/Reconciled Child Sites","Confirmed by Distributor","Successor Contract Update");
+		for(int i=0;i<statusoption.size();i++) {
+
+			option.add(statusoption.get(i).getText());
+
+		}
+System.out.println(option);
+System.out.println(expectdoption);
+		assertTrue(option.containsAll(expectdoption));
+
+		return this;
+	}
+	
+	//Verify Attachment Status reason
+		public ContractAttachmentPage verifyAttachmentStatusReasonApproved() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+			//Create Actual blank Array List
+			List<String> option=new ArrayList<String>();	
+
+			List<WebElement> statusoption =attachmentStatusReason.getOptions();
+			List<String> expectdoption = Arrays.asList("---","Revenue received; no approval on record","Vendor account set up required","Approved from previous contract","Confirmed by Distributor","Spend on Direct Parent","Approved per Vendor List","Approved by Vendor","Member is Secondary","Not Purchasing","Successor Contract Update","Approved as Primary","Approved as Secondary");
+			for(int i=0;i<statusoption.size();i++) {
+
+				option.add(statusoption.get(i).getText());
+
+			}
+	System.out.println(option);
+	System.out.println(expectdoption);
+			assertTrue(option.containsAll(expectdoption));
+
+			return this;
+		}
+		
+		//Verify Attachment Status reason
+				public ContractAttachmentPage verifyAttachmentStatusReasonDeclinedByMember() throws InterruptedException {
+					click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+					Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+					//Create Actual blank Array List
+					List<String> option=new ArrayList<String>();	
+
+					List<WebElement> statusoption =attachmentStatusReason.getOptions();
+					List<String> expectdoption = Arrays.asList("---","Does not use product/contract not applicable","Private Contract/Agreement","Uses non-contracted competitive product","Uses competitor contract with us","Uses another GPO's contract","Other tier selected","Confirmed by Distributor");
+					for(int i=0;i<statusoption.size();i++) {
+
+						option.add(statusoption.get(i).getText());
+
+					}
+			System.out.println(option);
+			System.out.println(expectdoption);
+					assertTrue(option.containsAll(expectdoption));
+
+					return this;
+				}
+				
+				//Verify Attachment Status reason
+				public ContractAttachmentPage verifyAttachmentStatusReasonDeniedByVendor() throws InterruptedException {
+					click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+					Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+					//Create Actual blank Array List
+					List<String> option=new ArrayList<String>();	
+
+					List<WebElement> statusoption =attachmentStatusReason.getOptions();
+					List<String> expectdoption = Arrays.asList("---","Using another GPO's contract","Uses private agreement","Not on vendor approved list","Approved for different tier","Confirmed by Distributor","Ineligible Class of Trade","Successor Contract Update");
+					for(int i=0;i<statusoption.size();i++) {
+
+						option.add(statusoption.get(i).getText());
+
+					}
+			System.out.println(option);
+			System.out.println(expectdoption);
+					assertTrue(option.containsAll(expectdoption));
+
+					return this;
+				}
+
+	//Verify Attachment Status reason
+		public ContractAttachmentPage verifyAttachmentStatusReasonSentToVendor() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+			//Create Actual blank Array List
+			List<String> option=new ArrayList<String>();	
+
+			List<WebElement> statusoption =attachmentStatusReason.getOptions();
+			List<String> expectdoption = Arrays.asList("---","Member purchasing required","No response from vendor","Confirmed by Distributor","Successor Contract Update");
+			for(int i=0;i<statusoption.size();i++) {
+
+				option.add(statusoption.get(i).getText());
+
+			}
+
+			assertTrue(option.containsAll(expectdoption));
+
+			return this;
+		}
+		
+
+
+
+
 	//Verify Attachment Status Reason when Attachment Status is Approved.
 	public ContractAttachmentPage verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsPresent() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
@@ -428,6 +565,16 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		return this;
 
 	}
+
+	//Click New Contract Attachment
+	public ContractAttachmentPage addContractAttachmentButton() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contractattachment.NewRecord']"))," New Contract Attachment");
+		return this;
+
+	}
+
+	//
+
 
 	//Enter new Contract
 	//Select Class of trade
@@ -542,8 +689,8 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	//Select All existing Contract Attachment
 	public ContractAttachmentPage selectAllExistingContractAttachment() throws InterruptedException, AWTException { 
 		if(getDriver().findElements(By.xpath("//input[@aria-label='Toggle selection of all rows']")).size()>0) {
-		Actions actions=new Actions(getDriver());
-		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Toggle selection of all rows']"))).click().build().perform();
+			Actions actions=new Actions(getDriver());
+			actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Toggle selection of all rows']"))).click().build().perform();
 		}
 		return this;
 	}
@@ -551,11 +698,11 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	//Click Deactivate for Contract Attachment	
 	public ContractAttachmentPage clickDeactivateonContractAttachment() throws InterruptedException, AWTException {
 		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")).size()>0) {
-		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
-		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
-		Thread.sleep(7000);
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
+			Thread.sleep(7000);
 		}
-		
+
 		return this;
 
 	}
@@ -653,33 +800,33 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Select AccountType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));		
 		//Create temp Array List > add  actual options  from DOM for comparison
 		List<WebElement> mylist =AccountType.getOptions();
-		
+
 		List<String> selectoptions =new ArrayList<String>();
-		
+
 		for(int i=0;i<mylist.size();i++) {
 
 			selectoptions.add(mylist.get(i).getText());
 
 		}
-		
+
 		System.out.println(selectoptions);
 		assertTrue((selectoptions.contains("Successor Contract Update")), "Sucessor Contract Updated");
-									 
+
 		return this;
 	}
-	
+
 	//Select Successor Contract Update as Attachment Reason
 	public ContractAttachmentPage selectAttachmentReasons(String Attachment_Reason) throws InterruptedException, AWTException {
-	
+
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")), Attachment_Reason, "Attachment_Reason");
 		return this;
 	}
-	
+
 
 
 	//Verify Attachment Reasons
 	public ContractAttachmentPage verifyAttachmentReasonsisDeleted() throws InterruptedException, AWTException {
-		
+
 		String attachmentReason = getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")).getAttribute("title");
 		assertTrue(attachmentReason.contentEquals("---"));
 		return this;
@@ -695,109 +842,118 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		assertTrue(!(mylist.contains("Successor Contract Update")), "Sucessor Contract Updated");
 		return this;
 	}
-	
+
 	//Verify Vendor status and Vendor status date are not displayed
-		public ContractAttachmentPage verifyVendorStatusIsNotDisplayed() throws InterruptedException, AWTException {
-			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Vendor Status')]")).size(), "Vendor Status");
-			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Vendor Status Date')]")).size(), "Vendor Status Date");
-			return this;
-		}
-		
-		
-		//Verify Request ID status date are not displayed
-				public ContractAttachmentPage verifyRequestIDIsNotDisplayed() throws InterruptedException, AWTException {
-					verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Request ID')]")).size(), "Request ID");
-					
-					return this;
-				}
-		
-		//Select Open All Contract Attachment View
-		public ContractAttachmentPage openAllContractAttachmentView() throws InterruptedException   {
-			
-			Thread.sleep(10000);
-			List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
-			if(dropdown.size()>0) {
-				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
-			}else {
-				click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
-			}
-			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//*[contains(text(),'All Contract Attachment')]")),"All Contract Attachment");
-			Thread.sleep(15000);
-		
-			
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		//Click the Edit button for the contract Attachment
-		public ContractAttachmentPage clickEditButton() throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Edit']")),"Edit Button");
-			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
-
-			wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//ul[@aria-label='Contract Attachment Form']"))));
-
-			
-			
+	public ContractAttachmentPage verifyVendorStatusIsNotDisplayed() throws InterruptedException, AWTException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Vendor Status')]")).size(), "Vendor Status");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Vendor Status Date')]")).size(), "Vendor Status Date");
 		return this;
+	}
+
+
+	//Verify Request ID status date are not displayed
+	public ContractAttachmentPage verifyRequestIDIsNotDisplayed() throws InterruptedException, AWTException {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Request ID')]")).size(), "Request ID");
+
+		return this;
+	}
+
+	//Select Open All Contract Attachment View
+	public ContractAttachmentPage openAllContractAttachmentView() throws InterruptedException   {
+
+		Thread.sleep(10000);
+		List<WebElement> dropdown= getDriver().findElements(By.xpath("(//span[contains(@id,'ViewSelector')])[4]"));
+		if(dropdown.size()>0) {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[4]")),"Select a view");
+		}else {
+			click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Select a view");
 		}
-		
-		
-		
-		//Select the Existing Contract Attachment
-		public ContractAttachmentPage selectExistingContractAttachment() throws InterruptedException   {
-			Actions actions= new Actions(getDriver());
-			actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).click().build().perform();
-			Thread.sleep(2000);
-			clickEditButton();
-			
-			return this;
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Contract Attachment')]")),"All Contract Attachment");
+		Thread.sleep(15000);
+
+
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Click the Edit button for the contract Attachment
+	public ContractAttachmentPage clickEditButton() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Edit']")),"Edit Button");
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(180));
+
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//ul[@aria-label='Contract Attachment Form']"))));
+
+
+
+		return this;
+	}
+
+
+
+	//Select the Existing Contract Attachment
+	public ContractAttachmentPage selectExistingContractAttachment() throws InterruptedException   {
+		Actions actions= new Actions(getDriver());
+		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).click().build().perform();
+		Thread.sleep(2000);
+		clickEditButton();
+
+		return this;
+	}
+
+	//Click Suppliers Tab on CA
+
+	public ContractAttachmentPage clickSystemTabOnCA() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//li[@aria-label='System']")),"Sysyem Tab");
+		Thread.sleep(3000);
+		return this;
+
+	}
+
+	//Click Verify the Assigned To Field
+
+	public ContractAttachmentPage verifyAssginedToFeild(String AssignedToFeild) throws InterruptedException {
+		String AssignedType;
+		if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
+			AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
+
+		}else{
+			AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getAttribute("title");
 		}
-		
-		//Click Suppliers Tab on CA
 
-		public ContractAttachmentPage clickSystemTabOnCA() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//li[@aria-label='System']")),"Sysyem Tab");
-			Thread.sleep(3000);
-			return this;
+		System.out.println(AssignedType);
+		System.out.println(AssignedToFeild);
+		assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
+		return this;
 
+
+	}
+
+	public ContractAttachmentPage verifyAssginedToFeildUser(String AssignedToFeild) throws InterruptedException {
+		String AssignedType;
+		if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
+			AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
+
+		}else{
+			AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getText();
 		}
-		
-		//Click Verify the Assigned To Field
 
-				public ContractAttachmentPage verifyAssginedToFeild(String AssignedToFeild) throws InterruptedException {
-					String AssignedType;
-					if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
-						AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
-						
-					}else{
-					 AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getAttribute("title");
-					}
-					
-					System.out.println(AssignedType);
-					System.out.println(AssignedToFeild);
-					assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
-					return this;
-					
+		System.out.println(AssignedType);
+		System.out.println(AssignedToFeild);
+		assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
+		return this;
 
-				}
-				
-				public ContractAttachmentPage verifyAssginedToFeildUser(String AssignedToFeild) throws InterruptedException {
-					String AssignedType;
-					if(getDriver().findElements(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).size()>0) {
-						AssignedType=getDriver().findElement(By.xpath("(//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text'])[2]")).getText();
-						
-					}else{
-					 AssignedType=getDriver().findElement(By.xpath("//div[@data-id='ownerid.fieldControl-LookupResultsDropdown_ownerid_selected_tag_text']")).getText();
-					}
-					
-					System.out.println(AssignedType);
-					System.out.println(AssignedToFeild);
-					assertTrue(AssignedType.equalsIgnoreCase(AssignedToFeild));
-					return this;
-					
 
-				}
-		
+	}
 
+	//Attachment Status REason is locked
+	public ContractAttachmentPage verifyattachmentStatusReasonisLocked() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select' and @disabled]")).size(), "AttachmentStatusreason");
+
+		return this;
+	}
+	
+	
+	
+	
 }

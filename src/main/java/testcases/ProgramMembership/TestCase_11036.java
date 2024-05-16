@@ -1,16 +1,14 @@
-package testcases.DSHMembership;
+package testcases.ProgramMembership;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
-import utils.TestUtils;
-//TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
-//Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
-//Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
+//TFS ID_11036:_827928: Verify Program membership is inherited to a newly created prospect converted to member account on publish
 
-public class TestCase_1030781 {
+
+public class TestCase_11036 {
 
 
 	@Test
@@ -28,11 +26,6 @@ public class TestCase_1030781 {
 
 		//2. From the left navigation column ,Go to Accounts > +New
 		.selectAccountsTab()
-
-
-		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.getDPData()
 
 		.clickNewOnAccountsPage()
 		.chooseMemberForm()
@@ -134,6 +127,14 @@ public class TestCase_1030781 {
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
 
+		//Verify Surpass membership is not displayed
+		.selectMembership()
+
+		.searchmemberShip("SURPASS Core")
+
+		.verifyMembership(false, "SURPASS Core")
+
+		.clickGeneralTab()
 		//8. Record Status = Published
 		.chooseRecordStatusPublished()
 
@@ -143,63 +144,13 @@ public class TestCase_1030781 {
 		//9. Verify Entity code is generated 
 		.entityCodeIsDisplayed()
 
-		//Choose Draft
-		.chooseRecordStatusDraft()
-
-		//Click Save
-		.clickSave()
-
-		//Add DSH Membership
-
-		//Click add new membership
-		.clickMembershipAndAddNewMembership()
-
-		// Choose Membership type 
-		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType1", sDataSheetName))
-		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider1", sDataSheetName))
-
-		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate1", sDataSheetName))
-
-		//Click on membership save and close
-		.clickQuickCreateMembershipSaveAndClose()
-
-		//navigate to membership
+		//Verify Surpass membership is displayed
 		.selectMembership()
 
+		.searchmemberShip("SURPASS Core")
 
-		//10.Go to membership and Open the Premier National membership ***** Premier National membership should be opened 
-
-		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
-
-		//11.Provide end date = Any future date **** Account should be saved successfully 
-		.typeMembershipEndDate(TestUtils.todaysDate())
-
-		// End reason = Anything from dropdown,
-		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndReason", sDataSheetName))
-
-		// then save
-		.clickMembershipSaveAndClose()
-
-		//navigate to membership
-		.selectMembership()
-
-
-		//Double click DSH membership
-		.doubleClickMembershipWithEndDAte(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider1", sDataSheetName))
-
-		//Verify End date
-		.verifyEndDate(TestUtils.todaysDate())
-
-		//click save and close
-		.clickSaveAndClose()
-		
-		.clickGeneralTab()
-		
-		.verifyAccountStatus("Terminated")
+		.verifyMembership(true, "SURPASS Core")
 
 		;
-
-
 	}
 }
