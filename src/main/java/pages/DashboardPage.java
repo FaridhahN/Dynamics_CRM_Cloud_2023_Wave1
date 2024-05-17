@@ -226,4 +226,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 		Thread.sleep(2000);
 		return new BulkImportPage();
 	}
+	
+	
+	
 }

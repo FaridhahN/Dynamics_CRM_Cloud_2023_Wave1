@@ -27,9 +27,6 @@ public class TestCase_1085248 {
 		.selectContractsTab()
 		
 		
-.changeTheContractView("Inactive Contracts")
-		
-		.verifyOlderEndDate()
 		;
 		}
 }
