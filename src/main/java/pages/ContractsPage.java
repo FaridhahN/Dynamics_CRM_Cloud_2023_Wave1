@@ -340,14 +340,158 @@ public class ContractsPage extends WebDriverServiceImpl {
 			
 			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+sponsor+"')]")));
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'"+sponsor+"')]")),"Sponsor");
 			verifyElementisDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Sponsor Entity Code')]")).size(), "Sponsor Entity code");
 			verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='sponsorentitycode.ix_premierein.fieldControl-text-box-text' and contains(@value,'"+entityCode+"')]")).size(), "Sponsor Entity code");
 
-			
-			
 			return this;
 			
 		}	
+		
+		//Click Tab
+		public ContractsPage clickTab(int number)  throws InterruptedException {
+			for(int i=0;i<number;i++) {
+				Actions a =new Actions(getDriver());
+				a.sendKeys(Keys.TAB).build().perform();
+				Thread.sleep(3000);
+			}
+			return this;
+		}
+
+		
+		//Verify Tier Enhancement fields in General Tab
+		public ContractsPage verifyTierEnhancementFieldLength(String sponsor, String tierEnhancement, String cotEligibility, String entityCode) throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//input[@data-id='ix_sponsor.fieldControl-LookupResultsDropdown_ix_sponsor_textInputBox_with_filter_new']")),"Sponsor");
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_sponsor.fieldControl-LookupResultsDropdown_ix_sponsor_textInputBox_with_filter_new']")),sponsor,"Sponsor");
+			
+			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+sponsor+"')]")));
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'"+sponsor+"')]")),"Sponsor");
+			
+			Thread.sleep(4000);
+			
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//label[contains(text(),'Sponsor Entity Code')]")).size(), "Sponsor Entity code");
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='sponsorentitycode.ix_premierein.fieldControl-text-box-text' and contains(@value,'"+entityCode+"')]")).size(), "Sponsor Entity code");
+
+			type(getDriver().findElement(By.xpath("//input[@aria-label='Tier Enhancement']")),tierEnhancement,"tierEnhancement");
+			clickTab(2);
+			String tierEnhancementvalue=getDriver().findElement(By.xpath("//input[@aria-label='Tier Enhancement']")).getAttribute("title");
+			assertTrue(tierEnhancementvalue.contentEquals(tierEnhancement));
+			
+			verifyDocRequirementsDropdown();
+			verifyGPODesignationDropdown();
+			verifyAccountNumberDropdown();
+			
+			type(getDriver().findElement(By.xpath("//input[@data-id='ix_coteligibility.fieldControl-text-box-text']")),cotEligibility,"cotEligibility");
+			String cotEligibilityvalue=getDriver().findElement(By.xpath("//input[@aria-label='Tier Enhancement']")).getAttribute("title");
+			assertTrue(tierEnhancementvalue.contentEquals(tierEnhancement));
+			
+			
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@data-id='ix_contract.fieldControl-LookupResultsDropdown_ix_contract_SelectedRecordList']")).size(), "Selected Record List");
+			
+			return this;
+		}
+
+public ContractsPage verifyGPODesignationDropdown() throws InterruptedException {
+		
+			
+			Select RepresentativeType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_gpodesignationform.fieldControl-option-set-select']")));		
+			// Create Expected Array List
+			List<String> expectedRepresentativeType = Arrays.asList("---","Yes","No");		
+			//Create Actual blank Array List
+			List<String> actualRepresentativeType=new ArrayList<String>();	
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> mylist =RepresentativeType.getOptions();		
+			//loop through DOM and add dropdown values into mylist for comparison
+			for (WebElement ele:mylist) {			
+				String data =ele.getText();
+				actualRepresentativeType.add(data);			
+				System.out.println("The Actual RepresentativeType is : "  + " " +data);				
+				Thread.sleep(3000);
+				if(expectedRepresentativeType.containsAll(actualRepresentativeType))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "RepresentativeType- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedRepresentativeType ,	screenshotCapture());
+					Driver.failCount++;
+				}
+				
+				
+
+			}
+			return this;
+		}
+
+
+
+public ContractsPage verifyAccountNumberDropdown() throws InterruptedException {
+		
+			
+			Select RepresentativeType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_accountnumber.fieldControl-option-set-select']")));		
+			// Create Expected Array List
+			List<String> expectedRepresentativeType = Arrays.asList("---","Yes","No");		
+			//Create Actual blank Array List
+			List<String> actualRepresentativeType=new ArrayList<String>();	
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> mylist =RepresentativeType.getOptions();		
+			//loop through DOM and add dropdown values into mylist for comparison
+			for (WebElement ele:mylist) {			
+				String data =ele.getText();
+				actualRepresentativeType.add(data);			
+				System.out.println("The Actual RepresentativeType is : "  + " " +data);				
+				Thread.sleep(3000);
+				if(expectedRepresentativeType.containsAll(actualRepresentativeType))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "RepresentativeType- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedRepresentativeType ,	screenshotCapture());
+					Driver.failCount++;
+				}
+				
+				
+
+			}
+			return this;
+		}
+
+		public ContractsPage verifyDocRequirementsDropdown() throws InterruptedException {
+		
+			
+			Select RepresentativeType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_docrequirements.fieldControl-option-set-select']")));		
+			// Create Expected Array List
+			List<String> expectedRepresentativeType = Arrays.asList("---","Yes","No");		
+			//Create Actual blank Array List
+			List<String> actualRepresentativeType=new ArrayList<String>();	
+			//Create temp Array List > add  actual options  from DOM for comparison
+			List<WebElement> mylist =RepresentativeType.getOptions();		
+			//loop through DOM and add dropdown values into mylist for comparison
+			for (WebElement ele:mylist) {			
+				String data =ele.getText();
+				actualRepresentativeType.add(data);			
+				System.out.println("The Actual RepresentativeType is : "  + " " +data);				
+				Thread.sleep(3000);
+				if(expectedRepresentativeType.containsAll(actualRepresentativeType))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "RepresentativeType- " + "   " + data + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + data + "  " + "- Option is not available in the list"  + " "+ expectedRepresentativeType ,	screenshotCapture());
+					Driver.failCount++;
+				}
+				
+				
+
+			}
+			return this;
+		}
 		
 		//Verify Contract field is auto fields
 		public ContractsPage verifyContractFieldisNotNull() {
@@ -364,6 +508,18 @@ public class ContractsPage extends WebDriverServiceImpl {
 		//Verify Tier enhancement is displayed
 		public ContractsPage verifyTierEnhancementCreated(String sponsor) { 
 			verifyElementisDisplayed(getDriver().findElements(By.xpath("//label[@aria-label='"+sponsor+"']")).size(), "Sponsor");
+			return this;
+		}
+		
+		
+		//Verify creation fields are not available for Member/Member supervisor/Supplier/Supplier supervisor
+		public ContractsPage verifyReadonlyFields(){
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_contract|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contract.NewRecord']")).size(), "Selected Record List");
+			Actions action = new Actions(getDriver());
+			action.moveToElement(getDriver().findElement(By.xpath("//div[contains(@class,'ag-cell ag-cell-not-inline-editing ag-cell') and @col-id='ix_number']"))).doubleClick().build().perform();
+			//Click Tier Enhancement button is displayed
+			clickTierEnhancement();
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//button[@data-id='ix_contracttierenhancement|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_contracttierenhancement.AddNewStandard']")).size(), "Tier Enchancement");
 			return this;
 		}
 		
