@@ -26,6 +26,7 @@ public class TestCase_1085248 {
 		//Open Existing CA
 		.selectContractsTab()
 		
+		.verifyReadonlyFields();
 		
 		;
 		}

@@ -92,7 +92,7 @@ public class AdvanceFindPage extends WebDriverServiceImpl {
 		switchToFrame(getDriver().findElement(By.id("contentIFrame0")));
 		click(getDriver().findElement(By.xpath("//div[@id='advFindE_fieldListFLDLBL']")),"selectbutton");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@id='advFindE_fieldListFLDCTL']")),additionalfield , "additionalfield");
-		click(getDriver().findElement(By.xpath("//div[@title='Enter Value']")),"click enter value");
+		click(getDriver().findElement(By.xpath("//div[contains(@title,'Enter Value')]")),"click enter value");
 		click(getDriver().findElement(By.xpath("//td[@class='Lookup_RenderButton_td']")),"Search button");
 		switchToDefaultContent();
 		return this;
