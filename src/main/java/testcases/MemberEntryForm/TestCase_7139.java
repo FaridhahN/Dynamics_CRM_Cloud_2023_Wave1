@@ -5,6 +5,7 @@ import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
 //TFS ID_7139:Create new member - New Member entry form through sub account and save it as prospect first
+import utils.TestUtils;
 
 public class TestCase_7139 {
 
@@ -47,7 +48,8 @@ public class TestCase_7139 {
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+		.selectDirectParentRelationDate(TestUtils.todaysDate())
+
 
 		//DP exception reason = Any
 		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))

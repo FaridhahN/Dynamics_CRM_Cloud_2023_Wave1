@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
+import utils.TestUtils;
 //TFS ID_7138:Create new member - New Member form through sub account and save it as prospect first
 public class TestCase_7138 {
 
@@ -81,7 +82,7 @@ public class TestCase_7138 {
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+		.selectDirectParentRelationDate(TestUtils.todaysDate())
 
 		//DP exception reason = Any
 		.typeDPReason(DataInputProvider.getCellData_ColName(iRowNumber, "DPReason", sDataSheetName))
