@@ -1211,6 +1211,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Enter the Appointment Details
 	public MemberFormPage EnterAppointmentDetailsWithQuickSubject(String subject,String letterdetails) throws InterruptedException, IOException   {
 
+		selectInformationview();
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
@@ -1282,6 +1283,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Enter the Letter Details With quick Subject
 	public MemberFormPage EnterLetterDetailsWithQuickSubject(String subject, String duedate, String duration, String letterdetails) throws InterruptedException, IOException   {
 
+		selectInformationview();
+		
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
@@ -1304,6 +1307,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Enter the Phone Details with Quick Subject
 	public MemberFormPage EnterFPhoneDetailsWithQuickSubject(String subject, String duedate, String duration, String Phonenumber) throws InterruptedException, IOException   {
 
+		selectInformationview();
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
@@ -1335,7 +1339,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Enter the Fax Details with Quick Subject
 	public MemberFormPage EnterFaxDetailswithQuickSubject(String subject, String duedate, String duration, String Faxnumber, String noofPages, String coverpage,String direction, String taskdetails) throws InterruptedException, IOException   {
-
+		selectInformationview();
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
@@ -1364,6 +1368,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Enter the Task Details with QuickSubject
 	public MemberFormPage EnterTaskDetailswithQuickSubject(String subject, String duedate, String duration, String taskdetails) throws InterruptedException, IOException   {
 
+		selectInformationview();
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
 
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
@@ -7044,7 +7049,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage completeAllTask() throws InterruptedException {
-
+		selectOpenActivitiesViewAfterTask();
 		List<WebElement> checkmark= getDriver().findElements(By.xpath("//*[@col-id='activitytypecode']//label[contains(@class,'option')]"));
 		if(checkmark.size()>0) {
 			Actions actions= new Actions(getDriver());
