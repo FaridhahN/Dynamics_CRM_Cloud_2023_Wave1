@@ -109,7 +109,6 @@ public class AccountsPage extends WebDriverServiceImpl {
 	public  AccountsPage searchAccount(String crmNumberInput) throws InterruptedException {	
 		//click(getDriver().findElement(By.xpath("//*[@title='Select a view']")),"Select a view");
 		//Updating due to UAT issue
-		if(getDriver().findElements(By.id("GlobalSearchBox")).size()>0) {
 		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.id("GlobalSearchBox"))));
 		System.out.println(crmNumberInput+" searching ");
@@ -126,9 +125,7 @@ public class AccountsPage extends WebDriverServiceImpl {
 				searchAccountFromFilter(crmNumberInput);
 			}
 		}
-		}else {
-			searchAccountFromFilter(crmNumberInput);
-		}
+		
 
 		return this;
 	}
@@ -195,10 +192,8 @@ public AccountsPage searchinfilter(String crmNumberInput) throws InterruptedExce
 
 	//Select member account from Global search results -06/14/2023
 	
-	/*
-	 * changing the name from selectAccountFromGlobalSearchResults to selectInactiveAccount becasue of the UAT issue
-	 */
-	public  MemberFormPage selectInactiveAccount(String crmNumberInput) throws InterruptedException {	
+	
+	public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span"))));
 		if(getDriver().findElements(By.xpath("(//*[contains(@id,'Pivot')]//span[contains(@class,'ms-Pivot-linkContent linkCont')]/span)[2]")).size()>0){
@@ -212,11 +207,9 @@ public AccountsPage searchinfilter(String crmNumberInput) throws InterruptedExce
 		return new MemberFormPage();
 	}	
 	
-	/*
-	 * changing the name from selectInactiveAccount to selectAccountFromGlobalSearchResults becasue of the UAT issue
-	 */
+	
 	//Select member account from Global search results -06/14/2023
-		public  MemberFormPage selectAccountFromGlobalSearchResults(String crmNumberInput) throws InterruptedException {	
+		public  MemberFormPage selectInactiveAccount(String crmNumberInput) throws InterruptedException {	
 			WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//div[@col-id='name'and contains(@class,'ag-cell')]"))));
 			Thread.sleep(4000);
