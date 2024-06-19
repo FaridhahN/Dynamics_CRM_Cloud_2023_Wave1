@@ -183,6 +183,20 @@ public class AdvanceFindPage extends WebDriverServiceImpl {
 		return this;
 	}
 	
+	//View Saved View
+	
+	public AdvanceFindPage setSavedView(String savedView) throws InterruptedException {
+		switchToFrame(getDriver().findElement(By.id("contentIFrame0")));
+		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@id='savedQuerySelector']")), savedView, "savedView");
+		switchToDefaultContent();
+		return this;
+	}
+	
+	public AdvanceFindPage clcickAdvanceFindTab() throws InterruptedException {
+	click(getDriver().findElement(By.xpath("//span[contains(text(),'Advanced Find')]")),"Advance Find");
+	
+	return this;
+	}
 	
 }
 

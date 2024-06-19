@@ -145,7 +145,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Select attachmentStatus = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_supplierattachmentstatus.fieldControl-option-set-select']")));
 		// Create Expected Array List
 		List<String> expectedAttachmentStatus = Arrays.asList("---","Attachment Requested","Do not attach at Supplier","Confirmed by Distributor","Not Authorized Supplier","Aligned with another GPO",
-				"Not Approved by Manufacturer","Not Purchasing through Distributor" , "Requested Eligibility from Supplier", "Pending Request","Ineligible Class of Trade","Expired Contract","Premier Roster Update Required");		
+				"Not Approved by Manufacturer","Not Purchasing through Distributor" , "Requested Eligibility from Supplier", "Pending Request","Price Activation Required","Ineligible Class of Trade","Expired Contract","Premier Roster Update Required");		
 		//Create Actual blank Array List
 		List<String> actualAttachmentStatus=new ArrayList<String>();	
 		//Create temp Array List > add  actual options  from DOM for comparison
@@ -187,7 +187,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		// Create Expected Array List
 		List<String> expectedAttachmentStatus = Arrays.asList("---","Generated/Sent Paperwork","Sent to Contract Attachment","Sent to Vendor","Sent to Distributor",
 				"Approved","Declined by Member","Denied by Vendor","Canceled","Offered to Member - On Hold","Information Required - On Hold",
-				"Pending Paperwork","Request from Vendor");		
+				"Pending Paperwork","Price Activation Required","Request from Vendor");		
 		//Create Actual blank Array List
 		List<String> actualAttachmentStatus=new ArrayList<String>();	
 		//Create temp Array List > add  actual options  from DOM for comparison

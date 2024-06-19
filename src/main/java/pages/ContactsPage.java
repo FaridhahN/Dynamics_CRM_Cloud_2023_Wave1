@@ -138,6 +138,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// select the primary account
 	public ContactsPage selectPrimaryAccount(String primaryAccount) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
+
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
 		//Thread.sleep(55000);

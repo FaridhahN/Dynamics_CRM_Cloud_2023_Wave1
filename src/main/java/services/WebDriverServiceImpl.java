@@ -393,9 +393,13 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 
-	public void typeAndEnter(WebElement ele, String data,String field) {
+	public void typeAndEnter(WebElement ele, String data,String field) throws InterruptedException {
 		try {
-			ele.clear();
+			Thread.sleep(3000);
+			ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
+			Thread.sleep(3000);
+			ele.sendKeys(Keys.BACK_SPACE);
+			Thread.sleep(2000);
 			ele.sendKeys(data, Keys.ENTER);
 			setReport().log(Status.PASS, "The data: "+data+" entered successfully in the field :"+field,screenshotCapture());
 		} catch (InvalidElementStateException e) {

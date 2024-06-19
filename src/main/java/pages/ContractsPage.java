@@ -290,6 +290,8 @@ public class ContractsPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[@title='Tier Descriptions']/following-sibling::li[@title='Tier Enhancements']")).size(), "Tier Enchancement");
 		return this;
 	}
+	
+	
 
 	//Click Tier Enhancement
 
@@ -299,6 +301,18 @@ public class ContractsPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+
+	//Verify New Tier Enhancement Tab
+
+		public ContractsPage verifyTierEnhanceMentTab() {
+
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),\"CRM Account # (Sponsor Name)\")]")).size(), "Sponsor Name");
+			verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),\"Entity Code (Sponsor Name)\")]")).size(), "Sponsor Name");
+
+			
+			return this;
+		}
+	
 	//Verify New Tier Enhancement button
 
 	public ContractsPage verifyNewTierEnhancementButton() {
