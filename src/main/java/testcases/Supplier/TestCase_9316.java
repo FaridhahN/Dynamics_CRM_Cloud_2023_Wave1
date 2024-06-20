@@ -29,7 +29,7 @@ public class TestCase_9316 {
 		.clearDP()
 		
 		//Choose Direct Parent -Contracted status
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput1", sDataSheetName));
+		.noMatchforDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput1", sDataSheetName));
 		
 	}
 }
