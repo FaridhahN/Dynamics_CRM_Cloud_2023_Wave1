@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
+import utils.TestUtils;
 //TFS ID_7150: Create new Shipto to main account conversion
 
 public class TestCase_7150 {
@@ -56,13 +57,13 @@ public class TestCase_7150 {
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
 		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName)) 
+		.selectDirectParentRelationDate(TestUtils.todaysDate()) 
 
 		//Top Parent Relation =  OLM
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 
 		//Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		.selectTopParentRelationDate( TestUtils.todaysDate())
 
 		//Click on save 			
 		.clickSave() 

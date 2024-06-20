@@ -2692,7 +2692,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
-	public MemberFormPage navigateToSponsor() {
+	public MemberFormPage navigateToSponsor() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exclude from Roster')]")),"Exclude from Roster");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Receive Direct Mail");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible')]")),"Fee Share Eligible");
@@ -2703,10 +2703,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Corporate Rebate')]")),"Corporate Rebate");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Change Status')]")),"Record Change Status");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Internal Rep')]")),"Current Internal Rep");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Field Rep')]")),"Current Field Rep");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Rank')]")),"Account Rank");
-
+		clickTab(3);
+		
 		return this;
 	}
 
@@ -2718,7 +2716,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public MemberFormPage navigateToCorporateParent() {
+	public MemberFormPage navigateToCorporateParent() throws InterruptedException {
 		navigateToSponsor();
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")),"is Sponsor");
 		Actions actions = new Actions(getDriver());
@@ -9332,13 +9330,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-	public MemberFormPage navigateToSponsorMEF() {
+	public MemberFormPage navigateToSponsorMEF() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Change Status')]")),"Record Change Status");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Internal Rep')]")),"Current Internal Rep");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Current Field Rep')]")),"Current Field Rep");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Rank')]")),"Account Rank");
-
+		clickTab(3);
 		return this;
 	}
 
