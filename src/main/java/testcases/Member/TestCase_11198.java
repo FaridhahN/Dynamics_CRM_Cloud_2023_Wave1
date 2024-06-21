@@ -32,6 +32,8 @@ public class TestCase_11198 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		
+		.chooseMemberForm()
+		
 		.navigateToDoNotVerify()
 		
 		.selectDonotVerify("Yes")

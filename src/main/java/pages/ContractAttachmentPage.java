@@ -668,14 +668,24 @@ System.out.println(expectdoption);
 	//click save button
 	public ContractAttachmentPage clickSaveButtonContractAttachment() throws InterruptedException, AWTException { 
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Save']")),"Save Button");
-		Thread.sleep(7000);
+		Thread.sleep(2000);
+		clickIgnoreAndSave();
+		Thread.sleep(5000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
 		System.out.println(saveStatus);
 		assertFalse(saveStatus.contains("Unsaved"),"Details are not saved");
 		return this;
 
 	}	
+	
+	public ContractAttachmentPage clickIgnoreAndSave() throws InterruptedException, AWTException { 
+	List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
 
+	if(ignoreMessage.size()>0)
+
+		click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
+return this;
+	}
 	//Click save and close button
 
 	public ContractAttachmentPage clickSaveAndCloseButtonContractAttachment() throws InterruptedException, AWTException {
