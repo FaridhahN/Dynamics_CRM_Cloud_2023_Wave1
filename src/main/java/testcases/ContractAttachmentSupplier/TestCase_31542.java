@@ -21,16 +21,17 @@ public class TestCase_31542 {
 		.clicSignin()
 
 		.clicYesInStaySignedin()
-		
+
 		///Go to Accounts with Contract Attachments
 		.selectAccountsTab()
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		
+
 		//Choose Existing Contract Attachments with CA Supplier
-		.selectRelatedContractAttachments()		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+		.selectRelatedContractAttachments()	
 		
+		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+
 		//Add CA Supplier with all fields	
 		.clickSuppliersTabOnCA()
 		.clickNewContractAttachmentSupplierButton()	
@@ -40,10 +41,10 @@ public class TestCase_31542 {
 		.typeTierOnCASupplier(DataInputProvider.getCellData_ColName(iRowNumber, "tier", sDataSheetName))
 		.typeCommentsOnCASupplier(DataInputProvider.getCellData_ColName(iRowNumber, "comments", sDataSheetName))
 		.clickSaveOnCASupplier()
-		
+
 		//Data Reset 		
 		.clickDeactivateOnCASupplier();
-		
-		
-		}
+
+
+	}
 }

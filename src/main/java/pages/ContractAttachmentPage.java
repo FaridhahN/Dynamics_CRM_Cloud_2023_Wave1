@@ -187,7 +187,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		// Create Expected Array List
 		List<String> expectedAttachmentStatus = Arrays.asList("---","Generated/Sent Paperwork","Sent to Contract Attachment","Sent to Vendor","Sent to Distributor",
 				"Approved","Declined by Member","Denied by Vendor","Canceled","Offered to Member - On Hold","Information Required - On Hold",
-				"Pending Paperwork","Price Activation Required","Request from Vendor");		
+				"Pending Paperwork","Price Activation Required","Request from Vendor", "Compliance Required");		
 		//Create Actual blank Array List
 		List<String> actualAttachmentStatus=new ArrayList<String>();	
 		//Create temp Array List > add  actual options  from DOM for comparison
@@ -244,6 +244,18 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Activate On CA Supplier");
 		Thread.sleep(3000);
 		return this;
+	}
+	
+	public ContractAttachmentPage searchinfilter(String crmNumberInput) throws InterruptedException {
+		
+		WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(15));
+		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
+		Thread.sleep(3000);
+		typeAndEnter(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]")),crmNumberInput,"Find Criteria" );
+		//06/14/2023 -Due to Active Member Taking Long Time to load
+		Thread.sleep(5000);
+		return this;
+
 	}
 
 	//Choose Existing CA using Contract Number

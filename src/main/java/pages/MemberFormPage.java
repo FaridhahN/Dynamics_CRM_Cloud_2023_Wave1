@@ -247,16 +247,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 		try {
+			if(getDriver().findElements(By.xpath("//div[@data-id='confirmdialog']")).size()>0){
+				List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
 
-			List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+				if(ignoreMessage.size()>0)
 
-			if(ignoreMessage.size()>0)
+					click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
 
-				click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
-
-			if(getDriver().findElements(By.xpath("//button[@aria-label='Continue']")).size()>0)
-				click(getDriver().findElement(By.xpath("//button[@aria-label='Continue']")),"Continue Button");
-
+				if((getDriver().findElements(By.xpath("//h1[@title='DP change confirmation']"))).size()==0) {
+					if(getDriver().findElements(By.xpath("//button[@aria-label='Continue']")).size()>0)
+						click(getDriver().findElement(By.xpath("//button[@aria-label='Continue']")),"Continue Button");
+				}
+			}
 		} catch (Exception e) {
 
 			e.getMessage();
@@ -354,7 +356,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),errorMessage);
 		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
-		
+
 		return this;
 
 	}
@@ -501,7 +503,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//li[contains(@id,'ix_businessclassification.fieldControl-LookupResultsDropdown_ix_businessclassification')]")),"Business Classification");
 		return this;
 	}
-	
+
 	//verify LOB
 	public MemberFormPage verifyLOBTable() {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//label//div[contains(text(),'Line of Business')]")).size(), "LOB");
@@ -2704,7 +2706,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Status')]")),"Record Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Record Change Status')]")),"Record Change Status");
 		clickTab(3);
-		
+
 		return this;
 	}
 
@@ -10664,7 +10666,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-	
+
 
 }
 
