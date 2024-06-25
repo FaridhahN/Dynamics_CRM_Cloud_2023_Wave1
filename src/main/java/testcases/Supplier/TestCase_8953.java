@@ -2,6 +2,7 @@ package testcases.Supplier;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
+import utils.TestUtils;
 
 public class TestCase_8953 {
 	
@@ -37,7 +38,7 @@ public class TestCase_8953 {
 		.doubleClickOnNewNationalMembership()
 
 		//5.Verify by providing value on End date and leave End reason Blank  .click save.Note:  End Reason is a Mandatory field for Terminating Premier Membership ,End Reason value must be provided.  
-		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+		.typeMembershipEndDate(TestUtils.todaysDate())
 		// then save
 		.clickMembershipSave()
 		//Req Change. End Reason Auto populates to 'Change'
@@ -51,7 +52,7 @@ public class TestCase_8953 {
 		.verifyDateValidationError(DataInputProvider.getCellData_ColName(iRowNumber, "expectedErrorText1", sDataSheetName))
 
 		//7.try to Terminate the "Parent Account"  which has Active "Child Accounts" in it with End date and End reason in the Premier: National Membership. Click on Save. 
-		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+		.typeMembershipEndDate(TestUtils.todaysDate())
 		
 		// End reason = Anything from dropdown,
 		.selectMembershipEndReason(DataInputProvider.getCellData_ColName(iRowNumber, "memberShipEndReason", sDataSheetName))
@@ -60,7 +61,7 @@ public class TestCase_8953 {
 		.clickMembershipSaveAndClose()
 		
 		//8.Verify and observe Premier End date is getting updated in the Supplier form.
-		.verifyPremierEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
+		.verifyPremierEndDate(TestUtils.todaysDate())
 		
 		//9. Verify and observe Account status=Terminated.
 		.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "accountStatusTerminated", sDataSheetName))
