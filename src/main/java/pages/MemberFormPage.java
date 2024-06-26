@@ -2060,7 +2060,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
+		if(getDriver().findElements(By.xpath("//*[@title='FBO']")).size()>0){
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
+		}
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Safe Harbor Instructions')]")),"Safe Harbor Instructions");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'NAICS Code')]")),"NAICS Code");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Require Manual AG')]")),"Require Manual AG");
