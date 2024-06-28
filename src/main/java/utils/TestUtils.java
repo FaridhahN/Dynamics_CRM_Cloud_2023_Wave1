@@ -103,4 +103,18 @@ public class TestUtils {
 					return fdate1.compareTo(fdate2);
 				
 				}
+			
+				//Enter End Date as past date from the given Date in Account Numbers
+				public static int differencebetweenDates(String date1, String date2) throws ParseException {
+					SimpleDateFormat dateform=new SimpleDateFormat("M/d/yyyy");
+					Date fdate1 = new SimpleDateFormat("M/d/yyyy").parse(date1);
+					Date fdate2 = new SimpleDateFormat("M/d/yyyy").parse(date2);
+					long difference_In_Time= fdate1.getTime() - fdate2.getTime();
+					long difference_In_Days = (difference_In_Time  / (1000 * 60 * 60 * 24))% 365;
+return (int) difference_In_Days;
+
+
+				
+				}
+				
 }

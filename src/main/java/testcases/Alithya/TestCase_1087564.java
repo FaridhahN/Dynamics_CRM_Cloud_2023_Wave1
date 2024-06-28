@@ -5,11 +5,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TFS ID_1087564:_1087564:Verify whether 'CP-My Opportunity' view is available for the user - Channel Partner Senior Director.
 
-
-
-public class TestCase_1086033 {
+public class TestCase_1087564 {
 
 
 	@Test
@@ -25,14 +23,8 @@ public class TestCase_1086033 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
-		.ClickNewOppurtunity()
-		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
-		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
+		.verifyDefaultViewOppurtunityPage()
+		.changeViewinOppurtunityPage("CP - My Opportunities")
 		;					
 	}
 }

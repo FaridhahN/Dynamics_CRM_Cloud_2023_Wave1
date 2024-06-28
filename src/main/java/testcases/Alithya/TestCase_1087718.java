@@ -5,11 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TFS ID_1087718:_1087718:Verify mentioned fields are pulled from account record on to opportunity form for Channel Partner Senior Director
 
 
-
-public class TestCase_1086033 {
+public class TestCase_1087718 {
 
 
 	@Test
@@ -25,14 +24,12 @@ public class TestCase_1086033 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
 		.ClickNewOppurtunity()
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
 		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		.verifyMemberDetails()
 		;					
 	}
 }

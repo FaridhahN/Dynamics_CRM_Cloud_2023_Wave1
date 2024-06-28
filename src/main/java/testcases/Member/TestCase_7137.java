@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import services.WebDriverServiceImpl;
 import utils.DataInputProvider;
+import utils.TestUtils;
 //TFS ID_ 7137:Create new member - New Member form and Save it as prospect first
 //Test Case 8763:Automation Cloud : Validate auto-generated CRM Number for Members, Suppliers
 //Test Case 8791:Cloud - Verify when selecting any "Class of trade" , "Not Found" Error window should not get displayed.
@@ -58,8 +59,7 @@ public class TestCase_7137 {
 		.verifyDefaultAccountStatus()	
 
 		//Application Start Date = Today's Date
-		.chooseApplicationDate(DataInputProvider.getCellData_ColName(iRowNumber, "applicationDate", sDataSheetName))
-
+		.chooseApplicationDate(TestUtils.todaysDate())
 		//CAMS Flag = Yes
 		.changeCAMSFlagAsYes()
 
@@ -74,13 +74,13 @@ public class TestCase_7137 {
 		.selectDirectParentRelationManaged() 
 
 		//Direct Parent Relation date = Today's Date
-		.selectDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "directParentRelationDate", sDataSheetName))
+		.selectDirectParentRelationDate(TestUtils.todaysDate())
 
 		//Top Parent Relation =  OLM
 		.selectTopParentRelation(DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelation", sDataSheetName))
 
 		// Top Parent Relation Date = Today's Date
-		.selectTopParentRelationDate( DataInputProvider.getCellData_ColName(iRowNumber, "topParentRelationDate", sDataSheetName))
+		.selectTopParentRelationDate(TestUtils.todaysDate())
 
 		//Click on Save 
 		.clickSave() 
@@ -115,7 +115,7 @@ public class TestCase_7137 {
 		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
 
 		// Start Date =Today's date
-		.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+		.typeLineOfBusinessStartDate(TestUtils.todaysDate())
 
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
@@ -128,7 +128,7 @@ public class TestCase_7137 {
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 
 		//Provide any start date and click on save
-		.typeMembershipStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate", sDataSheetName))
+		.typeMembershipStartDate(TestUtils.todaysDate())
 
 		//Click on membership save and close
 		.clickQuickCreateMembershipSaveAndClose()
@@ -170,7 +170,7 @@ public class TestCase_7137 {
 		.verifyIsFBO(WebDriverServiceImpl.Dpdata.get("IsFBO"))
 		.verifyFBO(WebDriverServiceImpl.Dpdata.get("FBO"))
 		//FBORD
-		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName));
+		.verifyFBORD(TestUtils.todaysDate());
 
 
 		//commenting below block since we are not verifying Is Member Add mail sent in the audit history due to the current changes in the application

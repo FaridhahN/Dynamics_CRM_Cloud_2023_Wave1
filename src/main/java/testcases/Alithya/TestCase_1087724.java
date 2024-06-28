@@ -5,11 +5,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TF ID_1087724:_1087724:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Senior Director
 
-
-
-public class TestCase_1086033 {
+public class TestCase_1087724 {
 
 
 	@Test
@@ -24,15 +22,9 @@ public class TestCase_1086033 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
-		.ClickNewOppurtunity()
-		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
-		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
+		
+		.clickAccounts()
+		.verifyViewNotinAccountsPage()		
 		;					
 	}
 }

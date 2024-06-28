@@ -5,11 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TFS ID_1087743:_1087743:Verify columns are removed from mentioned Contact Views for Channel Partner Senior Director
 
 
-
-public class TestCase_1086033 {
+public class TestCase_1087743 {
 
 
 	@Test
@@ -24,15 +23,13 @@ public class TestCase_1086033 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
-		.ClickNewOppurtunity()
-		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
-		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
-		;					
+		
+		.clickContacts()
+		.changeViewInContactssPage("All Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		.changeViewInContactssPage("My Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		
+		;
 	}
 }

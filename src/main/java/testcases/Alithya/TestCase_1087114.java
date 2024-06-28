@@ -4,12 +4,12 @@ import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
+import utils.TestUtils;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TFS ID_1087114:_1087114:Verify whether 'Opportunities' is available in the left navigation for Channel Partner Senior Director. 
 
 
-
-public class TestCase_1086033 {
+public class TestCase_1087114 {
 
 
 	@Test
@@ -25,14 +25,13 @@ public class TestCase_1086033 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
 		.ClickNewOppurtunity()
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
 		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
+		.typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
+		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
+		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
+		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 		;					
 	}
 }

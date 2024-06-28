@@ -5,11 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086033:_1086033:Verify Gut Feel is available for the Channel Partner Regional Manager
+//TFS ID_1087673:_1087673:Verify Channel Partner Senior Director can Assign his/her Opportunity to another user
 
 
-
-public class TestCase_1086033 {
+public class TestCase_1087673 {
 
 
 	@Test
@@ -26,13 +25,14 @@ public class TestCase_1086033 {
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
 		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
 		.ClickNewOppurtunity()
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
-		.verifyGutFeel()
-		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
 		.clickSaveinOpportunities()
+		.assignToUser(false, DataInputProvider.getCellData_ColName(iRowNumber, "user", sDataSheetName))
 		.verifygeneralErrormessageisNotDisplayed()
+		.assignToUser(false, DataInputProvider.getCellData_ColName(iRowNumber, "user1", sDataSheetName))
+		.verifygeneralErrormessageisNotDisplayed()
+		
 		;					
 	}
 }
