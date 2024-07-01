@@ -565,6 +565,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']"))),"Active"," 'Account Status' on Member Form");
 		return this;
 	}
+	
+	//verify default account status is active
+		public MemberFormPage verifyDefaultAccountStatusinMEF() throws InterruptedException {
+			Thread.sleep(3000);
+			verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']"))),"Active"," 'Account Status' on Member Form");
+			return this;
+		}
 
 	//Choose application start date
 	public MemberFormPage chooseApplicationDate(String applicationDate) throws InterruptedException {
@@ -3414,12 +3421,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify Account Status
 	public MemberFormPage verifyAccountStatusValue(String verifyAcountStatus) throws InterruptedException {
 		Thread.sleep(3000);
-		JavascriptExecutor je = (JavascriptExecutor) getDriver();
-		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']"));
-		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		navigateToApplicationDate();
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@data-id='ix_accountstatus.fieldControl-option-set-select']")),verifyAcountStatus,"Account Status");
 		return this;
 	}
+	
+	
+	//Verify Account Status
+		public MemberFormPage verifyAccountStatusValueinMEF(String verifyAcountStatus) throws InterruptedException {
+			Thread.sleep(3000);
+			navigateToApplicationDate();
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@data-id='ix_accountstatus.fieldControl-option-set-select']")),verifyAcountStatus,"Account Status");
+			return this;
+		}
+	
 
 	//Select the Account status
 	public MemberFormPage changetheAccountStatususingDropdown(String AcountStatus) throws InterruptedException {
@@ -4486,7 +4501,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Choose record status as Draft
 	public MemberFormPage chooseRecordStatusDraft() throws InterruptedException {
 		Thread.sleep(3000);
+		if(getDriver().findElements(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")).size()>0){
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
+		}
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Draft", "Record Status");	
 		Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft","Record Status"); 

@@ -32,7 +32,7 @@ public class TestCase_8997 {
 		.clickGoBackButton()
 		.clickOnDiscardChangesNavigatetoAccountsPage()
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-		.verifyAccountStatusValue("Terminated")
+		.verifyAccountStatusValueinMEF("Terminated")
 		;
 	}
 }

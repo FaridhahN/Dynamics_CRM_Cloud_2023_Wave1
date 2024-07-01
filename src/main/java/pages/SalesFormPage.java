@@ -35,6 +35,14 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(7000);
 		return this;
 	}
+	//Verify Error message is not displauyed
+		public SalesFormPage verifyErrorisNotDisplayed() throws InterruptedException {
+			Thread.sleep(3000);
+			List<WebElement> error=getDriver().findElements(By.xpath("//*[@data-id='errorDialog_subtitle']"));
+			verifyElementisNotDisplayed(error.size(), "Error message");
+			Thread.sleep(2000);
+			return this;
+		}
 
 	public SalesFormPage changeViewinAccountsPage(String viewType) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
@@ -623,6 +631,44 @@ public class SalesFormPage extends WebDriverServiceImpl {
 					WebDriverWait wait=new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 					wait.until(ExpectedConditions.invisibilityOf(getDriver().findElement(By.xpath("//div[@id='datasethost-progress-indicator']"))));
 					verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@col-id='name']//a//span[contains(text(),'"+opportunity+"')]")).size(), opportunity);
+					return this;
+				}
+				
+				//verify the Opputunity column
+				
+				public SalesFormPage verifyOppurtunityviewColumn() throws InterruptedException {
+				
+					click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+					ArrayList<String> actualColumn= new ArrayList<String>();
+					Thread.sleep(3000);
+					for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+					actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
+
+					}
+					
+					List<String> expectdoption = Arrays.asList("Topic","Description","Top Parent (Member Account)", "Member Account","Entity Code (Member Account)","Channel Partner Rev Category","Projected NAF","Est. close date","Gut Feel","Modified On","Modified By","Owner");		
+
+					if(actualColumn.containsAll(expectdoption))
+					{		
+						Thread.sleep(3000);
+						setReport().log(Status.PASS, "RepresentativeType- " + "   " + actualColumn + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+					} 
+					else {
+						setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + actualColumn + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+						Driver.failCount++;
+					}
+
+					assertTrue(!(expectdoption.contains("Fax")));
+					assertTrue(!(expectdoption.contains("Active Stage")));
+					assertTrue(!(expectdoption.contains("Revenue Category")));
+					return this;
+				}
+				
+				//Add Stage in the column
+				public SalesFormPage clikCancelButton() throws InterruptedException {
+
+					click(getDriver().findElement(By.xpath("//span[contains(text(),'Cancel')]")),"Apply Button");
 					return this;
 				}
 

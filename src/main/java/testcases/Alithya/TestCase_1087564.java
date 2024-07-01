@@ -25,6 +25,7 @@ public class TestCase_1087564 {
 		.clickOppurtunitiesPage()
 		.verifyDefaultViewOppurtunityPage()
 		.changeViewinOppurtunityPage("CP - My Opportunities")
+		.verifyErrorisNotDisplayed()
 		;					
 	}
 }

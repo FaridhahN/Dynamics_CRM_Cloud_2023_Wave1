@@ -5,9 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087554:_1087554:Verify whether 'CP-All Opportunity' view is available for the user - Channel Partner Senior Director.
+//TFS ID_1087767:_1087767:Verify columns for the mentioned Opportunity Views for Channel Partner Senior Director
 
-public class TestCase_1087554 {
+
+public class TestCase_1087767 {
 
 
 	@Test
@@ -25,7 +26,13 @@ public class TestCase_1087554 {
 		.clickOppurtunitiesPage()
 		.verifyDefaultViewOppurtunityPage()
 		.changeViewinOppurtunityPage("CP - All Opportunities")
-		.verifyErrorisNotDisplayed()
+		.verifyOppurtunityviewColumn()
+		.clikCancelButton()
+		.changeViewinOppurtunityPage("CP - My Opportunities")
+		.verifyOppurtunityviewColumn()
+		.clikCancelButton()
+		.changeViewinOppurtunityPage("CP - Open Opportunities")
+		.verifyOppurtunityviewColumn()
 		;					
 	}
 }
