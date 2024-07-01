@@ -74,7 +74,7 @@ public class TestCase_11002 {
 		//SEarch for SURPASS
 		.searchmemberShip("SURPASS Core")
 
-		.verifyMembership(true, "SURPASS")
+		.verifyMembership(true, "SURPASS Core")
 		
 		//Data Reset
 		//End and delete the membership

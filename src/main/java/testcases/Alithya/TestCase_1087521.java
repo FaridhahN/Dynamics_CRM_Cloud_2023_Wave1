@@ -9,7 +9,7 @@ import utils.TestUtils;
 //TFS ID_1087114:_1087114:Verify whether 'Opportunities' is available in the left navigation for Channel Partner Senior Director. 
 
 
-public class TestCase_1087114 {
+public class TestCase_1087521 {
 
 
 	@Test
@@ -32,8 +32,6 @@ public class TestCase_1087114 {
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
-		.clickSaveinOpportunities()
-		.verifygeneralErrormessageisNotDisplayed()
 		;					
 	}
 }

@@ -246,14 +246,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"Save");
 
 
+		List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+
+		if(ignoreMessage.size()>0)
+
+			click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
+
 		try {
 			if(getDriver().findElements(By.xpath("//div[@data-id='confirmdialog']")).size()>0){
-				List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
-
-				if(ignoreMessage.size()>0)
-
-					click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
-
+				
 				if((getDriver().findElements(By.xpath("//h1[@title='DP change confirmation']"))).size()==0) {
 					if(getDriver().findElements(By.xpath("//button[@aria-label='Continue']")).size()>0)
 						click(getDriver().findElement(By.xpath("//button[@aria-label='Continue']")),"Continue Button");
@@ -560,9 +561,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//verify default account status is active
 	public MemberFormPage verifyDefaultAccountStatus() throws InterruptedException {
 		Thread.sleep(3000);
-		JavascriptExecutor je = (JavascriptExecutor) getDriver();
-		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']"));
-		je.executeScript("arguments[0].scrollIntoView(true);",element);
+		navigateToApplicationDate();
 		verifyExactTextWithTitleAttribute((getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']"))),"Active"," 'Account Status' on Member Form");
 		return this;
 	}
@@ -6902,8 +6901,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			boolean isSurpass =false;
 			for(int i=1;i<=getDriver().findElements(By.xpath("//*[@col-id='ix_membershipprovider']//span")).size();i++) {
 				if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]")).getText().equalsIgnoreCase(membership)) {
-					if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label").isEmpty())
-					{
+					if(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershipprovider']//span)["+i+"]/ancestor::div[@col-id='ix_membershipprovider']/following-sibling::div[@col-id='ix_enddate']//label")).getAttribute("aria-label").isEmpty())					{
 						isSurpass=true;	
 						break;
 					}
