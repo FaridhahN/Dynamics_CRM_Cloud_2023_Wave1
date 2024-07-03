@@ -471,7 +471,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
+		if(getDriver().findElements(By.xpath("//*[@title='Sponsor']")).size()>0){
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
+		}
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
@@ -685,7 +687,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//select Direct parent
 	public MemberFormPage selectDirectParent(String directParent) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
+		if(getDriver().findElements(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Direct Parent");
+		}
 		Thread.sleep(2000);
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),directParent,"Direct Parent");
 		//Thread.sleep(120000);
@@ -6220,7 +6224,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_accountnumber|NoRelationship|Form|Mscrm.Form.ix_accountnumber.Deactivate']")),"Deactivate");
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate");
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 		return this;	
 	}
 

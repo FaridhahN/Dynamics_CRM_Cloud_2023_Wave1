@@ -61,6 +61,14 @@ public class TestUtils {
 		return enddate;
 		}
 	
+	
+	public static String todaysDatewithTime() {
+		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy HH");
+		Date date = new Date();
+		String enddate= dateFormat.format(date);
+		return enddate;
+		}
+	
 	//Enter End Date as FutureDate Date in Account Numbers
 		public static String  FutureEndDate(int number) {
 			DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");

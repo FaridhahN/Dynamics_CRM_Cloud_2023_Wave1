@@ -6,10 +6,9 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1087114:_1087114:Verify whether 'Opportunities' is available in the left navigation for Channel Partner Senior Director. 
-
-
-public class TestCase_1087521 {
+//TFS ID_1087579:_1087579:Verify whether following fields : "Topic, Estimated Closed Date, Channel Partner Revenue Category ,Projected NAF" are editable in Opportunity form for the Channel Partner Senior Director.
+ 
+public class TestCase_1087663 {
 
 
 	@Test
@@ -26,15 +25,15 @@ public class TestCase_1087521 {
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
 		.ClickNewOppurtunity()
-		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
+		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
 		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
-		.typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
+		.typeEstimatedCloseDate(TestUtils.todaysDate())
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 		.clickSaveinOpportunities()
-		.verifyErrorisNotDisplayed()
-		
+		.clicklightassistantBulp()
+		.verifyOppurtunityinLightAssistant(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
 		;					
 	}
 }

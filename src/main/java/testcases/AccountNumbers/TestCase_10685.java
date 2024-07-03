@@ -45,6 +45,7 @@ public class TestCase_10685 {
 		.doubleClickExistingAccountNumberDEA()
 		.clickDeactivateInAccountNumbers()
 		.clickGoBackOnMemberForm()
+		.pageRefresh()
 		.clickGeneralTab()
 		.verifyDEAIsNull();
 		
