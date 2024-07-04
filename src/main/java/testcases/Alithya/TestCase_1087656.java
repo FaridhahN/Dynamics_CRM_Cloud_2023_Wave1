@@ -8,7 +8,7 @@ import utils.TestUtils;
 
 //TFS ID_1087579:_1087579:Verify whether following fields : "Topic, Estimated Closed Date, Channel Partner Revenue Category ,Projected NAF" are editable in Opportunity form for the Channel Partner Senior Director.
  
-public class TestCase_1087579 {
+public class TestCase_1087656 {
 
 
 	@Test

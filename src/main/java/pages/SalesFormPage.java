@@ -68,6 +68,16 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+
+	//Verify Views are not displayed in Accounts View
+	public SalesFormPage verifySystemViewNotinAccountsPage() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
+		assertTrue(getDriver().findElements(By.xpath("//label[contains(text(),'Influenced Deals that We Won')]")).size()==0);
+		assertTrue(getDriver().findElements(By.xpath("//label[contains(text(),'Accounts: No Activities in Last 3 Months')]")).size()==0);
+		assertTrue(getDriver().findElements(By.xpath("//label[contains(text(),'Accounts: Responded to Campaigns')]")).size()==0);
+		return this;
+	}
+
 	//Verify Default View in Oppurtunity page
 
 	public SalesFormPage verifyDefaultViewOppurtunityPage() throws InterruptedException {
@@ -157,6 +167,14 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage ClickNewOppurtunity() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.opportunity.NewRecord']")),"ClickNewOppurtunity");
 		Thread.sleep(5000);
+		return this;
+	}
+
+	//Change the form type
+	public SalesFormPage changeOppurtunityFormType(String FormType) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//div[@data-id='form-selector']")),"click Form Selector");
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+FormType+"')]")),"click FormType");
+		Thread.sleep(2000);
 		return this;
 	}
 
@@ -273,9 +291,9 @@ public class SalesFormPage extends WebDriverServiceImpl {
 			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='systemuserview_id.fieldControl-LookupResultsDropdown_systemuserview_id_infoContainer']//span[contains(text(),'"+User+"')]"))).click().build().perform();
 
 		}
-
+		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Click Assign");
-
+		Thread.sleep(5000);
 		return this;
 	}
 
@@ -723,30 +741,51 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//button[@data-id='cardFeedContainerLauncher']")),"assistantBulp");
 		return this;
 	}
-	
-	
+
+
 	//Verify Oppurtunity in the Light Assitant
-		public SalesFormPage verifyOppurtunityinLightAssistant(String opportunity) throws InterruptedException {
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@id='cards']//*[contains(text(),'"+opportunity+"')]")).size(), "opportunity");
+	public SalesFormPage verifyOppurtunityinLightAssistant(String opportunity) throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@id='cards']//*[contains(text(),'"+opportunity+"')]")).size(), "opportunity");
+		return this;
+	}
+
+	//VErify BPF
+
+	public SalesFormPage verifyBPF() throws InterruptedException {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'Channel Partner Opportunity')]")).size(), "Channel partner opportunity");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Quantify')]")).size(), "Quantify");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Present To Channel Partner')]")).size(), "Present To Channel Partner");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'In Progress')]")).size(), "In Progress");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Close')]")).size(), "Close");
+
+
+		return this;
+	}
+
+	//clikc signout
+		public SalesFormPage clickSignout() {
+			click(getDriver().findElement(By.id("mectrl_headerPicture")), "Signout Icon");
+			click(getDriver().findElement(By.id("mectrl_body_signOut")), "Signout button");
+			return this;
+		}
+	
+	
+	// perform page refresh
+		public SalesFormPage pageRefresh() throws InterruptedException {
+			getDriver().navigate().refresh();
+			Thread.sleep(5000);
 			return this;
 		}
 		
-		//VErify BPF
 		
-		public SalesFormPage verifyBPF() throws InterruptedException {
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'Channel Partner Opportunity')]")).size(), "Channel partner opportunity");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Quantify')]")).size(), "Quantify");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Present To Channel Partner')]")).size(), "Present To Channel Partner");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'In Progress')]")).size(), "In Progress");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(@id,'processHeaderStageName') and contains(text(),'Close')]")).size(), "Close");
-			
-			
+		public SalesFormPage clickAsWon() {
+			click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|Form|Mscrm.Form.opportunity.MarkAsWon']")),"Close as won");
 			return this;
 		}
-		
-		
-	
-	
+
 }
+
+
+
 
 
