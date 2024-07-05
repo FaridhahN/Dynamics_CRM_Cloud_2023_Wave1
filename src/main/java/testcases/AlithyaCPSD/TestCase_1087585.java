@@ -1,4 +1,4 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
@@ -6,9 +6,9 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1087579:_1087579:Verify whether following fields : "Topic, Estimated Closed Date, Channel Partner Revenue Category ,Projected NAF" are editable in Opportunity form for the Channel Partner Senior Director.
- 
-public class TestCase_1087579 {
+//TFS ID_1087585:_1087585:Verify whether Phone call due for today is available in Assistant -lightbulb button for the user Channel Partner Senior Director.
+
+public class TestCase_1087585 {
 
 
 	@Test
@@ -22,30 +22,53 @@ public class TestCase_1087579 {
 		.clicSignin()
 		.staysignedinforOtherApp()
 
+		//Navigate to the Sales hub
 		.selectSalesHubAccount()
+
+		//Navigate to the opportunity  page
 		.clickOppurtunitiesPage()
+
+		//Click new opportunity button
 		.ClickNewOppurtunity()
+
+		//Enter the topic
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
+
+		//Select the gut feel
 		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
+
+		//Type the est close date
 		.typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
+
+		//type anticipated purchase date
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
+
+		//Select revenuew
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
+
+		//type the projected NAF
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
+
+		//save opportunities
 		.clickSaveinOpportunities()
-		.verifyErrorisNotDisplayed()
+
+		//navigate to Acitvities
+		.selectRelatedActivities()
+
+		//click new Email activity
+		.clickNewPhoneActivity()
+		
+		//enter the email details
+		.EnterPhoneDetails(DataInputProvider.getCellData_ColName(iRowNumber, "subject", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "to", sDataSheetName), TestUtils.todaysDate(),DataInputProvider.getCellData_ColName(iRowNumber, "time", sDataSheetName))
+		
+		.clickSaveinOpportunities()
+		
 		.clickgoBack()
-		.searchOpportunity(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
-		.openOpportunity(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
 		
-		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+"Updatd"+TestUtils.todaysDatewithTime())
-		.typeEstimatedCloseDate(TestUtils.FutureEndDate(3))
-		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
-		.clearRevenueCategory()
-		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category1", sDataSheetName))
-		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName)+1)
-		.clickSaveinOpportunities()
-		.verifyErrorisNotDisplayed()
+		//verify in the ligh bulp
+		.clicklightassistantBulp()
 		
+		.verifyOppurtunityinLightAssistant(DataInputProvider.getCellData_ColName(iRowNumber, "subject", sDataSheetName))
 		;					
 	}
 }

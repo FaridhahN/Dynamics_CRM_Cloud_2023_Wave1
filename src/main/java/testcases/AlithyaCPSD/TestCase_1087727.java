@@ -1,14 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087710:_1087710:Verify 'Projected NAF' and ‘Est. Close Date’ fields on the opportunity form for Channel Partner Senior Director
+//TFS ID_1087727:_1087727:Verify 'Channel Partner Accounts Created in Last 7 Days' view is available for Channel Partner Senior Director
 
 
-public class TestCase_1087710 {
+public class TestCase_1087727 {
 
 
 	@Test
@@ -23,11 +23,15 @@ public class TestCase_1087710 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
-		.ClickNewOppurtunity()
-		.verifyFeildsinOppurtunitiesForm()
-			;					
+		
+		.clickAccounts()
+		.changeViewinAccountsPage("Channel Partner Sales Accounts Created in Last 7 Days")
+		.addColumnInTheView("Account Type")
+		.addColumnInTheView("Is Sponsor")
+		.addColumnInTheView("Created On")
+		.clickApplyinEditColumn()
+		.verifyOptionsInAccountsView()
+		
+		;					
 	}
 }

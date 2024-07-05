@@ -1,13 +1,13 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TF ID_1087724:_1087724:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Senior Director
+//TFS ID_1087304:_1087304:Verify the mentioned system views from Accounts are removed and not visible to Channel partner senior director
 
-public class TestCase_1087724 {
+public class TestCase_1087304 {
 
 
 	@Test
@@ -24,7 +24,7 @@ public class TestCase_1087724 {
 		.selectSalesHubAccount()
 		
 		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.verifySystemViewNotinAccountsPage()		
 		;					
 	}
 }

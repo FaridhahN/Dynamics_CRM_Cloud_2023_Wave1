@@ -315,6 +315,9 @@ public class Driver extends PreAndPost{
 			}else if(sCategory.equalsIgnoreCase("Alithya")) {
 				sTestClassName="testcases.Alithya.".concat(sTestClassName);
 				System.out.println("Executing : " + sTestCaseID);
+			}else if(sCategory.equalsIgnoreCase("AlithyaCPSD")) {
+				sTestClassName="testcases.AlithyaCPSD.".concat(sTestClassName);
+				System.out.println("Executing : " + sTestCaseID);
 			}
 			
 				

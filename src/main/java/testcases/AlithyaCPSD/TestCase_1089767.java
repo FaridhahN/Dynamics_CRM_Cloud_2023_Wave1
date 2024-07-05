@@ -1,14 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087727:_1087727:Verify 'Channel Partner Accounts Created in Last 7 Days' view is available for Channel Partner Senior Director
+//TFS ID_1089767:_1089767:Verify Opportunity Channel Partner form is accessible for Channel partner senior director
 
 
-public class TestCase_1087727 {
+public class TestCase_1089767 {
 
 
 	@Test
@@ -23,15 +23,11 @@ public class TestCase_1087727 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.changeViewinAccountsPage("Channel Partner Sales Accounts Created in Last 7 Days")
-		.addColumnInTheView("Account Type")
-		.addColumnInTheView("Is Sponsor")
-		.addColumnInTheView("Created On")
-		.clickApplyinEditColumn()
-		.verifyOptionsInAccountsView()
-		
+		.clickOppurtunitiesPage()
+		.changeViewinOppurtunityPage("CP - Open Opportunities")
+		.verifyGutFeelOptioninView()
+		.ClickNewOppurtunity()
+		.changeOppurtunityFormType("Opportunity Channel Partner")
 		;					
 	}
 }

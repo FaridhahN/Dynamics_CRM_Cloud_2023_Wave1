@@ -1,14 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087743:_1087743:Verify columns are removed from mentioned Contact Views for Channel Partner Senior Director
+//TFS ID_1087710:_1087710:Verify 'Projected NAF' and ‘Est. Close Date’ fields on the opportunity form for Channel Partner Senior Director
 
 
-public class TestCase_1087743 {
+public class TestCase_1087710 {
 
 
 	@Test
@@ -23,13 +23,11 @@ public class TestCase_1087743 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickContacts()
-		.changeViewInContactssPage("All Channel Partner Sales Contacts")	
-		.verifyColumnNameinContactView()
-		.changeViewInContactssPage("My Channel Partner Sales Contacts")	
-		.verifyColumnNameinContactView()
-		
-		;
+		.clickOppurtunitiesPage()
+		.changeViewinOppurtunityPage("CP - Open Opportunities")
+		.verifyGutFeelOptioninView()
+		.ClickNewOppurtunity()
+		.verifyFeildsinOppurtunitiesForm()
+			;					
 	}
 }

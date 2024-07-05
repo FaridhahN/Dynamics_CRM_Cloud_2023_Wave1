@@ -1,14 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087767:_1087767:Verify columns for the mentioned Opportunity Views for Channel Partner Senior Director
+//TFS ID_1087718:_1087718:Verify mentioned fields are pulled from account record on to opportunity form for Channel Partner Senior Director
 
 
-public class TestCase_1087767 {
+public class TestCase_1087718 {
 
 
 	@Test
@@ -24,15 +24,12 @@ public class TestCase_1087767 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.verifyDefaultViewOppurtunityPage()
-		.changeViewinOppurtunityPage("CP - All Opportunities")
-		.verifyOppurtunityviewColumn()
-		.clikCancelButton()
-		.changeViewinOppurtunityPage("CP - My Opportunities")
-		.verifyOppurtunityviewColumn()
-		.clikCancelButton()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyOppurtunityviewColumn()
+		.ClickNewOppurtunity()
+		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
+		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		.verifyMemberDetails()
 		;					
 	}
 }

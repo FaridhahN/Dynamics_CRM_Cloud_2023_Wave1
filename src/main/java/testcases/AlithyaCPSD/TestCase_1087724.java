@@ -1,13 +1,13 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087554:_1087554:Verify whether 'CP-All Opportunity' view is available for the user - Channel Partner Senior Director.
+//TF ID_1087724:_1087724:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Senior Director
 
-public class TestCase_1087554 {
+public class TestCase_1087724 {
 
 
 	@Test
@@ -22,10 +22,9 @@ public class TestCase_1087554 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		.clickOppurtunitiesPage()
-		.verifyDefaultViewOppurtunityPage()
-		.changeViewinOppurtunityPage("CP - All Opportunities")
-		.verifyErrorisNotDisplayed()
+		
+		.clickAccounts()
+		.verifyViewNotinAccountsPage()		
 		;					
 	}
 }

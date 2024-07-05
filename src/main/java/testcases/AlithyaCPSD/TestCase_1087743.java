@@ -1,13 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087304:_1087304:Verify the mentioned system views from Accounts are removed and not visible to Channel partner senior director
+//TFS ID_1087743:_1087743:Verify columns are removed from mentioned Contact Views for Channel Partner Senior Director
 
-public class TestCase_1087304 {
+
+public class TestCase_1087743 {
 
 
 	@Test
@@ -23,8 +24,12 @@ public class TestCase_1087304 {
 
 		.selectSalesHubAccount()
 		
-		.clickAccounts()
-		.verifySystemViewNotinAccountsPage()		
-		;					
+		.clickContacts()
+		.changeViewInContactssPage("All Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		.changeViewInContactssPage("My Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		
+		;
 	}
 }

@@ -1,14 +1,13 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1089767:_1089767:Verify Opportunity Channel Partner form is accessible for Channel partner senior director
+//TFS ID_1089780:_1089780:Verify Channel partner senior director can see Opportunity Business process flow when he opens a new Opportunity
 
-
-public class TestCase_1089767 {
+public class TestCase_1089780 {
 
 
 	@Test
@@ -24,10 +23,8 @@ public class TestCase_1089767 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - Open Opportunities")
-		.verifyGutFeelOptioninView()
 		.ClickNewOppurtunity()
-		.changeOppurtunityFormType("Opportunity Channel Partner")
+		.verifyBPF()
 		;					
 	}
 }

@@ -1,13 +1,13 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087740:_1087740:Verify mentioned Contact Views are available for Channel Partner Senior Director
+//TFS ID_1087564:_1087564:Verify whether 'CP-My Opportunity' view is available for the user - Channel Partner Senior Director.
 
-public class TestCase_1087740 {
+public class TestCase_1087564 {
 
 
 	@Test
@@ -22,16 +22,10 @@ public class TestCase_1087740 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.changeViewinAccountsPage("Channel Partner Sales Accounts Created in Last 7 Days")
-		.clickAddColumn()
-		.addColumnInTheView("Account Type")
-		.addColumnInTheView("Is Sponsor")
-		.addColumnInTheView("Created On")
-		.clickApplyinEditColumn()
-		.verifyOptionsInAccountsView()
-		
+		.clickOppurtunitiesPage()
+		.verifyDefaultViewOppurtunityPage()
+		.changeViewinOppurtunityPage("CP - My Opportunities")
+		.verifyErrorisNotDisplayed()
 		;					
 	}
 }

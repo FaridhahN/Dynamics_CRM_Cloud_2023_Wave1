@@ -1,13 +1,14 @@
-package testcases.Alithya;
+package testcases.AlithyaCPSD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087564:_1087564:Verify whether 'CP-My Opportunity' view is available for the user - Channel Partner Senior Director.
+//TFS ID_1087567:_1087567:Verify whether following Columns are available : "Topic, Estimated Revenue, Estimated Close Date, Potential Customer, Revenue Category, Stage" in 'My Opportunities' view for Channel Partner Senior Director.
 
-public class TestCase_1087564 {
+
+public class TestCase_1087567 {
 
 
 	@Test
@@ -23,9 +24,15 @@ public class TestCase_1087564 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.verifyDefaultViewOppurtunityPage()
 		.changeViewinOppurtunityPage("CP - My Opportunities")
-		.verifyErrorisNotDisplayed()
+		.clickAddColumn()
+		.addColumnInTheView("Est. Revenue (Base)")
+		.addColumnInTheView("Potential Customer")
+		.addColumnInTheView("Active Stage")
+		.clickApplyinEditColumn()
+		.clikCancelButton()
+		.verifyOppurtunityviewColumnafternewColumnAdded()
+		.clikCancelButton()
 		;					
 	}
 }

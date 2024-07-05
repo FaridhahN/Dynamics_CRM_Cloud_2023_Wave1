@@ -24,7 +24,7 @@ public class TestCase_1034128 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		.verifySalesHubOption()
+		.verifySalesHubOption() 
 		;					
 	}
 }
