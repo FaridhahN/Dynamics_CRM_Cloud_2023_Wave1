@@ -10,6 +10,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.jsoup.nodes.Entities.EscapeMode;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -46,7 +48,34 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	public SalesFormPage changeViewinAccountsPage(String viewType) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'"+viewType+"')]")),"View Selector Button");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),\""+viewType+"\")]")),"View Selector Button");
+		Thread.sleep(7000);
+		return this;
+	}
+	
+	public SalesFormPage changeViewinAccountsPageAfterSearch(String viewType) throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
+		type(getDriver().findElement(By.xpath("//input[@placeholder='Search views']")), viewType, "View type");
+		click(getDriver().findElement(By.xpath("//*[contains(text(),'"+viewType+"')]")),"View Selector Button");
+		Thread.sleep(7000);
+		return this;
+	}
+	
+	
+	
+	public SalesFormPage changeViewinDashboard(String viewType) throws InterruptedException {
+		if(getDriver().findElements(By.xpath("(//*[contains(text(),'"+viewType+"')])")).size()==0) {
+		click(getDriver().findElement(By.xpath("//div[@title='Dashboard Selector']")),"View Selector Button");
+		click(getDriver().findElement(By.xpath("(//*[contains(text(),'"+viewType+"')])")),"View Selector Button");
+		}
+		Thread.sleep(7000);
+		return this;
+	}
+
+
+	public SalesFormPage openFirstAccount() throws InterruptedException {
+		Actions action = new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//div[@col-id='name']//a//span"))).doubleClick().build().perform();
 		Thread.sleep(7000);
 		return this;
 	}
@@ -146,10 +175,31 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
-	public SalesFormPage clickAccounts() {
+
+	
+	public SalesFormPage clickAccounts() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Accounts')]")),"Account button");
+		Thread.sleep(6000);
 		return this;
 	}
+
+
+	public SalesFormPage clickDashboard() {
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Dashboards')]")),"Dashboards button");
+		return this;
+	}
+
+
+	public SalesFormPage clickActivitiesInLeftPane() {
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Activities')]")),"Dashboards button");
+		return this;
+	}
+
+	public SalesFormPage clickEmailUnderActivity() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.NewEmail']")),"Email");
+		return this;
+	}
+
 
 
 	public SalesFormPage clickContacts() {
@@ -260,15 +310,15 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
-	
-	
+
+
 	//Click Tab
-		public SalesFormPage clickEsc()  throws InterruptedException {
-				Actions a =new Actions(getDriver());
-				a.sendKeys(Keys.ESCAPE).build().perform();
-				Thread.sleep(3000);
-			return this;
-		}
+	public SalesFormPage clickEsc()  throws InterruptedException {
+		Actions a =new Actions(getDriver());
+		a.sendKeys(Keys.ESCAPE).build().perform();
+		Thread.sleep(3000);
+		return this;
+	}
 
 	public SalesFormPage clickSave() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@data-id='account|NoRelationship|Form|Mscrm.Form.account.Save']")),"");
@@ -300,7 +350,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 			action.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='systemuserview_id.fieldControl-LookupResultsDropdown_systemuserview_id_infoContainer']//span[contains(text(),'"+User+"')]"))).click().build().perform();
 
 		}
-		
+
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Click Assign");
 		Thread.sleep(5000);
@@ -429,7 +479,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//verify Internal notes
 	public SalesFormPage verifyInternalNotes() throws InterruptedException {
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[contains(text(),'Internal Notes')]")).size(),"Internal notes scetion");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Internal Notes')]")).size(),"Internal notes scetion");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//textarea[@data-id='ix_internalnotes.fieldControl-text-box-text']")).size(),"Internal notes test area");
 		Thread.sleep(4000);
 		return this;
@@ -736,11 +786,98 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 
+
+	//verify the Opputunity column with Addded Column
+
+	public SalesFormPage verifyContactviewColumnafternewColumnAdded() throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+		ArrayList<String> actualColumn= new ArrayList<String>();
+		Thread.sleep(3000);
+		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+			actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
+
+		}
+
+		List<String> expectdoption = Arrays.asList("First Name","Last Name","Primary Account", "Job Title","Email","Phone #","Street 1","City","State/Province","ZIP/Postal Code");		
+
+		if(actualColumn.containsAll(expectdoption))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + actualColumn + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + actualColumn + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+		return this;
+	}
+
+	//verify the Opputunity column with Addded Column
+
+	public SalesFormPage verifyAccountviewColumn() throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+		ArrayList<String> actualColumn= new ArrayList<String>();
+		Thread.sleep(3000);
+		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+			actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
+
+		}
+
+
+		List<String> expectdoption = Arrays.asList("Account Name", "Class of Trade", "Entity Code" ,"Business Classification", "Premier Start Date", "Account Status", "Direct Parent", "Top Parent", "Corporate Parent Name", "Current Field Rep" , "Current Internal Rep","Street 1", "City", "State/Province", "ZIP/Postal Code");		
+
+		if(actualColumn.containsAll(expectdoption))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + actualColumn + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + actualColumn + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+		return this;
+	}
+
+
+	//verify the Opputunity column with Addded Column
+
+	public SalesFormPage verifyRelatedContactviewColumnafternewColumnAdded() throws InterruptedException {
+
+		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+		ArrayList<String> actualColumn= new ArrayList<String>();
+		Thread.sleep(3000);
+		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+			actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
+
+		}
+
+		List<String> expectdoption = Arrays.asList("First Name","Last Name","Job Title","Email","Phone #","Street 1","City","State/Province","ZIP/Postal Code");		
+
+		if(actualColumn.containsAll(expectdoption))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + actualColumn + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + actualColumn + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+		return this;
+	}
+
 	//Add Stage in the column
 	public SalesFormPage clikCancelButton() throws InterruptedException {
 
 		if(getDriver().findElements(By.xpath("//span[contains(text(),'Cancel')]")).size()>0) {
-			click(getDriver().findElement(By.xpath("//span[contains(text(),'Cancel')]")),"Apply Button");	
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'Cancel')]")),"Cancel Button");	
 		}
 
 		return this;
@@ -773,205 +910,451 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	}
 
 	//clikc signout
-		public SalesFormPage clickSignout() {
-			click(getDriver().findElement(By.id("mectrl_headerPicture")), "Signout Icon");
-			click(getDriver().findElement(By.id("mectrl_body_signOut")), "Signout button");
-			return this;
-		}
-	
-	
+	public SalesFormPage clickSignout() {
+		click(getDriver().findElement(By.id("mectrl_headerPicture")), "Signout Icon");
+		click(getDriver().findElement(By.id("mectrl_body_signOut")), "Signout button");
+		return this;
+	}
+
+
 	// perform page refresh
-		public SalesFormPage pageRefresh() throws InterruptedException {
-			getDriver().navigate().refresh();
-			Thread.sleep(5000);
+	public SalesFormPage pageRefresh() throws InterruptedException {
+		getDriver().navigate().refresh();
+		Thread.sleep(5000);
+		return this;
+	}
+
+
+	public SalesFormPage clickAsWon() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|Form|Mscrm.Form.opportunity.MarkAsWon']")),"Close as won");
+		return this;
+	}
+
+	public SalesFormPage verifyWonCloseOppurtunityStatusReason() {
+
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> option =gutFeel.getOptions();	
+
+
+		for(int i=0;i<option.size();i++) {
+
+			selectoptions.add(option.get(i).getText());
+
+		}
+
+		assertTrue(selectoptions.contains("Won"));
+
+		return this;
+	}
+
+
+	//Click cancel button in Close opportunity popu up
+	public SalesFormPage clickCancelinCloseOpportunity () {
+		click(getDriver().findElement(By.xpath("//button[@data-id='cancel_id']")),"Cancel button");
+		return this;
+	}
+
+	public SalesFormPage clickAsLost() {
+		click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|Form|Mscrm.Form.opportunity.MarkAsLost']")),"Close as lost");
+		return this;
+	}
+
+	public SalesFormPage verifyLostCloseOppurtunityStatusReason() {
+
+		ArrayList<String> selectoptions=new ArrayList<String>();
+		Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
+
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<WebElement> option =gutFeel.getOptions();	
+
+		/*
+		 * All other options 
+		 * "---","Loss to competitor","Loss due to lack of interest from member","Loss due to lack of interest from sponsor","Loss due to no contact/bad contact at member",,"Reason not specified","Private Agreement","Not applicable to member","Centralized purchasing","Canceled","Competitor","Pricing","Unable to Integrate","Other","--Select--"
+		 */
+		List<String> expectdoption = Arrays.asList("Loss to Competitive GPO","Loss due to Supplier (Denials, No Response)","Premier Price Not Competitive","Non-Authorized Distributor","Sponsor Local Contract","Member Local Contract","Member Closed","Member Part of Another Mgmt Company","Premier Contracting Gap");		
+
+		for(int i=0;i<option.size();i++) {
+
+			selectoptions.add(option.get(i).getText());
+
+		}
+		System.out.println(selectoptions);
+		System.out.println(expectdoption);
+		assertTrue(selectoptions.containsAll(expectdoption));
+
+		return this;
+	}
+
+	//Enter the Phone Details with Subject
+	public SalesFormPage EnterEmailDetails(String subject, String To) throws InterruptedException, IOException   {
+
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+		Actions a = new Actions(getDriver());
+		type(getDriver().findElement(By.xpath("//input[@data-id='to.fieldControl-LookupResultsDropdown_to_textInputBox_with_filter_new']")),To,"Send To");
+		Thread.sleep(4000);
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='to.fieldControl-LookupResultsDropdown_to_resultsContainer']"))).click().build().perform();
+
+		Thread.sleep(200);
+		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
+		Thread.sleep(10000);
+		return this;
+	}
+
+
+	//Enter the Phone Details with Subject
+	public SalesFormPage EnterEmailDetailsWithRegardingAndDueDate(String subject, String To, String regarding, String date, String time) throws InterruptedException, IOException   {
+
+		
+		Actions a = new Actions(getDriver());
+		type(getDriver().findElement(By.xpath("//input[@data-id='to.fieldControl-LookupResultsDropdown_to_textInputBox_with_filter_new']")),To,"Send To");
+		Thread.sleep(4000);
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='to.fieldControl-LookupResultsDropdown_to_resultsContainer']"))).click().build().perform();
+		clickEsc();
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+		clickTab(4);
+		
+		//next to line is to reach Regarding field
+		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
+		a.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Regarding : Required fields must be filled in.')]"))).doubleClick().build().perform();
+		type(getDriver().findElement(By.xpath("//input[@data-id='regardingobjectid.fieldControl-LookupResultsDropdown_regardingobjectid_textInputBox_with_filter_new']")),regarding,"Regarding");
+		Thread.sleep(4000);
+		a.moveToElement(getDriver().findElement(By.xpath("//li[@data-id='regardingobjectid.fieldControl-LookupResultsDropdown_regardingobjectid_resultsContainer']"))).click().build().perform();
+
+		Thread.sleep(200);
+		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
+		Thread.sleep(10000);
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Oerflow Button");
+		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
+		clickEsc();
+		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.SaveAndClose']")),"Save button");
+		Thread.sleep(4000);
+		return this;
+	}
+	
+	//Verify My activities for Today
+	
+	public SalesFormPage verifyActivityUnderTodayActivity(String activitySubject) throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Activities for Today']//a/span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
+		return this;
+	}
+	
+	//Verify My Past activities 
+	
+		public SalesFormPage verifyActivityUnderPastActivity(String activitySubject) throws InterruptedException, IOException   {
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Past Due Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
 			return this;
 		}
 		
+	
 		
-		public SalesFormPage clickAsWon() {
-			click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|Form|Mscrm.Form.opportunity.MarkAsWon']")),"Close as won");
-			return this;
-		}
+		//Verify My Upcoming activities 
 		
-		public SalesFormPage verifyWonCloseOppurtunityStatusReason() {
-			
-			ArrayList<String> selectoptions=new ArrayList<String>();
-			Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
-
-			//Create temp Array List > add  actual options  from DOM for comparison
-			List<WebElement> option =gutFeel.getOptions();	
-
-		
-			for(int i=0;i<option.size();i++) {
-
-				selectoptions.add(option.get(i).getText());
-
-			}
-
-			assertTrue(selectoptions.contains("Won"));
-
-			return this;
-		}
-		
-		
-		//Click cancel button in Close opportunity popu up
-		public SalesFormPage clickCancelinCloseOpportunity () {
-			click(getDriver().findElement(By.xpath("//button[@data-id='cancel_id']")),"Cancel button");
-			return this;
-		}
-		
-		public SalesFormPage clickAsLost() {
-			click(getDriver().findElement(By.xpath("//button[@data-id='opportunity|NoRelationship|Form|Mscrm.Form.opportunity.MarkAsLost']")),"Close as lost");
-			return this;
-		}
-		
-		public SalesFormPage verifyLostCloseOppurtunityStatusReason() {
-			
-			ArrayList<String> selectoptions=new ArrayList<String>();
-			Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
-
-			//Create temp Array List > add  actual options  from DOM for comparison
-			List<WebElement> option =gutFeel.getOptions();	
-
-			/*
-			 * All other options 
-			 * "---","Loss to competitor","Loss due to lack of interest from member","Loss due to lack of interest from sponsor","Loss due to no contact/bad contact at member",,"Reason not specified","Private Agreement","Not applicable to member","Centralized purchasing","Canceled","Competitor","Pricing","Unable to Integrate","Other","--Select--"
-			 */
-			List<String> expectdoption = Arrays.asList("Loss to Competitive GPO","Loss due to Supplier (Denials, No Response)","Premier Price Not Competitive","Non-Authorized Distributor","Sponsor Local Contract","Member Local Contract","Member Closed","Member Part of Another Mgmt Company","Premier Contracting Gap");		
-
-			for(int i=0;i<option.size();i++) {
-
-				selectoptions.add(option.get(i).getText());
-
-			}
-System.out.println(selectoptions);
-System.out.println(expectdoption);
-			assertTrue(selectoptions.containsAll(expectdoption));
-
-			return this;
-		}
-		
-		//Enter the Phone Details with Subject
-		public SalesFormPage EnterEmailDetails(String subject, String To) throws InterruptedException, IOException   {
-
-			type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
-		
-			Actions a = new Actions(getDriver());
-			type(getDriver().findElement(By.xpath("//input[@data-id='to.fieldControl-LookupResultsDropdown_to_textInputBox_with_filter_new']")),To,"Send To");
-			Thread.sleep(4000);
-			a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='to.fieldControl-LookupResultsDropdown_to_resultsContainer']"))).click().build().perform();
-
-			Thread.sleep(200);
-			click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
-			Thread.sleep(10000);
-			return this;
-		}
-		
-		
-		//Enter the Email Details with Subject
-				public SalesFormPage enterEmailDueDate	(String date, String time) throws InterruptedException, IOException   {
-					click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Oerflow Button");
-					type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
-					type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
-					clickEsc();
-					click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
-					Thread.sleep(4000);
-					return this;
-				}
-		
-		
-		//Click Related Activities
-		public SalesFormPage selectRelatedActivities() throws InterruptedException   {
-			Thread.sleep(2000);
-				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
-			
-			click(getDriver().findElement(By.xpath("(//*[text()='Activities'])[2]")),"Activities");
-			Thread.sleep(5000);
-			return this;
-		}
-		
-		//Click New Activity- Email
-		public SalesFormPage clickNewEmailActivity() throws InterruptedException   {
-			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
-			Thread.sleep(10000);
-			click(getDriver().findElement(By.xpath("//span[text()='Email']")),"Email Activity");
-			Thread.sleep(2000);
-			return this;
-		}
-		
-		
-		//Click New Activity- Phone call
-				public SalesFormPage clickNewPhoneActivity() throws InterruptedException   {
-					click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
-					Thread.sleep(10000);
-					click(getDriver().findElement(By.xpath("//span[text()='Phone Call']")),"Phone Call Activity");
-					Thread.sleep(2000);
-					return this;
-				}
-
-				//Enter the Phone Details with Subject
-				public SalesFormPage EnterPhoneDetails(String subject, String To, String date, String time) throws InterruptedException, IOException   {
-
-					type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
-				
-					Actions a = new Actions(getDriver());
-					type(getDriver().findElement(By.xpath("//input[@aria-label='To, Multiple Selection Lookup']")),To,"Send To");
-					Thread.sleep(4000);
-					a.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='to.fieldControl-LookupResultsDropdown_to_infoContainer']"))).click().build().perform();
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Duration')]")),"Duration");
-					clickTab(2);
-					Thread.sleep(200);
-					type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
-					type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due Date']")),time,"time");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
-					click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close button");
-					Thread.sleep(10000);
-					return this;
-				}
-				
-				public SalesFormPage verifyRosterOption() throws InterruptedException, IOException   {
-				verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Roster')]")).size(), "Premier Roster");
+			public SalesFormPage verifyActivityUnderUpcomingActivity(String activitySubject) throws InterruptedException, IOException   {
+				verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Upcoming Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
 				return this;
-				}
-				
-				
-				//click roaster option
-				public SalesFormPage clickRosterOption() throws InterruptedException, IOException   {
-					click(getDriver().findElement(By.xpath("//span[contains(text(),'Roster')]")),"Roster");
-					verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
+			}
+			
+	
+	
+	//Delete My Activities under Upcoming
+	public SalesFormPage deleteActivitiesFromDashboardUpcoming(String activitySubject) throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//ul[@aria-label='My Upcoming Activities']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
+		click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+		Thread.sleep(5000);
+		return this;
+	}
+	
+	//Delete My Activities under Past
+		public SalesFormPage deleteActivitiesFromDashboardPast(String activitySubject) throws InterruptedException, IOException   {
+			click(getDriver().findElement(By.xpath("//ul[@aria-label='My Past Due Activities']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
+			click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+			Thread.sleep(5000);
+			return this;
+		}
+		
+		public SalesFormPage deleteActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
+			Actions a= new Actions (getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//h3[contains(text(),'My Past Due Activities')]/ancestor::div[@data-id='DataSetHostContainer']//div/a[contains(@title,'"+activitySubject+"')]/parent::div//preceding-sibling::div[contains(@class,'data-selectable')]"))).click().build().perform();
+			click(getDriver().findElement(By.xpath("//button[@title='More commands for Activity']")),"More Commands");
+			a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.DeleteMenu']"))).click().build().perform();
+			click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+			
+			return this;	
+		}
+		
+public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h3[contains(text(),'My Past Due Activities')]/ancestor::div[@data-id='DataSetHostContainer']//div[contains(@class,'data-selectable')]//following-sibling::div/a[contains(@title,'"+activitySubject+"')]")).size(), activitySubject);
+			
+			return this;	
+		}
+		
+		
+		
+		
+		
+		
+		//Delete My Activities under Today
+				public SalesFormPage deleteActivitiesFromDashboardToday(String activitySubject) throws InterruptedException, IOException   {
+					click(getDriver().findElement(By.xpath("//ul[@aria-label='My Activities for Today']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
+					click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
+					click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+					Thread.sleep(5000);
 					return this;
 				}
 			
-				
-				//Click New Activity- Task
-				public SalesFormPage clickNewTaskActivity() throws InterruptedException   {
-					click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
-					Thread.sleep(10000);
-					click(getDriver().findElement(By.xpath("//span[text()='Task']")),"Phone Call Activity");
-					Thread.sleep(2000);
-					return this;
-				}
+	
+	
 
-				//Enter the Phone Details with Subject
-				public SalesFormPage EnterTaskDetails(String subject,  String date, String time) throws InterruptedException, IOException   {
 
-					type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
-				
-					type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
-					type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
-					click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
-					click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close button");
-					Thread.sleep(10000);
-					return this;
-				}
-				
-				
-				
+	//Enter the Email Details with Subject
+	public SalesFormPage enterEmailDueDate	(String date, String time) throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Oerflow Button");
+		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
+		clickEsc();
+		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
+		Thread.sleep(4000);
+		return this;
+	}
 
+
+	//Click Related Activities
+	public SalesFormPage selectRelatedActivities() throws InterruptedException   {
+		Thread.sleep(2000);
+		click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+
+		click(getDriver().findElement(By.xpath("(//*[text()='Activities'])[2]")),"Activities");
+		Thread.sleep(5000);
+		return this;
+	}
+
+
+	//Click  Activities
+	public SalesFormPage clickActivitiesTab() throws InterruptedException   {
+		Thread.sleep(2000);
+		if(getDriver().findElements(By.xpath("//*[text()='ACTIVITIES']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[text()='ACTIVITIES']")),"ACTIVITIES");	
+		}
+		if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+		}
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("(//span[text()='Activities'])[2]")),"Activities");
+
+		Thread.sleep(5000);
+		return this;
+	}
+
+	//Click New Activity- Email
+	public SalesFormPage clickNewEmailActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
+		Thread.sleep(10000);
+		click(getDriver().findElement(By.xpath("//span[text()='Email']")),"Email Activity");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	//Click New Activity- Appointment
+	public SalesFormPage clickNewAppointmentActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
+		Thread.sleep(10000);
+		click(getDriver().findElement(By.xpath("//span[text()='Appointment']")),"Appointment Activity");
+		Thread.sleep(2000);
+		return this;
+	}
+
+
+	//Click New Activity- Phone call
+	public SalesFormPage clickNewPhoneActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
+		Thread.sleep(10000);
+		click(getDriver().findElement(By.xpath("//span[text()='Phone Call']")),"Phone Call Activity");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Enter the Phone Details with Subject
+	public SalesFormPage EnterPhoneDetails(String subject, String To, String date, String time) throws InterruptedException, IOException   {
+
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+		Actions a = new Actions(getDriver());
+		type(getDriver().findElement(By.xpath("//input[@aria-label='To, Multiple Selection Lookup']")),To,"Send To");
+		Thread.sleep(4000);
+		a.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='to.fieldControl-LookupResultsDropdown_to_infoContainer']"))).click().build().perform();
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Duration')]")),"Duration");
+		clickTab(2);
+		Thread.sleep(200);
+		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due Date']")),time,"time");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close button");
+		Thread.sleep(10000);
+		return this;
+	}
+
+
+	public SalesFormPage clickQucikCreateSaveAndCloseButton() throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close button");
+		return this;
+	}
+
+	public SalesFormPage verifyRosterOption() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Roster')]")).size(), "Premier Roster");
+		return this;
+	}
+
+
+	//click roaster option
+	public SalesFormPage clickRosterOption() throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'Roster')]")),"Roster");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
+		return this;
+	}
+
+
+	//Click New Activity- Task
+	public SalesFormPage clickNewTaskActivity() throws InterruptedException   {
+		click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.NewActivitiesMenuV2']")),"New EmaikActivity");
+		Thread.sleep(10000);
+		click(getDriver().findElement(By.xpath("//span[text()='Task']")),"Phone Call Activity");
+		Thread.sleep(2000);
+		return this;
+	}
+
+	//Enter the Phone Details with Subject
+	public SalesFormPage EnterTaskDetails(String subject,  String date, String time) throws InterruptedException, IOException   {
+
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
+
+		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
+		click(getDriver().findElement(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")),"Save and Close button");
+		Thread.sleep(10000);
+		return this;
+	}
+
+
+
+	//Verify Owner data in the contact view
+	public SalesFormPage verifyOwnerDate(String username) throws InterruptedException, IOException   {
+
+		click(getDriver().findElement(By.xpath("//div[@data-id='data-set-quickFind-container']/input")),"search in filter button");
+		clickTab(2);
+		clickshiftTab(1);
+		for(int i=1;i<getDriver().findElements(By.xpath("//div[@col-id='ownerid']//button//span")).size();i++) {
+			assertTrue(getDriver().findElement(By.xpath("(//div[@col-id='ownerid']//button//span)["+i+"]")).getText().contentEquals(username));
+		}
+		return this;
+	}
+
+
+	//Verify Owner data in the contact view
+	public SalesFormPage verifyAccountTypeData(String accountType) throws InterruptedException, IOException   {
+
+		for(int i=2;i<getDriver().findElements(By.xpath("//div[@col-id='ownerid']//button//span")).size();i++) {
+			assertTrue(getDriver().findElement(By.xpath("(//div[@col-id='customertypecode']//label/div)["+i+"]")).getText().contentEquals(accountType));
+		}
+		return this;
+	}
+
+	//Enter the Contract Volumne
+
+	public SalesFormPage typeContractVolume(String contractVolume) throws InterruptedException, IOException   {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_annualizedsales.fieldControl-currency-text-input']")),contractVolume,"contractVolume");	
+		return this;	
+	}
+
+
+	//Enter the Admin fee 
+
+	public SalesFormPage typeAdminFee(String AdminFee) throws InterruptedException, IOException   {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_adminfee.fieldControl-decimal-number-text-input']")),AdminFee,"AdminFee");	
+		return this;	
+	}
+
+
+	//Enter the  fee share
+
+	public SalesFormPage typefeeShare(String feeShare) throws InterruptedException, IOException   {
+		type(getDriver().findElement(By.xpath("//input[@data-id='ix_feeshare.fieldControl-decimal-number-text-input']")),feeShare,"feeShare");	
+		return this;	
+	}
+
+
+	//Verify GAF
+	public SalesFormPage verifyGAF(String contractVolumne, String adminFee) throws InterruptedException, IOException   {
+		int contractvolume=Integer.parseInt(contractVolumne);
+		double adminFeeint= Double.valueOf(adminFee);
+		double gaf=(contractvolume*adminFeeint)/100;
+		int gafvalue=(int)Math.round(gaf);
+		String ActualgafValue=getDriver().findElement(By.xpath("//input[@data-id='ix_projectedgafvalue.fieldControl-currency-text-input']")).getAttribute("title").substring(1);
+
+		assertTrue(Integer.parseInt(ActualgafValue)==gafvalue);
+
+		return this;
+	}
+
+	//Verify NAF
+	public SalesFormPage verifyNAF(String contractVolumne, String adminFee, String feeshare) throws InterruptedException, IOException   {
+		int contractvolume=Integer.parseInt(contractVolumne);
+		double adminFeeint= Double.valueOf(adminFee);
+		double feeShareint= Double.valueOf(feeshare);
+		double gaf=(contractvolume*adminFeeint)/100;
+		int gafvalue=(int)Math.round(gaf);
+		double naf=gafvalue*(1-(feeShareint/100));
+		int expectednaf=(int)Math.round(naf);
+		String actualnaf=getDriver().findElement(By.xpath("//input[@data-id='estimatedvalue.fieldControl-currency-text-input']")).getAttribute("title").substring(1);
+		assertTrue(Integer.parseInt(actualnaf)==expectednaf);
+
+		return this;
+	}
+
+
+	public SalesFormPage verifyFieldRepDashboard() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Activities for Today')]")).size(), "My Activities for Today");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Past Due Activities')]")).size(), "My Past Due Activities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Upcoming Activities')]")).size(), "My Upcoming Activities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Open Pipelines')]")).size(), "My Open Pipelines");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Accounts w/Signed Contracts & No Revenue Yet')]")).size(), "My Accounts w/Signed Contracts & No Revenue Yet");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Prospects')]")).size(), "My Prospects");
+		return this;
+	}
+	
+	
+	public SalesFormPage verifyCPOpenOpportunityChart() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label='CP - Open Opportunities']")).size(), "CP Open oppurtunity Funnel chart");
+		assertTrue(!(getDriver().findElement(By.xpath("//*[contains(@class,'highcharts-point highcharts-color')]")).getAttribute("aria-label").isEmpty()));
+		return this;
+	}
+	
+	public SalesFormPage verifyCPSeniorDirectorDashboard() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label='CP - Open Opportunities']")).size(), "CP Open oppurtunity Funnel chart");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label=\"CP - My Team's Open Opportunities\"]")).size(), "CP - My Team's Open Opportunities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label=\"My Team's Past Due Activities\"]")).size(), "My Team's Past Due Activities");
+		return this;
+	}
+	
+	
 }
 
 
