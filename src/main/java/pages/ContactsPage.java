@@ -137,8 +137,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// select the primary account
 	public ContactsPage selectPrimaryAccount(String primaryAccount) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
-
+		
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Telephone");
+		click(getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")),"Email address");
+		click(getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")),"Mobile Phone");
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")))),primaryAccount, "Primary Account");
 		//Thread.sleep(55000);
@@ -349,6 +351,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(
 				By.xpath("//*[@data-id='fullname_compositionLinkControl_lastname.fieldControl-text-box-text']")),
 				"Last Name");
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Telephone");
+		click(getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")),"Email address");
+		click(getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")),"Mobile Phone");
+		clickTab(3);
 		click(getDriver().findElement(By.xpath("//*[@data-id='jobtitle.fieldControl-text-box-text']")), "Job Title");
 		clickTab(4);
 		click(getDriver().findElement(By.xpath("//*[contains(@data-id,'ix_employeeflag.fieldControl-checkbox')]")),

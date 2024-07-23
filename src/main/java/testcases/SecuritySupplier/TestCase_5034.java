@@ -29,8 +29,5 @@ public class TestCase_5034 {
 		// 2. Go to any active contact which has an active contact account association
 		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.clickDeactivateButton()
-		.verifyContactDeactivated()
-		.Activateccount()
-	
-	;}
+		.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName));}
 }

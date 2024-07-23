@@ -9120,6 +9120,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//li[@aria-label='LOB']/following-sibling::li[@title='Contact Account Associations']")), "Account Representatives");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(@id,'View') and contains(text(),'Active Contact Account Associations')]")).size(), "Current Account Representative view");
 		Thread.sleep(7000);
+		Thread.sleep(7000);
 		click(getDriver().findElement(By.xpath("//button[@data-lp-id='SubGridStandard:ix_contactaccountassociation-ix_contactaccountassociation|NoRelationship|SubGridStandard|Mscrm.SubGrid.ix_contactaccountassociation.RefreshButton']")), "Refresh button");
 		Thread.sleep(7000);
 		return this;
