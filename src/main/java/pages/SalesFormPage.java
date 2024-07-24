@@ -633,8 +633,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Navigating to Member
 	public SalesFormPage navigateToMemberField()  throws InterruptedException {
-		clickTab(1);
-		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_revenuecategory.fieldControl-LookupResultsDropdown_ix_revenuecategory_textInputBox_with_filter_new']")),"Revenue Category");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelineinitiative.fieldControl-LookupResultsDropdown_ix_pipelineinitiative_textInputBox_with_filter_new']")),"Pipeline Inititative");
+		click(getDriver().findElement(By.xpath("//input[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Member");
 		clickTab(4);
 		return this;	
 	}
