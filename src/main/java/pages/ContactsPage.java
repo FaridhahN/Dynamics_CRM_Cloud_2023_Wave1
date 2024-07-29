@@ -103,6 +103,22 @@ public class ContactsPage extends WebDriverServiceImpl {
 		return this;
 
 	}
+	
+	
+	public ContactsPage selectViewAtContact(String View) throws InterruptedException {
+		Thread.sleep(3000);
+		
+		if(!(getDriver().findElement(By.xpath("//span[contains(@id,'text-value')]")).getText().contentEquals(View))) {
+		// Click Drop down -01/09/2024
+		click(getDriver().findElement(By.xpath("//*[contains(@class,'DropdownArrow-symbol')]")),"Drop down");
+		Thread.sleep(3000);
+		//Wave2 Update
+		click(getDriver().findElement(By.xpath("//label[text()='"+View+"']")), "All Contacts");
+		Thread.sleep(10000);
+		}
+		return this;
+
+	}
 	// type the contact first name and last name
 	public ContactsPage typeContactName(String firstName, String lastName) throws InterruptedException {
 		Thread.sleep(3000);
@@ -495,6 +511,14 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// update primary account with a new account details
 	public ContactsPage addAnotherPrimaryAccount(String PrimaryAccount1) throws InterruptedException {
 		Thread.sleep(6000);
+		click(getDriver().findElement(By.xpath("//input[@data-id='suffix.fieldControl-text-box-text']")),"Suffix textbox");
+		click(getDriver().findElement(By.xpath("//input[@data-id='fullname_compositionLinkControl_firstname.fieldControl-text-box-text']")),"Fullname textbox");
+		click(getDriver().findElement(By.xpath("//input[@data-id='fullname_compositionLinkControl_middlename.fieldControl-text-box-text']")),"Middle name textbox");
+		click(getDriver().findElement(By.xpath("//input[@data-id='fullname_compositionLinkControl_lastname.fieldControl-text-box-text']")),"last name");
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Phone text box");
+		click(getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")),"email text box");
+		click(getDriver().findElement(By.xpath("//input[@data-id='mobilephone.fieldControl-phone-text-input']")),"Phone text box");
+		clickTab(3);
 		clearPrimaryAccount();
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_textInputBox_with_filter_new']")),"Primary Contact");

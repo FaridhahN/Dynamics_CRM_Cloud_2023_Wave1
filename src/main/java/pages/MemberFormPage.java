@@ -757,7 +757,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		String name=getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")).getAttribute("title");
 
-		Dpdata.put("DP_Name",name );	
+		Dpdata.put("DP_Name",name );
+		click(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name 2");
+		clickTab(3);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'DP Exception Reason')]")),"DP exception Reason");
 		List<WebElement> entitycode= getDriver().findElements(By.xpath("//div[@data-id='TPQuickViewForm']//label"));
 		if(entitycode.size()>0) {
@@ -2070,6 +2072,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
+		
 		if(getDriver().findElements(By.xpath("//*[@title='FBO']")).size()>0){
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
 		}

@@ -99,6 +99,7 @@ public class TestCase_8772 {
 		// 2. Go to any active contact which has an active contact account association
 		.chooseActiveContact(DataInputProvider.getCellData_ColName(iRowNumber, "activeContact", sDataSheetName))
 
+		.selectViewAtContact("Contact")
 		// Primary Account = 1000155094
 		.addAnotherPrimaryAccount(
 				DataInputProvider.getCellData_ColName(iRowNumber, "primaryAccount", sDataSheetName))
