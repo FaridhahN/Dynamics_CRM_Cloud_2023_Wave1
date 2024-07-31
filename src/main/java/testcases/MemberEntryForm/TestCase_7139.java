@@ -73,7 +73,7 @@ public class TestCase_7139 {
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
+		.verifyDefaultAccountStatusinMEF()	
 
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))

@@ -1,13 +1,15 @@
-package testcases.AlithyaCPRM;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1087708:_1087708:Verify 'Projected NAF' and ‘Est. Close Date’ fields on the opportunity form for Channel Partner Regional Director
 
-public class TestCase_1086032 {
+
+
+public class TestCase_1087708 {
 
 
 	@Test
@@ -22,9 +24,11 @@ public class TestCase_1086032 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
-		;					
+		.clickOppurtunitiesPage()
+		.changeViewinOppurtunityPage("CP - Open Opportunities")
+		.verifyGutFeelOptioninView()
+		.ClickNewOppurtunity()
+		.verifyFeildsinOppurtunitiesForm()
+			;					
 	}
 }

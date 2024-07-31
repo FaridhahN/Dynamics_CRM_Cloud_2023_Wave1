@@ -37,7 +37,7 @@ public class TestCase_7140 {
 		.clickSave() 
 
 		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()
+		.verifyCRMNumberIsDisplayedMEF()
 
 		//5. Account Type = Member
 		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
@@ -49,7 +49,7 @@ public class TestCase_7140 {
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
+		.verifyDefaultAccountStatusinMEF()	
 
 		//Participation Type = Standard
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))	

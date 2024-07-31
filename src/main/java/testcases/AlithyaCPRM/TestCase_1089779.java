@@ -5,9 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1089779:_1089779:Verify Channel partner regional manager can see Opportunity Business process flow when he opens a new Opportunity
 
-public class TestCase_1086032 {
+
+public class TestCase_1089779 {
 
 
 	@Test
@@ -22,9 +23,9 @@ public class TestCase_1086032 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.clickOppurtunitiesPage()
+		.ClickNewOppurtunity()
+		.verifyBPF()
 		;					
 	}
 }

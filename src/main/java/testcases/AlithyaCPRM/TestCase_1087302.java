@@ -5,9 +5,9 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1087302:_1087302:Verify the mentioned system views from Accounts are removed and not visible to Channel partner Regional manager
 
-public class TestCase_1086032 {
+public class TestCase_1087302 {
 
 
 	@Test
@@ -24,7 +24,7 @@ public class TestCase_1086032 {
 		.selectSalesHubAccount()
 		
 		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.verifySystemViewNotinAccountsPage()		
 		;					
 	}
 }

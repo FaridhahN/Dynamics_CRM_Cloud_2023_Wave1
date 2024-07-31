@@ -134,15 +134,15 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage verifyColumnNameinContactView() throws InterruptedException {
 		ArrayList<String> actualColumn= new ArrayList<String>();
 		Thread.sleep(3000);
-		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@data-testid='columnHeader']//label/div")).size();i++) {
-			actualColumn.add(getDriver().findElement(By.xpath("(//div[@data-testid='columnHeader']//label/div)["+i+"]")).getText());
-			if(i==7) {
-				click(getDriver().findElement(By.xpath("//div[@data-id='data-set-quickFind-container']/input")),"search in filter button");
-				clickTab(2);
-				clickshiftTab(1);
+		
+		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+		
+		Thread.sleep(3000);
+		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+			actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
 
-			}
 		}
+
 
 		List<String> expectdoption = Arrays.asList("First Name","Last Name","Primary Account", "Job Title","Email","Phone #","Street 1","City","State/Province","ZIP/Postal Code");		
 

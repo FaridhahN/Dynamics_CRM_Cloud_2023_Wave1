@@ -1,13 +1,13 @@
-package testcases.AlithyaCPRM;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1087739:_1087739:Verify mentioned Contact Views are available for Channel Partner Regional Director
 
-public class TestCase_1086032 {
+public class TestCase_1087739 {
 
 
 	@Test
@@ -24,7 +24,14 @@ public class TestCase_1086032 {
 		.selectSalesHubAccount()
 		
 		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.changeViewinAccountsPage("Channel Partner Sales Accounts Created in Last 7 Days")
+		.clickAddColumn()
+		.addColumnInTheView("Account Type")
+		.addColumnInTheView("Is Sponsor")
+		.addColumnInTheView("Created On")
+		.clickApplyinEditColumn()
+		.verifyOptionsInAccountsView()
+		
 		;					
 	}
 }

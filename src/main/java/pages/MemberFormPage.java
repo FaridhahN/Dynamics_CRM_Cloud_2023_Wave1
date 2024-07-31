@@ -198,6 +198,32 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		return this;
 	}
+	
+	//verify if CRM number is auto generated
+		public MemberFormPage verifyCRMNumberIsDisplayedMEF() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Accouint nmber 2");
+			click(getDriver().findElement(By.xpath("//input[@data-id='address1_name.fieldControl-text-box-text']")),"Address name");
+			click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+			click((getDriver().findElement(By.xpath("//input[@data-id='address1_line3.fieldControl-text-box-text']"))),"Address 3");
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
+			
+			
+			Thread.sleep(5000);
+			CRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
+			System.out.println("crmnumber"+CRMNumber);
+			if (CRMNumber==null) {
+				setReport().log(Status.FAIL, "Value is blank in CRM Number"	,screenshotCapture());
+				Driver.failCount++;		
+			}
+			verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")), "CRM Account Number");
+			try {
+				DataInputProvider.setCellData(CRMNumber.toString(), Driver.iTestCaseRowNumDriver, "CRMNumber",Driver.properties.getProperty("DriverSheetName"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 	public MemberFormPage verifyCRMNumberIsDisplayedForChilAccount(int childAcccount) {
 		String sCRMNumber = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='accountnumber.fieldControl-text-box-text']")),"value","CRM Number");
@@ -598,7 +624,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Class of Trade')]")),"Class of Trade");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Facility')]")),"Facility");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Business')]")),"Business Classification");
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'Premier Owner')]")).size()>0) {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier Owner')]")),"Premier owner");
+		}
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
 
@@ -1594,8 +1622,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select TPR
 	public MemberFormPage selectTopParentRelation(String topParentRelation) throws InterruptedException {
 		Thread.sleep(1000);
+		if(getDriver().findElements(By.xpath("//h2[@title='TOP PARENT']")).size()>0) {
 		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent");
-
+		}
 		scrolldown();
 
 		List<WebElement> entitycode= getDriver().findElements(By.xpath("//div[@data-id='TPQuickViewForm']//label"));
@@ -3294,7 +3323,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
-		click(getDriver().findElement(By.xpath("(//*[text()='Membership'])[2]")),"Membership");
+		click(getDriver().findElement(By.xpath("//div[@role='menuitem'] //*[contains(text(),'Membership')]")),"Membership");
 		Thread.sleep(3000);
 		selectCurrentMemberShipview();
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.AddNewStandard']")),"New Membership");

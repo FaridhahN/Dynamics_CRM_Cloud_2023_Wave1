@@ -5,9 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1089784:_1089784:Verify Channel partner regional manager can see CP - Open Opportunities funnel chart under Channel Partner Salesperson Dashboard
 
-public class TestCase_1086032 {
+
+public class TestCase_1089784 {
 
 
 	@Test
@@ -22,9 +23,11 @@ public class TestCase_1086032 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
+		.clickDashboard()
 		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.changeViewinDashboard("Channel Partner Salesperson Dashboard")
+		
+		.verifyCPOpenOpportunityChart()
 		;					
 	}
 }

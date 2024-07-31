@@ -5,9 +5,10 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1087714:_1087714:Verify mentioned fields are pulled from account record on to opportunity form for Channel Partner Regional Manager
 
-public class TestCase_1086032 {
+
+public class TestCase_1087714 {
 
 
 	@Test
@@ -22,9 +23,13 @@ public class TestCase_1086032 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.clickOppurtunitiesPage()
+		.ClickNewOppurtunity()
+		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
+		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		.verifyMemberDetails()
 		;					
 	}
 }

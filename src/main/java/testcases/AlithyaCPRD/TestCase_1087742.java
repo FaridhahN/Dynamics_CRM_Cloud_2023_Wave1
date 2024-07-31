@@ -1,13 +1,15 @@
-package testcases.AlithyaCPRM;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1087742:_1087742:Verify columns are removed from mentioned Contact Views for Channel Partner Regional Director
 
-public class TestCase_1086032 {
+
+
+public class TestCase_1087742 {
 
 
 	@Test
@@ -23,8 +25,12 @@ public class TestCase_1086032 {
 
 		.selectSalesHubAccount()
 		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
-		;					
+		.clickContacts()
+		.changeViewInContactssPage("All Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		.changeViewInContactssPage("My Channel Partner Sales Contacts")	
+		.verifyColumnNameinContactView()
+		
+		;
 	}
 }

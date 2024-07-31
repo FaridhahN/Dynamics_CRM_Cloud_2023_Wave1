@@ -5,9 +5,11 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1086032:_1086032:Verify mentioned Account Views are removed from Sales Hub for Channel Partner Regional Manager
+//TFS ID_1089766:_1089766:Verify Opportunity Channel Partner form is accessible for Channel partner Regional manager
 
-public class TestCase_1086032 {
+
+
+public class TestCase_1089766 {
 
 
 	@Test
@@ -22,9 +24,11 @@ public class TestCase_1086032 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.verifyViewNotinAccountsPage()		
+		.clickOppurtunitiesPage()
+		.changeViewinOppurtunityPage("CP - Open Opportunities")
+		.verifyGutFeelOptioninView()
+		.ClickNewOppurtunity()
+		.changeOppurtunityFormType("Opportunity Channel Partner")
 		;					
 	}
 }
