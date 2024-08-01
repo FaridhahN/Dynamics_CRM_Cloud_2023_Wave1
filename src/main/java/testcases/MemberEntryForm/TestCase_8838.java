@@ -74,7 +74,7 @@ public class TestCase_8838 {
 		.clickSave() 
 
 		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
+		.verifyCRMNumberIsDisplayedMEF()	
 
 		//5. Account Type = Member
 		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))

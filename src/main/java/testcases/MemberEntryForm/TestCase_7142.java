@@ -43,7 +43,7 @@ public class TestCase_7142 {
 		.verifyBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "verifyBusinessClassification", sDataSheetName))
 
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()
+		.verifyDefaultAccountStatusinMEF()
 
 		//Direct Parent Entity Code = 673415
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
