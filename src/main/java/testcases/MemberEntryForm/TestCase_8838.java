@@ -80,7 +80,7 @@ public class TestCase_8838 {
 		.selectAccountTypeMEF(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
 		//Account Status = Auto Populated to Active
-		.verifyDefaultAccountStatus()	
+		.verifyDefaultAccountStatusinMEF()	
 
 		//CAMS Flag = Yes
 		//.changeCAMSFlag()
