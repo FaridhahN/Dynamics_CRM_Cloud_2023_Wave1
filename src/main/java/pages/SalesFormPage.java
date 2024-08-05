@@ -468,12 +468,12 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	}
 
 	//Select Regarding 
-	public SalesFormPage selectRagrding( String entityCode) throws InterruptedException, IOException   {
+	public SalesFormPage selectRagrding( String regardingName) throws InterruptedException, IOException   {
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),"Click the REgarding text box");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),entityCode, "Entity code");
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@data-id,'regardingobjectid.fieldControl-ix_premierein')]")));
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+entityCode+"')]")),"Direct Parent");
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-id='regardingobjectid.fieldControl-LookupResultsDropdown_regardingobjectid_resultsContainer']")));
+		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+regardingName+"')]")),"Direct Parent");
 		return this;
 	}
 
@@ -499,7 +499,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Dashboards']")),"Dashboards button");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Accounts']")),"Accounts button");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Contacts']")),"contacts button");
-		click(getDriver().findElement(By.xpath("//li[@aria-label='Contract Attachments']]")),"Contract Attachments");
+		click(getDriver().findElement(By.xpath("//li[@aria-label='Contract Attachments']")),"Contract Attachments");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Leads']")),"Leads");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Opportunities']")),"Opportunities");
 		click(getDriver().findElement(By.xpath("//li[@aria-label='Forecasts']")),"Forecasts");

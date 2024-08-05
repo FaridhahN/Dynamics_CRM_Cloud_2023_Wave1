@@ -101,7 +101,7 @@ public class TestCase_31551 {
 		//Click save button
 		.clickSaveAndCloseButtonContractAttachment()
 
-			
+			.clickIgnoreAndSave()
 			.verifyErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "errormessage", sDataSheetName))
 			
 			.clickGoBackandDiscardChanges()

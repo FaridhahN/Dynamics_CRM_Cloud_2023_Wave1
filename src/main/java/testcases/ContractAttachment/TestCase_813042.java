@@ -96,7 +96,7 @@ public class TestCase_813042 {
 		.clickSaveButtonContractAttachment()
 
 		//Change the Attachment Status
-		.selectAttachmentStatus("“Canceled")
+		.selectAttachmentStatus("Canceled")
 
 
 		//Verify Attachment Reason is not displayed

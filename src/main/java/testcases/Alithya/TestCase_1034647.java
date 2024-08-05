@@ -29,7 +29,7 @@ public class TestCase_1034647 {
 		.clickAppointment()
 		.typeSubject(DataInputProvider.getCellData_ColName(iRowNumber, "subject", sDataSheetName))
 		.clickTab(3)
-		.selectRagrding(DataInputProvider.getCellData_ColName(iRowNumber, "entityCode", sDataSheetName))
+		.selectRagrding(DataInputProvider.getCellData_ColName(iRowNumber, "regardingName", sDataSheetName))
 		.clickTab(8)
 		.verifyInternalNotes()
 		.typeInternalNotes(DataInputProvider.getCellData_ColName(iRowNumber, "internalnotes", sDataSheetName))

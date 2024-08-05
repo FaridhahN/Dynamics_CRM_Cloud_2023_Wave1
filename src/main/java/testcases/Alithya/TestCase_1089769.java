@@ -25,6 +25,7 @@ public class TestCase_1089769 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
+		.ClickNewOppurtunity()
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.verifyAdminFee(DataInputProvider.getCellData_ColName(iRowNumber, "adminFee", sDataSheetName))
 		.clearRevenueCategory()
