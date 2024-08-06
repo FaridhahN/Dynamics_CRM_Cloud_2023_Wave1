@@ -2031,7 +2031,10 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage navigateToPrimaryContact() {
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line2.fieldControl-text-box-text']")),"Street2");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']")),"City");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line3.fieldControl-text-box-text']")),"Delivery Info");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_county.fieldControl-text-box-text']")),"Country");
+		clickAndTab(getDriver().findElement(By.xpath("//input[@data-id='address1_postalcode.fieldControl-text-box-text']")),"Zip Code");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Primary Contact')]")),"Primary Contact Label");
 		return this;
 	}

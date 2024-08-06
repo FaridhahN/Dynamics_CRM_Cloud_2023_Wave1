@@ -24,7 +24,7 @@ public class TestCase_964278 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		.selectSupplierAccountFromSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "crmNumberInput", sDataSheetName))
 		
-				
+		.navigateToPrimaryContact()		
 		//Enter Contract Effective Date without moving the account to Draft
 		.pickContractEffectiveDate(DataInputProvider.getCellData_ColName(iRowNumber, "contractEffectiveDate", sDataSheetName))
 		.clickSave()

@@ -32,6 +32,8 @@ public class TestCase_1089770 {
 		.typeContractVolume(DataInputProvider.getCellData_ColName(iRowNumber, "contractVolume", sDataSheetName))
 		.typeAdminFee(DataInputProvider.getCellData_ColName(iRowNumber, "adminFee", sDataSheetName))
 		.typefeeShare(DataInputProvider.getCellData_ColName(iRowNumber, "feeshare", sDataSheetName))
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
 		.clickSaveinOpportunities()
 		
 		.verifyGAF(DataInputProvider.getCellData_ColName(iRowNumber, "contractVolume",sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "adminFee", sDataSheetName))

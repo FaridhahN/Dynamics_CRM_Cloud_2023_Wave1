@@ -634,8 +634,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Navigating to Member
 	public SalesFormPage navigateToMemberField()  throws InterruptedException {
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelineinitiative.fieldControl-LookupResultsDropdown_ix_pipelineinitiative_textInputBox_with_filter_new']")),"Pipeline Inititative");
-		click(getDriver().findElement(By.xpath("//input[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"Member");
-		clickTab(4);
+		clickTab(6);
 		return this;	
 	}
 
@@ -646,7 +645,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),member,"Member");
 
 		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]"))).perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]"))).sendKeys(Keys.ENTER).perform();
 		click(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]")),"Member"); 
 
 
