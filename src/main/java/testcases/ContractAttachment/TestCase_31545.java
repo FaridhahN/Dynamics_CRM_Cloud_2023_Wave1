@@ -39,6 +39,7 @@ public class TestCase_31545 {
 		//Verify New View in Contract Attachement
 		.verifyDefaultViewinContractAttachment()
 
+		
 		//Click New Button in Contract Attachment
 		.clickNewContractAttachmentButton()
 

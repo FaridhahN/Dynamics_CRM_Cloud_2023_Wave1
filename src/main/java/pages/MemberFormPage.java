@@ -802,7 +802,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}else {
 			Dpdata.put("TopParent_Name", getDriver().findElement(By.xpath("//div[@data-id='ix_topparent.fieldControl-LookupResultsDropdown_ix_topparent_selected_tag_text']")).getAttribute("title"));
 		}
-
+		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
+		clickTab(10);
 		List<WebElement> corporateHeader= getDriver().findElements(By.xpath("//*[@data-id='form-sectionHeader-SUMMARY_TAB_section_18']"));
 		if(corporateHeader.size()>0) {
 

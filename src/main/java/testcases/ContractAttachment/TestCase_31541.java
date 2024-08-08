@@ -26,6 +26,13 @@ public class TestCase_31541 {
 		//Open Existing CA
 		.selectContractAttachmentsTab()
 		.selectAllContractAttachentsView()	
+		
+		//Selectall Contract attachment
+		.selectAllExistingContractAttachment()
+		//Deactivate contract Attachment
+		.clickDeactivateonContractAttachment()
+		
+		
 		.clickNewOnCA()
 		.verifyAttachmentStatusFieldOptionsOnCA();
 		

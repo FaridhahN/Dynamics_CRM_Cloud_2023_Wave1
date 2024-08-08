@@ -728,6 +728,21 @@ return this;
 		return this;
 
 	}
+	
+	//Click Deactivate for Contract Attachment	
+		public ContractAttachmentPage clickDeactivateonContractAttachmentinForm() throws InterruptedException, AWTException {
+			if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")).size()>0) {
+				click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")),"Deactivate Button");
+				click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
+				
+				Thread.sleep(7000);
+			}
+
+			return this;
+
+		}
+	
+	
 
 	//Verify Error message is not displauyed
 	public ContractAttachmentPage verifyErrorisNotDisplayed() throws InterruptedException {

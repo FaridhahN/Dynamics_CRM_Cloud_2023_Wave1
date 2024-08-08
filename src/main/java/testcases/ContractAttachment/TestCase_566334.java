@@ -39,6 +39,11 @@ public class TestCase_566334 {
 				//Verify New View in Contract Attachement
 				.verifyDefaultViewinContractAttachment()
 
+				//Selectall Contract attachment
+				.selectAllExistingContractAttachment()
+				//Deactivate contract Attachment
+				.clickDeactivateonContractAttachment()
+				 
 				//Click New Button in Contract Attachment
 				.clickNewContractAttachmentButton()
 

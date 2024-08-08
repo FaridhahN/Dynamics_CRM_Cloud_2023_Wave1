@@ -39,6 +39,11 @@ public class TestCase_31550 {
 		//Verify New View in Contract Attachement
 		.verifyDefaultViewinContractAttachment()
 
+		//Selectall Contract attachment
+		.selectAllExistingContractAttachment()
+		//Deactivate contract Attachment
+		.clickDeactivateonContractAttachment()
+		
 		//Click New Button in Contract Attachment
 		.clickNewContractAttachmentButton()
 
@@ -77,9 +82,11 @@ public class TestCase_31550 {
 
 		.verifyAttachmentStatusFieldOptionsOnCASupplierwithSpecificValue("Aligned with another GPO")
 		.verifyAttachmentStatusFieldOptionsOnCASupplierwithSpecificValue("Not Approved by Manufacturer")
-		.verifyAttachmentStatusFieldOptionsOnCASupplierwithSpecificValue("Not Purchasing through Distributor");
+		.verifyAttachmentStatusFieldOptionsOnCASupplierwithSpecificValue("Not Purchasing through Distributor")
 
-		//Data Reset -Not Required.
+		.clickGoBackandDiscardChanges()
+		.clickDeactivateonContractAttachmentinForm()
+		;
 
 	}
 }
