@@ -1,14 +1,14 @@
-package testcases.AlithyaCPSD;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087727:_1087727:Verify 'Channel Partner Accounts Created in Last 7 Days' view is available for Channel Partner Senior Director
+//TFS ID_1087725:_1087725:Verify 'Channel Partner Accounts Created in Last 7 Days' view is available for Channel Partner Regional Director
 
 
-public class TestCase_1087727 {
+public class TestCase_1087725 {
 
 
 	@Test

@@ -49,7 +49,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage changeViewinAccountsPage(String viewType) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
 		click(getDriver().findElement(By.xpath("//*[contains(text(),\""+viewType+"\")]")),"View Selector Button");
-		Thread.sleep(7000);
+		Thread.sleep(10000);
 		return this;
 	}
 	
@@ -878,6 +878,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		if(getDriver().findElements(By.xpath("//span[contains(text(),'Cancel')]")).size()>0) {
 			click(getDriver().findElement(By.xpath("//span[contains(text(),'Cancel')]")),"Cancel Button");	
 		}
+		Thread.sleep(4000);
 
 		return this;
 	}

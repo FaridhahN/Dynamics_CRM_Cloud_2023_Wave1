@@ -50,6 +50,9 @@ public class TestCase_1087655 {
 		//type the projected NAF
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 		
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		
 		//save opportunities
 		.clickSaveinOpportunities()
 		

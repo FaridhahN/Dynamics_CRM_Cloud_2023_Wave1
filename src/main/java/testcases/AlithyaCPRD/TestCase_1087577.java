@@ -35,9 +35,6 @@ public class TestCase_1087577 {
 		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
 		.clickSaveinOpportunities()
 		.verifyErrorisNotDisplayed()
-		.clickgoBack()
-		.searchOpportunity(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
-		.openOpportunity(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
 		
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+"Updatd"+TestUtils.todaysDatewithTime())
 		.typeEstimatedCloseDate(TestUtils.FutureEndDate(3))

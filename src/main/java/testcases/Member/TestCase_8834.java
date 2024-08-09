@@ -230,6 +230,7 @@ public class TestCase_8834 {
 		.pageRefresh()
 		.verifyPremierEndDateIsNull()
 
+		.navigateToDP()
 		//22.Verify DPRD ***** DPRD should be same as new Premier start date 
 		.verifyDirectParentRelationDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderStartDate2", sDataSheetName))
 		//23.Verify TPRD ****TPRD should be same as New Premier start date 

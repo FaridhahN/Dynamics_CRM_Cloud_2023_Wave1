@@ -1,14 +1,14 @@
-package testcases.AlithyaCPSD;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087673:_1087673:Verify Channel Partner Senior Director can Assign his/her Opportunity to another user
+//TFS ID_1087672:_1087672:Verify Channel Partner Regional Director can Assign his/her Opportunity to another user
 
 
-public class TestCase_1087673 {
+public class TestCase_1087672 {
 
 
 	@Test
