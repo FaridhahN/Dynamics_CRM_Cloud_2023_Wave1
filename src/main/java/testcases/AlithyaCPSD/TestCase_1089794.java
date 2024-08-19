@@ -16,45 +16,58 @@ public class TestCase_1089794 {
 	public void Oppurtunities(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//Access Login Page		
-		/*
-		 * new LoginPage() .typeEmail(DataInputProvider.getCellData_ColName(iRowNumber,
-		 * "email", sDataSheetName)) .clickNext()
-		 * .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password",
-		 * sDataSheetName)) .clicSignin() .staysignedinforOtherApp()
-		 * 
-		 * //Navigate to Opputrunity and create Oppurtunity .selectSalesHubAccount()
-		 * .clickOppurtunitiesPage()
-		 * 
-		 * //Click create new oppurtunity Button .ClickNewOppurtunity()
-		 * 
-		 * //Enter Topic .enterTopic(DataInputProvider.getCellData_ColName(iRowNumber,
-		 * "topic", sDataSheetName)+"OtherUser"+TestUtils.todaysDatewithTime())
-		 * 
-		 * //Select Gut Feel
-		 * .selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel",
-		 * sDataSheetName))
-		 * 
-		 * //Enter est close date .typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
-		 * 
-		 * //Enter anticipated Purchase start date
-		 * .typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
-		 * 
-		 * //Select Revenue Category
-		 * .selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber,
-		 * "category", sDataSheetName))
-		 * 
-		 * //enter Projected NAF
-		 * .typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber,
-		 * "projectedNAF", sDataSheetName))
-		 * 
-		 * //Save and verify error is not displayed .clickSaveinOpportunities()
-		 * .verifyErrorisNotDisplayed()
-		 * 
-		 * 
-		 * .clickSignout()
-		 * 
-		 * .pageRefresh()
-		 */		
+		
+		  new LoginPage() 
+		  .typeEmail(DataInputProvider.getCellData_ColName(iRowNumber,
+		  "email", sDataSheetName)) 
+		  .clickNext()
+		  .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password",
+		  sDataSheetName)) 
+		  
+		  .clicSignin()
+			.staysignedinforOtherApp()
+
+		
+		  //Navigate to Opputrunity and create Oppurtunity 
+			.selectSalesHubAccount()
+		  .clickOppurtunitiesPage()
+		  
+		  //Click create new oppurtunity Button 
+		  .ClickNewOppurtunity()
+		  
+		  //Enter Topic 
+		  .enterTopic(DataInputProvider.getCellData_ColName(iRowNumber,
+		  "topic", sDataSheetName)+"OtherUser"+TestUtils.todaysDatewithTime())
+		  
+		  //Select Gut Feel
+		  .selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel",
+		  sDataSheetName))
+		  
+		  //Enter est close date .typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
+		  
+		  //Enter anticipated Purchase start date
+		  .typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
+		  
+		  //Select Revenue Category
+		  .selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber,
+		  "category", sDataSheetName))
+		  
+		  //enter Projected NAF
+		  .typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber,
+		  "projectedNAF", sDataSheetName))
+		  
+			.navigateToMemberField()
+			.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+			
+			
+		  //Save and verify error is not displayed .clickSaveinOpportunities()
+		  .verifyErrorisNotDisplayed()
+		  
+		  
+		  .clickSignout()
+		  
+		  .pageRefresh()
+		 		
 ;
 		//1. Login to CRM using member supervisor / member credentials 
 		new LoginPage() 
@@ -91,6 +104,9 @@ public class TestCase_1089794 {
 				//enter Projected NAF
 				.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 				
+				.navigateToMemberField()
+				.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+				
 				//Save and verify error is not displayed
 				.clickSaveinOpportunities()
 				.verifyErrorisNotDisplayed()
@@ -117,6 +133,10 @@ public class TestCase_1089794 {
 		
 		//Update NAF
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
+		
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		
 		
 		//save the update
 		.clickSaveinOpportunities()

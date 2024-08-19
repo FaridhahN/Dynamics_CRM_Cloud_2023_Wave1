@@ -31,8 +31,14 @@ public class TestCase_1087663 {
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
+		
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
+		
+		
 		.clickSaveinOpportunities()
 		.clicklightassistantBulp()
+		
 		.verifyOppurtunityinLightAssistant(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName)+TestUtils.todaysDatewithTime())
 		;					
 	}

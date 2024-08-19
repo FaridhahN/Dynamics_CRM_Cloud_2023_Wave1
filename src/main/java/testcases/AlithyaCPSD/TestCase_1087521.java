@@ -32,6 +32,8 @@ public class TestCase_1087521 {
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
+		.navigateToMemberField()
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
 		.clickSaveinOpportunities()
 		.verifyErrorisNotDisplayed()
 		

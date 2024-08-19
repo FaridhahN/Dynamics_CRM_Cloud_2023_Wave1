@@ -27,6 +27,7 @@ public class TestCase_1087741 {
 		.clickContacts()
 		.changeViewInContactssPage("All Channel Partner Sales Contacts")	
 		.verifyColumnNameinContactView()
+		.clikCancelButton()
 		.changeViewInContactssPage("My Channel Partner Sales Contacts")	
 		.verifyColumnNameinContactView()
 		

@@ -49,6 +49,9 @@ public class TestCase_1087651 {
 		//type the projected NAF
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 
+		.navigateToMemberField()
+		
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
 		//save opportunities
 		.clickSaveinOpportunities()
 
@@ -63,7 +66,6 @@ public class TestCase_1087651 {
 		
 		.clickSaveinOpportunities()
 		
-		.clickgoBack()
 		
 		//verify in the ligh bulp
 		.clicklightassistantBulp()

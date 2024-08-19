@@ -127,7 +127,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage changeViewInContactssPage(String viewType) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'"+viewType+"')]")),"View Selector Button");
-		Thread.sleep(7000);
+		Thread.sleep(10000);
 		return this;
 	}
 
@@ -892,7 +892,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Verify Oppurtunity in the Light Assitant
 	public SalesFormPage verifyOppurtunityinLightAssistant(String opportunity) throws InterruptedException {
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@id='cards']//*[contains(text(),'"+opportunity+"')]")).size(), "opportunity");
+		System.out.println(opportunity);
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[normalize-space()='"+opportunity+"']")).size(), "opportunity");
 		return this;
 	}
 
