@@ -1229,6 +1229,13 @@ public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySub
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
 		return this;
 	}
+	
+	//Verify User is navigatd to th rostterpage
+	public SalesFormPage verifyRosterPage() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
+		return this;
+	}
+	
 
 
 	//Click New Activity- Task
