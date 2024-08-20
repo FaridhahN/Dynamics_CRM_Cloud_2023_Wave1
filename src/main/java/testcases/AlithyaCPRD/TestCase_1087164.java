@@ -6,7 +6,7 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1087114:_1087114:Verify whether 'Opportunities' is available in the left navigation for Channel Partner Senior Director. 
+//TFS ID_1087164:_1087164:Verify whether user is able to create new 'Opportunities'  from 'Opportunities' tab across the top of the Account form in left navigation panel using Channel Partner Regional Director.
 
 
 public class TestCase_1087164 {

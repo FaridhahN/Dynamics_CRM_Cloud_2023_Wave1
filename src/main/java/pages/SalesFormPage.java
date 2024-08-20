@@ -52,7 +52,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(10000);
 		return this;
 	}
-	
+
 	public SalesFormPage changeViewinAccountsPageAfterSearch(String viewType) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[contains(@data-id,'ViewSelector')]//i[@data-icon-name='ChevronDown']")),"View Selector Button");
 		type(getDriver().findElement(By.xpath("//input[@placeholder='Search views']")), viewType, "View type");
@@ -60,13 +60,13 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(7000);
 		return this;
 	}
-	
-	
-	
+
+
+
 	public SalesFormPage changeViewinDashboard(String viewType) throws InterruptedException {
 		if(getDriver().findElements(By.xpath("(//*[contains(text(),'"+viewType+"')])")).size()==0) {
-		click(getDriver().findElement(By.xpath("//div[@title='Dashboard Selector']")),"View Selector Button");
-		click(getDriver().findElement(By.xpath("(//*[contains(text(),'"+viewType+"')])")),"View Selector Button");
+			click(getDriver().findElement(By.xpath("//div[@title='Dashboard Selector']")),"View Selector Button");
+			click(getDriver().findElement(By.xpath("(//*[contains(text(),'"+viewType+"')])")),"View Selector Button");
 		}
 		Thread.sleep(7000);
 		return this;
@@ -134,9 +134,9 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage verifyColumnNameinContactView() throws InterruptedException {
 		ArrayList<String> actualColumn= new ArrayList<String>();
 		Thread.sleep(3000);
-		
+
 		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
-		
+
 		Thread.sleep(3000);
 		for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
 			actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
@@ -176,7 +176,67 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	}
 
 
-	
+	//Verify THe Account sales form page fields are not displayed 
+
+	public SalesFormPage verifyNewAccountsPage() throws InterruptedException {
+
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Store/Location Type')]")).size(), "Store / Location type");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Store/Location #')]")).size(), "Store / Location #");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Business Key')]")).size(), "Business Key");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'BK Active')]")).size(), "BK Active");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Siebel ID')]")).size(), "Siebel ID");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Region')]")).size(), "Region");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Ownership')]")).size(), "Ownership");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Stock Symbol')]")).size(), "Stcok Symbol");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Exchange')]")).size(), "Exchange");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Receive Direct Mail')]")).size(), "Receiv Direct Mail");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Siebel Address ID')]")).size(), "Siebel Address ID");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'FSRPT Tag')]")).size(), "FSRPT Tag");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Membership Provider')]")).size(), "Membership Provider");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Membership Provider Type')]")).size(), "Membership Provider Type");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Membership Attribute Code')]")).size(), "Membership Attribute Code");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'CAMS Flag')]")).size(), "CAMS FLAG");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Exclude from Roster')]")).size(), "Exclude from Roster");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Participation Type')]")).size(), "Participation Type");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Provider Select MD')]")).size(), "Provider Select MD");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Supplier Record')]")).size(), "Aupplier Record");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Is Payment Entity')]")).size(), "Is Payment Entity");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Payment Entity')]")).size(), "Payment Entity");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Corporate Rebate')]")).size(), "Corporate Rebate");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Corporate Rebate Fee Date')]")).size(), "Corporate Rebate Fee Date");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Is Food Service Parent')]")).size(), "Is Food Services PArent");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Food Service Parent')]")).size(), "Food Services PArent");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Food Service Parent Entity Code')]")).size(), "Food Services PArent Entity Code");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Food Service Parent Start Date')]")).size(), "Food Services PArent Start date");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Food Service Parent Override')]")).size(), "Food Services PArent Override");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Is Purchasing Officer')]")).size(), "Is Purchasing Officer");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Purchasing Office Account')]")).size(), "Purchasing Officer Account");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Facility Authorization')]")).size(), "Facility Authorization");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Facility Authorization Date')]")).size(), "Facility Authorization Dat");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Override Date')]")).size(), "Override Date");
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Override Creation Date')]")).size(), "Override Creation Date");
+		return this;
+	}
+
+	//Verify the tabs aer displayed in the accounts page
+	public SalesFormPage verifyAccountsPAgeTabs() throws InterruptedException {
+
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'General')]")).size(), "General");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Opportunities')]")).size(), "Opportunities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Business at Risk')]")).size(), "Business at Risk");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Contacts')]")).size(), "Contacts");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Contract Attachments')]")).size(), "Contract Attachments");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Timeline')]")).size(), "Timeline");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Documents')]")).size(), "Documents");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Documents Tracking')]")).size(), "Documents Tracking");
+		if(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size()==0){
+click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More Button");
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Account Representatives')]")).size(), "Documents Tracking");
+		}else{
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Documents Tracking");
+
+		}
+		return this;}
 	public SalesFormPage clickAccounts() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Accounts')]")),"Account button");
 		Thread.sleep(6000);
@@ -1009,7 +1069,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Enter the Phone Details with Subject
 	public SalesFormPage EnterEmailDetailsWithRegardingAndDueDate(String subject, String To, String regarding, String date, String time) throws InterruptedException, IOException   {
 
-		
+
 		Actions a = new Actions(getDriver());
 		type(getDriver().findElement(By.xpath("//input[@data-id='to.fieldControl-LookupResultsDropdown_to_textInputBox_with_filter_new']")),To,"Send To");
 		Thread.sleep(4000);
@@ -1018,7 +1078,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 
 		clickTab(4);
-		
+
 		//next to line is to reach Regarding field
 		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
 		a.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='warningNotification' and contains(text(),'Regarding : Required fields must be filled in.')]"))).doubleClick().build().perform();
@@ -1029,7 +1089,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(200);
 		click(getDriver().findElement(By.xpath("//button[@data-id='email|NoRelationship|Form|Mscrm.Form.email.Save']")),"Save button");
 		Thread.sleep(10000);
-		
+
 		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Oerflow Button");
 		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
@@ -1040,32 +1100,32 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(4000);
 		return this;
 	}
-	
+
 	//Verify My activities for Today
-	
+
 	public SalesFormPage verifyActivityUnderTodayActivity(String activitySubject) throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Activities for Today']//a/span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
 		return this;
 	}
-	
+
 	//Verify My Past activities 
-	
-		public SalesFormPage verifyActivityUnderPastActivity(String activitySubject) throws InterruptedException, IOException   {
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Past Due Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
-			return this;
-		}
-		
-	
-		
-		//Verify My Upcoming activities 
-		
-			public SalesFormPage verifyActivityUnderUpcomingActivity(String activitySubject) throws InterruptedException, IOException   {
-				verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Upcoming Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
-				return this;
-			}
-			
-	
-	
+
+	public SalesFormPage verifyActivityUnderPastActivity(String activitySubject) throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Past Due Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
+		return this;
+	}
+
+
+
+	//Verify My Upcoming activities 
+
+	public SalesFormPage verifyActivityUnderUpcomingActivity(String activitySubject) throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@aria-label='My Upcoming Activities']//span[contains(text(),'"+activitySubject+"')]")).size(), "Activity");
+		return this;
+	}
+
+
+
 	//Delete My Activities under Upcoming
 	public SalesFormPage deleteActivitiesFromDashboardUpcoming(String activitySubject) throws InterruptedException, IOException   {
 		click(getDriver().findElement(By.xpath("//ul[@aria-label='My Upcoming Activities']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
@@ -1074,48 +1134,48 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		return this;
 	}
-	
+
 	//Delete My Activities under Past
-		public SalesFormPage deleteActivitiesFromDashboardPast(String activitySubject) throws InterruptedException, IOException   {
-			click(getDriver().findElement(By.xpath("//ul[@aria-label='My Past Due Activities']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
-			click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
-			click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
-			Thread.sleep(5000);
-			return this;
-		}
-		
-		public SalesFormPage deleteActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
-			Actions a= new Actions (getDriver());
-			a.moveToElement(getDriver().findElement(By.xpath("//h3[contains(text(),'My Past Due Activities')]/ancestor::div[@data-id='DataSetHostContainer']//div/a[contains(@title,'"+activitySubject+"')]/parent::div//preceding-sibling::div[contains(@class,'data-selectable')]"))).click().build().perform();
-			click(getDriver().findElement(By.xpath("//button[@title='More commands for Activity']")),"More Commands");
-			a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.DeleteMenu']"))).click().build().perform();
-			click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
-			
-			return this;	
-		}
-		
-public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
+	public SalesFormPage deleteActivitiesFromDashboardPast(String activitySubject) throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//ul[@aria-label='My Past Due Activities']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
+		click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+		Thread.sleep(5000);
+		return this;
+	}
+
+	public SalesFormPage deleteActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
+		Actions a= new Actions (getDriver());
+		a.moveToElement(getDriver().findElement(By.xpath("//h3[contains(text(),'My Past Due Activities')]/ancestor::div[@data-id='DataSetHostContainer']//div/a[contains(@title,'"+activitySubject+"')]/parent::div//preceding-sibling::div[contains(@class,'data-selectable')]"))).click().build().perform();
+		click(getDriver().findElement(By.xpath("//button[@title='More commands for Activity']")),"More Commands");
+		a.moveToElement(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.activitypointer.DeleteMenu']"))).click().build().perform();
+		click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+
+		return this;	
+	}
+
+	public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySubject) throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h3[contains(text(),'My Past Due Activities')]/ancestor::div[@data-id='DataSetHostContainer']//div[contains(@class,'data-selectable')]//following-sibling::div/a[contains(@title,'"+activitySubject+"')]")).size(), activitySubject);
-			
-			return this;	
-		}
-		
-		
-		
-		
-		
-		
-		//Delete My Activities under Today
-				public SalesFormPage deleteActivitiesFromDashboardToday(String activitySubject) throws InterruptedException, IOException   {
-					click(getDriver().findElement(By.xpath("//ul[@aria-label='My Activities for Today']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
-					click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
-					click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
-					Thread.sleep(5000);
-					return this;
-				}
-			
-	
-	
+
+		return this;	
+	}
+
+
+
+
+
+
+	//Delete My Activities under Today
+	public SalesFormPage deleteActivitiesFromDashboardToday(String activitySubject) throws InterruptedException, IOException   {
+		click(getDriver().findElement(By.xpath("//ul[@aria-label='My Activities for Today']//a/span[contains(text(),'"+activitySubject+"')]/parent::a/following-sibling::div/button[@aria-label='More options']")),"More Commands");
+		click(getDriver().findElement(By.xpath("//li[@role='menuitem']//*[contains(text(),'Delete')]")),"Delete Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+		Thread.sleep(5000);
+		return this;
+	}
+
+
+
 
 
 	//Enter the Email Details with Subject
@@ -1226,16 +1286,16 @@ public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySub
 	//click roaster option
 	public SalesFormPage clickRosterOption() throws InterruptedException, IOException   {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Roster')]")),"Roster");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
+		Thread.sleep(7000);
 		return this;
 	}
-	
+
 	//Verify User is navigatd to th rostterpage
 	public SalesFormPage verifyRosterPage() throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h1[@title='Full Premier Roster']")).size(), "Premier Roster");
 		return this;
 	}
-	
+
 
 
 	//Click New Activity- Task
@@ -1347,22 +1407,22 @@ public SalesFormPage verifyActivitiesFromDashboardCPSalesView(String activitySub
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Prospects')]")).size(), "My Prospects");
 		return this;
 	}
-	
-	
+
+
 	public SalesFormPage verifyCPOpenOpportunityChart() throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label='CP - Open Opportunities']")).size(), "CP Open oppurtunity Funnel chart");
 		assertTrue(!(getDriver().findElement(By.xpath("//*[contains(@class,'highcharts-point highcharts-color')]")).getAttribute("aria-label").isEmpty()));
 		return this;
 	}
-	
+
 	public SalesFormPage verifyCPSeniorDirectorDashboard() throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label='CP - Open Opportunities']")).size(), "CP Open oppurtunity Funnel chart");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label=\"CP - My Team's Open Opportunities\"]")).size(), "CP - My Team's Open Opportunities");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label=\"My Team's Past Due Activities\"]")).size(), "My Team's Past Due Activities");
 		return this;
 	}
-	
-	
+
+
 }
 
 
