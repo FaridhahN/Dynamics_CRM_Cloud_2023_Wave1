@@ -1,15 +1,14 @@
-package testcases.AlithyaCPSD;
+package testcases.AlithyaCPRM;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087271:_1087271:Verify Fee share % new field is added in the sales account form
+//TFS ID:_1087265:_1087265:Verify the updated sales account form is displayed for the Channel partner Regional manager
 
 
-
-public class TestCase_1087270 {
+public class TestCase_1087265 {
 
 
 	@Test

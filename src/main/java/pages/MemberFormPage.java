@@ -26,6 +26,7 @@ import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -2518,6 +2519,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify entity code
 	public MemberFormPage verifyEntityCode(String verifyEntityCode) throws InterruptedException {
+		System.out.println(verifyEntityCode);
+		System.out.println(getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity ode"));
 		Assert.assertTrue((getTextValue(getDriver().findElement(By.xpath("(//*[@data-id='form-header']/div[2]/div/div/div/div/div)[1]")),"Entity Code").toString()).equals(verifyEntityCode));
 		return this;
 	}
@@ -4631,6 +4634,41 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Sub-Accounts')]")),"Sub Accounts");
 		return this;
 	}
+	
+	//Click Edit Column
+			public MemberFormPage clickEditColumn() throws InterruptedException {
+				click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+				return this;
+			}
+			
+			
+			//verify the Opputunity column with Addded Column
+
+			public MemberFormPage verifySubAccountColumn() throws InterruptedException {
+
+				click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+				ArrayList<String> actualColumn= new ArrayList<String>();
+				Thread.sleep(3000);
+				for(int i=1;i<=getDriver().findElements(By.xpath("//div[@draggable='true']/div[@role='listitem']/span")).size();i++) {
+					actualColumn.add(getDriver().findElement(By.xpath("(//div[@draggable='true']/div[@role='listitem']/span)["+i+"]")).getText());
+
+				}
+
+				List<String> expectdoption = Arrays.asList("DEA","HIN","Name(Group)", "Class of Trade");
+				
+				if(actualColumn.contains(expectdoption))
+				{		
+					Thread.sleep(3000);
+					setReport().log(Status.PASS, "RepresentativeType- " + "   " + actualColumn + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+
+				} 
+				else {
+					setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + actualColumn + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+					Driver.failCount++;
+				}
+
+				return this;
+			}
 
 	//Verify Fields in subaccount view
 
@@ -5634,7 +5672,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage pageRefresh() throws InterruptedException {
 		getDriver().navigate().refresh();
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		return this;
 	}
 

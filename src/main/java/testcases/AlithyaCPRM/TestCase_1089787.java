@@ -1,4 +1,4 @@
-package testcases.AlithyaCPRD;
+package testcases.AlithyaCPRM;
 
 import org.testng.annotations.Test;
 
@@ -6,9 +6,10 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1087644:_1087644:Verify Channel Partner Senior Director Dashboard Views
+//TFS ID_1089787:_1089787:Verify Channel partner regional manager can see My past due activities under Channel Partner Salesperson Dashboard
 
-public class TestCase_1089790 {
+
+public class TestCase_1089787 {
 
 
 	@Test

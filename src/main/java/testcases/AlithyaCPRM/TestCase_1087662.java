@@ -6,8 +6,8 @@ import pages.LoginPage;
 import utils.DataInputProvider;
 import utils.TestUtils;
 
-//TFS ID_1087579:_1087579:Verify whether following fields : "Topic, Estimated Closed Date, Channel Partner Revenue Category ,Projected NAF" are editable in Opportunity form for the Channel Partner Senior Director.
- 
+//TFS ID_1087662:_1087662:Verify whether Close date due for Opportunity is available in Assistant-lightbulb button for the user Channel Partner Regional Manager.
+
 public class TestCase_1087662 {
 
 

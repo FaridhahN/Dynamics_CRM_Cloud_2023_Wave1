@@ -1,15 +1,14 @@
-package testcases.AlithyaCPSD;
+package testcases.AlithyaCPRM;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
+import utils.TestUtils;
 
-//TFS ID_1087271:_1087271:Verify Fee share % new field is added in the sales account form
+//TFS ID_1087293:_1087293:Verify Premier roster table is accessible from sales Hub for Channel partner Regional director 
 
-
-
-public class TestCase_1087270 {
+public class TestCase_1087287 {
 
 
 	@Test
@@ -24,13 +23,8 @@ public class TestCase_1087270 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
-		
-		.clickAccounts()
-		.clickNewAccounts()
-		.changeView("Sales Form")
-		
-		.verifyNewAccountsPage()
-		.verifyAccountsPageTabs()
+		.clickRosterOption()
+		.verifyRosterPage()
 		;					
 	}
 }

@@ -1,15 +1,14 @@
-package testcases.AlithyaCPSD;
+package testcases.AlithyaCPRD;
 
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
 import utils.DataInputProvider;
 
-//TFS ID_1087271:_1087271:Verify Fee share % new field is added in the sales account form
+//TFS ID_1089785:_1089785:Verify Channel partner senior director can see CP - Open Opportunities funnel chart under Channel Partner Salesperson Dashboard
 
 
-
-public class TestCase_1087270 {
+public class TestCase_1089792 {
 
 
 	@Test
@@ -24,13 +23,11 @@ public class TestCase_1087270 {
 		.staysignedinforOtherApp()
 
 		.selectSalesHubAccount()
+		.clickDashboard()
 		
-		.clickAccounts()
-		.clickNewAccounts()
-		.changeView("Sales Form")
+		.changeViewinDashboard("Channel Partner Salesperson Dashboard")
 		
-		.verifyNewAccountsPage()
-		.verifyAccountsPageTabs()
+		.verifyMyOpenOpportunityChart()
 		;					
 	}
 }

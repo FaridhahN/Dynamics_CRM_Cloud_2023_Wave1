@@ -219,7 +219,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	}
 
 	//Verify the tabs aer displayed in the accounts page
-	public SalesFormPage verifyAccountsPAgeTabs() throws InterruptedException {
+	public SalesFormPage verifyAccountsPageTabs() throws InterruptedException {
 
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'General')]")).size(), "General");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Opportunities')]")).size(), "Opportunities");
@@ -230,22 +230,23 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Documents')]")).size(), "Documents");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Documents Tracking')]")).size(), "Documents Tracking");
 		if(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size()==0){
-click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More Button");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Account Representatives')]")).size(), "Documents Tracking");
+			click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More Button");
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Account Representative");
 		}else{
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Documents Tracking");
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Account Representative");
 
 		}
 		return this;}
 	public SalesFormPage clickAccounts() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Accounts')]")),"Account button");
-		Thread.sleep(6000);
+		Thread.sleep(8000);
 		return this;
 	}
 
 
-	public SalesFormPage clickDashboard() {
+	public SalesFormPage clickDashboard() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Dashboards')]")),"Dashboards button");
+		Thread.sleep(8000);
 		return this;
 	}
 
@@ -582,6 +583,12 @@ click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More B
 		click(getDriver().findElement(By.xpath("//button[@id='AddColumnsBtn']")),"Add Columns");
 		return this;
 	}
+	
+	//Click Edit Column
+		public SalesFormPage clickEditColumn() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
+			return this;
+		}
 
 	//Add Stage in the column
 	public SalesFormPage addColumnInTheView(String column) throws InterruptedException {
@@ -844,6 +851,9 @@ click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More B
 
 		return this;
 	}
+	
+	
+	
 
 
 	//verify the Opputunity column with Addded Column
@@ -1408,6 +1418,10 @@ click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More B
 		return this;
 	}
 
+	public SalesFormPage verifyMyOpenOpportunityChart() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h3[contains(text(),'My Opportunities')]")).size(), "CP My oppurtunity Funnel chart");
+		return this;
+	}
 
 	public SalesFormPage verifyCPOpenOpportunityChart() throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h2[@aria-label='CP - Open Opportunities']")).size(), "CP Open oppurtunity Funnel chart");

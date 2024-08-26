@@ -30,7 +30,7 @@ public class TestCase_1087269 {
 		.changeView("Sales Form")
 		
 		.verifyNewAccountsPage()
-		.verifyAccountsPAgeTabs()
+		.verifyAccountsPageTabs()
 		;					
 	}
 }
