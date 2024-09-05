@@ -26,6 +26,7 @@ public class TestCase_8798 {
 		
 	//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
+		.navigateToApplicationDate()
 		.verifyDPRelationtDateIsNotNull()
 		.changeTopParentAsYes()
 		.verifyDPRelationtDateIsNull()
@@ -38,6 +39,7 @@ public class TestCase_8798 {
 		
 	//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber1", sDataSheetName))
+		.navigateToApplicationDate()
 		.verifyDPRelationtDateIsNotNull()
 		.changeTopParentAsYes()
 		.verifyDPRelationtDateIsNull()

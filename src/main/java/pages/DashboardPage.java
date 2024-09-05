@@ -50,6 +50,8 @@ public class DashboardPage extends WebDriverServiceImpl {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Accounts']")));
 
 		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
+		
+		Thread.sleep(5000);
 		return new AccountsPage();
 	}
 

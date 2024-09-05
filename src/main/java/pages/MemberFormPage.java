@@ -434,7 +434,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.id("nav_ix_account_ix_contractattachment")), "Contract Attachments");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		return new ContractAttachmentPage();
 	}
 
@@ -5297,6 +5297,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify premier start date is null
 	public MemberFormPage verifyDPRelationtDateIsNotNull() throws InterruptedException {
 		Thread.sleep(3000);
+		System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getAttribute("value"));
 		verifIsNoTNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")),"DP Relation Date");
 		return this;
 	}
