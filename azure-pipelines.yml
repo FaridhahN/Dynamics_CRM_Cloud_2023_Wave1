@@ -1,0 +1,129 @@
+# Currently using cloudbolt servers (Premier Windows Agents). These are temporary servers
+# and they dont allow us to transfer the TestOutput folder to our Charlotte servers
+# so we are going to provision permanent Charlotte servers then use them as the build agents instead
+# Update: This pool now has permanent agents located in Culpeper
+pool: "Premier Windows Agents"
+ 
+resources:
+  pipelines:
+  - pipeline: pincai_pincai
+    source: pincai-pincai
+    trigger:   
+      stages:       
+      - DEVI
+       
+trigger:
+- none
+# - sbodanap
+ 
+pr:
+  branches:
+    exclude:
+      - main  
+ 
+parameters:
+- name: Environment
+  displayName: Environment
+  default: 'QA'
+  values:
+  - QA
+  - PROD
+  - DEV
+   
+variables:
+- name: solution
+  value: '**/*.sln'
+- name: buildPlatform
+  value: 'Any CPU'
+#- name: buildConfiguration
+#  value: 'PROD'
+#- group: automation-account-creds
+ 
+ 
+steps:
+#- checkout: self
+#  clean: true
+ 
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: TestOutput
+    Contents: TestOutput
+    RemoveSourceFolder: true
+ 
+- task: NuGetToolInstaller@1
+  displayName: NuGetTool Install  
+ 
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    includeNuGetOrg: false
+    feedsToUse: 'config'
+    nugetConfigPath: $(SYSTEM_NUGET_CONFIG)  
+ 
+- task: VSBuild@1
+  displayName: VSBuild
+  inputs:
+      solution: '**\*.sln'
+      platform: '$(buildPlatform)'
+      configuration: 'DEBUG'
+ 
+- task: VSTest@2
+  displayName: testrun
+  continueOnError: true
+  inputs:    
+    runSettingsFile: '$(System.DefaultWorkingDirectory)/Wikipedia.UITest/RunSettings/wikipedia.${{ parameters.Environment}}.runsettings'    
+    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+    searchFolder: '$(System.DefaultWorkingDirectory)' 
+#    testConfiguration: '$(testConfiguration)'
+    testFiltercriteria: 'Category=Remote.chrome | Category=Remote.edge | Category=Remote.firefox'
+    runInParallel: false
+    codeCoverageEnabled: true
+    diagnosticsEnabled: true
+    testAssemblyVer2: |
+      **\*test.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    # Rerunning tests is not possible right now with our framework due to open Azure Pipeline issues.
+    # i.e. Our tests and our test fixtures are parameterized and so have characters like parenthesis and
+    # double quotes in the names. The current open unresolved Azure Pipeline bug is as follows:
+    # https://github.com/microsoft/azure-pipelines-tasks/issues/16187 https://github.com/microsoft/azure-pipelines-tasks/issues/15592
+    # Azure Pipeline Vstest fails to escape these characters and throws the below error during a build:
+    # "An exception occurred while invoking executor 'executor://nunit3testexecutor/': Filter string '"edge"\,""\,""\,"Windows"\,""\,""' includes
+    # unrecognized escape sequence". Until this is resolved, I am commenting the below
+    # rerunFailedTests: true
+    # rerunType: 'basedOnTestFailurePercentage'
+    # rerunFailedThreshold: '90'
+    # rerunMaxAttempts: '2'
+  
+- publish: TestOutput
+  artifact: TestOutput
+  
+- task: EmailReport@1
+  displayName: Send Email
+  inputs:
+    sendMailConditionConfig: 'Always'
+    subject: '[{environmentStatus}] {passPercentage} tests passed in PINCAI Automation $(Build.BuildNumber)'
+    toAddress: 'mike_johnston@premierinc.com'
+    defaultDomain: 'premierinc.com'
+    groupTestResultsBy: 'run'
+    includeCommits: true
+    maxTestFailuresToShow: '15'
+    includeOthersInTotal: false
+    usePreviousEnvironment: false
+    enableTLS: true
+    smtpConnectionEndpoint: 'pincaiautomation'
+ 
+# - task: WindowsMachineFileCopy@2
+#   inputs:
+# We are copying the TestOutput folder to the below location. If we ever wanted to copy
+# the TestResults folder, which is the default .NET test output folder that contains
+# the TRX file, then we would use the built-in $(Agent.TempDirectory) variable
+# to specify the location where the TestResults get places automatically
+#    SourcePath: $(Agent.TempDirectory)\TestResults
+    # SourcePath: TestOutput
+    # MachineNames: 'C3DIERPDEVSEL01'
+    # AdminUserName: $(automation_account_admin_user)
+    # AdminPassword: $(automation_account_admin_password)
+    # TargetPath: 'AzureTestResults'
