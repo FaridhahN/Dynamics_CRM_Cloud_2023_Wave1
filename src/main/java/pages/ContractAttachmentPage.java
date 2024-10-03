@@ -38,6 +38,8 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Contract Attachments')]")),"All Contract Attachments");
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("(//*[contains(@col-id,'ix_premierein')])[2]"))));
+		
+		Thread.sleep(6000);
 		return this;
 	} 	
 
@@ -719,8 +721,8 @@ return this;
 
 	//Click Deactivate for Contract Attachment	
 	public ContractAttachmentPage clickDeactivateonContractAttachment() throws InterruptedException, AWTException {
-		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")).size()>0) {
-			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
+		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contractattachment.Deactivate']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
 			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
 			Thread.sleep(7000);
 		}

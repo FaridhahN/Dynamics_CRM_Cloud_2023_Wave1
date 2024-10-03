@@ -1417,6 +1417,22 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'My Prospects')]")).size(), "My Prospects");
 		return this;
 	}
+	
+	
+	public SalesFormPage verifySalesManagerDashboard() throws InterruptedException, IOException   {
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'s Activities for Today')]")).size(), "My Team's Activities for Today");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'s Past Due Activities')]")).size(), "My Team's Past Due Activities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'s Upcoming Activities')]")).size(), "My Team's Upcoming Activities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'s Open Opportunities')]")).size(), "DS - My Team's Open Opportunities");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),'Open Business at Risk')]")).size(), "My Team's Open Business at Risk");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),Prospects')]")).size(), "My Sales Team's Prospects");
+		return this;
+	}
+	
+	public SalesFormPage verifySalesManagerDashboardViewNotDisplayed() throws InterruptedException, IOException   {
+		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//span[contains(text(),\"My Team's Open Pipelines\")]")).size(), "My Team's Open Pipelines");
+		return this;
+	}
 
 	public SalesFormPage verifyMyOpenOpportunityChart() throws InterruptedException, IOException   {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//h3[contains(text(),'My Opportunities')]")).size(), "CP My oppurtunity Funnel chart");

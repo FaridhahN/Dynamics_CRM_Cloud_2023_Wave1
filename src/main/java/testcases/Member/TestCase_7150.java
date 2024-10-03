@@ -50,12 +50,15 @@ public class TestCase_7150 {
 		//Store/Location type = Shipto
 		.chooseLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "locationType", sDataSheetName))
 
+		//Direct Parent Entity Code = 673415
+				.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
+
+				
+				
 		//Direct Parent Relation = Managed
 		.selectDirectParentRelationManaged() 
 
-		//Direct Parent Entity Code = 673415
-		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
-
+		
 		//Direct Parent Relation date = Today's Date
 		.selectDirectParentRelationDate(TestUtils.todaysDate()) 
 
@@ -163,6 +166,25 @@ public class TestCase_7150 {
 		// Click on LOB Save 
 		//.clickLOBSaveAndClose()
 		.clickLOBSaveAndCloseDev()
+		
+		//Click the + icon on the Line of Business Grid
+				.clickLineOfBusinesses()
+
+				//Click New Line Of Business
+				.clickAddNewLineOfBusiness()
+
+				// Line of Business =General GPO
+				.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness2", sDataSheetName))
+
+				// Classification3 Type = General GPO
+				.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification2", sDataSheetName))
+
+				// Start Date =Today's date
+				.typeLineOfBusinessStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusinessStartDate", sDataSheetName))
+
+				// Click on LOB Save 
+				//.clickLOBSaveAndClose()
+				.clickLOBSaveAndCloseDev()
 
 		//8. Record Status = Published
 		.clickGeneralThenChooseRecordStatusPublished()

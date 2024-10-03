@@ -812,7 +812,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		Dpdata.put("IsCorporate", getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		if(Dpdata.get("IsCorporate").equalsIgnoreCase("no")) {
+		if(Dpdata.get("IsCorporate").equalsIgnoreCase("No")) {
 
 			Dpdata.put("CorporateName", getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-LookupResultsDropdown_ix_corporateparentname_selected_tag_text']")).getAttribute("title"));
 			click(getDriver().findElement(By.xpath("//div[@data-id='CPEntityCode.ix_premierein-FieldSectionItemContainer']")),"CP entity");
@@ -825,7 +825,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		Dpdata.put("isFoodService", getDriver().findElement(By.xpath("//*[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-container']")).getAttribute("title"));
 
-		if(Dpdata.get("isFoodService").equalsIgnoreCase("no")) {
+		if(Dpdata.get("isFoodService").equalsIgnoreCase("No")) {
 
 			Dpdata.put("FoodServiceName", getDriver().findElement(By.xpath("//div[@data-id='ix_foodserviceparentname.fieldControl-LookupResultsDropdown_ix_foodserviceparentname_selected_tag_text']")).getAttribute("title"));
 

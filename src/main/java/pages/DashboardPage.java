@@ -51,7 +51,7 @@ public class DashboardPage extends WebDriverServiceImpl {
 
 		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
 		
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 		return new AccountsPage();
 	}
 
