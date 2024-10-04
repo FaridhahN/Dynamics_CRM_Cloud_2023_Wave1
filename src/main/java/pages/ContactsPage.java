@@ -185,6 +185,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	//Select Primary Account through Search Icon
 
 	public ContactsPage selectPrimaryAccountByClickingOnSearchLensIcon(String pa) throws InterruptedException {
+		clickTab(4);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Department')]")),"Department");		
 		click(getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_search']")),"Primary Account Search Icon");
 		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='parentcustomerid.fieldControl-LookupResultsDropdown_parentcustomerid_infoContainer']"));
