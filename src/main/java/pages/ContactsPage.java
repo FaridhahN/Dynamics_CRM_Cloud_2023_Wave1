@@ -885,10 +885,16 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// double click on the old CAA record
 	public ContactsPage doubleClickOnOldCAARecord(String OldCAA) throws InterruptedException {
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
-		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Account Associations')]")),
-				"Contact Account Associations");
+		if(getDriver().findElements(By.xpath("//li[@title='Contact Account Associations']")).size()==0) {
+			click(getDriver().findElement(By.xpath("//*[@title='Related']")), "Related");
+			Thread.sleep(3000);
+			click(getDriver().findElement(By.xpath("//li[@title='Contact Account Associations']")),
+					"Contact Account Associations");
+		}else {
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'Contact Account Associations')]")),
+					"Contact Account Associations");
+		}
+				
 		Thread.sleep(2000);
 		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
 		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[@tabindex='-1'][@aria-colindex='2']//div//label"));

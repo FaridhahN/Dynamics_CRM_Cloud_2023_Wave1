@@ -721,6 +721,7 @@ return this;
 
 	//Click Deactivate for Contract Attachment	
 	public ContractAttachmentPage clickDeactivateonContractAttachment() throws InterruptedException, AWTException {
+		Thread.sleep(2000);
 		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contractattachment.Deactivate']")).size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|HomePageGrid|Mscrm.HomepageGrid.ix_contractattachment.Deactivate']")),"Deactivate Button");
 			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
