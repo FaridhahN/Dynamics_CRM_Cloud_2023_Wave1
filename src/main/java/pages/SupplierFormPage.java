@@ -1161,6 +1161,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage pickContractEffectiveDate(String contractEffectiveDate) throws InterruptedException {
+		navigateToPrimaryContact();
 		Thread.sleep(3000);
 		type(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
