@@ -29,6 +29,7 @@ public class TestCase_8945 {
 			//Account Name = Any
 			.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))	
 			
+			.navigateToPrimaryContact()
 			//Business Classification = Any
 			.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
 			

@@ -58,7 +58,6 @@ public class TestCase_8949 {
 		.clickSave()
 		
 		//Choose Record Status as Published
-		.recordStatusPublished(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatusPublished", sDataSheetName))	
 		
 		//Verify if CRM# is generated.
 		.crmNumberIsDisplayed()
