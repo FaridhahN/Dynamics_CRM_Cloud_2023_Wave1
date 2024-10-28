@@ -92,7 +92,7 @@ public class PartnerSalesPage extends WebDriverServiceImpl {
 	//input[@data-id='name.fieldControl-text-box-text']
 
 	public PartnerSalesPage selectMemberContact(String contact) throws InterruptedException {
-
+		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//input[@data-id='parentcontactid.fieldControl-LookupResultsDropdown_parentcontactid_textInputBox_with_filter_new']")),"//input[@data-id=\"parentcontactid.fieldControl-LookupResultsDropdown_parentcontactid_textInputBox_with_filter_new\"]");
 		Thread.sleep(2000);
 		type(((getDriver().findElement(By.xpath("//input[@data-id='parentcontactid.fieldControl-LookupResultsDropdown_parentcontactid_textInputBox_with_filter_new']")))),contact,"memberaccount");
@@ -337,6 +337,7 @@ public class PartnerSalesPage extends WebDriverServiceImpl {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+contact+"')]")));
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+contact+"')]")),"contact");
 
+		if(getDriver().findElements(By.xpath("//input[@data-id='header_process_parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")).size()>0) {
 		click(getDriver().findElement(By.xpath("//input[@data-id='header_process_parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),"textbox");
 		Thread.sleep(2000);
 		type(((getDriver().findElement(By.xpath("//input[@data-id='header_process_parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")))),memberaccount,"memberaccount");
@@ -344,6 +345,7 @@ public class PartnerSalesPage extends WebDriverServiceImpl {
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+memberaccount+"')]")));
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+memberaccount+"')]")),"contact");
+		}
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='header_process_purchasetimeframe.fieldControl-option-set-select']")), purchasetime, "purchasetime");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='header_process_purchaseprocess.fieldControl-option-set-select']")), purchaseprocess, "purchaseprocess");
 		type(getDriver().findElement(By.xpath("//textarea[@data-id='header_process_description.fieldControl-text-box-text']")),summary,"summary");

@@ -37,6 +37,13 @@ public class TestCase_1045269 {
 
 		.enterTopic("Test"+TestUtils.todaysDate())	
 		
+		//navigate to Member account
+		.navigateToMemberAccount()
+		
+		//Select Member account
+		.selectMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "memberAccount", sDataSheetName))
+
+	
 		.clickSaveButton()
 		
 		

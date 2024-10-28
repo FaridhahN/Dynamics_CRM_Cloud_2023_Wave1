@@ -37,6 +37,12 @@ public class TestCase_1094744 {
 
 		.enterTopic("TestPrequalified"+TestUtils.todaysDate())	
 		
+		//navigate to Member account
+		.navigateToMemberAccount()
+		
+		//Select Member account
+		.selectMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "memberAccount", sDataSheetName))
+
 		.clickSaveButton()
 		.updatePrequalified()
 		.updatequalify(DataInputProvider.getCellData_ColName(iRowNumber, "memberContact", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "memberAccount", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "purchaseTime", sDataSheetName),DataInputProvider.getCellData_ColName(iRowNumber, "purchaseProcess", sDataSheetName), DataInputProvider.getCellData_ColName(iRowNumber, "summary", sDataSheetName))

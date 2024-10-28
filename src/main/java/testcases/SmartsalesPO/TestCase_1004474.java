@@ -8,7 +8,6 @@ import utils.DataInputProvider;
 //TFS ID_1004474:_1004474_Verify whether Opportunity is available in Opportunity Associated view of the 'Member Account'
 
 
-
 public class TestCase_1004474 {
 
 
