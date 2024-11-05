@@ -2090,6 +2090,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		//Scroll down to make the record status field visible
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		clickTab(4);
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
 			click(((getDriver().findElement(By.xpath("//label[contains(text(),'County')]")))), "County");
@@ -5982,7 +5983,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage deactivateAllMemberships() throws InterruptedException {			
 		// DOM was showing duplicate select all elements when its not available in UI- to avoid inconsistency implementing preceding sibling approach - 09/04/2023
 		click(getDriver().findElement(By.xpath("//div[@col-id='ix_membershiptype']/preceding-sibling::div//i")),"Select All Check Mark");
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Deactivate']//span[contains(text(),'Deactivate')]")),"Deactivate button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.Deactivate]")),"Deactivate button");
 		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Confirm Deactivate button");
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.AddNewStandard']")));
@@ -9621,8 +9622,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	public MemberFormPage clickDeactivateButton()throws InterruptedException  {
 
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
+		//click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membership|NoRelationship|SubGridAssociated|Mscrm.SubGrid.ix_membership.Deactivate]")),"Deactivate Member");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
+		
+		
 
 		return this;
 	}
