@@ -531,9 +531,9 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Select Regarding 
 	public SalesFormPage selectRagrding( String regardingName) throws InterruptedException, IOException   {
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),"Click the REgarding text box");
-		type(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),entityCode, "Entity code");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Regarding, Lookup']")),regardingName, "Entity code");
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-id='regardingobjectid.fieldControl-LookupResultsDropdown_regardingobjectid_resultsContainer']")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'"+regardingName+"')]")));
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+regardingName+"')]")),"Direct Parent");
 		return this;
 	}
@@ -713,8 +713,9 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 		Actions action = new Actions(getDriver());
 		action.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]"))).sendKeys(Keys.ENTER).perform();
+		if(getDriver().findElements(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]")).size()>0) {
 		click(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]")),"Member"); 
-
+		}
 
 		return this;	
 	}

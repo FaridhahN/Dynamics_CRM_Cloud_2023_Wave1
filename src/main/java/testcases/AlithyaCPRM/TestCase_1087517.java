@@ -25,11 +25,15 @@ public class TestCase_1087517 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
+		
 		.ClickNewOppurtunity()
+		.changeView("Opportunity Channel Partner")
+		
 		.enterTopic(DataInputProvider.getCellData_ColName(iRowNumber, "topic", sDataSheetName))
 		.selectGutFeel(DataInputProvider.getCellData_ColName(iRowNumber, "gutFeel", sDataSheetName))
 		.typeEstimatedCloseDate(TestUtils.FutureEndDate(5))
 		.typeanticipatedPurchaseStarDate(TestUtils.todaysDate())
+		.selectMember(DataInputProvider.getCellData_ColName(iRowNumber, "member", sDataSheetName))
 		.selectRevenueCategory(DataInputProvider.getCellData_ColName(iRowNumber, "category", sDataSheetName))
 		.typeProjectedNAF(DataInputProvider.getCellData_ColName(iRowNumber, "projectedNAF", sDataSheetName))
 		.clickSaveinOpportunities()

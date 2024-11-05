@@ -46,6 +46,7 @@ public class TestCase_964306 {
 		//5. Account Type = Member
 		.selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "accountType", sDataSheetName))
 
+			.navigateToCountry()
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 

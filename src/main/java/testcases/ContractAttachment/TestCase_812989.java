@@ -86,14 +86,14 @@ public class TestCase_812989 {
 		.clickGeneralTabInContractAttachment()
 
 		//Change the Attachment Status
-		.selectAttachmentStatus("“Approved")
+		.selectAttachmentStatus("Approved")
 
 		//Verify Attachment Reason
 		.verifyAttachmentReasons()
 
 
 		//Change the Attachment Status
-		.selectAttachmentStatus("“Canceled")
+		.selectAttachmentStatus("Canceled")
 
 
 		//Verify Attachment Reason is not displayed

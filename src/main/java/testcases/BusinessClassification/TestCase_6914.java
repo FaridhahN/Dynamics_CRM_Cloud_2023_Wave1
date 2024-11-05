@@ -36,7 +36,9 @@ public class TestCase_6914 {
 		.clickSave() 
 
 		//4. Verify CRM Account # is generated 
-		.verifyCRMNumberIsDisplayed()	
+		.verifyCRMNumberIsDisplayed()
+		
+		.navigateToCountry()
 
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
@@ -198,7 +200,10 @@ public class TestCase_6914 {
 
 		//Click on Save 
 		.clickSave() 
+		
 
+		.navigateToCountry()
+		
 		.clearClassOfTrade()
 		.selectClassOfTrade("Dentistry")
 

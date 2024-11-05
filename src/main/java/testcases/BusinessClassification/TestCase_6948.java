@@ -38,6 +38,7 @@ public class TestCase_6948 {
 		//4. Verify CRM Account # is generated 
 		.verifyCRMNumberIsDisplayed()	
 
+		.navigateToCountry()
 		//Class of Trade =Any
 		.selectClassOfTrade(DataInputProvider.getCellData_ColName(iRowNumber, "classOfTrade", sDataSheetName))
 
