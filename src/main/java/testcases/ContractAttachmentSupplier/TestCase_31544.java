@@ -29,8 +29,8 @@ public class TestCase_31544 {
 		
 		//Choose Existing Contract Attachments with CA Supplier
 		.selectRelatedContractAttachments()		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
-		
+		//.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+				.doubleClickExistingContractAttachment()
 		
 		//Access Contract Attachment Supplier and Deactivate	
 		.clickSuppliersTabOnCA()

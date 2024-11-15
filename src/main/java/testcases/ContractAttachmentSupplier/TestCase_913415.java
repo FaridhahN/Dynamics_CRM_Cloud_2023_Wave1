@@ -28,12 +28,12 @@ public class TestCase_913415 {
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		//Choose Existing Contract Attachments with CA Supplier
 		.selectRelatedContractAttachments()		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
-		
+		//.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+		.doubleClickExistingContractAttachment()
 		
 		//Access Contract Attachment Supplier and Update Attachment Status 		
 		.clickSuppliersTabOnCA()
-		.doubleClickCASupplier()		
+		.checkexistingAsupplier()
 		.selectAttachmentStatusOnCASupplier(DataInputProvider.getCellData_ColName(iRowNumber, "caSupplierAttachmentStatus", sDataSheetName))
 		.clickSaveOnCASupplier()
 		

@@ -30,8 +30,8 @@ public class TestCase_31542 {
 		//Choose Existing Contract Attachments with CA Supplier
 		.selectRelatedContractAttachments()	
 		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
-
+		//.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+				.doubleClickExistingContractAttachment()
 		//Add CA Supplier with all fields	
 		.clickSuppliersTabOnCA()
 		.clickNewContractAttachmentSupplierButton()	

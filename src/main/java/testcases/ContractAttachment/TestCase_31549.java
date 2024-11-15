@@ -28,8 +28,8 @@ public class TestCase_31549 {
 		
 		//Choose Existing Contract Attachment
 		.selectRelatedContractAttachments()		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
-		
+		//.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+				.doubleClickExistingContractAttachment()
 		//Choose any Attachment Status that has Attachment Status as "Approved" 
 		.selectAttachmentStatusOnCA(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatus", sDataSheetName))
 		

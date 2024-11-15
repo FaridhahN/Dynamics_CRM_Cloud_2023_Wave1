@@ -29,8 +29,8 @@ public class TestCase_31548 {
 		
 		//Choose Existing Contract Attachments with CA Supplier
 		.selectRelatedContractAttachments()		
-		.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
-		
+		//.doubleClickExistingContractAttachment(DataInputProvider.getCellData_ColName(iRowNumber, "contractNumber", sDataSheetName))
+				.doubleClickExistingContractAttachment()
 		//Choose any Attachment Status that has Attachment Status Reason "Successor Contract Update" and save.
 		.selectAttachmentStatusOnCA(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatus", sDataSheetName))
 		.selectAttachmentStatusReasonOnCA(DataInputProvider.getCellData_ColName(iRowNumber, "caAttachmentStatusReason", sDataSheetName))

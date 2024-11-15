@@ -261,21 +261,24 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	}
 
 	//Choose Existing CA using Contract Number
-	public ContractAttachmentPage doubleClickExistingContractAttachment(String contractNumber) throws InterruptedException   {
+	public ContractAttachmentPage doubleClickExistingContractAttachment() throws InterruptedException   {
 		Thread.sleep(4000);
 		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
 		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label"));
 		System.out.println("# of Rows Including Header:"+ rowList.size());
-		for (int i = 2; i <=rowList.size(); i++) {
-			String contractNum = getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")).getText();
-			System.out.println(contractNum);
-			if (contractNum.equals(contractNumber)) {
-				Thread.sleep(3000);
-				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["+i+"]")), "Contract Attachment" +" " + contractNumber);
-				Thread.sleep(3000);
-				break;				
-			}
-		}		
+		
+		doubleClick(getDriver().findElement(By.xpath("(//div[contains(@col-id,'.ix_idmownercontractnumber')]//label/div)[2]")), "contractNumber");
+		/*
+		 * for (int i = 2; i <=rowList.size(); i++) { String contractNum =
+		 * getDriver().findElement(By.xpath(
+		 * "(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["
+		 * +i+"]")).getText(); System.out.println(contractNum); if
+		 * (contractNum.equals(contractNumber)) { Thread.sleep(3000);
+		 * doubleClick(getDriver().findElement(By.xpath(
+		 * "(//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label)["
+		 * +i+"]")), "Contract Attachment" +" " + contractNumber); Thread.sleep(3000);
+		 * break; } }
+		 */		
 
 		return this;					
 	}
@@ -284,6 +287,17 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	public ContractAttachmentPage doubleClickCASupplier() throws InterruptedException {
 		doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
+		Thread.sleep(3000);
+		return this;
+	}
+	
+	
+	public ContractAttachmentPage checkexistingAsupplier() throws InterruptedException {
+		if(getDriver().findElements(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")).size()>0) {
+			doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
+		}else {
+			clickNewContractAttachmentSupplierButton();
+		}
 		Thread.sleep(3000);
 		return this;
 	}
