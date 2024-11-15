@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -143,16 +144,29 @@ public class LoginPage extends WebDriverServiceImpl{
 		
 
 	public LoginPage verifyOldLook() throws InterruptedException{
-		List<WebElement> newlook=getDriver().findElements(By.xpath("//button[@aria-checked='true']"));
+		List<WebElement> newlook=getDriver().findElements(By.xpath("//button[@aria-expanded='true']"));
 		if(newlook.size()>0) {
-			click(getDriver().findElement(By.xpath("//button[@aria-checked='true']")),"New look toggle");
-			click(getDriver().findElement(By.xpath("//span[contains(text(),'Skip feedback')]")),"Skip Feedback");
-
+			click(getDriver().findElement(By.xpath("//button[@aria-expanded='true']")),"New look toggle");
+			if(newlook.size()>0) {
+				Actions a = new Actions (getDriver());
+				a.moveToElement(getDriver().findElement(By.xpath("//button[@aria-expanded='true']"))).click().build().perform();
+			}
+			List<WebElement> skip=getDriver().findElements(By.xpath("//span[contains(text(),'Skip feedback')]"));
+			if(skip.size()>0) {
+				
+				click(getDriver().findElement(By.xpath("//span[contains(text(),'Skip feedback')]")),"Skip Feedback");	
+			}
+			
+ 
 		}
-
+ 
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(35));
-		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//button[@aria-checked='false']"))));
+		wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath("//button[@aria-expanded='false' and contains(@aria-controls,'Copilot')]"))));
+		if(getDriver().findElements(By.xpath("//button[@aria-expanded='false' and @aria-label='Site Map']")).size()>0) {
 		//Thread.sleep(000);
+			Actions a = new Actions (getDriver());
+			a.moveToElement(getDriver().findElement(By.xpath("//button[@aria-expanded='false' and @aria-label='Site Map']"))).click().build().perform();
+		}
 		return this;
 	}
 	//Click on Yes in stay signed in window
