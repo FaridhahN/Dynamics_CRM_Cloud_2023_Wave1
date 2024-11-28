@@ -1147,7 +1147,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).sendKeys(Keys.TAB).build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//*[contains(text(),'"+duration+"')]"))).sendKeys(Keys.TAB).build().perform();
+		a.sendKeys(Keys.ESCAPE).build().perform();  
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
 		//Changed on 10/11/2023
 		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
