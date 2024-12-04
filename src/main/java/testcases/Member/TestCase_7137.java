@@ -123,6 +123,7 @@ public class TestCase_7137 {
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()
 
+		
 		// Choose Membership type 
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))

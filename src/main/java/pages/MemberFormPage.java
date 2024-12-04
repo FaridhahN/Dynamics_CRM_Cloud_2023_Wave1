@@ -59,6 +59,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Enter account name
 	public MemberFormPage typeAccountName(String accountName) throws InterruptedException {
+		clearAllSuggestions();
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String executiondate = dateFormat.format(date);
@@ -122,7 +123,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Navigate to AG DAte
-	public MemberFormPage navigateToAGDate() {
+	public MemberFormPage navigateToAGDate() throws InterruptedException {
 
 		navigateToDoNotVerify();
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'Ownership')]")))), "Ownership");
@@ -149,6 +150,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group Effective Date' )]")))), "AG Effective Date");
 		return this;
 	}
+	
+	public MemberFormPage NavigateToSponsofromAGDAteMEF() throws InterruptedException {
+		navigateToAGDateMEF();
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")), "AGDate");
+		clickTab(15);
+		
+		return this;
+	}
+	
 
 	//Verify the AG Effective date after the Field Update
 	public MemberFormPage verifyAgDateAfterUpdate() throws InterruptedException {
@@ -507,9 +517,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		navigatetoNAICS();
 		naivagateToReferredByFromNACS();
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Membership Provider Configuration Header");
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")))),accountType,"Account type");
+		click(getDriver().findElement(By.xpath("//button[@data-id='customertypecode.fieldControl-option-set-select']")),"Account Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component-')]/div/div[contains(text(),'"+accountType+"')]")),"Account Type");
+		
+		
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
 		return this;
 	}
 
@@ -612,7 +625,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
 		Thread.sleep(5000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),applicationDate, "Application Start Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Application Date']")))),applicationDate, "Application Start Date");
 		return this;
 
 	}
@@ -658,7 +671,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Application Status");
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),applicationDate, "Application Start Date");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl._datecontrol-date-container']//input")))),applicationDate, "Application Start Date");
 		return this;
 	}
 
@@ -668,8 +681,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
 		je.executeScript("arguments[0].scrollIntoView(true);",element);
-
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"Yes","CAMS Flag"); 
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_camsflag.fieldControl-option-set-select']")),"CAMS Flag");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"CAMS Flag");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"Yes","CAMS Flag"); 
 		return this;
 	}
 
@@ -677,8 +692,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 		WebElement element = getDriver().findElement(By.xpath("//label[contains(text(),'Group')]"));
 		je.executeScript("arguments[0].scrollIntoView(true);",element);
-
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"No","CAMS Flag"); 
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_camsflag.fieldControl-option-set-select']")),"CAMS Flag");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'No')]")),"CAMS Flag");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_camsflag.fieldControl-checkbox-select']")),"No","CAMS Flag"); 
 		return this;
 	}
 
@@ -699,19 +715,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//		JavascriptExecutor je = (JavascriptExecutor) getDriver();
 		//		WebElement element = getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_textInputBox_with_filter_new']"));
 		//		je.executeScript("arguments[0].scrollIntoView(true);",element);f
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.fieldControl-option-set-select']")),"Participation Type");
+		
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+participationType+"')]")),"Participation Type Option");
+				//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type"); 
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type"); 
 		return this;
 	}
 
 	//Select Participation type on Member Entry Form
 	public MemberFormPage selectParticipationTypeMEF(String participationType) throws InterruptedException {
 		//Wave 2023 update method for MEF
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");
+click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.fieldControl-option-set-select']")),"Participation Type");
+		
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+participationType+"')]")),"Participation Type Option");
+				//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type"); 
-		return this;
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");return this;
 	}
 
 	//select Direct parent
@@ -756,16 +778,22 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select DPR as Managed
 	public MemberFormPage selectDirectParentRelationManaged() throws InterruptedException {
 		Thread.sleep(2000);
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_parentrelationship.fieldControl-option-set-select']")))),"Managed","Direct Parent Relation");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_parentrelationship.fieldControl-option-set-select']")),"Participation Type");
+		
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Managed')]")),"Participation Type Option");
+				//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_participationtype.fieldControl-option-set-select']")),participationType,"Participation type");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_parentrelationship.fieldControl-option-set-select']")),"Managed","Direct Parent Relation"); 		
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_parentrelationship.fieldControl-option-set-select']")))),"Managed","Direct Parent Relation");
+		Thread.sleep(2000);
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_parentrelationship.fieldControl-option-set-select']")),"Managed","Direct Parent Relation"); 		
 		return this;
 	}
 
 	//Select DPRD
 	public MemberFormPage selectDirectParentRelationDate(String directParentRelationDate) throws InterruptedException {
 		Thread.sleep(5000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")))),directParentRelationDate, "Direct Parent Relation Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Direct Parent Relation Date']")))),directParentRelationDate, "Direct Parent Relation Date");
 		return this;
 	}
 
@@ -776,6 +804,16 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return new NewAccountPage();
 	}
 
+	
+	//clear Suggestion
+	public MemberFormPage clearAllSuggestions() {
+		List<WebElement> clearsugestion=getDriver().findElements(By.xpath("//button[@aria-label='Clear all suggestions']/span"));
+		if(clearsugestion.size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@aria-label='Clear all suggestions']/span")),"Clear sugesstion");
+		}
+		
+		return this;
+	}
 	//Store the values
 
 	public MemberFormPage getDPData() throws InterruptedException {
@@ -785,11 +823,15 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		//	clickSave();
 
 		String name=getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")).getAttribute("title");
-
+		
+		clearAllSuggestions();
 		Dpdata.put("DP_Name",name );
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_hiscirostername.fieldControl-text-box-text']")),"Account Name 2");
-		clickTab(3);
+		clickTab(2);
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Store/Location #']")),"Store Location");
+		clickTab(7);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'DP Exception Reason')]")),"DP exception Reason");
+		Thread.sleep(5000);
 		List<WebElement> entitycode= getDriver().findElements(By.xpath("//div[@data-id='TPQuickViewForm']//label"));
 		if(entitycode.size()>0) {
 			click(getDriver().findElement(By.xpath("//div[@data-id='TPQuickViewForm']//label")),"Entity Code");
@@ -797,7 +839,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Top Parent')]")),"Is Top Parent");
 		}
 		Thread.sleep(5000);
-		String isTP=getDriver().findElement(By.xpath("//select[@data-id='ix_istopparent.fieldControl-checkbox-select']//option[@data-selected='true']")).getText();
+		String isTP=getDriver().findElement(By.xpath("//button[@aria-label='Is Top Parent']")).getAttribute("value");
 		if(isTP.equalsIgnoreCase("yes")) {
 			Dpdata.put("TopParent_Name",name );	
 		}else {
@@ -810,7 +852,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 			click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-SUMMARY_TAB_section_18']")),"Corporate Account");
 		}
-		Dpdata.put("IsCorporate", getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")).getAttribute("title"));
+		Dpdata.put("IsCorporate", getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")).getAttribute("value"));
 
 		if(Dpdata.get("IsCorporate").equalsIgnoreCase("No")) {
 
@@ -823,7 +865,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"Food Service Grid Title");
 
-		Dpdata.put("isFoodService", getDriver().findElement(By.xpath("//*[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-container']")).getAttribute("title"));
+		Dpdata.put("isFoodService", getDriver().findElement(By.xpath("//input[@aria-label='Is Food Service Parent']")).getAttribute("value"));
 
 		if(Dpdata.get("isFoodService").equalsIgnoreCase("No")) {
 
@@ -834,7 +876,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			Dpdata.put("FoodServiceName",name);
 		}
 
-		Dpdata.put("isSponsor", getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")).getAttribute("title"));
+		Dpdata.put("isSponsor", getDriver().findElement(By.xpath("//button[@data-id='ix_issponsor.fieldControl-option-set-select']")).getAttribute("title"));
 
 		if(Dpdata.get("isSponsor").equalsIgnoreCase("no")) {
 
@@ -848,18 +890,18 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//h2[@title='FOOD SERVICE PARENT']")),"Food Service");
 		click(getDriver().findElement(By.xpath("//h2[contains(text(),'FBO')]")),"FBO");
 
-		Dpdata.put("IsFBO", getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")).getAttribute("title"));
+		Dpdata.put("IsFBO", getDriver().findElement(By.xpath("//input[@aria-label='Is FBO']")).getAttribute("value"));
 
-		if(!(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")).getAttribute("title").equalsIgnoreCase("yes"))){
+		if(!(getDriver().findElement(By.xpath("//input[@aria-label='Is FBO']")).getAttribute("value").equalsIgnoreCase("yes"))){
 			Dpdata.put("FBO", getDriver().findElement(By.xpath("//*[@data-id='ix_fbo.fieldControl-LookupResultsDropdown_ix_fbo_selected_tag_text']")).getAttribute("title"));
 
-			Dpdata.put("FBORD", getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")).getAttribute("value"));
+			Dpdata.put("FBORD", getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")).getAttribute("value"));
 
 		}else {
 			Dpdata.put("IsFBO", "No");
 			Dpdata.put("FBO",name);
 
-			Dpdata.put("FBORD", getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")).getAttribute("value"));
+			Dpdata.put("FBORD", getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")).getAttribute("value"));
 
 		}
 
@@ -1635,7 +1677,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//div[@data-id='TPQuickViewForm']//label")),"Entity Code");
 		}
 		Thread.sleep(1000);
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),topParentRelation,"Top Parent Relation");
+		click(((getDriver().findElement(By.xpath("//button[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),"Top Parent Relation");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+topParentRelation+"')]")),"topParentRelation");
 		Thread.sleep(1000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),topParentRelation,"Top Parent Relation"); 
 		return this;
@@ -1655,7 +1698,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectTopParentRelationDate(String topParentRelationDate) throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),"Top Parent Relation Date");
 		Thread.sleep(5000);
-		type(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),topParentRelationDate,"Top Parent Relation Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Top Parent Relation Date']")),topParentRelationDate,"Top Parent Relation Date");
 		return this;
 	}
 
@@ -1677,7 +1720,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 
-	public MemberFormPage navigateToDoNotVerify() {
+	public MemberFormPage navigateToDoNotVerify() throws InterruptedException {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
@@ -1685,7 +1728,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");	
+		clickTab(4);
 		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
@@ -2060,9 +2104,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 
 	public MemberFormPage selectPublished() throws InterruptedException{
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
+		
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Published')]")),"Account published");
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
 		Thread.sleep(2000);
 		return this;
 	}
@@ -2078,9 +2127,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
 
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Published')]")),"Account published");
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
 		Thread.sleep(2000);
 		return this;
 	}
@@ -2100,6 +2152,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Phone')]"))),"Other Phone");
+		click((getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']"))),"Other Phone");
+		clickTab(4);
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
@@ -2393,7 +2447,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		return this;
 	}
 	//Navigate to MemberAttribute
-	public MemberFormPage navigateAndVerifyMemberAttribute() {
+	public MemberFormPage navigateAndVerifyMemberAttribute() throws InterruptedException {
 
 		navigateToDoNotVerify();
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'FBO GPO')]")))), "FBO GPO");
@@ -2530,7 +2584,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify Premier Start Date is Auto Populated
 	public MemberFormPage verifyPremierStartDateIsAutoPopulated() throws InterruptedException  {
 		Thread.sleep(4000);
-		getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date");
+		getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier Start Date']")),"Premier Start Date");
 		return this;
 	}
 
@@ -2563,13 +2617,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify AG effective is not null
 	public MemberFormPage verifyAgEffectiveDateIsNotNull() {
-		getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Effective Date");
+		getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl._datecontrol-date-container']//input")),"Affiliate Group Effective Date");
 		return this;
 	}
 
 	//AG Effective date is null
 	public MemberFormPage verifyAgEffectiveDateIsNull() {
-		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"AG Effective Date"); 
+		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl._datecontrol-date-container']//input")),"AG Effective Date"); 
 		return this;
 	}
 
@@ -2591,13 +2645,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		if(CorporateAccount.size()>0) {
 			click(getDriver().findElement(By.xpath("//h2[@title='Corporate Parent']")),"Corporate Account");
 		}
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),verifyIsCorporateAccount,"Is Corporate Account"); 
+		verifyExactAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_iscorporateaccount.fieldControl-pcf-container-id']//input")),"value",verifyIsCorporateAccount,"Is Corporate Account"); 
 		return this;
 	}
 
 	//Verify Corporate Parent Name is null
 	public MemberFormPage verifyCorporateParentNameIsNull() {
-		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//*[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']//div/div")),"Corporate Parent Name"); 
+		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-pcf-container-id']//div/div")),"Corporate Parent Name"); 
 		return this;
 	}
 
@@ -2623,7 +2677,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//label[text()='Corporate Parent Override']")),"Corporate Parent Override");
 			click(getDriver().findElement(By.xpath("//label[text()='Is Food Service Parent']")),"Is Food Service Parent");
 		}
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-container']")),verifyIsFoodServiceParent,"Is Food Service Parent"); 
+		verifyExactAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_isfoodserviceparent.fieldControl-pcf-container-id']//input")),"value",verifyIsFoodServiceParent,"Is Food Service Parent"); 
 		return this;
 	}
 
@@ -2706,8 +2760,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 				click(getDriver().findElement(By.xpath("//h2[contains(text(),'FBO')]")),"FBO");
 			}
 
-			System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")).getAttribute("value"));
-			verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")),verifyFBORD,"FBO Relation Date"); 
+			System.out.println(getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")).getAttribute("value"));
+			verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")),verifyFBORD,"FBO Relation Date"); 
 		}
 		return this;
 	}
@@ -2739,8 +2793,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			List<WebElement>FBO=getDriver().findElements(By.xpath("//h2[contains(text(),'FBO')]"));
 			if(FBO.size()>0) {
 				click(getDriver().findElement(By.xpath("//h2[contains(text(),'FBO')]")),"FBO");
-				System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")).getAttribute("title"));
-				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_isfbo.fieldControl-checkbox-container']")),verifyIsFBO, "Is FBO");
+				System.out.println(getDriver().findElement(By.xpath("//input[@aria-label='Is FBO']")).getAttribute("value"));
+				verifyExactAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Is FBO']")),"value",verifyIsFBO, "Is FBO");
 				//FBORD
 			}
 		}
@@ -2771,8 +2825,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage navigateToCorporateParent() throws InterruptedException {
-		navigateToSponsor();
-		click(getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")),"is Sponsor");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_issponsor.fieldControl-option-set-select']")),"is Sponsor");
 		Actions actions = new Actions(getDriver());
 		actions.sendKeys(Keys.TAB).sendKeys(Keys.TAB).sendKeys(Keys.TAB).build().perform();
 
@@ -2818,7 +2871,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify Is sponsor
 	public MemberFormPage verifyIsSponsor(String verifyIsSponsor) {
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-checkbox-container']")),verifyIsSponsor,"Is Sponsor"); 
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_issponsor.fieldControl-option-set-select']")),verifyIsSponsor,"Is Sponsor"); 
 		return this;
 	}
 
@@ -2998,9 +3051,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 	//Select Line of business
 	public MemberFormPage selectLineOfBusiness(String lineOfBusiness) throws InterruptedException   {
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_portfolio.fieldControl-option-set-select']")),lineOfBusiness,"LOB");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_portfolio.fieldControl-option-set-select']")),"Select LOB");
+		if(lineOfBusiness.contentEquals("General GPO")) {
+			click(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+lineOfBusiness+"')])[2]")),"LOB");
+		}else {
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+lineOfBusiness+"')]")),"LOB");	
+		}
+		
+		//button[@data-id='ix_portfolio.fieldControl-option-set-select']
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_portfolio.fieldControl-option-set-select']")),lineOfBusiness,"LOB");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_portfolio.fieldControl-option-set-select']")),lineOfBusiness,"LOB");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_portfolio.fieldControl-option-set-select']")),lineOfBusiness,"LOB");
 		//	click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"SCRIPT ERROR");
 		return this;
 	}
@@ -3010,8 +3071,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage selectLOBfClassificationType(String lineOfClassification) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")),"Line of classification");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")))),lineOfClassification,"Line of classification");
-		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("(//*[normalize-space()='"+lineOfClassification+"'])[2]")),lineOfClassification);
+		Thread.sleep(3000);
+		if(getDriver().findElements(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')][2]")).size()>0) {
+		click(getDriver().findElement(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')][2]")),lineOfClassification);
+		}
+		click(getDriver().findElement(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')][1]")),lineOfClassification);
 		return this;
 	}
 
@@ -3020,7 +3084,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")),"Line of classification");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_classificationtypenew.fieldControl-LookupResultsDropdown_ix_classificationtypenew_textInputBox_with_filter_new']")))),lineOfClassification,"Line of classification");
 		Thread.sleep(5000);
-		click(getDriver().findElement(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')]")),lineOfClassification);
+		Actions action=new Actions(getDriver());
+		action.moveToElement(getDriver().findElement(By.xpath("//span/span[contains(text(),'"+lineOfClassification+"')]"))).click().build().perform();
 
 
 		return this;
@@ -3265,7 +3330,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Type Line Of Business Start Date
 	public MemberFormPage typeLineOfBusinessStartDate(String lineOfBusinessStartDate) throws InterruptedException {
 		Thread.sleep(3500);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")))),lineOfBusinessStartDate,"Line of Bussiness Start Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")))),lineOfBusinessStartDate,"Line of Bussiness Start Date");
 		return this;
 	}
 
@@ -3348,9 +3413,14 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 	//Select Membership provider type of business
 	public MemberFormPage selectMembershipType(String membershipProviderType) throws InterruptedException   {
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_membershiptype.fieldControl-option-set-select']")),membershipProviderType,"Membership Provider Type");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_membershiptype.fieldControl-option-set-select']")),"MEmbership Provided Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+membershipProviderType+"')]")),"Membership Type");
+		
+		
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_membershiptype.fieldControl-option-set-select']")),membershipProviderType,"Membership Provider Type");
 		Thread.sleep(3000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_membershiptype.fieldControl-option-set-select']")),membershipProviderType,"Membership Provider Type");
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_membershiptype.fieldControl-option-set-select']")),membershipProviderType,"Membership Provider Type");
 		return this;
 	}
 
@@ -3390,7 +3460,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Type Membership Start Date
 	public MemberFormPage typeMembershipStartDate(String membershipStartDate) {
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")))),membershipStartDate,"Membership Start Date");
+		clearAllSuggestions();
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")))),membershipStartDate,"Membership Start Date");
 		return this;
 	}
 
@@ -4372,9 +4443,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Choose Location Type
 	public MemberFormPage chooseLocationType(String locationType) throws InterruptedException   {	
+		
 		Thread.sleep(1000);
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location type"); 
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+locationType+"')]")),"Location Type");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location type"); 
 		return new MemberFormPage();
 	}
 
@@ -4382,23 +4457,29 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Choose Location Type
 	public MemberFormPage chooseLocationTypewithOutVerifying(String locationType) throws InterruptedException   {	
 		Thread.sleep(3000);
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+locationType+"')]")),"Location Type");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
 		return new MemberFormPage();
 	}
 
 	//Location type null
 	public MemberFormPage chooseLocationTypeNull() throws InterruptedException   {	
 		Thread.sleep(1000);
-		selectDropDownUsingIndex(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),0,"Location Type");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'---')]")),"Location Type");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
 		return new MemberFormPage();
 	}	
 
 	//Change Top parent
 	public MemberFormPage changeTopParentAsYes() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent Label");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"Yes","Is Top Parent"); 
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_istopparent.fieldControl-option-set-select']")),"Is TopParent");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Location Type");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"Yes","Is Top Parent"); 
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-container']")),"Yes","Is Top Parent"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_istopparent.fieldControl-option-set-select']")),"Yes","Is Top Parent"); 
 		return this;
 	}
 
@@ -4406,9 +4487,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Change Top parent
 	public MemberFormPage changeTopParentAsNo() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//h2[@title='TOP PARENT']")),"Top Parent Label");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"No","Is Top Parent"); 
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_istopparent.fieldControl-option-set-select']")),"Is TopParent");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'No')]")),"Location Type");
+		
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-select']")),"No","Is Top Parent"); 
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_istopparent.fieldControl-checkbox-container']")),"No","Is Top Parent"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_istopparent.fieldControl-option-set-select']")),"No","Is Top Parent"); 
 		return this;
 	}
 
@@ -4422,17 +4506,24 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Region
 	public MemberFormPage selectRegion(String Region) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//label[text()='BK Active']")),"BK Active");
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_regionnew.fieldControl-option-set-select']")))),Region,"Region");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_regionnew.fieldControl-option-set-select']")),"Select Region");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+Region+"')]")),"Location Type");
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_regionnew.fieldControl-option-set-select']")))),Region,"Region");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_regionnew.fieldControl-option-set-select']")),Region,"Region"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_regionnew.fieldControl-option-set-select']")),Region,"Region"); 
 		return this;
 	}
 
 	//Select Top Parent Classification
 	public MemberFormPage selectTopParentClassification(String topParentClassification) throws InterruptedException {
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-select']")))),topParentClassification,"Top Parent Classification");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_topparentclassification.fieldControl-option-set-select']")),"Select Top Parent Classification");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+topParentClassification+"')]")),"Location Type");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-select']")))),topParentClassification,"Top Parent Classification");
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-container']")),topParentClassification,"Top Parent Classification"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-container']")),topParentClassification,"Top Parent Classification"); 
 		return this;
 	}
 
@@ -4445,9 +4536,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//To make fee share field visible
 		click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Fee share Eligible");
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligible.fieldControl-checkbox-select']")),"Yes","Fee Share Eligible"); 
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligible.fieldControl-checkbox-container']")),"Yes","Fee Share Eligible"); 
+		
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Fee Share Eligible']")),"Yes","Fee Share Eligible"); 
 		return this;
 	}
 
@@ -4460,7 +4554,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Select FBO Type
 	public MemberFormPage selectFBOGPOType(String FBOType) {
-		selectDropDownUsingVisibleText((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']"))),FBOType,"FBO GPO Type");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']")),"FBO Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+FBOType+"')]")),"FBO Type");
+		verifyExactValue((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']"))),FBOType,"FBO  Type");
 		//	verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='ix_fbotype.fieldControl-option-set-select']")),FBOType,"FBO GPO Type"); 
 		return this;
 	}
@@ -4529,9 +4625,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//Verify Is FBO is Locked	
 	public MemberFormPage selectisFBO(String selectMemberOverride) {
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Is FBO']")),selectMemberOverride,"MemberOverride");
 
-
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Is FBO']")),"FBO Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+selectMemberOverride+"')]")),"Member Override");
+		
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@aria-label='Is FBO']")),selectMemberOverride,"MemberOverride");
 
 		return this;
 	}
@@ -4781,7 +4879,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Type Zip code	
 	public MemberFormPage typeZipCode(String zipCode) throws InterruptedException {
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		type((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),zipCode, "Zip Code");
 		return this;
 	}
@@ -5025,18 +5123,24 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~Member Entry Form~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public MemberFormPage selectAccountTypeMEF(String accountType) throws InterruptedException{
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")))),accountType,"Account type");
+		click(getDriver().findElement(By.xpath("//button[@data-id='customertypecode.fieldControl-option-set-select']")),"Account Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component-')]/div/div[contains(text(),'"+accountType+"')]")),"Account Type");
+		
 		Thread.sleep(2000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")),accountType,"Account type"); 
 		return this;
 	}
 
 
 	public MemberFormPage selectTopParentRelationMEF(String topParentRelation) throws InterruptedException {
 
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),topParentRelation,"Top Parent Relation");
+		click(((getDriver().findElement(By.xpath("//button[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),"Top Parent Relation");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+topParentRelation+"')]")),"topParentRelation");
 		Thread.sleep(1000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),topParentRelation,"Top Parent Relation"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")),topParentRelation,"Top Parent Relation");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationship.fieldControl-option-set-select']")))),topParentRelation,"Top Parent Relation");
+		Thread.sleep(1000);
+		 
 		return this;
 	}
 
@@ -5072,21 +5176,29 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage chooseRecordStatusPublishedMEF() throws InterruptedException {
 		Thread.sleep(3000);
 		navigateToRecordStatusMEF();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Published')]")),"Account published");
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
+		Thread.sleep(2000);
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
+		
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
 		Thread.sleep(3000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
+		//verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
 		return this;
 	}
 
 	public MemberFormPage verifyIsCorporateAccountMEF(String verifyIsCorporateAccount) {
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),verifyIsCorporateAccount,"Is Corporate Account"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")),verifyIsCorporateAccount,"Is Corporate Account"); 
 		return this;
 	}
 
 	//Change Is Corporate parent
 	public MemberFormPage changeIsCorporateParent(String IsCorporateAccount) {
 		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")))),IsCorporateAccount,"IsCorporateAccount");
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),IsCorporateAccount,"Is Corporate Account"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),IsCorporateAccount,"Is Corporate Account"); 
 		return this;
 	}
 
@@ -5187,9 +5299,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Choose application start date
 	public MemberFormPage chooseApplicationDateMEF(String applicationDate) throws InterruptedException {
 
-
 		chooseApplicationnavigateToAdditionalCriteria();
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),applicationDate, "Application Start Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Application Date']")))),applicationDate, "Application Start Date");
 		return this;
 	}
 
