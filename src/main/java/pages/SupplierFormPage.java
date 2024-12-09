@@ -1189,7 +1189,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage pickContractEffectiveDate(String contractEffectiveDate) throws InterruptedException {
 		navigateToPrimaryContact();
 		Thread.sleep(3000);
-		type(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),contractEffectiveDate,"Contract Effective Date");
+		type(getDriver().findElement(By.xpath("//input[contains(@id,'DateControlPrefix')][@aria-label='Date of Contract Effective date']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
 	}
 
@@ -1236,7 +1236,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage chooseAccountStatus() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='ADMINISTRATION']")),"ADMINISTRATION");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Inactive","Account Status");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Account Status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Inactive')]")),"Account Status");
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountstatus.fieldControl-option-set-select']")),"Inactive","Account Status");
 		Thread.sleep(3000);
 		return this;
@@ -1273,7 +1274,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String date1= dateFormat.format(date); 
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),date1,"Premier Start Date");
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@aria-label='Date of Premier Start Date']")),date1,"Premier Start Date");
 		return this;
 	}
 
@@ -1730,8 +1731,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='name.fieldControl-text-box-text']")),"Account Name");
 		click(getDriver().findElement(By.xpath("//*[@title='Premier Start Date - Premier Member Start Date']")),"Premier Start Date");
-		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
-		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']")),"Contract Effective Date");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate-locked-icon']")),"Contract Effective Date Lock");
+		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@aria-label='Date of Contract Effective date']")),"Contract Effective Date");
 		return this;
 	}
 

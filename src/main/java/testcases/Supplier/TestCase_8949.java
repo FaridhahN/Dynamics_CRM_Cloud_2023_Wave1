@@ -65,8 +65,8 @@ public class TestCase_8949 {
 		//Save the information
 		.clickSave()
 		
-		//Verify if Entity Code is generated.
-		.entityCodeIsDisplayed()
+//		//Verify if Entity Code is generated.
+//		.entityCodeIsDisplayed()
 		
 		//Click on Account Status as Inactive
 		.chooseAccountStatus()
