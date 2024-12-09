@@ -958,9 +958,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// provide contact relationship end date
 	public ContactsPage verifyNullinCaaRelationshipEndDate(String contactRelationshipEndDate) throws InterruptedException {
 		Thread.sleep(3000);
-		String relEndDate = getAttribute(
-				getDriver()
-				.findElement(By.xpath("//*[@data-id='ix_relationshipenddate.fieldControl-date-time-input']")),
+		String relEndDate = getAttribute(getDriver().findElement(By.xpath("//input[contains(@id,'DateControlPrefix')]")),
 				"placeholder", "Relationship End Date");		
 
 		if(relEndDate.equalsIgnoreCase(contactRelationshipEndDate))

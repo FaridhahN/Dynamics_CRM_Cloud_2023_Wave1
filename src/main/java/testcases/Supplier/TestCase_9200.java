@@ -63,8 +63,7 @@ public class TestCase_9200 {
 		.verifySerDisVetSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName))
 		.addSerDisVetDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
-				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-				"Asian-Pacific")
+				,"Asian-Pacific")
 		.addNewDiversityInfo()
 		.verifyDisBusEntSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName))
 		.addDisBusEntDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName),

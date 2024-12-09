@@ -34,7 +34,9 @@ public class TestCase_10527 {
 
 		//Verify New Diversity Type Options and field labels
 
-		.verifyNewDiversityTypesAndFields();
+		.verifyNewDiversityTypesAndFields()
+		
+		;
 
 
 

@@ -32,12 +32,15 @@ public class TestCase_109521 {
 
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
+		
+		//AI Suggestions
+		.clearAllSuggestions()
 
 
 		//Add New Diversity Information
 		.chooseRelatedDiversityInformation()
 		.addNewDiversityInfo()
-		.addDisBusEntDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType", sDataSheetName),
+		.addDisBusEntDiversityType("Disabled Business Enterprise",
 				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
 				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
 				"Hispanic")

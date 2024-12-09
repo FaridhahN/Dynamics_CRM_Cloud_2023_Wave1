@@ -31,6 +31,10 @@ public class TestCase_10516 {
 
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
+		
+		//Clear Co pilot suggestions
+		
+		.clearAllSuggestions()
 
 		.navigateToTPRD()
 		//verify Existing Primary Contact value 

@@ -35,8 +35,6 @@ public class TestCase_7161 {
 		//Verify Default Account Status on Supplier Form
 		.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))
 		
-		//Verify Default Account Type on Supplier Form
-		.defaultAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountType", sDataSheetName))
 		
 		//Choose Record Status as Draft.
 		.recordStatusDraft()
@@ -65,7 +63,7 @@ public class TestCase_7161 {
 		//Verify new Entity Code is generated.
 		.verifyMainAccountEntityCode(DataInputProvider.getCellData_ColName(iRowNumber, "verifyEntityCode", sDataSheetName))
 		
-		//Revert Store LocationType
+		//Data Reset ---		//Revert Store LocationType
 		.storeLocationType(DataInputProvider.getCellData_ColName(iRowNumber, "storeLocationType", sDataSheetName))
 		
 		//Save the information

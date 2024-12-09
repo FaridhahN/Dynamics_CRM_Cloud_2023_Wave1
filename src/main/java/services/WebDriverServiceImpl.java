@@ -1315,6 +1315,26 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 		} 
 	}
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		public void enterArrowDownAndEnter(WebElement ele,String field)  {
+			try {
+				ele.sendKeys(Keys.ENTER);
+				ele.sendKeys(Keys.ARROW_DOWN);
+				ele.sendKeys(Keys.ENTER);
+				setReport().log(Status.PASS,"Clicked on "+field, screenshotCapture());	
+			}
+			catch (InvalidElementStateException e) {
+				e.printStackTrace();
+				setReport().log(Status.FAIL,field+" could not be clicked", screenshotCapture());	
+				Driver.failCount++;
+			} catch (WebDriverException e) {
+				e.printStackTrace();
+				setReport().log(Status.FAIL, "Unknown exception occured while clicking in the field : "+field,screenshotCapture());	
+				Driver.failCount++;
+			} 
+		}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public void verifyExactContent( String actualText,String expectedText,String field) {
 		//String bReturn=ele.getAttribute("value");
 		try {

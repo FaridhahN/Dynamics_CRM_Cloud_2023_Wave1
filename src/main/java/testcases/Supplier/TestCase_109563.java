@@ -32,7 +32,8 @@ public class TestCase_109563 {
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
 
-
+		.clearAllSuggestions()
+		
 		//Add New Diversity Information
 		.chooseRelatedDiversityInformation()
 		.addNewDiversityInfo()
@@ -45,8 +46,7 @@ public class TestCase_109563 {
 		.verifySerDisVetSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName))
 		.addSerDisVetDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType3", sDataSheetName),
 				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
-				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-				"Asian-Pacific")
+				,"Asian-Pacific")
 		.addNewDiversityInfo()
 		.verifyDisBusEntSubClassificationOptions(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName))
 		.addDisBusEntDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType4", sDataSheetName),
@@ -56,7 +56,7 @@ public class TestCase_109563 {
 
 		//Data Reset
 		.deactivateAllDiversityInfo()
-		;
+	;
 
 
 

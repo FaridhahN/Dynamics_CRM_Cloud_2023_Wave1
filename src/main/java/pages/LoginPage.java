@@ -114,6 +114,18 @@ public class LoginPage extends WebDriverServiceImpl{
 			verifyOldLook();
 			return new DashboardPage();
 		}	
+		
+		//Click on Yes in stay signed in window
+				public DashboardPage clicYesInStaySignedinSecondUserLogin() throws InterruptedException {
+					Thread.sleep(5000);
+					if(getDriver().findElements(By.id("idSIButton9")).size()>0){
+						click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
+					}
+					Thread.sleep(7000);
+					selectPremierAccount();
+					return new DashboardPage();
+				}	
+
 
 
 
@@ -150,6 +162,7 @@ public class LoginPage extends WebDriverServiceImpl{
 			if(newlook.size()>0) {
 				Actions a = new Actions (getDriver());
 				a.moveToElement(getDriver().findElement(By.xpath("//button[@aria-expanded='true']"))).click().build().perform();
+				
 			}
 			List<WebElement> skip=getDriver().findElements(By.xpath("//span[contains(text(),'Skip feedback')]"));
 			if(skip.size()>0) {

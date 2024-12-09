@@ -30,11 +30,13 @@ public class TestCase_7154 {
 		//Choose 'Supplier Form' Option
 		.chooseSupplierForm()
 		
+		.clearAllSuggestions()
+		
 		//Verify Default Account Status on Supplier Form
 		.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))
 		
 		//Verify Default Account Type on Supplier Form
-		.defaultAccountType(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountType", sDataSheetName))		
+		.defaultAccountTypeSupplier(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountType", sDataSheetName))		
 		
 		//Type the Account Name
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))		

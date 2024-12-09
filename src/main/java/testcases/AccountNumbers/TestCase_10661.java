@@ -58,7 +58,7 @@ public class TestCase_10661 {
 		//8.Add the same Fed Tax ID (from step 3 )  on to the Supplier
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.chooseAccountNumberTypeFedTaxID()
+		.chooseAccountNumberTypeFedTaxID("Federal Tax ID")
 		.typeStaticFedTaxID(DataInputProvider.getCellData_ColName(iRowNumber, "fedTaxID", sDataSheetName))
 		.typeStartDateInAccountNumbers()
 		.clickSaveInAccountNumbersEntity()

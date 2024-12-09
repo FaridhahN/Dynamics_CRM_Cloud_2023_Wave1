@@ -33,14 +33,15 @@ public class TestCase_109506 {
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
 
-
+		//AI changes
+		.clearAllSuggestions()
+		
 		//Add New Diversity Information
 		.chooseRelatedDiversityInformation()
 		.addNewDiversityInfo()
-		.addSerDisVetDiversityType(DataInputProvider.getCellData_ColName(iRowNumber, "diversityType", sDataSheetName),
+		.addSerDisVetDiversityType("Service Disabled Veteran",
 				DataInputProvider.getCellData_ColName(iRowNumber, "certifyingAgency", sDataSheetName)
-				,DataInputProvider.getCellData_ColName(iRowNumber, "diversityStartDate", sDataSheetName),
-				"Asian-Pacific")
+				,"Asian-Pacific")
 		
 		//Data Reset
 		.deactivateAllDiversityInfo()

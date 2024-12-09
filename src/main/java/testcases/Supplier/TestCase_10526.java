@@ -31,6 +31,8 @@ public class TestCase_10526 {
 
 		//Choose the desired account from the search results
 		.selectSupplierAccountFromSearchResults()
+		
+		.clearAllSuggestions()
 
 
 

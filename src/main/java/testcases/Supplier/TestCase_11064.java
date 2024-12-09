@@ -35,6 +35,7 @@ public class TestCase_11064 {
 		.doubleClickOnNewNationalMembership()
 		.typeMembershipEndDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipEndDate", sDataSheetName))
 		.clickMembershipSave()
+		.pageRefresh()
 		.verifyEndreason("Change")
 		.clickMembershipSaveAndClose()
 		.selectMembership()
@@ -46,7 +47,7 @@ public class TestCase_11064 {
 		.selectMembershipProviderType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
 		.typeMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 		.selectMembershipProviderStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "membershipStartDate", sDataSheetName))
-		.clickAddNewMembershipProviderSaveButton()
+		.clickAddNewMembershipProviderSave()
 		
 
 		;

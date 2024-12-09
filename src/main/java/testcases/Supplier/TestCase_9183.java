@@ -72,7 +72,7 @@ public class TestCase_9183 {
 		.clickNext()
   	    .typePassword(DataInputProvider.getCellData_ColName(iRowNumber, "password", sDataSheetName))  
   	    .clicSignin()
-  	    .clicYesInStaySignedin()
+  	    .clicYesInStaySignedinSecondUserLogin()
 		
 		//Select Accounts Entity
 		.selectAccountsTab()

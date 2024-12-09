@@ -45,13 +45,13 @@ public class DashboardPage extends WebDriverServiceImpl {
 		if(copilotclosebutton.size()>0) {
 			click(getDriver().findElement(By.xpath("//button[@aria-label='Copilot' and @aria-expanded='true']")),"co pilot Close button");
 		}
-		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
+		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(20));
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Accounts']")));
 
 		click(getDriver().findElement(By.xpath("//span[text()='Accounts']")),"Accounts");
 		
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		return new AccountsPage();
 	}
 

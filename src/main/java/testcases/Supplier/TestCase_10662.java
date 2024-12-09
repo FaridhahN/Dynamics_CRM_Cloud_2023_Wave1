@@ -32,7 +32,7 @@ public class TestCase_10662 {
 		//4.Add the Fed Tax ID to the Supplier 1
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.chooseAccountNumberTypeFedTaxID()
+		.chooseAccountNumberTypeFedTaxID("Federal Tax ID")
 		.typeStaticFedTaxID(DataInputProvider.getCellData_ColName(iRowNumber, "fedTaxID", sDataSheetName))
 		.typeStartDateInAccountNumbers()
 		.clickSaveInAccountNumbersEntity()
@@ -51,7 +51,7 @@ public class TestCase_10662 {
 		//7.Add the same Fed Tax ID to the Supplier 2
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.chooseAccountNumberTypeFedTaxID()
+		.chooseAccountNumberTypeFedTaxID("Federal Tax ID")
 		.typeStaticFedTaxID(DataInputProvider.getCellData_ColName(iRowNumber, "fedTaxID", sDataSheetName))
 		.typeStartDateInAccountNumbers()
 		.clickSaveInAccountNumbersEntity()
