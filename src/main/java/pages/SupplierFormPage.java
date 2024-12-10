@@ -1207,7 +1207,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage clearContractEffectiveDate() throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement ele =getDriver().findElement(By.xpath("//*[@data-id='ix_contracteffectivedate.fieldControl-date-time-input']"));
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Date of Contract Effective date']")),"Clear Contract Effective Date");
+		WebElement ele =getDriver().findElement(By.xpath("//input[@aria-label='Date of Contract Effective date']"));
 		ele.sendKeys(Keys.CONTROL, Keys.chord("a"));
 		Thread.sleep(3000);
 		ele.sendKeys(Keys.BACK_SPACE);
