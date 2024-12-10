@@ -10,7 +10,7 @@ import utils.DataInputProvider;
 public class TestCase_8746 {
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void deactivateContact(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -99,8 +99,7 @@ public class TestCase_8746 {
 		.doubleClickOnCAARecordInactiveView()
 
 		// Verify termination status in contact account association - Entered in Error
-		.verifyStatusInCAA(
-				DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
+		.verifyStatusInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
 
 		.clickContactJobFunctionFromRelated()
 
@@ -108,24 +107,20 @@ public class TestCase_8746 {
 
 		// Check job function
 		// Verify termination status
-		.verifyJobFunctTerminationReasonInInactiveView(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.verifyJobFunctTerminationReasonInInactiveView(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		// Verify status
-		.verifyJobFunctStatusInInactiveView(
-				DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
+		.verifyJobFunctStatusInInactiveView(DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
 
 		.clickContactCommunicationFromRelated()
 
 		.clickInactiveContactCommunicationView()
 
-		.verifyContactCommunicationStatusInInactiveView(
-				DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
+		.verifyContactCommunicationStatusInInactiveView(DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
 
 		.doubleClickOnContactCommunication()
 
-		.verifyContactCommunicationTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.verifyContactCommunicationTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		.clickSignout();
 	}

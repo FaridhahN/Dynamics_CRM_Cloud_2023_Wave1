@@ -258,13 +258,12 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),
 				"Record Status");
-		selectDropDownUsingVisibleText(
-				((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),
-				recordStatus, "Record Status");
-		Thread.sleep(3000);
-		verifyExactTextWithTitleAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),
-				recordStatus, "Record Status");
+				Thread.sleep(5000);
+		//click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+recordStatus+"')]")),"Contact published");
+		Thread.sleep(2000);
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),recordStatus,"Record Status");
+		Thread.sleep(2000);
 		return this;
 
 	}
@@ -850,8 +849,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//li[contains(text(),'Administration')]")), "Administration tab");
 
-		String conRecordStatus = getAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='statecode.fieldControl-option-set-select']")), "title",
+		String conRecordStatus = getAttribute(getDriver().findElement(By.xpath("//*[@aria-label='Status']")), "value",
 				"Status under Admin tab ");
 		if (conRecordStatus.equalsIgnoreCase(status)) {
 
@@ -1230,8 +1228,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Thread.sleep(3000);
 		//Explicit wait 08/25/2023
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
-		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value","Created On");
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@aria-label='Date of Created On']")),"value"));
+		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@aria-label='Date of Created On']")), "value","Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
 
@@ -1548,15 +1546,11 @@ public class ContactsPage extends WebDriverServiceImpl {
 		//Thread.sleep(3000);
 		//Explicit wait -08/25/2023
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")),"value"));
-		String dateInUI = getAttribute(
-				getDriver().findElement(By.xpath("//*[@data-id='createdon.fieldControl-date-time-input']")), "value",
-				"Created On");
+		wait.until(ExpectedConditions.attributeToBeNotEmpty(getDriver().findElement(By.xpath("//*[@aria-label='Date of Created On']")),"value"));
+		String dateInUI = getAttribute(getDriver().findElement(By.xpath("//*[@aria-label='Date of Created On']")), "value","Created On");
 		Date diffdate = formatter.parse(dateInUI);
 		String finalDate = formatter.format(diffdate);
-
 		Thread.sleep(4000);
-
 		if (finalDate.equalsIgnoreCase(curDate)) {
 			setReport().log(Status.PASS, "An entry is added with current date " + finalDate, screenshotCapture());
 		} else {
@@ -1574,10 +1568,10 @@ public class ContactsPage extends WebDriverServiceImpl {
 		Thread.sleep(3000);
 		//Actions a = new Actions(getDriver());
 		//Wave2 Update
-		//a.moveToElement(
+		//a.moveToElement( 
 		//Wave 2023
-		doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"CAA on Comm/Pub");
-
+		//doubleClick(getDriver().findElement(By.xpath("//*[@data-icon-name='CheckMark']")),"CAA on Comm/Pub");
+		doubleClick(getDriver().findElement(By.xpath("(//*[@col-id='statecode']//label)[2]")),"CAA on Comm/Pub");
 		//doubleClick(getDriver().findElement(By.xpath("//*[@col-id='statecode']//label[@aria-label='Read only']")),"CAA on Comm/Pub");
 
 		Thread.sleep(3000);
@@ -1622,19 +1616,17 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// Verify if Contact Communication is in terminated status
 	public ContactsPage verifyContactCommunicationTerminationReason(String terminationReason) {
-		String contactComm = getAttribute(
-				getDriver()
-				.findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")),
-				"title", "Termination Reason");
+		String contactComm = getAttribute(getDriver().findElement(By.xpath("//*[@aria-label='Termination Reason']")),
+				"value", "Termination Reason");
 		if (contactComm.equalsIgnoreCase(terminationReason)) {
 
 			setReport().log(Status.PASS,
-					"Termination reason for the Contact Communication " + contactComm + " is displayed right",
+					"Termination reason for the Contact Communication ' " + contactComm + " ' is displayed right",
 					screenshotCapture());
 
 		} else {
 			setReport().log(Status.FAIL,
-					"Termination reason for the Contact Communication " + contactComm + " is not displayed right",
+					"Termination reason for the Contact Communication '" + contactComm + " ' is not displayed right",
 					screenshotCapture());
 			Driver.failCount++;
 		}
