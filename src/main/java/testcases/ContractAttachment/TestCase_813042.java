@@ -90,7 +90,7 @@ public class TestCase_813042 {
 
 
 		//Select Attachment Reasons
-		.selectAttachmentReasons("Successor Contract Update")
+		.selectAttachmentStatusReasonOnCA("Successor Contract Update")
 		
 		//click save button
 		.clickSaveButtonContractAttachment()

@@ -30,7 +30,7 @@ public class TestCase_822011 {
 		
 		//Verify Initiated By and Termination Reason fields are is disabled and verify the header text -Don't forget to change the Status Date when changing the Attachment Status!
 		.verifyWarningNotification()
-		.scrollToPriceActivationDetails()
+		.scrollToPriceActivationDetailsForReadonly()
 		.verifyInitiatiedByTerminationReasonAreDisabled();
 				
 		//Data Reset -Not Required.

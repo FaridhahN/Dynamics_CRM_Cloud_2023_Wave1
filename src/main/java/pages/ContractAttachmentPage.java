@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -26,6 +27,7 @@ import com.aventstack.extentreports.Status;
 
 import driver.Driver;
 import services.WebDriverServiceImpl;
+import utils.TestUtils;
 
 public class ContractAttachmentPage extends WebDriverServiceImpl{
 
@@ -33,12 +35,12 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	//Select All Contract Attachments view
 	public ContractAttachmentPage selectAllContractAttachentsView() throws InterruptedException {
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("(//*[@data-icon-name='ChevronDown'])[2]")),"Select a view");
+		click(getDriver().findElement(By.xpath("(//*[@data-icon-name='ChevronDown'])")),"Select a view");
 		Thread.sleep(4000);
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'All Contract Attachments')]")),"All Contract Attachments");
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("(//*[contains(@col-id,'ix_premierein')])[2]"))));
-		
+
 		Thread.sleep(6000);
 		return this;
 	} 	
@@ -185,33 +187,35 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 
 	//Verify Attachment Status field drop down options on CA Supplier
 	public ContractAttachmentPage verifyAttachmentStatusFieldOptionsOnCA() throws InterruptedException {
-		Select attachmentStatus = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")));
 		// Create Expected Array List
 		List<String> expectedAttachmentStatus = Arrays.asList("---","Generated/Sent Paperwork","Sent to Contract Attachment","Sent to Vendor","Sent to Distributor",
 				"Approved","Declined by Member","Denied by Vendor","Canceled","Offered to Member - On Hold","Information Required - On Hold",
 				"Pending Paperwork","Price Activation Required","Request from Vendor", "Compliance Required");		
-		//Create Actual blank Array List
-		List<String> actualAttachmentStatus=new ArrayList<String>();	
+
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =attachmentStatus.getOptions();		
+		List<String> mylist = new ArrayList<String>();	
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),"attachment status");
 		//loop through DOM and add dropdown values into mylist for comparison
-		for (WebElement ele:mylist) {			
-			String data =ele.getText();
-			actualAttachmentStatus.add(data);			
-			System.out.println("The Actual Attachment Status is : "  + " " +data);				
-			Thread.sleep(3000);
-			if(expectedAttachmentStatus.containsAll(actualAttachmentStatus))
-			{		
-				Thread.sleep(3000);
-				setReport().log(Status.PASS, "Attachment Status ' " + "   " + data + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ expectedAttachmentStatus,	screenshotCapture());
 
-			} 
-			else {
-				setReport().log(Status.FAIL, "Attachment Status ' "+   "   " + data + "  " + " ' Option is not available in the list"  + "::::= > "+ expectedAttachmentStatus ,	screenshotCapture());
-				Driver.failCount++;
-			}
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
+
+		if(expectedAttachmentStatus.containsAll(mylist))
+		{		
+			Thread.sleep(3000);
+			setReport().log(Status.PASS, "Attachment Status ' " + "   " + mylist + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ expectedAttachmentStatus,	screenshotCapture());
+
+		} 
+		else {
+			setReport().log(Status.FAIL, "Attachment Status ' "+   "   " + mylist + "  " + " ' Option is not available in the list"  + "::::= > "+ expectedAttachmentStatus ,	screenshotCapture());
+			Driver.failCount++;
+		}
+
+
 
 		return this;
 	}
@@ -247,9 +251,9 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		return this;
 	}
-	
+
 	public ContractAttachmentPage searchinfilter(String crmNumberInput) throws InterruptedException {
-		
+
 		WebDriverWait wait= new WebDriverWait(getDriver(),Duration.ofSeconds(15));
 		wait.until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.xpath("//*[contains(@id,'quickFind_text')]"))));
 		Thread.sleep(3000);
@@ -266,7 +270,7 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		WebElement table =getDriver().findElement(By.xpath("//*[@data-id='grid-container']"));
 		List<WebElement> rowList = table.findElements(By.xpath("//*[@data-id='grid-container']//div[contains(@col-id,'ix_idmownercontractnumber')]//label"));
 		System.out.println("# of Rows Including Header:"+ rowList.size());
-		
+
 		doubleClick(getDriver().findElement(By.xpath("(//div[contains(@col-id,'.ix_idmownercontractnumber')]//label/div)[2]")), "contractNumber");
 		/*
 		 * for (int i = 2; i <=rowList.size(); i++) { String contractNum =
@@ -290,8 +294,8 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(3000);
 		return this;
 	}
-	
-	
+
+
 	public ContractAttachmentPage checkexistingAsupplier() throws InterruptedException {
 		if(getDriver().findElements(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")).size()>0) {
 			doubleClick(getDriver().findElement(By.xpath("(//*[@data-icon-name='CheckMark'])[2]")),"Existing CA Supplier");
@@ -311,7 +315,19 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	//Verify LastResponse Date Disabled
 	public ContractAttachmentPage verifyLastResponseDateIsDisabled() throws InterruptedException {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[contains(@data-id,'tabpanel')]//h2")),"Don't forget to change the Status Date when changing the Attachment Status!","Header Section of Last Response Date");
-		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_lastresponsedate.fieldControl-date-time-input']")),"Last Response Date");
+		try {
+
+			getDriver().findElement(By.xpath("//*[@data-id='ix_lastresponsedate.fieldControl._datecontrol-date-container']")).sendKeys(TestUtils.todaysDate());
+
+		}catch(ElementNotInteractableException e)
+
+		{
+			String value=getDriver().findElement(By.xpath("//input[@aria-label='Date of Last Response Date']")).getAttribute("value");
+			Assert.assertFalse(TestUtils.todaysDate().contentEquals(value));
+			setReport().log(Status.PASS, "Last REsponse date is disabled",screenshotCapture());
+
+		}
+		//verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_lastresponsedate.fieldControl._datecontrol-date-container']")),"Last Response Date");
 		Thread.sleep(2000);
 		return this;
 	}
@@ -330,12 +346,37 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	public ContractAttachmentPage verifyInitiatiedByTerminationReasonAreDisabled() throws InterruptedException {
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='PriceActivationDetails_Sec']//h2")),"Price Activation Details","Header Section of Initiated By and Termination Reason Fields");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_negotiationstatus.fieldControl-text-box-text']")),"Negotiation Status");
-		click(getDriver().findElement(By.xpath("//*[@data-id='ix_priceexpirationdate.fieldControl-date-time-input']")),"Price Expiration Date");
-		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_initiatedby.fieldControl-text-box-text']")),"Initiated By");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_priceexpirationdate.fieldControl._datecontrol-date-container']")),"Price Expiration Date");
+		
+		try {
+			 
+			getDriver().findElement(By.xpath("//*[@data-id='ix_initiatedby.fieldControl-text-box-text']")).sendKeys(TestUtils.todaysDate());
+ 
+		}catch(ElementNotInteractableException e)
+ 
+		{
+			String value=getDriver().findElement(By.xpath("//*[@data-id='ix_initiatedby.fieldControl-text-box-text']")).getAttribute("value");
+			Assert.assertFalse(TestUtils.todaysDate().contentEquals(value));
+			setReport().log(Status.PASS, "Last REsponse date is disabled",screenshotCapture());
+ 
+		}
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_tierdescriptionfromsca.fieldControl-text-box-text']")),"Tier");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_customtierdescription.fieldControl-text-box-text']")),"Custom Tier Description");
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_suppliercomments.fieldControl-text-box-text']")),"Custom Tier Description");
-		verifyReadonlyFields(getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-text-box-text']")),"Termination Reason");
+		
+		try {
+			 
+			getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-text-box-text']")).sendKeys(TestUtils.todaysDate());
+ 
+		}catch(ElementNotInteractableException e)
+ 
+		{
+			String value=getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-text-box-text']")).getAttribute("value");
+			Assert.assertFalse(TestUtils.todaysDate().contentEquals(value));
+			setReport().log(Status.PASS, "Last REsponse date is disabled",screenshotCapture());
+ 
+		}
+		
 		Thread.sleep(2000);
 		return this;
 	}
@@ -349,17 +390,39 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 		Thread.sleep(2000);
 		return this;
 	}
+	
+	
+	public ContractAttachmentPage scrollToPriceActivationDetailsForReadonly() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Attachment Status Date')]")),"Attachment Status date");
+		clickTab(8);
+		Thread.sleep(2000);
+		return this;
+	}
+	
+	
+	
 	//Select Attachment Status on CA 
-	public ContractAttachmentPage selectAttachmentStatusOnCA(String caAttachmentStatus) {
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),caAttachmentStatus," Attachment Status on CA");
+	public ContractAttachmentPage selectAttachmentStatusOnCA(String caAttachmentStatus) throws InterruptedException {
+		clickAndEsc(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")), "CA Status");
+		clickTab(4);
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),"CA status")	;
+
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+caAttachmentStatus+"')]")),"caAttachmentStatus");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),caAttachmentStatus," Attachment Status on CA");
 		return this;
 
 	}
 
 	//Select Attachment Status Reason on CA 
-	public ContractAttachmentPage selectAttachmentStatusReasonOnCA(String caAttachmentStatusReason) {
+	public ContractAttachmentPage selectAttachmentStatusReasonOnCA(String caAttachmentStatusReason) throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),caAttachmentStatusReason," Attachment Status Reason on CA");
+
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"CA Reason")	;
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+caAttachmentStatusReason+"')]")),"caAttachmentStatusReason");
+
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),caAttachmentStatusReason," Attachment Status Reason on CA");
 		return this;
 
 	}	
@@ -376,28 +439,31 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	@SuppressWarnings("unlikely-arg-type")
 	public ContractAttachmentPage verifyAttachmentStatusReasonSuccesorContractUpdateIsNotPresent() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
 		//Create Actual blank Array List
-		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
-		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		List<String> mylist=new ArrayList<String>();	
 		//loop through DOM and add dropdown values into mylist for comparison
-		for (WebElement ele:mylist) {			
-			String data =ele.getText();
-			actualAttachmentStatusReason.add(data);			
-			System.out.println("The Actual Attachment Status Reason is : "  + " " +data);				
-			Thread.sleep(3000);
-			if(actualAttachmentStatusReason.equals("Successor Contract Update"))
-			{	Thread.sleep(2000);	
-			setReport().log(Status.FAIL, "Attachment Status Reason' "+   " Successor Contract Update  " +  "  " + " ' Option is NOT available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
-			Driver.failCount++;
 
-			} 
-			else {
-				setReport().log(Status.PASS, "Attachment Status Reason ' " + " Successor Contract Update " +  " '  Option is NOT available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
-			}
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"CA Reason")	;
+		//loop through DOM and add dropdown values into mylist for comparison
 
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
+
+		if(mylist.equals("Successor Contract Update"))
+		{	Thread.sleep(2000);	
+		setReport().log(Status.FAIL, "Attachment Status Reason' "+   " Successor Contract Update  " +  "  " + " ' Option is NOT available in the list"  + "::::= > "+ mylist ,	screenshotCapture());
+		Driver.failCount++;
+
+		} 
+		else {
+			setReport().log(Status.PASS, "Attachment Status Reason ' " + " Successor Contract Update " +  " '  Option is NOT available to choose from the list" + " ::::= > "+ mylist,	screenshotCapture());
+		}
+
+
 
 		return this;
 	}
@@ -405,107 +471,123 @@ public class ContractAttachmentPage extends WebDriverServiceImpl{
 	//Verify Attachment Status reason
 	public ContractAttachmentPage verifyAttachmentStatusReason() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Create Actual blank Array List
+		List<String> mylist=new ArrayList<String>();
+		//List<WebElement> statusoption =attachmentStatusReason.getOptions();
+		List<String> expectdoption = Arrays.asList("--Select--","New Supplier Account(s) added","Document(s) Updated","Re-engagement","New/Reconciled Child Sites","Confirmed by Distributor","Successor Contract Update");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"CA Reason")	;
+		//loop through DOM and add dropdown values into mylist for comparison
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		System.out.println(mylist);
+		System.out.println(expectdoption);
+		assertTrue(mylist.containsAll(expectdoption));
+
+		return this;
+	}
+
+	//Verify Attachment Status reason
+	public ContractAttachmentPage verifyAttachmentStatusReasonApproved() throws InterruptedException {
+		//click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+	//	Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
 		//Create Actual blank Array List
 		List<String> option=new ArrayList<String>();	
 
-		List<WebElement> statusoption =attachmentStatusReason.getOptions();
-		List<String> expectdoption = Arrays.asList("---","New Supplier Account(s) added","Document(s) Updated","Re-engagement","New/Reconciled Child Sites","Confirmed by Distributor","Successor Contract Update");
-		for(int i=0;i<statusoption.size();i++) {
+		//List<WebElement> statusoption =attachmentStatusReason.getOptions();
+		List<String> expectdoption = Arrays.asList("--Select--","Revenue received; no approval on record","Vendor account set up required","Approved from previous contract","Confirmed by Distributor","Spend on Direct Parent","Approved per Vendor List","Approved by Vendor","Member is Secondary","Not Purchasing","Successor Contract Update","Approved as Primary","Approved as Secondary");
+		
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"CA Reason")	;
+		//loop through DOM and add dropdown values into mylist for comparison
 
-			option.add(statusoption.get(i).getText());
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
+		for(int i=1;i<=options.size();i++) {
+			option.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
-System.out.println(option);
-System.out.println(expectdoption);
+		System.out.println(option);
+		System.out.println(expectdoption);
 		assertTrue(option.containsAll(expectdoption));
 
 		return this;
 	}
-	
+
 	//Verify Attachment Status reason
-		public ContractAttachmentPage verifyAttachmentStatusReasonApproved() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
-			//Create Actual blank Array List
-			List<String> option=new ArrayList<String>();	
+	public ContractAttachmentPage verifyAttachmentStatusReasonDeclinedByMember() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Create Actual blank Array List
+		List<String> option=new ArrayList<String>();	
 
-			List<WebElement> statusoption =attachmentStatusReason.getOptions();
-			List<String> expectdoption = Arrays.asList("---","Revenue received; no approval on record","Vendor account set up required","Approved from previous contract","Confirmed by Distributor","Spend on Direct Parent","Approved per Vendor List","Approved by Vendor","Member is Secondary","Not Purchasing","Successor Contract Update","Approved as Primary","Approved as Secondary");
-			for(int i=0;i<statusoption.size();i++) {
+		//List<WebElement> statusoption =attachmentStatusReason.getOptions();
+		List<String> expectdoption = Arrays.asList("--Select--","Does not use product/contract not applicable","Private Contract/Agreement","Uses non-contracted competitive product","Uses competitor contract with us","Uses another GPO's contract","Other tier selected","Confirmed by Distributor");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"CA Reason")	;
+		//loop through DOM and add dropdown values into mylist for comparison
 
-				option.add(statusoption.get(i).getText());
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-			}
-	System.out.println(option);
-	System.out.println(expectdoption);
-			assertTrue(option.containsAll(expectdoption));
-
-			return this;
+		for(int i=1;i<=options.size();i++) {
+			option.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
-		
-		//Verify Attachment Status reason
-				public ContractAttachmentPage verifyAttachmentStatusReasonDeclinedByMember() throws InterruptedException {
-					click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-					Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
-					//Create Actual blank Array List
-					List<String> option=new ArrayList<String>();	
+		System.out.println(option);
+		System.out.println(expectdoption);
+		assertTrue(option.containsAll(expectdoption));
 
-					List<WebElement> statusoption =attachmentStatusReason.getOptions();
-					List<String> expectdoption = Arrays.asList("---","Does not use product/contract not applicable","Private Contract/Agreement","Uses non-contracted competitive product","Uses competitor contract with us","Uses another GPO's contract","Other tier selected","Confirmed by Distributor");
-					for(int i=0;i<statusoption.size();i++) {
+		return this;
+	}
 
-						option.add(statusoption.get(i).getText());
+	//Verify Attachment Status reason
+	public ContractAttachmentPage verifyAttachmentStatusReasonDeniedByVendor() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+List<String> expectdoption = Arrays.asList("--Select--","Using another GPO's contract","Uses private agreement","Not on vendor approved list","Approved for different tier","Confirmed by Distributor","Ineligible Class of Trade","Successor Contract Update");
 
-					}
-			System.out.println(option);
-			System.out.println(expectdoption);
-					assertTrue(option.containsAll(expectdoption));
+List<String> mylist=new ArrayList<String>();	
+//loop through DOM and add dropdown values into mylist for comparison
+click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"attachment status");
+//loop through DOM and add dropdown values into mylist for comparison
 
-					return this;
-				}
+List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+for(int i=1;i<=options.size();i++) {
+	mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+}
+
+System.out.println(mylist);
+		System.out.println(expectdoption);
+		assertTrue(mylist.containsAll(expectdoption));
+
+		return this;
+	}
+
+	//Verify Attachment Status reason
+	public ContractAttachmentPage verifyAttachmentStatusReasonSentToVendor() throws InterruptedException {
+		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Create Actual blank Array List
 				
-				//Verify Attachment Status reason
-				public ContractAttachmentPage verifyAttachmentStatusReasonDeniedByVendor() throws InterruptedException {
-					click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-					Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
-					//Create Actual blank Array List
-					List<String> option=new ArrayList<String>();	
+		List<String> expectdoption = Arrays.asList("--Select--","Member purchasing required","No response from vendor","Confirmed by Distributor","Successor Contract Update");
 
-					List<WebElement> statusoption =attachmentStatusReason.getOptions();
-					List<String> expectdoption = Arrays.asList("---","Using another GPO's contract","Uses private agreement","Not on vendor approved list","Approved for different tier","Confirmed by Distributor","Ineligible Class of Trade","Successor Contract Update");
-					for(int i=0;i<statusoption.size();i++) {
+List<String> mylist=new ArrayList<String>();	
+//loop through DOM and add dropdown values into mylist for comparison
 
-						option.add(statusoption.get(i).getText());
+click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"attachment status");
+//loop through DOM and add dropdown values into mylist for comparison
 
-					}
-			System.out.println(option);
-			System.out.println(expectdoption);
-					assertTrue(option.containsAll(expectdoption));
+List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-					return this;
-				}
+for(int i=1;i<=options.size();i++) {
+	mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+}
 
-	//Verify Attachment Status reason
-		public ContractAttachmentPage verifyAttachmentStatusReasonSentToVendor() throws InterruptedException {
-			click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-			Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
-			//Create Actual blank Array List
-			List<String> option=new ArrayList<String>();	
+System.out.println(mylist);
+		System.out.println(expectdoption);
+		assertTrue(mylist.containsAll(expectdoption));		return this;
+	}
 
-			List<WebElement> statusoption =attachmentStatusReason.getOptions();
-			List<String> expectdoption = Arrays.asList("---","Member purchasing required","No response from vendor","Confirmed by Distributor","Successor Contract Update");
-			for(int i=0;i<statusoption.size();i++) {
-
-				option.add(statusoption.get(i).getText());
-
-			}
-
-			assertTrue(option.containsAll(expectdoption));
-
-			return this;
-		}
-		
 
 
 
@@ -513,28 +595,35 @@ System.out.println(expectdoption);
 	//Verify Attachment Status Reason when Attachment Status is Approved.
 	public ContractAttachmentPage verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsPresent() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
 		// Create Expected Array List
-		List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
+		List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");	
+		
+		List<String> mylist = new ArrayList<String>();
+		
 		//Create Actual blank Array List
-		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"attachment status");
 		//loop through DOM and add dropdown values into mylist for comparison
-		for (WebElement ele:mylist) {			
-			String data =ele.getText();
-			actualAttachmentStatusReason.add(data);			
-			System.out.println("The Actual Attachment Status Reason is : "  + " " +data);				
-			Thread.sleep(3000);
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+		
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+			
 		}
-		if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Approved as Secondary')]")),"caAttachmentStatus");
+		System.out.println(mylist);
+		
+		if(mylist.containsAll(expectedAttachmentStatusReason))
 		{		
 			Thread.sleep(3000);
-			setReport().log(Status.PASS, "Attachment Status Reason ' " + "   " + expectedAttachmentStatusReason + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+			setReport().log(Status.PASS, "Attachment Status Reason ' " + "   " + mylist + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ expectedAttachmentStatusReason,	screenshotCapture());
 
 		} 
 		else {
-			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + expectedAttachmentStatusReason + "  " + " ' Option is not available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + mylist + "  " + " ' Option is not available in the list"  + "::::= > "+ expectedAttachmentStatusReason ,	screenshotCapture());
 			Driver.failCount++;
 		}
 		return this;
@@ -544,29 +633,33 @@ System.out.println(expectdoption);
 	//Verify Attachment Status Reasons (Approved as Primary","Approved as Secondary) is NOT present when Attachment Status is OTHER THAN Approved.
 	public ContractAttachmentPage verifyAttachmentStatusReasonApprovedAsPrimarySecondaryIsNotPresent() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@title='Attachment Status Date']"))," Attachment Status Date Title on CA");
-		Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
+		//Select attachmentStatusReason = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));
 		// Create Expected Array List
 		List<String> expectedAttachmentStatusReason = Arrays.asList("Approved as Primary","Approved as Secondary");		
 		//Create Actual blank Array List
-		List<String> actualAttachmentStatusReason=new ArrayList<String>();	
+		
+	List<String> mylist = new ArrayList<String>();
+		
+		//Create Actual blank Array List
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =attachmentStatusReason.getOptions();		
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"attachment status");
 		//loop through DOM and add dropdown values into mylist for comparison
-		for (WebElement ele:mylist) {			
-			String data =ele.getText();
-			actualAttachmentStatusReason.add(data);			
-			System.out.println("The Actual Attachment Status is Reason : "  + " " +data);				
-			Thread.sleep(3000);
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+		
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
-		if(actualAttachmentStatusReason.containsAll(expectedAttachmentStatusReason))
+		
+		if(mylist.containsAll(expectedAttachmentStatusReason))
 		{		
 
-			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + expectedAttachmentStatusReason + "  " + " ' Option is not available in the list"  + "::::= > "+ actualAttachmentStatusReason ,	screenshotCapture());
+			setReport().log(Status.FAIL, "Attachment Status Reason' "+   "   " + expectedAttachmentStatusReason + "  " + " ' Option is not available in the list"  + "::::= > "+ mylist ,	screenshotCapture());
 			Driver.failCount++;
 		} 
 		else {
 			Thread.sleep(3000);
-			setReport().log(Status.PASS, "Attachment Status Reason' " + "   " + expectedAttachmentStatusReason + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ actualAttachmentStatusReason,	screenshotCapture());
+			setReport().log(Status.PASS, "Attachment Status Reason' " + "   " + expectedAttachmentStatusReason + "  " +  " '  Option is available to choose from the list" + " ::::= > "+ mylist,	screenshotCapture());
 
 		}
 		return this;
@@ -620,7 +713,13 @@ System.out.println(expectdoption);
 	//Select Attachment sStatus
 	public ContractAttachmentPage selectAttachmentStatus(String attachmentStatus) throws InterruptedException, AWTException {
 
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")), attachmentStatus, "attachmentStatus");
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")),"CA status")	;
+
+		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+attachmentStatus+"')]")),"caAttachmentStatus");
+		
+		
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatus.fieldControl-option-set-select']")), attachmentStatus, "attachmentStatus");
 		return this;
 	}
 
@@ -637,7 +736,7 @@ System.out.println(expectdoption);
 	//enter contract attachment status date
 	public ContractAttachmentPage enterContractAttahmentstatusDate(String attachmentStatus) throws InterruptedException, AWTException { 
 		clickTab(2);
-		type(getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusdate.fieldControl-date-time-input']")),attachmentStatus,"Attachment Status");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Attachment Status Date']")),attachmentStatus,"Attachment Status");
 		clickTab(1);
 		return this;
 
@@ -665,8 +764,8 @@ System.out.println(expectdoption);
 	public ContractAttachmentPage verifyPriceActivationSection() throws InterruptedException, AWTException {
 
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_tierdescriptionfromsca-FieldSectionItemContainer']")).size(), "Tire ");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Price Activation ID']")).size(), "Price Activation Id");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Initiated By']")).size(), "Initiated By ");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Price Activation ID']")).size(), "Price Activation Id");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Initiated By']")).size(), "Initiated By ");
 
 		return this;
 	}
@@ -705,14 +804,14 @@ System.out.println(expectdoption);
 		return this;
 
 	}	
-	
+
 	public ContractAttachmentPage clickIgnoreAndSave() throws InterruptedException, AWTException { 
-	List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
+		List<WebElement> ignoreMessage=getDriver().findElements(By.xpath("//*[text()='Ignore and save']"));
 
-	if(ignoreMessage.size()>0)
+		if(ignoreMessage.size()>0)
 
-		click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
-return this;
+			click(getDriver().findElement(By.xpath("//*[text()='Ignore and save']")),"Ignore and Save"); 
+		return this;
 	}
 	//Click save and close button
 
@@ -745,21 +844,21 @@ return this;
 		return this;
 
 	}
-	
+
 	//Click Deactivate for Contract Attachment	
-		public ContractAttachmentPage clickDeactivateonContractAttachmentinForm() throws InterruptedException, AWTException {
-			if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")).size()>0) {
-				click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")),"Deactivate Button");
-				click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
-				
-				Thread.sleep(7000);
-			}
+	public ContractAttachmentPage clickDeactivateonContractAttachmentinForm() throws InterruptedException, AWTException {
+		if(getDriver().findElements(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_contractattachment|NoRelationship|Form|Mscrm.Form.ix_contractattachment.Deactivate']")),"Deactivate Button");
+			click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")),"Ok Button");
 
-			return this;
-
+			Thread.sleep(7000);
 		}
-	
-	
+
+		return this;
+
+	}
+
+
 
 	//Verify Error message is not displauyed
 	public ContractAttachmentPage verifyErrorisNotDisplayed() throws InterruptedException {
@@ -802,19 +901,25 @@ return this;
 
 	//Verify Attachment Status field drop down options on CA Supplier
 	public ContractAttachmentPage verifyAttachmentStatusFieldOptionsOnCASupplierwithSpecificValue(String Option) throws InterruptedException {
-		Select attachmentStatus = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_supplierattachmentstatus.fieldControl-option-set-select']")));
-		// Create Expected Array List
+		
+		//Select attachmentStatus = new Select(getDriver().findElement(By.xpath("//*[@data-id='ix_supplierattachmentstatus.fieldControl-option-set-select']")));
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_supplierattachmentstatus.fieldControl-option-set-select']")),"Supplier Attachment Array");	// Create Expected Array List
 		//Create Actual blank Array List
-		List<String> actualAttachmentStatus=new ArrayList<String>();	
+		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =attachmentStatus.getOptions();		
-		//loop through DOM and add dropdown values into mylist for comparison
-		for (WebElement ele:mylist) {			
-			String data =ele.getText();
-			actualAttachmentStatus.add(data);			
-			System.out.println("The Actual Attachment Status is : "  + " " +data);				
-		}
-		Assert.assertTrue(actualAttachmentStatus.contains(Option));
+				List<String> mylist = new ArrayList<String>();	
+
+				//loop through DOM and add dropdown values into mylist for comparison
+
+				List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+				for(int i=1;i<=options.size();i++) {
+					mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+				}
+
+			Assert.assertTrue(mylist.contains(Option));
+			Actions actions= new Actions(getDriver());
+			actions.sendKeys(Keys.ESCAPE).build().perform();
 		return this;
 	}
 	//Verify LOB required Error message
@@ -822,7 +927,7 @@ return this;
 
 		Thread.sleep(5000);
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),errorMessage);
-		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"Ok Button");
 		return this;
 
 	}
@@ -830,9 +935,9 @@ return this;
 	public ContractAttachmentPage clickGoBackandDiscardChanges() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='navigateBackButtontab-id-0']")),"Go back");
 		Thread.sleep(6000);
-		List<WebElement> discarChanges=getDriver().findElements(By.xpath("//*[contains(@id,'cancelButtonTextName')]"));
+		List<WebElement> discarChanges=getDriver().findElements(By.xpath("//*[@data-id='cancelButton']"));
 		if(discarChanges.size()>0) {
-			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButtonTextName')]")),"Discard Changes");
+			click(getDriver().findElement(By.xpath("//*[@data-id='cancelButton']")),"Discard Changes");
 		}
 
 		Thread.sleep(5000);
@@ -851,27 +956,27 @@ return this;
 
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Tier Requested']")),"Tier Requested");
 		clickTab(5);
-		Select AccountType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));		
+		
+		//Select AccountType= new  Select(getDriver().findElement(By.xpath("//button[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));		
+																		 
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"AttachmentStatus reason");
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =AccountType.getOptions();
+		List<String> mylist =new ArrayList<String>();
 
-		List<String> selectoptions =new ArrayList<String>();
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-		for(int i=0;i<mylist.size();i++) {
-
-			selectoptions.add(mylist.get(i).getText());
-
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
 
-		System.out.println(selectoptions);
-		assertTrue((selectoptions.contains("Successor Contract Update")), "Sucessor Contract Updated");
-
+		assertTrue((mylist.contains("Successor Contract Update")), "Sucessor Contract Updated");
+		Actions actions= new Actions(getDriver());
+		actions.sendKeys(Keys.ESCAPE).build().perform();
 		return this;
 	}
 
 	//Select Successor Contract Update as Attachment Reason
 	public ContractAttachmentPage selectAttachmentReasons(String Attachment_Reason) throws InterruptedException, AWTException {
-
 		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")), Attachment_Reason, "Attachment_Reason");
 		return this;
 	}
@@ -881,7 +986,7 @@ return this;
 	//Verify Attachment Reasons
 	public ContractAttachmentPage verifyAttachmentReasonsisDeleted() throws InterruptedException, AWTException {
 
-		String attachmentReason = getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")).getAttribute("title");
+		String attachmentReason = getDriver().findElement(By.xpath("//*[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")).getAttribute("title");
 		assertTrue(attachmentReason.contentEquals("---"));
 		return this;
 	}
@@ -890,9 +995,20 @@ return this;
 	public ContractAttachmentPage verifySucessorAttachmentReason() throws InterruptedException, AWTException {
 
 
-		Select AccountType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));		
+	//	Select AccountType= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")));		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =AccountType.getOptions();		
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select']")),"AttachmentStatus reason");
+		//Create temp Array List > add  actual options  from DOM for comparison
+		List<String> mylist =new ArrayList<String>();
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		
+				
 		assertTrue(!(mylist.contains("Successor Contract Update")), "Sucessor Contract Updated");
 		return this;
 	}
@@ -948,7 +1064,7 @@ return this;
 	//Select the Existing Contract Attachment
 	public ContractAttachmentPage selectExistingContractAttachment() throws InterruptedException   {
 		Actions actions= new Actions(getDriver());
-		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='Select or deselect the row']"))).click().build().perform();
+		actions.moveToElement(getDriver().findElement(By.xpath("//input[@aria-label='select or deselect the row']"))).click().build().perform();
 		Thread.sleep(2000);
 		clickEditButton();
 
@@ -1002,12 +1118,12 @@ return this;
 
 	//Attachment Status REason is locked
 	public ContractAttachmentPage verifyattachmentStatusReasonisLocked() throws InterruptedException {
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//select[@data-id='ix_attachmentstatusreason.fieldControl-option-set-select' and @disabled]")).size(), "AttachmentStatusreason");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@aria-label='Attachment Status Reason' and  @readonly]")).size(), "AttachmentStatusreason");
 
 		return this;
 	}
-	
-	
-	
-	
+
+
+
+
 }

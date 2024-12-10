@@ -28,9 +28,9 @@ public class TestCase_31541 {
 		.selectAllContractAttachentsView()	
 		
 		//Selectall Contract attachment
-		.selectAllExistingContractAttachment()
+	//	.selectAllExistingContractAttachment()
 		//Deactivate contract Attachment
-		.clickDeactivateonContractAttachment()
+	//	.clickDeactivateonContractAttachment()
 		
 		
 		.clickNewOnCA()

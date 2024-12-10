@@ -443,7 +443,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 		}
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.id("nav_ix_account_ix_contractattachment")), "Contract Attachments");
+		click(getDriver().findElement(By.xpath("//div[@data-id='form-tab-relatedEntity-nav_ix_account_ix_contractattachment']")), "Contract Attachments");
 		Thread.sleep(5000);
 		return new ContractAttachmentPage();
 	}

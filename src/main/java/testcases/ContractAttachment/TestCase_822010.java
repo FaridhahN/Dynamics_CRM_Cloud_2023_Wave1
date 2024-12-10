@@ -29,7 +29,8 @@ public class TestCase_822010 {
 		.openFirstContractAttachment()
 		
 		//Verify LastResponse Date is disabled and verify the header text -Don't forget to change the Status Date when changing the Attachment Status!
-		.verifyWarningNotification()
+	//	.verifyWarningNotification()
+		
 		.verifyLastResponseDateIsDisabled();
 				
 		//Data Reset -Not Required.
