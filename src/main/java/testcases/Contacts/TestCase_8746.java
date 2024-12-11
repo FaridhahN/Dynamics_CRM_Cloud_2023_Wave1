@@ -65,8 +65,7 @@ public class TestCase_8746 {
 		.clickAddContactCommunication()
 
 		// Select "Roster-Hierarchy Roster" as Communication then save
-		.typeContactCommunication(
-				DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
+		.typeContactCommunication(DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
 
 		// Click on Save
 		.clickSaveInContactCommunication()

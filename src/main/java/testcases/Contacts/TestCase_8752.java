@@ -12,7 +12,7 @@ import utils.DataInputProvider;
 public class TestCase_8752 {
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void verifyCAATermination(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -58,8 +58,7 @@ public class TestCase_8752 {
 		.clickSaveInJobFunction()
 
 		// Verify created job function
-		.verifyJobFunctionIsCreated(
-				DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
+		.verifyJobFunctionIsCreated(DataInputProvider.getCellData_ColName(iRowNumber, "jobFunction", sDataSheetName))
 
 		.doubleClickOnCAARecord()
 
@@ -67,8 +66,7 @@ public class TestCase_8752 {
 		.clickAddContactCommunication()
 
 		// Select "Roster-Hierarchy Roster" as Communication then save
-		.typeContactCommunication(
-				DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
+		.typeContactCommunication(DataInputProvider.getCellData_ColName(iRowNumber, "communicationPublication", sDataSheetName))
 
 		// Click on Save
 		.clickSaveInContactCommunication()
@@ -85,8 +83,7 @@ public class TestCase_8752 {
 		.clickSave()
 
 		// 4. Check the record status - published
-		.verifyRecordStatus(
-				DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
+		.verifyRecordStatus(DataInputProvider.getCellData_ColName(iRowNumber, "recordStatus", sDataSheetName))
 
 		.clickCAAFromRelated()
 
@@ -96,39 +93,34 @@ public class TestCase_8752 {
 		.clickContactSubGridViewInCAA()
 
 		// Verify termination status
-		.verifyCAATerminationReasonInSubGridView(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.verifyCAATerminationReasonInSubGridView(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		// Verify relationship end date
-		.verifyCAARelationEndDateInSubGridView(
-				DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
-		
+		.verifyCAARelationEndDateInSubGridView(DataInputProvider.getCellData_ColName(iRowNumber, "contactRelationshipEndDate", sDataSheetName))
+
 		// 6. Check the Job function and communication record status
 		.doubleClickOnCAARecordInSubGridView()
 
 		// Verify termination status in contact account association
-		.verifyStatusInCAA(
-				DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
+		.verifyStatusInCAA(DataInputProvider.getCellData_ColName(iRowNumber, "Status", sDataSheetName))
 
 		.clickContactJobFunctionFromRelated()
 
 		.doubleClickOnActiveJobFunction()
 
 		// Verify job function termination status
-		.verifyJobFunctionTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
-		
+		.verifyJobFunctionTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+
 		.clickGoBack()
 
 		.clickContactCommunicationFromRelated()
-		
+
 		.clickCAArecordFromJobFunction()
 
 		//.doubleClickOnContactCommunication()
 
 		// Verify contact communication termination status
-		.verifyContactCommunicationTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.verifyContactCommunicationTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		.clickSignout();
 	}

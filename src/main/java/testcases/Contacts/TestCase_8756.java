@@ -12,7 +12,7 @@ import utils.DataInputProvider;
 public class TestCase_8756 {
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void checkBlankErrorinCommPubCAA(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM as member supervisor
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -44,8 +44,7 @@ public class TestCase_8756 {
 		.clickSaveInContactCommunication()
 
 		// Verify error message
-		.verifyErrorInContactCommunication(
-				DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
+		.verifyErrorInContactCommunication(DataInputProvider.getCellData_ColName(iRowNumber, "errorMessage", sDataSheetName))
 
 		.clickSignout();
 	}

@@ -12,7 +12,7 @@ import utils.DataInputProvider;
 public class TestCase_8755 {
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void checkErrorBlankJBinCAA(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM as Member supervisor
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))

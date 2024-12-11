@@ -11,7 +11,7 @@ import utils.DataInputProvider;
 public class TestCase_8751 {
 
 	@Test
-	public void createMemberTP(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
+	public void endDateAContact(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException {
 
 		// 1. Login to CRM using member supervisor / member credentials
 		new LoginPage().typeEmail(DataInputProvider.getCellData_ColName(iRowNumber, "email", sDataSheetName))
@@ -83,10 +83,9 @@ public class TestCase_8751 {
 		// and terminated reason as "Terminated" on the contact account association then
 		// save it
 		.typeContactRelationshipEndDate()
-				
+
 		// choose termination reason
-		.chooseContactTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.chooseContactTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		// SAve the record
 		.clickSaveAfterTerminationCAA()
@@ -100,20 +99,18 @@ public class TestCase_8751 {
 		.doubleClickOnActiveJobFunction()
 
 		// Check job function
-		.verifyJobFunctionTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
-		
+		.verifyJobFunctionTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+
 		.clickGoBack()
 
 		.clickContactCommunicationFromRelated()
-		
+
 		.clickCAArecordFromJobFunction()
 
 		//.doubleClickOnContactCommunication()
 
 		// Check communication record status
-		.verifyContactCommunicationTerminationReason(
-				DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
+		.verifyContactCommunicationTerminationReason(DataInputProvider.getCellData_ColName(iRowNumber, "terminationReason", sDataSheetName))
 
 		.clickSignout();
 	}

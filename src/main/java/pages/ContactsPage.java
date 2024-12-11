@@ -364,8 +364,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage typeContactEndDate(String contactEndDate) throws InterruptedException {
 		Thread.sleep(500);
 		// alternate action for scrolling down to contact end date
-		click(getDriver().findElement(
-				By.xpath("//*[@data-id='fullname_compositionLinkControl_lastname.fieldControl-text-box-text']")),
+		click(getDriver().findElement(By.xpath("//*[@data-id='fullname_compositionLinkControl_lastname.fieldControl-text-box-text']")),
 				"Last Name");
 		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Telephone");
 		click(getDriver().findElement(By.xpath("//input[@data-id='emailaddress1.fieldControl-mail-text-input']")),"Email address");
@@ -373,18 +372,13 @@ public class ContactsPage extends WebDriverServiceImpl {
 		clickTab(3);
 		click(getDriver().findElement(By.xpath("//*[@data-id='jobtitle.fieldControl-text-box-text']")), "Job Title");
 		clickTab(4);
-		click(getDriver().findElement(By.xpath("//*[contains(@data-id,'ix_employeeflag.fieldControl-checkbox')]")),
+		click(getDriver().findElement(By.xpath("//*[@data-id='ix_employeeflag.fieldControl-option-set-select']")),
 				"Employee flag");
 		clickTab(3);
-
 		// click contact end date field twice and then type value to it
-		click((getDriver().findElement(By.xpath("//*[@data-id='ix_contactenddate.fieldControl-date-time-input']"))),
-				"Contact End Date");
-		click((getDriver().findElement(By.xpath("//*[@data-id='ix_contactenddate.fieldControl-date-time-input']"))),
-				"Contact End Date");
-
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_contactenddate.fieldControl-date-time-input']")))),
-				contactEndDate, "Contact End Date");
+		click((getDriver().findElement(By.xpath("//*[@aria-label='Date of Contact End Date']"))),"Contact End Date");
+		click((getDriver().findElement(By.xpath("//*[@aria-label='Date of Contact End Date']"))),"Contact End Date");
+		type(getDriver().findElement(By.xpath("//*[@aria-label='Date of Contact End Date']")),contactEndDate, "Contact End Date");
 		return this;
 	}
 
@@ -614,8 +608,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	public ContactsPage chooseContactTerminationReason(String contactTerminationReason) throws InterruptedException {
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")),"Termination Reason");
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_terminationreason.fieldControl-option-set-select']")))),
-				contactTerminationReason, "Termination Reason");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+contactTerminationReason+"')]")),"Termination Reason");
 		Thread.sleep(3000);
 		Thread.sleep(3000);
 		return this;
@@ -633,9 +626,8 @@ public class ContactsPage extends WebDriverServiceImpl {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String enddate = dateFormat.format(date);
-		type(((getDriver()
-				.findElement(By.xpath("//*[@data-id='ix_relationshipenddate.fieldControl-date-time-input']")))),
-				enddate, "Relationship End Date");
+		click(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Relationship End Date']")))),"Relationship End Date");
+		type(((getDriver().findElement(By.xpath("//*[@aria-label='Date of Relationship End Date']")))),enddate, "Relationship End Date");
 		return this;
 	}
 
@@ -1324,9 +1316,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 
 	// Verify if job function is in terminated status
 	public ContactsPage verifyJobFunctionTerminationReason(String terminationReason) {
-		String jobFunction = getAttribute(
-				getDriver()
-				.findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")),
+		String jobFunction = getAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_terminationreason.fieldControl-option-set-select']")),
 				"title", "Termination Reason");
 		if (jobFunction.equalsIgnoreCase(terminationReason)) {
 			setReport().log(Status.PASS,
@@ -1617,7 +1607,7 @@ public class ContactsPage extends WebDriverServiceImpl {
 	// Verify if Contact Communication is in terminated status
 	public ContactsPage verifyContactCommunicationTerminationReason(String terminationReason) {
 		String contactComm = getAttribute(getDriver().findElement(By.xpath("//*[@aria-label='Termination Reason']")),
-				"value", "Termination Reason");
+				"title", "Termination Reason");
 		if (contactComm.equalsIgnoreCase(terminationReason)) {
 
 			setReport().log(Status.PASS,
