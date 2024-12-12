@@ -9,7 +9,7 @@ public class TestCase_1004153 {
 
 
 	@Test
-	public void verifyAccountNumberDUNS(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAccountNumberDUNSCharLimit(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM as Member
 		new LoginPage()
@@ -27,8 +27,8 @@ public class TestCase_1004153 {
 		//Verify DUNS is displayed in the Account Nunmber drop down
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.verifyAccountnumberTypedropdown("DUNS")
-		.chooseAccountNumberType("DUNS")
+		//.verifyAccountnumberTypedropdown("DUNS")
+		.chooseAccountNumberTypeDUNS()
 
 		//Type less than 9 digits
 		.typeStaticAccountNumber("123")

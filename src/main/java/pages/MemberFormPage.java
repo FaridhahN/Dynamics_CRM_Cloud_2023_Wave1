@@ -6555,7 +6555,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			System.out.println(title);					
 			if (title.equals("DUNS")) {
 				Thread.sleep(3000);
-				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "HIN");
+				doubleClick(getDriver().findElement(By.xpath("(//*[@data-id='grid-container']//div[@col-id='ix_accountnumbertype']//label/div)["+i+"]")), "DUNS");
 				Thread.sleep(3000);
 				break;								
 			}
@@ -8419,6 +8419,20 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		return this;
 	}
+	
+	//Select Account type as DUNS
+		public MemberFormPage chooseAccountNumberTypeDUNS() {
+			try {
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+				click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'DUNS')]")),"Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DUNS","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
+		}
 
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeHIN() {

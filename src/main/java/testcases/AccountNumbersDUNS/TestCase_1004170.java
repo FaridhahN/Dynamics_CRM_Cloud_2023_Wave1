@@ -10,7 +10,7 @@ public class TestCase_1004170 {
 
 
 	@Test
-	public void verifyAccountNumberDUNS(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyAccountNumberDUNSDupCheck(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM as Member
 		new LoginPage()
@@ -28,9 +28,9 @@ public class TestCase_1004170 {
 		//Verify DUNS is displayed in the Account Nunmber drop down
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.verifyAccountnumberTypedropdown("DUNS")
-		.chooseAccountNumberType("DUNS")
-		
+		//.verifyAccountnumberTypedropdown("DUNS")
+		.chooseAccountNumberTypeDUNS()
+
 		.typeStaticAccountNumber("546543785")
 		.typeStartDateInAccountNumbers()
 
@@ -38,14 +38,14 @@ public class TestCase_1004170 {
 
 		.verifyNameAndCalculatedNameInAccountNumbers()
 		.clickGoBack()
-		
-		
+
+
 		.selectAccountNumbers()
-		
+
 		.clickAddNewAccountNumberInAccountNumbers()
-		.verifyAccountnumberTypedropdown("DUNS")
-		.chooseAccountNumberType("DUNS")
-		
+		//.verifyAccountnumberTypedropdown("DUNS")
+		.chooseAccountNumberTypeDUNS()
+
 		.typeStaticAccountNumber("546543785")
 		.typeStartDateInAccountNumbers()
 
@@ -54,7 +54,7 @@ public class TestCase_1004170 {
 		.verifyAccountNumberErrorMessage(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
 		.clickOKOnAccountNumberErrorMessage()
 
-		
+
 		.clickGoBack()
 
 

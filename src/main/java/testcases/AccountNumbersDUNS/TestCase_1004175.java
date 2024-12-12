@@ -28,8 +28,8 @@ public class TestCase_1004175 {
 		//Verify DUNS is displayed in the Account Nunmber drop down
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
-		.verifyAccountnumberTypedropdown("DUNS")
-		.chooseAccountNumberType("DUNS")
+		//.verifyAccountnumberTypedropdown("DUNS")
+		.chooseAccountNumberTypeDUNS()
 
 		//Clcik Save button
 		.clickSaveAccountNumber()
