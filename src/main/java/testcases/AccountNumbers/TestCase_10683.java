@@ -11,7 +11,7 @@ public class TestCase_10683 {
 
 
 	@Test
-	public void verifyAccountNumberEntity(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyEndDateDEAAccountNumberEntity(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 
 		//1. Login to CRM as Member
 		new LoginPage()

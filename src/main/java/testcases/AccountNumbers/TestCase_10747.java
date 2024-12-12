@@ -10,7 +10,7 @@ public class TestCase_10747 {
 
 	  	
 	@Test
-	public void verifyAccountNumberEntity(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
+	public void verifyInvalidHINOnAccountNumberEntity(int iRowNumber, String sDataSheetName) throws Exception, InterruptedException  {
 		
 		//1. Login to CRM as Member
 		new LoginPage()
