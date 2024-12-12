@@ -23,10 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.text.TabableView;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.poi.util.SystemOutLogger;
+import org.jsoup.nodes.Entities.EscapeMode;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -660,7 +662,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Account Status')]")),"Account Status");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Application Date')]")),"Application Date");
 		Thread.sleep(5000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")))),applicationDate, "Application Start Date");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl._datecontrol-date-container']//input")))),applicationDate, "Application Start Date");
 		return this;
 
 	}
@@ -1575,20 +1577,20 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	//~~~~~~~~~~~~~~~~~~~END  Activity~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	//Enter End Date in Account Numbers
-	public MemberFormPage typeStaticEndDateInAccountNumbers(String accNumEndDate) {
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),accNumEndDate,"End Date"); 
-		return this;
-	}
+		public MemberFormPage typeStaticEndDateInAccountNumbers(String accNumEndDate) {
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date"); 
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date");
+			type(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),accNumEndDate,"End Date"); 
+			return this;
+		}
 
 	//Clear End Date in Account Numbers
-	public MemberFormPage  clearEndDateInAccountNumbers() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-		clear(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 				
-		return this;
-	}
+		public MemberFormPage  clearEndDateInAccountNumbers() throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date");
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date");
+			clear(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date"); 				
+			return this;
+		}
 
 
 	//disabled Account Number Type				
@@ -4467,7 +4469,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	public MemberFormPage chooseLocationTypeNull() throws InterruptedException   {	
 		Thread.sleep(1000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
-		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'---')]")),"Location Type");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'--Select--')]")),"Location Type");
 		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
 		return new MemberFormPage();
 	}	
@@ -4523,7 +4525,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+topParentClassification+"')]")),"Location Type");
 		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-select']")))),topParentClassification,"Top Parent Classification");
 		Thread.sleep(2000);
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentclassification.fieldControl-option-set-container']")),topParentClassification,"Top Parent Classification"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_topparentclassification.fieldControl-option-set-select']")),topParentClassification,"Top Parent Classification"); 
 		return this;
 	}
 
@@ -4536,19 +4538,19 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//To make fee share field visible
 		click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible
-		click(getDriver().findElement(By.xpath("//input[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
 		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Fee share Eligible");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligible.fieldControl-checkbox-select']")),"Yes","Fee Share Eligible"); 
+		
 		Thread.sleep(2000);
 		
-		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Fee Share Eligible']")),"Yes","Fee Share Eligible"); 
+		verifyExactValue(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Yes","Fee Share Eligible"); 
 		return this;
 	}
 
 	//Fee share eligible start date
 	public MemberFormPage selectFeeShareEligibleDate(String feeShareEligibleDate) throws InterruptedException {
 		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligibledate.fieldControl-date-time-input']")))),feeShareEligibleDate,"Fee Share Eligible Start Date");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligibledate.fieldControl._datecontrol-date-container']")))),feeShareEligibleDate,"Fee Share Eligible Start Date");
 		return this;
 	}
 
@@ -4573,7 +4575,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 
 	//Select FBO Effective date
 	public MemberFormPage selectFBOEffectiveDate(String FBOEffectiveDate) {
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotypeeffectivedate.fieldControl-date-time-input']")))),FBOEffectiveDate,"FBO Effective Date");
+		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotypeeffectivedate.fieldControl-datetime-description_container']")))),FBOEffectiveDate,"FBO Effective Date");
 		return this;
 	}
 
@@ -4646,8 +4648,9 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		if(getDriver().findElements(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")).size()>0){
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
 		}
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Draft", "Record Status");	
-		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Draft')]")),"Account published");
+				Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft","Record Status"); 
 		Thread.sleep(3000);
 		return this;	
@@ -5343,9 +5346,9 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	//Verify premier start date
 	public MemberFormPage verifyPremierStartDate(String premierStartDate) throws InterruptedException {
 
-		System.out.println(getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date"));
+		System.out.println(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier Start Date']")),"Premier Start Date"));
 		try {
-			Assert.assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date").equals(premierStartDate));
+			Assert.assertTrue(getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier Start Date']")),"Premier Start Date").equals(premierStartDate));
 		}
 		catch (AssertionError e) {
 			System.out.println(e.getMessage());}
@@ -5361,7 +5364,9 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 
 	//Select membership end date
 	public MemberFormPage selectMembershipEndReason(String EndReason) {
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")))),EndReason,"End Reason");
+	click((getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']"))),"End reason");
+	click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+EndReason+"')]")),"Account published");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_endreason.fieldControl-option-set-select']")))),EndReason,"End Reason");
 		return this;
 	}
 
@@ -5381,12 +5386,12 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	//Type membership end date
 	public MemberFormPage typeMembershipEndDate(String EndDate) {
 		//click(getDriver().findElement(By.xpath("//*[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")),"End Date");
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),EndDate,"End Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date'][contains(@id,'DateControlPrefix')]")))),EndDate,"End Date");
 		return this;
 	}
 
 	public MemberFormPage verifyPremierEndDateIsNull() {
-		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier End Date"); 
+		verifyNullValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier End Date']")),"Premier End Date"); 
 		return this;
 	}
 
@@ -5397,21 +5402,21 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 
 	//Verify premier end date
 	public MemberFormPage verifyPremierEndDate(String verifyPremierEndDate) {
-		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier End Date")).equals(verifyPremierEndDate));
+		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier End Date']")),"Premier End Date")).equals(verifyPremierEndDate));
 		return this;
 	}
 
 	//Verify direct parent relation  date is updated correctly
 	public MemberFormPage verifyDirectParentRelationDate(String verifyDirectParentRelationDate) {
-		verifyExactValue(((getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")))),verifyDirectParentRelationDate, "Direct Parent Relation Date");
+		verifyExactValue(((getDriver().findElement(By.xpath("//input[@aria-label='Date of Direct Parent Relation Date']")))),verifyDirectParentRelationDate, "Direct Parent Relation Date");
 		return this;
 	}
 
 	//Verify premier start date is null
 	public MemberFormPage verifyDPRelationtDateIsNotNull() throws InterruptedException {
 		Thread.sleep(3000);
-		System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")).getAttribute("value"));
-		verifIsNoTNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")),"DP Relation Date");
+		System.out.println(getDriver().findElement(By.xpath("//input[@aria-label='Date of Direct Parent Relation Date']")).getAttribute("value"));
+		verifIsNoTNullValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of Direct Parent Relation Date']")),"DP Relation Date");
 		return this;
 	}
 
@@ -5434,7 +5439,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Is Top Parent')]")),"Is top Parent");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Top Parent Relation')]")),"Top Parent Relation");
 
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),verifyTopParentRelationDate,"Top Parent Relation Date");
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of Top Parent Relation Date']")),verifyTopParentRelationDate,"Top Parent Relation Date");
 		return this;
 	}
 
@@ -5447,6 +5452,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		String Text=getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group");
 		System.out.println(Text);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Affiliate Group Effective Date')]")),"AG Effective Date");
+		System.out.println(verifyAffiliateGroup);
 		Assert.assertTrue((getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group")).equals(verifyAffiliateGroup));
 		return this;
 	}
@@ -5454,7 +5460,8 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	//Verify AG effective date
 	public MemberFormPage verifyAgEffectiveDate(String verifyAgEffectiveDate) {
 		click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
-		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Effective Date")).equals(verifyAgEffectiveDate));
+		System.out.println((getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")),"")));
+		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")),"Affiliate Group Effective Date")).equals(verifyAgEffectiveDate));
 		return this;
 	}
 
@@ -5462,7 +5469,7 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String date1= dateFormat.format(date); 
-		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroupeffectivedate.fieldControl-date-time-input']")),"Affiliate Group Effective Date")).equals(date1));
+		Assert.assertTrue((getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")),"Affiliate Group Effective Date")).equals(date1));
 		return this;
 	}
 
@@ -6829,15 +6836,15 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	}
 
 	//Enter End Date as Today's Date in Account Numbers
-	public MemberFormPage typeEndDateInAccountNumbers() {
-		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-		Date date = new Date();
-		String enddate= dateFormat.format(date);			
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
-		return this;
-	}
+		public MemberFormPage typeEndDateInAccountNumbers() {
+			DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+			Date date = new Date();
+			String enddate= dateFormat.format(date);
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"Start Date"); 
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"Start Date");
+			type(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),enddate,"Start Date"); 
+			return this;
+		}
 
 
 	//Enter End Date as FutureDate Date in Account Numbers
@@ -6863,31 +6870,21 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	public MemberFormPage typePastEndDateInAccountNumbers() {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
-
+ 
 		Calendar c = Calendar.getInstance();    
 		c.setTime(date);        
 		// manipulate date        
 		c.add(Calendar.DATE, -1); 
 		// convert calendar to date      
 		Date currentDatePlusOne = c.getTime();
-
+ 
 		String enddate= dateFormat.format(currentDatePlusOne);			
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date"); 
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),enddate,"End Date"); 
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date"); 
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),"End Date");
+		type(getDriver().findElement(By.xpath("//*[@aria-label='Date of End Date']")),enddate,"End Date"); 
 		return this;
 	}
-
-	//Enter Start Date as Today's Date in Account Numbers
-	public MemberFormPage typeStartDateInAccountNumbers() {
-		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
-		Date date = new Date();
-		String startdate= dateFormat.format(date);
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date"); 
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),"Start Date");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_startdate.fieldControl-date-time-input']")),startdate,"Start Date"); 
-		return this;
-	}
+		
 
 	//To add existing HIN
 	public MemberFormPage typeStaticHIN(String HIN) {
@@ -8417,17 +8414,18 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	}
 
 	//Select Account number type in account numbers window
-	public MemberFormPage chooseAccountNumberTypeHIN() {
-		try {
-			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Number Type");
-			Thread.sleep(2000);
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Numbers Type"); 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		public MemberFormPage chooseAccountNumberTypeHIN() {
+			try {
+				Thread.sleep(2000);
+				click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+				click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'HIN')]")),"Account Number Type");
+				Thread.sleep(2000);
+				verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"HIN","Account Numbers Type"); 
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return this;
 		}
-		return this;
-	}
 
 	//Select Account number type in account numbers window
 	public MemberFormPage chooseAccountNumberTypeRemitra() {
@@ -8546,17 +8544,20 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	}	
 
 	//Select Account type as DEA
-	public MemberFormPage chooseAccountNumberTypeDEA() {
-		try {
-			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Number Type");
-			Thread.sleep(2000);
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type"); 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		public MemberFormPage chooseAccountNumberTypeDEA() {
+			try {
+					Thread.sleep(2000);
+					click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+					click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'DEA')]")),"Account Number Type");
+					Thread.sleep(2000);
+					verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type"); 
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return this;
 		}
-		return this;
-	}
+	 
+	 
 
 	//Select Account type as NPI
 	public MemberFormPage chooseAccountNumberTypeNPI() {
@@ -10881,6 +10882,16 @@ click(getDriver().findElement(By.xpath("//button[@data-id='ix_participationtype.
 	}
 
 
+	//Enter Start Date as Today's Date in Account Numbers
+		public MemberFormPage typeStartDateInAccountNumbers() {
+			DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
+			Date date = new Date();
+			String startdate= dateFormat.format(date);
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of Start Date']")),"Start Date"); 
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Date of Start Date']")),"Start Date");
+			type(getDriver().findElement(By.xpath("//*[@aria-label='Date of Start Date']")),startdate,"Start Date"); 
+			return this;
+		}
 
 
 }

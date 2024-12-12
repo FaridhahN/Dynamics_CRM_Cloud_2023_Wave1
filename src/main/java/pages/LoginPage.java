@@ -105,7 +105,7 @@ public class LoginPage extends WebDriverServiceImpl{
 			//	if(getDriver().findElements(By.xpath("//h2[contains(text(),'Microsoft Authenticator')]")).size()>0) {
 			//	click(getDriver().findElement(By.xpath("//a[contains(text(),'Skip setup')]")),"Skip Setup");
 			//}
-			//	Thread.sleep(5000);
+				Thread.sleep(5000);
 			if(getDriver().findElements(By.id("idSIButton9")).size()>0){
 				click(getDriver().findElement(By.id("idSIButton9")),"Yes in Stay Signed In");
 			}

@@ -120,9 +120,7 @@ public class TestCase_8838 {
 
 		//FBORD
 		.verifyFBORD(DataInputProvider.getCellData_ColName(iRowNumber, "verifyFBORD", sDataSheetName))
-		.navigateToRecordStatusMEF()
-		.navigateToSponsorMEF()
-
+		.NavigateToSponsofromAGDAteMEF()
 		//17 Verify Sponsor field 
 		.verifySponsor(WebDriverServiceImpl.Dpdata.get("SponsorName"))
 
