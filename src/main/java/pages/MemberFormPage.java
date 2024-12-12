@@ -4643,18 +4643,25 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Choose record status as Draft
-	public MemberFormPage chooseRecordStatusDraft() throws InterruptedException {
-		Thread.sleep(3000);
-		if(getDriver().findElements(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")).size()>0){
+		public MemberFormPage chooseRecordStatusDraft() throws InterruptedException {
+			Thread.sleep(3000);
+			if(getDriver().findElements(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")).size()>0){
 			click(getDriver().findElement(By.xpath("//*[@data-id='form-sectionHeader-MembershipProviderConfiguration']")),"Record Status");
+			}
+			chooseRecordStatusAsDraft();
+			return this;	
 		}
-		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft status");
-		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Draft')]")),"Account published");
-		Thread.sleep(3000);
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft","Record Status"); 
-		Thread.sleep(3000);
-		return this;	
-	}
+		
+		public MemberFormPage chooseRecordStatusAsDraft() throws InterruptedException  {
+			
+			
+			click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft status");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Draft')]")),"Account published");
+					Thread.sleep(3000);
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft","Record Status"); 
+			Thread.sleep(3000);
+			return this;	
+		}
 
 	//Choose record status as Draft
 	public MemberFormPage chooseRecordStatusDraftfromTop() throws InterruptedException {

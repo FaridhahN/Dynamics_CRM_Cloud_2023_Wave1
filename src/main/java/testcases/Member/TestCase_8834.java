@@ -172,7 +172,7 @@ public class TestCase_8834 {
 		.clickSave() 
 
 		//16.For reactivation, move the record status to draft *** Record should be moved to draft 
-		.chooseRecordStatusDraft()
+		.chooseRecordStatusAsDraft()
 
 		//Click on Save 
 		.clickSave()
