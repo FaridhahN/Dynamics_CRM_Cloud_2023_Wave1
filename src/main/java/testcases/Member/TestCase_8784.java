@@ -152,7 +152,7 @@ public class TestCase_8784 {
 		.verifyErrorMessageLOBDeactivate()
 		.clickGoBackButton()
 		.clickGeneralTab()
-		.chooseRecordStatusDraft()
+		.chooseRecordStatusDraftfromTop()
 		.clickSave()
 		.clickLineOfBusinesses()
 		.doubleClickExistingLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))

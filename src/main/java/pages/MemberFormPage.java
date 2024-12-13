@@ -1191,8 +1191,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//*[contains(text(),'"+duration+"')]"))).sendKeys(Keys.TAB).build().perform();
-		a.sendKeys(Keys.ESCAPE).build().perform();  
+		a.moveToElement(getDriver().findElement(By.xpath("//*[contains(text(),'"+duration+"')]"))).click().sendKeys(Keys.TAB).build().perform();
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"Task details");
 		//Changed on 10/11/2023
 		//click(getDriver().findElement(By.xpath("//button[@aria-label='Save (CTRL+S)']")),"Save button");
@@ -1744,66 +1743,67 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	public MemberFormPage verifyParticipationType() {
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select participationList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Participation Type']")));		
-
+		
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']")),"Participation Type");
+		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> participationType =participationList.getOptions();	
+		List<String > mylist =new ArrayList<String>();	
 
-		for(int i=0;i<participationType.size();i++) {
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-			selectoptions.add(participationType.get(i).getText());
-
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
 
 
 		//Participation type should not have Provider Select : MD
-		assertTrue(!(selectoptions.contains("Provider Select: MD")));
+		assertTrue(!(mylist.contains("Provider Select: MD")));
 		return this;
 	}
 
 	public MemberFormPage verifyParticipationTypeOption(String participationTypeOption) {
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select participationList= new  Select(getDriver().findElement(By.xpath("//select[@aria-label='Participation Type']")));		
-
+		
+		click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']")),"Participation Type");
+		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> participationType =participationList.getOptions();	
+		List<String > mylist =new ArrayList<String>();	
 
-		for(int i=0;i<participationType.size();i++) {
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-			selectoptions.add(participationType.get(i).getText());
-
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
+
 		//Participation type should not have Provider Select : MD
-		assertTrue(selectoptions.contains(participationTypeOption));
+		assertTrue(mylist.contains(participationTypeOption));
 		return this;
 	}
 
 
 	public MemberFormPage verifyProviderSelectOption() throws InterruptedException {
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select participationType= new  Select(getDriver().findElement(By.xpath("//*[@data-id='ix_providerselectmd.fieldControl-option-set-select']")));
-
+		
+click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']")),"Participation Type");
+		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> option =participationType.getOptions();	
+		List<String > mylist =new ArrayList<String>();	
 
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		
 		List<String> expectdoption = Arrays.asList("---","Provider Select: MD","Provider Select: MD Grandfathered");		
 
 
-		for(int i=0;i<option.size();i++) {
-
-			selectoptions.add(option.get(i).getText());
-
-		}
-
-		if(selectoptions.containsAll(expectdoption))
+		if(mylist.containsAll(expectdoption))
 		{		
 			Thread.sleep(3000);
-			setReport().log(Status.PASS, "RepresentativeType- " + "   " + selectoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+			setReport().log(Status.PASS, "RepresentativeType- " + "   " + mylist+ "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
 
 		} 
 		else {
-			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + selectoptions + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			setReport().log(Status.FAIL, "RepresentativeType - "+   "   " + mylist + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
 			Driver.failCount++;
 		}
 
@@ -3169,7 +3169,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage deactivateLOB() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Button");
 		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Deactivation']")), "Deactivation Dialog Box");
-		click((getDriver().findElement(By.xpath("//span[contains(@id,'dialogButtonText') and contains(text(),'Deactivate')]"))),"Deactivate button");
+		click((getDriver().findElement(By.xpath("//button[@data-id='ok_id']"))),"Deactivate button");
 		Thread.sleep(5000);
 		return this;
 	}
@@ -3193,7 +3193,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage activateLOB() {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Activate')]")),"Activate LOB");
 		verifyDisplayed(getDriver().findElement(By.xpath("//h1[@aria-label='Confirm Line of Business Activation']")), "Dialog Box");
-		click(getDriver().findElement(By.xpath("//span[contains(@id,'dialogButton') and contains(text(),'Activate')]")),"Activate Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id' and @title='Activate']")),"Activate Button");
 		//click(getDriver().findElement(By.xpath("//button[data-id='ok_id']")),"Activate Button");
 		return this;
 	}
@@ -4692,8 +4692,9 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		 * ,"Record Status");
 		 */
 		navigateToRecordStatus();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Draft", "Record Status");	
-		Thread.sleep(3000);
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Draft')]")),"Account published");
+				Thread.sleep(3000);
 		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Draft","Record Status"); 
 		Thread.sleep(3000);
 		return this;	
@@ -4895,7 +4896,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	}
 
 	//Type top parent reason
-	public MemberFormPage typeTPReason(String TPReason) {
+	public MemberFormPage typeTPReason(String TPReason) throws InterruptedException {
+		clear(getDriver().findElement(By.xpath("//*[@data-id='ix_tpexceptionreason.fieldControl-text-box-text']")),"TP exception Reason");
 		click(((getDriver().findElement(By.xpath("//*[@data-id='ix_tpexceptionreason.fieldControl-text-box-text']")))),"TP Exception Reason");
 		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_tpexceptionreason.fieldControl-text-box-text']")))),TPReason,"TP Exception Reason");
 		return this;
@@ -5489,8 +5491,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//div[@data-id='FSPEntityCode.ix_premierein-FieldSectionItemContainer']/div")),"Food Service");
 		click(getDriver().findElement(By.xpath("//h2[contains(text(),'FBO')]")),"FBO");
 
-		System.out.println(getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")).getAttribute("value"));
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_fborelationdate.fieldControl-date-time-input']")),date1,"FBO Relation Date");
+		System.out.println(getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")).getAttribute("value"));
+		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Relation Date']")),date1,"FBO Relation Date");
 		return this;
 	}
 
@@ -5499,7 +5501,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		DateFormat dateFormat = new SimpleDateFormat("M/d/yyyy");
 		Date date = new Date();
 		String date1= dateFormat.format(date);
-		type(getDriver().findElement(By.xpath("//*[@data-id='ix_topparentrelationdate.fieldControl-date-time-input']")),date1,"Top Parent Relation Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Top Parent Relation Date']")),date1,"Top Parent Relation Date");
 		return this;
 	}
 
@@ -7313,17 +7315,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 				click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
 			}
 			Thread.sleep(4000);
-			List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Task')]"));
-			List<WebElement> closphone=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Phone')]"));
-			List<WebElement> closletter=getDriver().findElements(By.xpath("//button[contains(@aria-label,'Close Letter')]"));
+			List<WebElement> closbutton=getDriver().findElements(By.xpath("//button[contains(@title,'Close Task')]"));
+			List<WebElement> closphone=getDriver().findElements(By.xpath("//button[contains(@title,'Close Phone')]"));
+			List<WebElement> closletter=getDriver().findElements(By.xpath("//button[contains(@title,'Close Letter')]"));
 			if(closbutton.size()>0) {
-				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Task')]")),"Confirm Delete Button");	
+				click(getDriver().findElement(By.xpath("//button[contains(@title,'Close Task')]")),"Confirm Delete Button");	
 			}else if(closphone.size()>0){
-				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+				click(getDriver().findElement(By.xpath("//button[contains(@title,'Close Phone')]")),"Confirm Delete Button");
 			}else if(closletter.size()>0) {
-				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Letter')]")),"Confirm Delete Button");
+				click(getDriver().findElement(By.xpath("//button[contains(@title,'Close Letter')]")),"Confirm Delete Button");
 			}else {
-				click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close')]")),"Confirm Delete Button");
+				click(getDriver().findElement(By.xpath("//button[contains(@title,'Close')]")),"Confirm Delete Button");
 			}
 		}
 		Thread.sleep(10000);

@@ -31,12 +31,13 @@ public class TestCase_8793 {
 		.searchAccount(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
 
+		//Update Participation type
+		
+		.navigateToParticipationType()
+		
 		//Update Stree value
 		.typeStreet2(DataInputProvider.getCellData_ColName(iRowNumber, "street2", sDataSheetName)) 
 
-
-		//Update Participation type
-		.navigateToParticipationType()
 
 		//Participation Type
 		.selectParticipationType(DataInputProvider.getCellData_ColName(iRowNumber, "participationType", sDataSheetName))
