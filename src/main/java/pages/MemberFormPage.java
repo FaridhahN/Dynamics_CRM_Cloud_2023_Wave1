@@ -1245,10 +1245,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Thread.sleep(200);
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).click().build().perform();
-
+		a.moveToElement(getDriver().findElement(By.xpath("//*[contains(text(),'"+duration+"')]"))).click().build().perform();
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Phone Number']")),Phonenumber,"Phone Number");
-
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
