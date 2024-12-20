@@ -131,7 +131,7 @@ public class LoginPage extends WebDriverServiceImpl{
 
 	//Click on Yes in stay signed in window
 	public LoginPage staysignedinforOtherApp() throws InterruptedException {
-		Thread.sleep(5000);
+		Thread.sleep(7000);
 
 		/*
 		 * Below code is for MFA setup 

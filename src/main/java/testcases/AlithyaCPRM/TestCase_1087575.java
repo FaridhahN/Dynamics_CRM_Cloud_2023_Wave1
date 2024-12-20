@@ -26,12 +26,15 @@ public class TestCase_1087575 {
 		.changeViewinOppurtunityPage("CP - All Opportunities")
 		.clickAddColumn()
 		.addColumnInTheView("Est. Revenue (Base)")
+		.clickAddColumnInPopup()
 		.addColumnInTheView("Potential Customer")
+		.clickAddColumnInPopup()
 		.addColumnInTheView("Active Stage")
 		.clickApplyinEditColumn()
 		.clikCancelButton()
 		.verifyOppurtunityviewColumnafternewColumnAdded()
 		.clikCancelButton()
+
 		;					
 	}
 }

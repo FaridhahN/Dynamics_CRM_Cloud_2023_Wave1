@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import services.WebDriverServiceImpl;
+import utils.TestUtils;
 
 public class PartnerSalesPage extends WebDriverServiceImpl {
 
@@ -318,9 +319,12 @@ public class PartnerSalesPage extends WebDriverServiceImpl {
 
 	public PartnerSalesPage updatePrequalified() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//div[contains(@data-id,'MscrmControls.Containers.ProcessBreadCrumb-processHeaderStageName') and contains(text(),'Pre-Qualified')]")),"Pre Qualified stage");
-		click(getDriver().findElement(By.xpath("//label[@data-id='header_process_ix_introducedpremiersmartposolution.fieldControl-checkbox-toggle']")),"intro premier smart");
-		click(getDriver().findElement(By.xpath("//label[@data-id='header_process_ix_memberexpressedinterestordesiretolearn.fieldControl-checkbox-toggle']")),"member express");
+		click(getDriver().findElement(By.xpath("//button[@data-id='header_process_ix_introducedpremiersmartposolution.fieldControl-option-set-select']")),"intro premier smart");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Yes Option intro premier smart");
+		click(getDriver().findElement(By.xpath("//button[@data-id='header_process_ix_memberexpressedinterestordesiretolearn.fieldControl-option-set-select']")),"member express");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Yes Option member express");
 		click(getDriver().findElement(By.xpath("//button[@data-id='MscrmControls.Containers.ProcessStageControl-nextButtonContainer']")),"Process next stage");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Initial Call Set For']")),TestUtils.todaysDate(),"Initial call date");
 		clickCloseButtonProcessStage();		
 		return this;
 	}
@@ -360,12 +364,21 @@ public class PartnerSalesPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_whatpiquedyourinterest.fieldControl-text-box-text']")),intreset,"intreset");
 		type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_whataremaingoalstryingtosolvefor.fieldControl-text-box-text']")),goalsleft,"intreset");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_taskedwithfindingsolution.fieldControl-option-set-select']")), solution, "solution");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_taskedsolutiondate.fieldControl-date-time-input']")),time,"time");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_taskedwithfindingsolution.fieldControl-option-set-select']")),"Solution");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+solution+"')]")),"Account published");
+
+		
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_taskedwithfindingsolution.fieldControl-option-set-select']")), solution, "solution");
+		
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of By when?']")),time,"time");
 		type(getDriver().findElement(By.xpath("//textarea[@data-id='ix_anyoneelsetaskedwithproject.fieldControl-text-box-text']")),task,"timeline");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_timelineforthisproject.fieldControl-date-time-input']")),timeline,"timeline");
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Do your locations/departments have the same GL chart of accounts?']")), department, "department");
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_whenisyourcontractup.fieldControl-date-time-input']")),contractupDate,"contractupDate");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Timeline for this project?']")),timeline,"timeline");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@aria-label='Do your locations/departments have the same GL chart of accounts?']")), department, "department");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_dotheyhavesameglchart.fieldControl-option-set-select']")),"department");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+department+"')]")),"department");
+
+		
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of When is your contract up?']")),contractupDate,"contractupDate");
 		type(getDriver().findElement(By.xpath("//input[@data-id='ix_apsystemnameandlocation.fieldControl-text-box-text']")),apssystem,"apssystem");
 		type(getDriver().findElement(By.xpath("//input[@data-id='ix_apversion.fieldControl-text-box-text']")),apversion,"apversion");
 		return this;

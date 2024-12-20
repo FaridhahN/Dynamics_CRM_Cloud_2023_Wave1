@@ -1645,21 +1645,33 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Disabled Corporate Parent, Food Service Parent  ,Is FBO , Is Sponsor fields
 	//Verify Is Corporate Account is Disabled
 	public MemberFormPage verifyIsCorporateAccountFieldIsDisabled() {
-		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")),"Is Corporate Account");
+		List<WebElement> IsCorporate= getDriver().findElements(By.xpath("//input[@aria-label='Is Corporate Account' and @readonly]"));
+		verifyElementisDisplayed(IsCorporate.size(), "IsCorporate");
+	//	verifyDisabledFields(getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")),"Is Corporate Account");
 		return this;
+		//input[@aria-label='Is Corporate Account']
 	}
 
-	//Verify Is Food Service Parent is Disabled
+
+
 	public MemberFormPage verifyIsFoodServiceParentFieldIsDisabled() {
-		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")),"Is Food Service Parent");
+		List<WebElement> IsCorporate= getDriver().findElements(By.xpath("//input[@aria-label='Is Food Service Parent' and @readonly]"));
+		verifyElementisDisplayed(IsCorporate.size(), "IsCorporate");
+		
+		//verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfoodserviceparent.fieldControl-checkbox-select']")),"Is Food Service Parent");
 		return this;
 	}
 
-	//Verify Is FBO is Disabled
+
 	public MemberFormPage verifyIsFBOFieldIsDisabled() {
-		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfbo.fieldControl-checkbox-select']")),"Is FBO");
+		List<WebElement> IsCorporate= getDriver().findElements(By.xpath("//input[@aria-label='Is FBO' and @readonly]"));
+		verifyElementisDisplayed(IsCorporate.size(), "IsFBO");
+		
+		
+		//verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_isfbo.fieldControl-checkbox-select']")),"Is FBO");
 		return this;
 	}
+
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -2651,9 +2663,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify Corporate Parent Name is null
 	public MemberFormPage verifyCorporateParentNameIsNull() {
-		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-pcf-container-id']//div/div")),"Corporate Parent Name"); 
+		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']")),"Corporate Parent Name"); 
 		return this;
 	}
+
 
 	//Verify Corporate Parent Name
 	public MemberFormPage verifyCorporateParentName(String verifyCorporateParentName) {
@@ -2689,9 +2702,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify Food Service Parent Name
 	public MemberFormPage verifyFoodServiceParentNameIsNull() {
-		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//*[@data-id='ix_foodserviceparentname.fieldControl-Lookup_ix_foodserviceparentname']//div/div")),"Food Service Parent Name"); 
+		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//div[@data-id='ix_foodserviceparentname.fieldControl-Lookup_ix_foodserviceparentname']")),"Food Service Parent Name"); 
 		return this;
 	}
+
 
 	//Verify Food service Start Date
 	public MemberFormPage verifyFoodServiceStartDate(String verifyFoodServiceStartDate) {
@@ -2863,10 +2877,11 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 	//Verify if sponsor filed is blank
-	public MemberFormPage verifySponsorIsNull() {
-		verifyNullValueWithGetText(getDriver().findElement(By.xpath("//*[@data-id='ix_sponsor.fieldControl-Lookup_ix_sponsor']//div/div")),"Sponsor"); 
-		return this;
-	}
+		public MemberFormPage verifySponsorIsNull() {
+			verifyNullValueWithGetText(getDriver().findElement(By.xpath("//div[@data-id='ix_sponsor.fieldControl-Lookup_ix_sponsor']")),"Sponsor"); 
+			return this;
+		}
+
 
 
 	//Verify Is sponsor
@@ -3314,19 +3329,21 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage clickDeactivateMember() {
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Deactivate')]")),"Deactivate Member");
 		getDriver().findElement(By.xpath("//div//h1[@aria-label='Confirm Deactivation']")).isDisplayed();
-		getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")).isDisplayed();
+		getDriver().findElement(By.xpath("//button[@title='Deactivate' and @data-id='ok_id']")).isDisplayed();
 		return this;
 	}
+
 
 	//Verify Member supervisor could not deactivate error message
 
-	public MemberFormPage verifyDeactivateError(String Expected_Error) throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")),"Deactivate button");
-		Thread.sleep(5000);
-		verifyExactText(getDriver().findElement(By.xpath("//h2[@data-id='errorDialog_subtitle']")),Expected_Error,"Deactivate Error");
-		click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK Button");
-		return this;
-	}
+		public MemberFormPage verifyDeactivateError(String Expected_Error) throws InterruptedException {
+			click(getDriver().findElement(By.xpath("//button[@title='Deactivate' and @data-id='ok_id']")),"Deactivate button");
+			Thread.sleep(5000);
+			verifyExactText(getDriver().findElement(By.xpath("//h2[@data-id='errorDialog_subtitle']")),Expected_Error,"Deactivate Error");
+			click(getDriver().findElement(By.xpath("//button[@data-id='errorOkButton']")),"OK Button");
+			return this;
+		}
+
 	//Type Line Of Business Start Date
 	public MemberFormPage typeLineOfBusinessStartDate(String lineOfBusinessStartDate) throws InterruptedException {
 		Thread.sleep(3500);
@@ -4528,29 +4545,37 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 	//Select Fee share eligible as yes
-	public MemberFormPage changeFeeShareEligibleToYes() throws InterruptedException {
-		Thread.sleep(10000);
-		click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
-		click(getDriver().findElement(By.xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")),"MEMBERSHIP PROVIDER CONFIGURATION");//To make fee share field visible
-		click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible
-		click(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
-		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Fee share Eligible");
+		public MemberFormPage changeFeeShareEligibleToYes() throws InterruptedException {
+			Thread.sleep(10000);
+			click(getDriver().findElement(By.xpath("//*[@title='TOP PARENT']")),"TOP Parent");//Scroll down to make the record status field visible
+			click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
+			click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
+			click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
+			/*
+			 * if(getDriver().findElements(By.
+			 * xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']")).size()>0) {
+			 * click(getDriver().findElement(By.
+			 * xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']"))
+			 * ,"MEMBERSHIP PROVIDER CONFIGURATION");//To make fee share field visible }
+			 */
+			click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible
+			click(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Fee share Eligible");
+			clickTab(1);
+			Thread.sleep(2000);
 
-		Thread.sleep(2000);
+			verifyExactValue(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Yes","Fee Share Eligible"); 
+			return this;
+		}
 
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Yes","Fee Share Eligible"); 
-		return this;
-	}
 
-	//Fee share eligible start date
-	public MemberFormPage selectFeeShareEligibleDate(String feeShareEligibleDate) throws InterruptedException {
-		Thread.sleep(3000);
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligibledate.fieldControl._datecontrol-date-container']")))),feeShareEligibleDate,"Fee Share Eligible Start Date");
-		return this;
-	}
+		//Fee share eligible start date
+		public MemberFormPage selectFeeShareEligibleDate(String feeShareEligibleDate) throws InterruptedException {
+			Thread.sleep(3000);
+			type(((getDriver().findElement(By.xpath("//*[@data-id='ix_feeshareeligibledate.fieldControl._datecontrol-date-container']//input")))),feeShareEligibleDate,"Fee Share Eligible Start Date");
+			return this;
+		}
+
 
 	//Select FBO Type
 	public MemberFormPage selectFBOGPOType(String FBOType) {
@@ -4572,10 +4597,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 	//Select FBO Effective date
-	public MemberFormPage selectFBOEffectiveDate(String FBOEffectiveDate) {
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_fbotypeeffectivedate.fieldControl-datetime-description_container']")))),FBOEffectiveDate,"FBO Effective Date");
-		return this;
-	}
+		public MemberFormPage selectFBOEffectiveDate(String FBOEffectiveDate) {
+			type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of FBO Type Effective Date']")))),FBOEffectiveDate,"FBO Effective Date");
+			return this;
+		}
 
 	//Select FBO Effective date
 	public MemberFormPage selectFBORelationDate(String FBORelationDate) {
@@ -5206,11 +5231,12 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 	//Change Is Corporate parent
-	public MemberFormPage changeIsCorporateParent(String IsCorporateAccount) {
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")))),IsCorporateAccount,"IsCorporateAccount");
-		verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),IsCorporateAccount,"Is Corporate Account"); 
-		return this;
-	}
+		public MemberFormPage changeIsCorporateParent(String IsCorporateAccount) {
+			selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")))),IsCorporateAccount,"IsCorporateAccount");
+			verifyExactValue(getDriver().findElement(By.xpath("//*[@data-id='ix_iscorporateaccount.fieldControl-checkbox-container']")),IsCorporateAccount,"Is Corporate Account"); 
+			return this;
+		}
+
 
 
 	public MemberFormPage noMatchforCorporateParent(String corporateparent) throws InterruptedException {	
@@ -7773,20 +7799,20 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 	// Disabled Corporate Parent  Details
-	public MemberFormPage verifyCorporateParentDetailsIsNotEditable(String corporateParent,String crmNumber1) {
-		//CP
-		verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']/div/div/div[1]")),corporateParent,"Corporate Parent");
-		//EIN
-		verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
-		typeLocked(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
-		//Is CP
-		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_iscorporateaccount.fieldControl-checkbox-select']")),"Is Corporate Parent");
-		//CP Start Date
-		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")),"Corporate Parent Start Date");
-		//FSP Override
-		verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")),"Corporate Parent Override");
-		return this;
-	}
+		public MemberFormPage verifyCorporateParentDetailsIsNotEditable(String corporateParent,String crmNumber1) {
+			//CP
+			verifyExactTextWithTextContentAttribute(getDriver().findElement(By.xpath("//div[@data-id='ix_corporateparentname.fieldControl-Lookup_ix_corporateparentname']/div/div/div[1]")),corporateParent,"Corporate Parent");
+			//EIN
+			verifyReadonlyFields(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text'][@readonly]")),"Entity Code");
+			typeLocked(getDriver().findElement(By.xpath("//input[@data-id='CPEntityCode.ix_premierein.fieldControl-text-box-text']")),crmNumber1, "Entity Code");
+			//Is CP
+			verifyDisabledFields(getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")),"Is Corporate Parent");
+			//CP Start Date
+			verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_corporateparentstartdate.fieldControl-date-time-input']")),"Corporate Parent Start Date");
+			//FSP Override
+			verifyDisabledFields(getDriver().findElement(By.xpath("//select[@data-id='ix_corporateparentoverride.fieldControl-checkbox-select']")),"Corporate Parent Override");
+			return this;
+		}
 
 	// Disabled Corporate Rebate Details
 	public MemberFormPage verifyCorporateRebateDetailsIsNotEditable() {

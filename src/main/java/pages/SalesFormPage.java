@@ -294,8 +294,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//input[@data-id='name.fieldControl-text-box-text']")),"click Account Name");
 		click(getDriver().findElement(By.xpath("//textarea[@data-id='description.fieldControl-text-box-text']")),"Description Feild");
 		clickTab(2);
-		click(getDriver().findElement(By.xpath("//input[@data-id='estimatedclosedate.fieldControl-date-time-input']")),"Estimated close date");
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasedate.fieldControl-date-time-input']")),"Anticipated Purchase date");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Date of Est. close date']")),"Estimated close date");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Date of Anticipated Start Purchase Date']")),"Anticipated Purchase date");
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelineinitiative.fieldControl-LookupResultsDropdown_ix_pipelineinitiative_textInputBox_with_filter_new']")),"Pipeline intiative");
 		click(getDriver().findElement(By.xpath("//input[@data-id='ix_pipelineinitiative.fieldControl-LookupResultsDropdown_ix_pipelineinitiative_textInputBox_with_filter_new']")),"Pipeline intiative");
 		Thread.sleep(5000);
@@ -423,8 +423,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	public SalesFormPage navigatetoFeeshare() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Account Name 2']")),"Account name");
 		clickTab(11);
-		click(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"Account name");
-		clickTab(8);
+		click(getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']")),"Account name");
+		clickTab(10);
 		return this;
 	}
 
@@ -569,8 +569,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	}
 
 	public SalesFormPage verifyGutFeelOptioninView() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//div[@data-id='data-set-quickFind-container']/input")),"search in filter button");
-		clickTab(2);
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Opportunity Filter by keyword']")),"search in filter button");
+		clickTab(5);
 		clickshiftTab(1);
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'Gut Feel')]")).size(),"Gut Fell option");					
 		return this;
@@ -580,10 +580,14 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Click Add Stage button
 	public SalesFormPage clickAddColumn() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
-		click(getDriver().findElement(By.xpath("//button[@id='AddColumnsBtn']")),"Add Columns");
+		clickAddColumnInPopup();
 		return this;
 	}
 	
+	public SalesFormPage clickAddColumnInPopup() throws InterruptedException {
+	click(getDriver().findElement(By.xpath("//button[@id='AddColumnsBtn']")),"Add Columns");
+	return this;
+	}
 	//Click Edit Column
 		public SalesFormPage clickEditColumn() throws InterruptedException {
 			click(getDriver().findElement(By.xpath("//button[@id='columnEditor-btn']")),"column");	
@@ -602,7 +606,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 			doubleClick(getDriver().findElement(By.xpath("//label[contains(text(),'"+column+"')]")),"Click Active Stage");
 		}
 		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//i[@data-icon-name='Clear']"))).click().build().perform();
+		action.moveToElement(getDriver().findElement(By.xpath("(//button[@title='Close']//i)[2]"))).click().build().perform();
 		return this;
 	}
 
@@ -611,14 +615,13 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Add Stage in the column
 	public SalesFormPage clickApplyinEditColumn() throws InterruptedException {
 
-		click(getDriver().findElement(By.xpath("//button//span[contains(text(),'Close')]")),"Close button");
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Apply')]")),"Apply Button");
 		return this;
 	}
 
 	public SalesFormPage verifyOptionsInAccountsView() throws InterruptedException, ParseException {
 
-		click(getDriver().findElement(By.xpath("//div[@data-id='data-set-quickFind-container']/input")),"search in filter button");
+		click(getDriver().findElement(By.xpath("//input[@aria-label='Opportunity Filter by keyword']")),"search in filter button");
 		clickTab(2);
 		clickshiftTab(1);
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//div[contains(text(),'Account Type')]")).size(),"Account Type");
@@ -663,29 +666,43 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Verify Gut Feel options	
 	public SalesFormPage verifyGutFeel()  throws InterruptedException {
 
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_gutfeel.fieldControl-option-set-select']")));
+		//ArrayList<String> selectoptions=new ArrayList<String>();
+		
+		//Select gutFeel= new  Select(getDriver().findElement(By.xpath("//button[@data-id='ix_gutfeel.fieldControl-option-set-select']")));
 
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> option =gutFeel.getOptions();	
+		//List<WebElement> option =gutFeel.getOptions();	
 
-		List<String> expectdoption = Arrays.asList("---","Very Likely","Likely","Neutral","Not Likely");		
+		List<String> expectdoption = Arrays.asList("--Select--","Very Likely","Likely","Neutral","Not Likely");		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_gutfeel.fieldControl-option-set-select']")),"Gut Feel");
+		
 
+		List<String > mylist =new ArrayList<String>();	
 
-		for(int i=0;i<option.size();i++) {
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
 
-			selectoptions.add(option.get(i).getText());
-
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
+		
+		Actions actions= new Actions(getDriver());
+		actions.sendKeys(Keys.ESCAPE).build().perform();
+		/*
+		 * for(int i=0;i<option.size();i++) {
+		 * 
+		 * selectoptions.add(option.get(i).getText());
+		 * 
+		 * }
+		 */
 
-		if(selectoptions.containsAll(expectdoption))
+		if(mylist.containsAll(expectdoption))
 		{		
 			Thread.sleep(3000);
-			setReport().log(Status.PASS, "gutFeel- " + "   " + selectoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
+			setReport().log(Status.PASS, "gutFeel- " + "   " + mylist + "  " +  "-  Option is available to choose from the list" + " "+ expectdoption,	screenshotCapture());
 
 		} 
 		else {
-			setReport().log(Status.FAIL, "gutFeel - "+   "   " + selectoptions + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
+			setReport().log(Status.FAIL, "gutFeel - "+   "   " + mylist + "  " + "- Option is not available in the list"  + " "+ expectdoption ,	screenshotCapture());
 			Driver.failCount++;
 		}
 
@@ -694,7 +711,10 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Select Gut feel
 	public SalesFormPage selectGutFeel(String gutfeel)  throws InterruptedException {
-		selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_gutfeel.fieldControl-option-set-select']")), gutfeel, "gutfeel");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_gutfeel.fieldControl-option-set-select']")),"Gut Feel");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+gutfeel+"')]")),"Gut Feel");
+		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//select[@data-id='ix_gutfeel.fieldControl-option-set-select']")), gutfeel, "gutfeel");
 		return this;
 	}
 
@@ -712,7 +732,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@data-id='parentaccountid.fieldControl-LookupResultsDropdown_parentaccountid_textInputBox_with_filter_new']")),member,"Member");
 
 		Actions action = new Actions(getDriver());
-		action.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]"))).sendKeys(Keys.ENTER).perform();
+		action.moveToElement(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]"))).perform();
 		if(getDriver().findElements(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]")).size()>0) {
 		click(getDriver().findElement(By.xpath("//span[@data-id='parentaccountid.fieldControl-accountnumber1_0_0']/span[contains(text(),'"+member+"')]")),"Member"); 
 		}
@@ -745,7 +765,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Enter Estimated Close date
 	public SalesFormPage typeEstimatedCloseDate(String closeDate)  throws InterruptedException {
-		type(getDriver().findElement(By.xpath("//input[@data-id='estimatedclosedate.fieldControl-date-time-input']")),closeDate,"Estimated Close Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Est. close date']")),closeDate,"Estimated Close Date");
 
 		return this;
 
@@ -753,7 +773,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Enter anticipated start date
 	public SalesFormPage typeanticipatedPurchaseStarDate(String anticipatedPurchaseStarDate)  throws InterruptedException {
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_anticipatedstartpurchasedate.fieldControl-date-time-input']")),anticipatedPurchaseStarDate,"anticipatedPurchaseStarDate");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Anticipated Start Purchase Date']")),anticipatedPurchaseStarDate,"anticipatedPurchaseStarDate");
 
 		return this;
 
@@ -837,7 +857,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 		}
 
-		List<String> expectdoption = Arrays.asList("Topic","Description","Top Parent (Member Account)", "Member Account","Entity Code (Member Account)","Channel Partner Rev Category","Projected NAF","Est. close date","Gut Feel","Modified On","Modified By","Owner","Est. Revenue (Base)","Potential Customer","Active Stage");		
+		List<String> expectdoption = Arrays.asList("Topic","Description","Top Parent (Member Account)", "Member Account","Entity Code (Member Account)","Channel Partner Rev Category","Projected NAF","Est. close date","Gut Feel","Modified On","Modified By","Owner","Est. Revenue (Base)","Revenue","Potential Customer","(Deprecated) Active Stage");		
 
 		if(actualColumn.containsAll(expectdoption))
 		{		
@@ -1004,19 +1024,32 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	public SalesFormPage verifyWonCloseOppurtunityStatusReason() {
 
+
 		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
+		click(getDriver().findElement(By.xpath("//button[@data-id='statusreason_id.fieldControl-option-set-select']")),"Status REason");
+	
+		
+		List<WebElement> options=getDriver().findElements(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)"));
+
+		for(int i=1;i<=options.size();i++) {
+			selectoptions.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		
+		//Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
 
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> option =gutFeel.getOptions();	
+		//List<WebElement> option =gutFeel.getOptions();	
 
 
-		for(int i=0;i<option.size();i++) {
-
-			selectoptions.add(option.get(i).getText());
-
-		}
-
+		/*
+		 * for(int i=0;i<option.size();i++) {
+		 * 
+		 * selectoptions.add(option.get(i).getText());
+		 * 
+		 * }
+		 */
+		
+		
 		assertTrue(selectoptions.contains("Won"));
 
 		return this;
@@ -1036,11 +1069,18 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	public SalesFormPage verifyLostCloseOppurtunityStatusReason() {
 
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
+		//Select gutFeel= new  Select(getDriver().findElement(By.xpath("//select[@data-id='statusreason_id.fieldControl-option-set-select']")));
+	click(getDriver().findElement(By.xpath("//button[@data-id='statusreason_id.fieldControl-option-set-select']")),"Status REason");
+	ArrayList<String> selectoptions=new ArrayList<String>();
+		
+		List<WebElement> options=getDriver().findElements(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)"));
 
+		for(int i=1;i<=options.size();i++) {
+			selectoptions.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> option =gutFeel.getOptions();	
+		//List<WebElement> option =gutFeel.getOptions();	
 
 		/*
 		 * All other options 
@@ -1048,12 +1088,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		 */
 		List<String> expectdoption = Arrays.asList("Loss to Competitive GPO","Loss due to Supplier (Denials, No Response)","Premier Price Not Competitive","Non-Authorized Distributor","Sponsor Local Contract","Member Local Contract","Member Closed","Member Part of Another Mgmt Company","Premier Contracting Gap");		
 
-		for(int i=0;i<option.size();i++) {
-
-			selectoptions.add(option.get(i).getText());
-
-		}
-		System.out.println(selectoptions);
+			System.out.println(selectoptions);
 		System.out.println(expectdoption);
 		assertTrue(selectoptions.containsAll(expectdoption));
 
@@ -1192,7 +1227,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 	//Enter the Email Details with Subject
 	public SalesFormPage enterEmailDueDate	(String date, String time) throws InterruptedException, IOException   {
 		click(getDriver().findElement(By.xpath("//button[@data-id='header_overflowButton']")),"Oerflow Button");
-		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),date,"date");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due label");
@@ -1270,10 +1305,10 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='To, Multiple Selection Lookup']")),To,"Send To");
 		Thread.sleep(4000);
 		a.moveToElement(getDriver().findElement(By.xpath("//div[@data-id='to.fieldControl-LookupResultsDropdown_to_infoContainer']"))).click().build().perform();
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Duration')]")),"Duration");
+		click(getDriver().findElement(By.xpath("//input[@data-id='phonenumber.fieldControl-phone-text-input']")),"Duration");
 		clickTab(2);
 		Thread.sleep(200);
-		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due Date']")),date,"date");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due Date']")),time,"time");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due Date')]")),"Due Date");
@@ -1323,7 +1358,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 
-		type(getDriver().findElement(By.xpath("//input[@data-id='scheduledend.fieldControl-date-time-input']")),date,"date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),date,"date");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Time of Due']")),time,"time");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Due')]")),"Due Date");
@@ -1336,9 +1371,8 @@ public class SalesFormPage extends WebDriverServiceImpl {
 
 	//Verify Owner data in the contact view
 	public SalesFormPage verifyOwnerDate(String username) throws InterruptedException, IOException   {
-
-		click(getDriver().findElement(By.xpath("//div[@data-id='data-set-quickFind-container']/input")),"search in filter button");
-		clickTab(2);
+		click(getDriver().findElement(By.xpath("//input[@placeholder='Filter by keyword']")),"search in filter button");
+		clickTab(5);
 		clickshiftTab(1);
 		for(int i=1;i<getDriver().findElements(By.xpath("//div[@col-id='ownerid']//button//span")).size();i++) {
 			assertTrue(getDriver().findElement(By.xpath("(//div[@col-id='ownerid']//button//span)["+i+"]")).getText().contentEquals(username));

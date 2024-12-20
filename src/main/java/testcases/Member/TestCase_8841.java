@@ -157,6 +157,12 @@ public class TestCase_8841 {
 
 		.verifyDirectParentIsEmpty()
 		.verifyTopParentIsEmpty()
+		
+		//17. Verify "Is Sponsor" field 
+				.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
+
+				//18. Verify "Sponsor" field 
+				.verifySponsorIsNull()
 
 		//12. Verify "IS Corporate account" field
 		.verifyIsCorporateAccount(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsCorporateAccount", sDataSheetName))
@@ -181,11 +187,7 @@ public class TestCase_8841 {
 		
 		.verifyIsFBOFieldIsDisabled()
 
-		//17. Verify "Is Sponsor" field 
-		.verifyIsSponsor(DataInputProvider.getCellData_ColName(iRowNumber, "verifyIsSponsor", sDataSheetName))
-
-		//18. Verify "Sponsor" field 
-		.verifySponsorIsNull()
+		
 		//.verifySponsorLocked()
 		
 		;

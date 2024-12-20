@@ -333,9 +333,6 @@ public class Driver extends PreAndPost{
 			
 			
 
-
-
-
 			//Create instance of the class during run time
 			Class<?> cls = Class.forName(sTestClassName);
 			Object clsInstance = (Object) cls.getDeclaredConstructor().newInstance();

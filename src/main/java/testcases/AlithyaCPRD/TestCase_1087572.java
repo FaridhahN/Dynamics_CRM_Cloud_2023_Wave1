@@ -24,10 +24,12 @@ public class TestCase_1087572 {
 
 		.selectSalesHubAccount()
 		.clickOppurtunitiesPage()
-		.changeViewinOppurtunityPage("CP - All Opportunities")
+		.changeViewinOppurtunityPage("CP - My Opportunities")
 		.clickAddColumn()
 		.addColumnInTheView("Est. Revenue (Base)")
+		.clickAddColumnInPopup()
 		.addColumnInTheView("Potential Customer")
+		.clickAddColumnInPopup()
 		.addColumnInTheView("Active Stage")
 		.clickApplyinEditColumn()
 		.clikCancelButton()
