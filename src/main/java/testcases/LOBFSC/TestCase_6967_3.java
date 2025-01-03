@@ -117,7 +117,7 @@ public class TestCase_6967_3 {
 				.entityCodeIsDisplayed()
 
 				//Store/Location type = Blank
-				.chooseLocationTypewithOutVerifying("---")	
+				.chooseLocationTypewithOutVerifying("--Select--")	
 				
 				//8. Record Status = Published
 				.chooseRecordStatusDraft()
@@ -260,7 +260,7 @@ public class TestCase_6967_3 {
 				.clickSave() 
 
 				//Store/Location type = Blank
-				.chooseLocationTypewithOutVerifying("---")	
+				.chooseLocationTypewithOutVerifying("--Select--")	
 				
 				//8. Record Status = Published
 				.chooseRecordStatusDraft()

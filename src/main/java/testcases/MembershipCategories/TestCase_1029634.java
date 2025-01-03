@@ -34,7 +34,7 @@ public class TestCase_1029634 {
 
 		//3.Double click on the account and go to Sub accounts entity by clicking > on the top 
 		.selectAccountFromGlobalSearchResults(DataInputProvider.getCellData_ColName(iRowNumber, "CrmNumber", sDataSheetName))
-
+		.chooseMemberForm()
 		//Change the status to the draft
 		.chooseRecordStatusDraftfromTop()
 		.clickSave()

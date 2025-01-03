@@ -168,8 +168,19 @@ public class TestCase_6962 {
 		.verifyFoodServiceLOB()
 		.getClassificationType()
 		.clickGeneralTab()
+		.chooseRecordStatusAsDraft()
+		.clicksaveButton()
+		.clickLineOfBusinesses()
+		.clickGeneralTab()
+
 		.clearClassOfTrade()
 		.selectClassOfTrade("Dentistry")
+
+		//Click on Save 
+		.clickSave() 
+
+		//8. Record Status = Published
+		.chooseRecordStatusPublished()
 
 		//Click on Save 
 		.clickSave() 
@@ -317,12 +328,24 @@ public class TestCase_6962 {
 		//Click on Save 
 		.clickSave() 
 
+
 		//7.  Click the + icon on the Line of Business Grid
 		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		.clickGeneralTab()
+		.chooseRecordStatusAsDraft()
+		.clicksaveButton()
+		.clickLineOfBusinesses()
+		.clickGeneralTab()
+
 		.clearClassOfTrade()
 		.selectClassOfTrade("Dentistry")
+
+		//Click on Save 
+		.clickSave()
+
+		//8. Record Status = Published
+		.chooseRecordStatusPublished()
 
 		//Click on Save 
 		.clickSave() 

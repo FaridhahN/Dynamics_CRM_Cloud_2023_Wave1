@@ -41,8 +41,14 @@ public class TestCase_1029637 {
 
 
 		//Click add new membership
-		.clickMembershipAndAddNewMembership()
+		.selectRelatedMembership()
 
+		.searchmemberShip(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+		.endDateandDeleteMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.clickGeneralTab()
+
+		.clickMembershipAndAddNewMembership()
 		// Choose Membership type 
 		.selectMembershipType(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProviderType", sDataSheetName))
 		.selectMembershipProvider(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
@@ -73,12 +79,12 @@ public class TestCase_1029637 {
 		.clickCancelinMembershipCategory()
 
 		.clickOnDiscardChanges()
-		
+
 		//Click add new membership
-				.clickMembershipSaveAndCloseButton()
+		.clickMembershipSaveAndCloseButton()
 		.doubleClickMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
 		.clickDeactivateButton()	
-		
+
 		.clickGoBackButton()
 		.clickGeneralTab()
 		.chooseRecordStatusPublished()

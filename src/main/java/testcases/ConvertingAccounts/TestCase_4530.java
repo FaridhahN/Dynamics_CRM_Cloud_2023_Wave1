@@ -120,7 +120,7 @@ public class TestCase_4530 {
 
 		.chooseRecordStatusDraft()
 
-		.chooseLocationTypewithOutVerifying("---")
+		.chooseLocationTypewithOutVerifying("--Select--")
 
 		.chooseRecordStatusPublished()
 

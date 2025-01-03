@@ -38,8 +38,14 @@ public class TestCase_1029727 {
 		//Change the status to the draft
 		.chooseRecordStatusDraftfromTop()
 		.clickSave()
+		//Click add new membership
+				.selectRelatedMembership()
 
-		
+		.searchmemberShip(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+
+		.endDateandDeleteMembership(DataInputProvider.getCellData_ColName(iRowNumber, "membershipProvider", sDataSheetName))
+		.clickGeneralTab()
+
 
 		//Click add new membership
 		.clickMembershipAndAddNewMembership()

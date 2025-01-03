@@ -125,7 +125,7 @@ public class TestCase_8867 {
 		.clickGeneralTab()
 		
 		//Store/Location type = Blank
-		.chooseLocationTypewithOutVerifying("---")	
+		.chooseLocationTypewithOutVerifying("--Select--")	
 
 		//Click on Save 
 		.clickSave() 

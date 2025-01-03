@@ -106,7 +106,7 @@ public class TestCase_4525 {
 		.entityCodeIsDisplayed()
 		
 		.chooseRecordStatusDraft()
-		.chooseLocationTypewithOutVerifying("---")
+		.chooseLocationTypewithOutVerifying("--Select--")
 		.clickSave()
 
 		//7.  Click the + icon on the Line of Business Grid

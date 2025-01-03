@@ -36,7 +36,9 @@ public class TestCase_947071 {
 		.clickNewOppurtunitiesbutton()
 
 		.enterTopic("Test"+TestUtils.todaysDate())	
-		
+		.navigateToMemberAccount()
+		.selectMemberAccount(DataInputProvider.getCellData_ColName(iRowNumber, "memberAccount", sDataSheetName))
+		.clickSaveButton()
 		.updatePrequalified()
 		.clickSaveButton()
 		

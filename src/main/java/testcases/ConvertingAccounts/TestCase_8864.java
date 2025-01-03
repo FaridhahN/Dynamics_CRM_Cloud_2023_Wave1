@@ -124,7 +124,7 @@ public class TestCase_8864 {
 
 		.chooseRecordStatusDraft()
 
-		.chooseLocationTypewithOutVerifying("---")
+		.chooseLocationTypewithOutVerifying("--Select--")
 
 		.clickSave()
 		//7.  Click the + icon on the Line of Business Grid

@@ -149,7 +149,7 @@ public class TestCase_8865 {
 		
 		.chooseRecordStatusDraft()
 		
-		.chooseLocationTypewithOutVerifying("---")
+		.chooseLocationTypewithOutVerifying("--Select--")
 
 		//Click on Save 
 		.clickSave() 

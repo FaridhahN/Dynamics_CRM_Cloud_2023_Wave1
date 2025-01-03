@@ -31,7 +31,7 @@ public class TestCase_8779 {
 		.clickSave()
 		
 		// try converting it to a member account
-		.chooseRecordStatusDraft().chooseLocationTypewithOutVerifying("---").clickSave()
+		.chooseRecordStatusDraft().chooseLocationTypewithOutVerifying("--Select--").clickSave()
 
 		// 7. Click the + icon on the Line of Business Grid
 		.clickLineOfBusinesses()

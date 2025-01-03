@@ -28,7 +28,7 @@ public class TestCase_8868 {
 		.clickSave()
 		.verifyBusinessError("Since account has child records, It cannot be converted to location account")
 		//Store/Location type = Blank
-		.chooseLocationTypewithOutVerifying("---")	
+		.chooseLocationTypewithOutVerifying("--Select--")	
 		.clickSave()
 		;
 

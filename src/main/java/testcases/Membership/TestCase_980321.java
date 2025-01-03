@@ -65,12 +65,10 @@ public class TestCase_980321 {
 		.typeMembershipStartDate(TestUtils.todaysDate())
 
 		//Click on membership save and close
-		.clickQuickCreateMembershipSave_Close()
+		.clickMembershipSaveAndCloseButton()
 
 		.verifyError(DataInputProvider.getCellData_ColName(iRowNumber, "ErrorMessage", sDataSheetName))
-		.clickCancelButton()
-		.clickOnDiscardChanges()
-		.clickGeneralTab()
+		.clickGoBack()
 		.chooseRecordStatusPublished()
 		.clickSave()
 

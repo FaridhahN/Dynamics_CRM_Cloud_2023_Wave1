@@ -52,6 +52,7 @@ import utils.TestUtils;
 
 public class MemberFormPage extends WebDriverServiceImpl {
 	String attributevalue;
+	String LOB;
 	String Classificationbefore;
 	String Classificationafter;
 	String State;
@@ -395,7 +396,7 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		Thread.sleep(5000);
 		verifyDisplayed(getDriver().findElement(By.xpath("//h2[contains(@aria-label,'"+errorMessage+"')]")),errorMessage);
-		click(getDriver().findElement(By.xpath("//span[contains(@id,'okButtonText')]")),"Ok Button");
+		click(getDriver().findElement(By.xpath("//*[@data-id='errorOkButton']")),"Ok Button");
 
 		return this;
 
@@ -706,7 +707,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Premier End Date')]")),"Premier End Date title");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Primary Contact')]")),"Primary Contact title");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Street 2')]")),"Street 2 title");
+		click(getDriver().findElement(By.xpath("//input[@data-id='address1_line2.fieldControl-text-box-text']")),"Street 2 Textbox");
+		clickTab(3);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'County')]")),"County title");
+		click(getDriver().findElement(By.xpath("//input[@data-id='address1_county.fieldControl-text-box-text']")),"County title");
+		clickTab(4);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Override Name')]")),"Override Name title");
 		return this;
 	}
@@ -1172,13 +1177,13 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Select Information view
 	public MemberFormPage selectInformationview() throws InterruptedException   {
 		Thread.sleep(4000);
-		click(getDriver().findElement(By.xpath("//span[contains(@class,'symbolFont DropdownArrow-symbol')]")),"Dropdown Button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='form-selector']")),"Dropdown Button");
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//span[@role='presentation'][normalize-space()='Information']")),"Inforamtion Dropdown Button");
+		click(getDriver().findElement(By.xpath("//div[@data-text='Information']")),"Inforamtion Dropdown Button");
 		Thread.sleep(4000);
-		List<WebElement> element=getDriver().findElements(By.xpath("//button/span[contains(text(),'Discard changes')]"));
+		List<WebElement> element=getDriver().findElements(By.xpath("//button[@title='Discard changes']"));
 		if(element.size()>0) {
-			click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Discard changes')]")),"Discard Changes");
+			click(getDriver().findElement(By.xpath("//button[@title='Discard changes']")),"Discard Changes");
 		}
 		Thread.sleep(5000);
 		verifyIsDisplayed(getDriver().findElement(By.xpath("//label[contains(text(),'Quick Subject')]")));
@@ -1217,14 +1222,17 @@ public class MemberFormPage extends WebDriverServiceImpl {
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Thread.sleep(200);
 		Actions a=new Actions(getDriver());
-		a.moveToElement(getDriver().findElement(By.xpath("//li[contains(text(),'"+duration+"')]"))).build().perform();
+		a.moveToElement(getDriver().findElement(By.xpath("//*[contains(text(),'"+duration+"')]"))).click().build().perform();
 
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Fax Number']")),Faxnumber,"Fax Number");
 		click(getDriver().findElement(By.xpath("//input[@aria-label='Number of Pages']")),"No of Pages");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Number of Pages']")),noofPages,"Number of Pages");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Cover Page']")),coverpage,"Cover Page");
 
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Direction']")))),direction,"Direction");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//button[@aria-label='Direction']")))),direction,"Direction");
+
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Direction']")),"direction");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+direction+"')]")),"direction");
 
 		click(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),"Task Details");
 		type(getDriver().findElement(By.xpath("//textarea[@aria-label='Description']")),taskdetails,"task details feild");
@@ -1309,8 +1317,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage EnterAppointmentDetailsWithQuickSubject(String subject,String letterdetails) throws InterruptedException, IOException   {
 
 		selectInformationview();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		click(((getDriver().findElement(By.xpath("//button[@aria-label='Quick Subject']")))),"subject");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+subject+"')]")),"Subject");
+		
 		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
@@ -1382,7 +1392,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 
 		selectInformationview();
 
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		click(((getDriver().findElement(By.xpath("//button[@aria-label='Quick Subject']")))),"subject");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+subject+"')]")),"Subject");
+		
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
 		Thread.sleep(200);
@@ -1405,8 +1418,10 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage EnterFPhoneDetailsWithQuickSubject(String subject, String duedate, String duration, String Phonenumber) throws InterruptedException, IOException   {
 
 		selectInformationview();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		click(((getDriver().findElement(By.xpath("//button[@aria-label='Quick Subject']")))),"subject");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+subject+"')]")),"Subject");
+		
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
@@ -1437,7 +1452,11 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Enter the Fax Details with Quick Subject
 	public MemberFormPage EnterFaxDetailswithQuickSubject(String subject, String duedate, String duration, String Faxnumber, String noofPages, String coverpage,String direction, String taskdetails) throws InterruptedException, IOException   {
 		selectInformationview();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		
+		click(((getDriver().findElement(By.xpath("//button[@aria-label='Quick Subject']")))),"subject");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+subject+"')]")),"Subject");
+		
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Subject']")),subject, "subject field");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of Due']")),duedate, "Due DAte");
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Duration']")),duration,"Duration Dropdown");
@@ -1466,8 +1485,12 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	public MemberFormPage EnterTaskDetailswithQuickSubject(String subject, String duedate, String duration, String taskdetails) throws InterruptedException, IOException   {
 
 		selectInformationview();
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
-
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@aria-label='Quick Subject']")))),subject,"Quick Subject");
+		
+		click(((getDriver().findElement(By.xpath("//button[@aria-label='Quick Subject']")))),"subject");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+subject+"')]")),"Subject");
+		
+		
 		click(getDriver().findElement(By.xpath("//*[contains(text(),'Save & Close')]")),"Save button");
 		Thread.sleep(10000);
 		String saveStatus=getTextValue(getDriver().findElement(By.xpath("//h1[contains(@id,'formHeaderTitle')]/span")),"Save status");
@@ -2170,13 +2193,19 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
 		click(getDriver().findElement(By.xpath("//*[@title='Sponsor']")),"Sponsor");//Scroll down to make the record status field visible
 		click(getDriver().findElement(By.xpath("//*[@title='CORPORATE PARENT']")),"CP");//Scroll down to make the record status field visible
+		if(getDriver().findElements(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new']")).size()>0){
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_supplierrecordid.fieldControl-LookupResultsDropdown_ix_supplierrecordid_textInputBox_with_filter_new']")),"Supplier");
+		}else {
+			clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Receive Direct Mail']")),"Supplier");
+		}
 		clickTab(8);
 		click(getDriver().findElement(By.xpath("//*[@title='FOOD SERVICE PARENT']")),"Food Service");//Scroll down to make the record status field visible
 
 		if(getDriver().findElements(By.xpath("//*[@title='FBO']")).size()>0){
 			click(getDriver().findElement(By.xpath("//*[@title='FBO']")),"FBO");//Scroll down to make the record status field visible
 		}
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_ofestimatedlocations.fieldControl-whole-number-text-input']")),"Supplier");
+		clickTab(6);
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Safe Harbor Instructions')]")),"Safe Harbor Instructions");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'NAICS Code')]")),"NAICS Code");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Require Manual AG')]")),"Require Manual AG");
@@ -2939,7 +2968,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		//verifyDisplayed(getDriver().findElement(By.xpath("//label[@aria-label='Food Services']")), "Food Service LOB");
 
 		//~~verifying LOB and Classification Type using get attributes. Assigning to variable (attributevalue) to be used in compare methods below
-		attributevalue=getAttribute(getDriver().findElement(By.xpath("(//div[contains(text(),'Food Services')])[2]")), "textContent", "Food Service LOB");
+		LOB=getAttribute(getDriver().findElement(By.xpath("(//div[contains(text(),'Food Services')])[2]")), "textContent", "Food Service LOB");
 		attributevalue=getAttribute(getDriver().findElement(By.xpath("//div[contains(text(),'Food Services')]/ancestor::div[@col-id='ix_portfolio']/following-sibling::div[@col-id='ix_classificationtypenew']//a//span")), "textContent", "Classtification type");
 		return this;
 	}
@@ -3067,7 +3096,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//Select Line of business
 	public MemberFormPage selectLineOfBusiness(String lineOfBusiness) throws InterruptedException   {
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_portfolio.fieldControl-option-set-select']")),"Select LOB");
-		if(lineOfBusiness.contentEquals("General GPO")) {
+		if(lineOfBusiness.contentEquals("General GPO")  || lineOfBusiness.contentEquals("Pharmacy")) {
 			click(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+lineOfBusiness+"')])[2]")),"LOB");
 		}else {
 			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+lineOfBusiness+"')]")),"LOB");	
@@ -3521,7 +3550,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 	//Click on Membership SAve and close 
 	public MemberFormPage clickMembershipSaveAndClose() throws InterruptedException {
-
+		
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='ix_membership|NoRelationship|Form|Mscrm.Form.ix_membership.SaveAndClose']")),"Save and Close");
 		Thread.sleep(5000);
@@ -3654,7 +3683,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 		Thread.sleep(5000);
 		click(getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")),"Save and Close");
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 
 		return this;	
 	}
@@ -3784,7 +3813,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//Click Confirm Deactivate Button
 	public MemberFormPage clickMembershipDeactivateButtonConfirm() throws InterruptedException {
 
-		click(getDriver().findElement(By.xpath("//div[contains(@id,'dialogFooterContainer')]//button[@aria-label='Deactivate']")), "Deactivation button");
+		click(getDriver().findElement(By.xpath("//button[@data-id='ok_id']")), "Deactivation button");
 		Thread.sleep(6000);
 		return this;
 	}
@@ -4464,6 +4493,16 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		Thread.sleep(1000);
 
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
+		
+		List<String > mylist =new ArrayList<String>();	
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+		
 		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+locationType+"')]")),"Location Type");
 		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
 		verifyExactValue(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location type"); 
@@ -4475,7 +4514,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage chooseLocationTypewithOutVerifying(String locationType) throws InterruptedException   {	
 		Thread.sleep(3000);
 		click(getDriver().findElement(By.xpath("//button[@data-id='ix_locationtype.fieldControl-option-set-select']")),"Location Type");
+		
 		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+locationType+"')]")),"Location Type");
+		
+		
 		//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_locationtype.fieldControl-option-set-select']")),locationType,"Location Type");
 		return new MemberFormPage();
 	}
@@ -7364,7 +7406,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 			Thread.sleep(2000);
 			click(getDriver().findElement(By.xpath("//button[@data-id='activitypointer|NoRelationship|SubGridAssociated|Mscrm.SubGrid.activitypointer.MainTab.Actions.SaveAsCompleted']")),"Delete Activity Button");
 			Thread.sleep(2000);
-			click(getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close Phone')]")),"Confirm Delete Button");
+			click(getDriver().findElement(By.xpath("//button[contains(@title,'Close Phone Call')]")),"Confirm Delete Button");
 
 			//button[contains(@aria-label,'Close Phone')]
 		}
@@ -7985,7 +8027,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	// Disabled End Date on Membership Entity
 	public MemberFormPage verifyEndDateIsNotEditable() throws InterruptedException {
 		Thread.sleep(2000);
-		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),"End Date");
+		verifyDisabledFields(getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")),"End Date");
 		return this;
 	}
 
@@ -8641,6 +8683,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 					Actions a = new Actions(getDriver());
 					int j=i+1;
 					a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)["+(j)+"]"))).doubleClick().build().perform();
+					break;
 				}
 
 
@@ -8734,7 +8777,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		if(getDriver().findElements(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")).size()>0) {
 			TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")).getAttribute("Value");	
 		}else {
-			TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")).getAttribute("Value");
+			TestUtils.date=getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")).getAttribute("Value");
 		}
 		return this;
 	}
@@ -9429,18 +9472,18 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 	//Type Membership Start Date
 	public MemberFormPage getMembershipStartDate() {
-		if(getDriver().findElements(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")).size()>0) {
-			TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
+		if(getDriver().findElements(By.xpath("//input[@aria-label='Date of Start Date']")).size()>0) {
+			TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")),"Membership Startdate");
 		}else {
 			TestUtils.date=getAttribute(getDriver().findElement(By.xpath("//div[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRoot')]")), "aria-label", "Membership start date");
 
 		}
 		return this;
 	}
-
+	
 	//Type Membership Start Date
 	public MemberFormPage getMembershipStartDateForEnddate() {
-		TestUtils.date=getDriver().findElement(By.xpath("//div[@col-id='ix_startdate' and @role='gridcell']//label")).getAttribute("aria-label");
+		TestUtils.date=getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")).getAttribute("value");
 		return this;
 	}
 
@@ -9448,38 +9491,44 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//div[@col-id='ix_startdate' and @role='gridcell']//label
 
 	public MemberFormPage getThePremierEndDate() {
-		TestUtils.date=getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")).getAttribute("Value");
+		TestUtils.date=getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")).getAttribute("Value");
 		return this;
 	}
 
 	//Get LOB Start Date
 	public MemberFormPage getLOBStartDate() {
-		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_startdate.fieldControl-date-time-input']")),"Membership Startdate");
+		TestUtils.date=getTextValueAttribute(getDriver().findElement(By.xpath("//input[@aria-label='Date of Start Date']")),"Membership Startdate");
 		return this;
 	}
 
 	//Type LOB end date
 	public MemberFormPage typeLOBEndDate(String EndDate) {
-		type(((getDriver().findElement(By.xpath("//*[@data-id='ix_enddate.fieldControl-date-time-input']")))),EndDate,"End Date");
+		type(((getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")))),EndDate,"End Date");
 		return this;
 	}
 
 	public MemberFormPage verifyrewardrebatedropdown() throws InterruptedException {
-		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")), "---", "Reward rebate");
-		ArrayList<String> selectoptions=new ArrayList<String>();
-		Select reardrebate= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")));		
+		verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//button[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")), "---", "Reward rebate");
+		ArrayList<String> rewardrebateoptions=new ArrayList<String>();
+	//	Select reardrebate= new  Select(getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")));		
 
 		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> rewardrebateoptions =reardrebate.getOptions();	
-		List<String> expectedRepresentativeType = Arrays.asList("---","Direct parent level","Facility level","Third party","Top parent level");		
+		//List<WebElement> rewardrebateoptions =reardrebate.getOptions();	
+		List<String> expectedRepresentativeType = Arrays.asList("--Select--","Direct parent level","Facility level","Third party","Top parent level");		
 
-		for(int i=0;i<rewardrebateoptions.size();i++) {
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")),"Reward Debate");
 
-			selectoptions.add(rewardrebateoptions.get(i).getText());
+		
+		List<WebElement> options=getDriver().findElements(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)"));
 
+		for(int i=1;i<=options.size();i++) {
+			rewardrebateoptions.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
-
-		if(expectedRepresentativeType.containsAll(selectoptions))
+		
+		Actions action= new Actions(getDriver());
+		action.sendKeys(Keys.ESCAPE).build().perform();
+		
+		if(rewardrebateoptions.containsAll(expectedRepresentativeType))
 		{		
 			Thread.sleep(3000);
 			setReport().log(Status.PASS, "RepresentativeType- " + "   " + rewardrebateoptions + "  " +  "-  Option is available to choose from the list" + " "+ expectedRepresentativeType,	screenshotCapture());
@@ -9495,7 +9544,12 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 
 	public MemberFormPage selectverifyrewardrebatedropdown(String rewardrebatedropdown) throws InterruptedException {
-		selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//select[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")))),rewardrebatedropdown,"rewardrebate dropdown");
+	//	selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//button[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")))),rewardrebatedropdown,"rewardrebate dropdown");
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_rewardrebateoption.fieldControl-option-set-select']")),"rewardrebatedropdown");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'"+rewardrebatedropdown+"')]")),"rewardrebatedropdown");
+
+		
 		Thread.sleep(4000);
 		return this;
 	}
@@ -9788,7 +9842,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}
 
 		click(getDriver().findElement(By.xpath("//*[@data-id='ok_id']")),"Confirm Deactivate");
-
+		Thread.sleep(5000);
 
 
 		return this;
@@ -10528,7 +10582,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		verifyElementisNotDisplayed(getDriver().findElements(By.xpath("//div[@data-id='ix_membershipid-FieldSectionItemContainer']//label[contains(text(),'Membership Provider')]")).size(), "Membership Provider Title");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//ul[@data-id='ix_membershipid.fieldControl-LookupResultsDropdown_ix_membershipid_SelectedRecordList']")).size(), "Membership Textbox");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//input[@data-id='ix_membershipprogramcategory.fieldControl-LookupResultsDropdown_ix_membershipprogramcategory_textInputBox_with_filter_new']")).size(), "Membership Category");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@data-id='quickCreateRoot']//input[@data-id='ix_startdate.fieldControl-date-time-input']")).size(), "StartDate");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//section[@data-id='quickCreateRoot']//input[@aria-label='Date of Start Date']")).size(), "StartDate");
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//button[@data-id='quickCreateSaveAndCloseBtn']")).size(), "Save and Close button in the aucik form");
 		return this;
 	}
@@ -10549,9 +10603,11 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Type membership end date
 	public MemberFormPage typeMembershipCategoryStratDate(String startDate) {
-		type(((getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//input[@data-id='ix_startdate.fieldControl-date-time-input']")))),startDate,"End Date");
+		type(((getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//input[@aria-label='Date of Start Date']")))),startDate,"End Date");
 		return this;
 	}
+	
+	//section[@data-id="quickCreateRoot"]//input[@aria-label='Date of Start Date']
 
 
 	//Click Save and Close
@@ -10594,7 +10650,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Enter End Date in MembershipCategory(){
 	public MemberFormPage typeMembershipCategoryEndDate(String endDate) {
-		type(getDriver().findElement(By.xpath("//input[@data-id='ix_enddate.fieldControl-date-time-input']")),endDate,"End Date");
+		type(getDriver().findElement(By.xpath("//input[@aria-label='Date of End Date']")),endDate,"End Date");
 		return this;
 	}
 
@@ -10769,7 +10825,12 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}
 		type(getDriver().findElement(By.xpath("//input[@aria-label='Membership Filter by keyword']")),membership,"Memberhsip keyword");
 		Thread.sleep(2000);
-		click(getDriver().findElement(By.xpath("//button[@title='Start search']")),"go Button");
+		if(getDriver().findElements(By.xpath("//button[@title='Start search']")).size()>0) {
+			click(getDriver().findElement(By.xpath("//button[@title='Start search']")),"go Button");	
+		}
+		
+		Actions action= new Actions(getDriver());
+		action.sendKeys(Keys.ENTER).build().perform();
 		return this;
 
 	}
@@ -10907,7 +10968,12 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	public MemberFormPage changetheOppurtunityView(String view) {
 		click(getDriver().findElement(By.xpath("(//span[contains(@id,'ViewSelector')])[2]")),"Click View Selector");
-		click(getDriver().findElement(By.xpath("//span[contains(text(),'"+view+"')]")),"My Open Opportunities");
+		if(getDriver().findElements(By.xpath("(//span[contains(text(),'"+view+"')])[2]")).size()>0){
+			click(getDriver().findElement(By.xpath("(//span[contains(text(),'"+view+"')])[2]")),"My Open Opportunities");
+		}else {
+			click(getDriver().findElement(By.xpath("//span[contains(text(),'"+view+"')]")),"My Open Opportunities");	
+		}
+		
 		return this;
 	}
 	public MemberFormPage verifyOppurtunityCreated(String oppurtunity) {
@@ -10941,6 +11007,22 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 
 
+	
+	//Select Prescription Data
+		public MemberFormPage VerifyMembershipCategoriesisNotDisplayed() throws InterruptedException {
+			Thread.sleep(2000);
+			if(getDriver().findElements(By.xpath("//*[@title='Related']")).size()>0){	
+				click(getDriver().findElement(By.xpath("//*[@title='Related']")),"Related");
+			}else {
+				click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
+			}
+			Thread.sleep(3000);
+			List<WebElement> options= getDriver().findElements(By.xpath("//*[text()='Membership Categories']"));
+			verifyElementisNotDisplayed(options.size(), "Membership Categories is not displayed");
+			//click(getDriver().findElement(By.xpath("//*[contains(text(),'')]")),"Rebate Payments");
+			Thread.sleep(2000);
+			return this;
+		}
 }
 
 
