@@ -1982,16 +1982,17 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//NavigateToSystemTab
 	public MemberFormPage NavigateToSystemTab() throws InterruptedException {
 		Thread.sleep(3000);
-		List<WebElement> systemTab=getDriver().findElements(By.xpath("//li[@title='SYSTEM']"));
+		List<WebElement> systemTab=getDriver().findElements(By.xpath("//li[contains(text(),'SYSTEM')]"));
 		if(systemTab.size()>0) {
 
-			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
+			click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"System Tab");
 			Thread.sleep(3000);
 
 		}else {
 
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
-			click(getDriver().findElement(By.xpath("//li[@title='SYSTEM']")),"System Tab");
+			click(getDriver().findElement(By.xpath("//div[contains(@data-id,'tablist-tab')]/span[contains(text(),'SYSTEM')]")),"System Tab");
+			
 			Thread.sleep(3000);
 
 		}
@@ -2353,6 +2354,8 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage navigateToBusinessClassification() throws InterruptedException {
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("//*[@data-id='primarycontactid.fieldControl-LookupResultsDropdown_primarycontactid_textInputBox_with_filter_new']")),"Primary Contact");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")),"Street 1");
+		clickTab(2);
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),"City");
 		click(getDriver().findElement(By.xpath("//*[@data-id='address1_stateorprovince.fieldControl-text-box-text']")),"State");
 		return this;
@@ -3384,7 +3387,11 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage clickLOBSaveAndClose() throws InterruptedException {
 		//click(getDriver().findElement(By.xpath("//button[contains(@id,'quickCreateSaveAndCloseBtn')]//span[contains(text(),'Save')]")),"Save and Close");
 		//Wave2 Fix
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
+		if(getDriver().findElements(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save and Close']")).size()>0){
+			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save and Close']")),"Save and Close");
+		}else {
+			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save & Close']")),"Save and Close");
+		}
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
@@ -3400,7 +3407,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	}
 	//save and Click in dev1
 	public MemberFormPage clickLOBSaveAndCloseDev() throws InterruptedException {
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
+		click(getDriver().findElement(By.xpath("//button[@aria-label='Save and Close']")),"Save and Close");
 		Thread.sleep(5000);
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
@@ -3761,9 +3768,9 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage clickGoBackandDiscardChanges() throws InterruptedException {
 		click(getDriver().findElement(By.xpath("//*[@data-id='navigateBackButtontab-id-0']")),"Go back");
 		Thread.sleep(6000);
-		List<WebElement> discarChanges=getDriver().findElements(By.xpath("//*[contains(@id,'cancelButtonTextName')]"));
+		List<WebElement> discarChanges=getDriver().findElements(By.xpath("//button[@data-id='cancelButton']"));
 		if(discarChanges.size()>0) {
-			click(getDriver().findElement(By.xpath("//*[contains(@id,'cancelButtonTextName')]")),"Discard Changes");
+			click(getDriver().findElement(By.xpath("//button[@data-id='cancelButton']")),"Discard Changes");
 		}
 
 		Thread.sleep(5000);
@@ -5433,7 +5440,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify premier start date is null
 	public MemberFormPage verifyPremierStartDateIsNull() {
-		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberstartdate.fieldControl-date-time-input']")),"Premier Start Date");
+		verifyNullValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier Start Date']")),"Premier Start Date");
 		return this;
 	}
 
@@ -6214,7 +6221,8 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//Verify Premier start date is Locked	
 	public MemberFormPage verifyPremierStartDateIsLocked() {
 		//Wave 2023
-		verifyDisabledFields(getDriver().findElement(By.xpath("//*[@data-id='ix_premiermemberenddate.fieldControl-date-time-input']")),"Premier Start Date Lock");
+		//verifyDisabledFields(getDriver().findElement(By.xpath("//input[@aria-label='Date of Premier Start Date']")),"Premier Start Date Lock");
+		Assert.assertTrue(getDriver().findElements(By.xpath("//input[@aria-label='Date of Premier Start Date' and @readonly]")).size()>0);
 		return this;
 	}
 
@@ -9230,7 +9238,8 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//navigateto country
 	public MemberFormPage navigateToCountry() {
-
+		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
+		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'County')]")),"County");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'State')]")),"State");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'ZIP')]")),"Zip");

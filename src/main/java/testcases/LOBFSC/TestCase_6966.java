@@ -155,6 +155,7 @@ public class TestCase_6966 {
 
 		.getClassificationType()
 		.clickGeneralTab()
+		.navigateToDP()
 		.clearClassOfTrade()
 		.selectClassOfTrade("Dentistry")
 
@@ -296,6 +297,7 @@ public class TestCase_6966 {
 		.clickLineOfBusinesses()
 		.verifyFoodServiceLOBisNotDisplayed()
 		.clickGeneralTab()
+		.navigateToDP()
 		.clearClassOfTrade()
 		.selectClassOfTrade("Dentistry")
 

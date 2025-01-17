@@ -55,7 +55,9 @@ public class TestCase_978027 {
 		.chooseRecordStatusPublished()
 		.clickSave()
 
-
+		.chooseRecordStatusAsDraft()
+		.clickSave()
+		
 		//Data Reset
 		//navigate To Business classification
 		.NavigateToSystemTab()

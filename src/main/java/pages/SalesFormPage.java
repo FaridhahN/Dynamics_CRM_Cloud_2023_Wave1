@@ -231,7 +231,7 @@ public class SalesFormPage extends WebDriverServiceImpl {
 		verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Documents Tracking')]")).size(), "Documents Tracking");
 		if(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size()==0){
 			click(getDriver().findElement(By.xpath("//div[@data-id='more_button']")),"More Button");
-			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Account Representative");
+			verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[contains(text(),'Account Representatives')]")).size(), "Account Representative");
 		}else{
 			verifyElementisDisplayed(getDriver().findElements(By.xpath("//li[contains(text(),'Account Representatives')]")).size(), "Account Representative");
 
