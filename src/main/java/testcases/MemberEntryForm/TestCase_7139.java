@@ -141,7 +141,7 @@ public class TestCase_7139 {
 		.clickMembershipSaveAndCloseMEF()
 
 		//11. Record Status = Published
-		.chooseRecordStatusPublishedMEF()
+		.chooseStatusPublished()
 
 		//Click on Save 
 		.clickSave() 

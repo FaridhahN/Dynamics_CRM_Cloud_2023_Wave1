@@ -43,6 +43,8 @@ public class TestCase_7160 {
 		//Enter Premier Start Date
 		//.pickPremierStartDate(DataInputProvider.getCellData_ColName(iRowNumber, "premierStartDate", sDataSheetName))		
 		
+		.navigateToDoNotVerify()
+		
 		//Choose the Business Classification
 		.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
 		

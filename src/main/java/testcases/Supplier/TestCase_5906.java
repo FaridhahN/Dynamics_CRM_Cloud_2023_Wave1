@@ -28,9 +28,7 @@ public class TestCase_5906 {
 		//Account Name = Any
 		.typeAccountName(DataInputProvider.getCellData_ColName(iRowNumber, "accountName", sDataSheetName))	
 
-		//Business Classification = Any
-		.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
-
+		
 		//Direct Parent  =2000133648
 		.selectDirectParent(DataInputProvider.getCellData_ColName(iRowNumber, "directParent", sDataSheetName))
 
@@ -45,6 +43,11 @@ public class TestCase_5906 {
 
 		//Zip Code = Any
 		.typeZipCode(DataInputProvider.getCellData_ColName(iRowNumber, "zipCode", sDataSheetName))
+
+		.navigateToDoNotVerify()
+		
+		//Business Classification = Any
+				.selectBusinessClassification(DataInputProvider.getCellData_ColName(iRowNumber, "businessClassification", sDataSheetName))
 
 		//Account Status = Auto populated  ( Active)
 		.defaultAccountStatus(DataInputProvider.getCellData_ColName(iRowNumber, "defaultAccountStatus", sDataSheetName))

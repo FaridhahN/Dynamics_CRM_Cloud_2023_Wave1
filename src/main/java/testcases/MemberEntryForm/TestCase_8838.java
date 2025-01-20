@@ -87,10 +87,10 @@ public class TestCase_8838 {
 
 		//Click on Save 
 		.clickSave() 
-		.navigatetoAdditionaCriteriaFromDonotVerify()
+		//.navigatetoAdditionaCriteriaFromDonotVerify()
+		.clickGeneralTabMEF()
 		//7. Record Status = Published
-		.chooseRecordStatusPublishedMEF()				
-
+		.chooseStatusPublished()
 		//Click on Save 
 		.clickSave() 
 

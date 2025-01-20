@@ -2281,7 +2281,8 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Exclude from Roster')]")),"Exclude from Roster");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]")),"Receive Direct Mail");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible')]")),"Fee Share Eligible");
-		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Eligible Date')]")),"Fee Share Eligible Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share Start Date')]")),"Fee Share Start Date");
+		click(getDriver().findElement(By.xpath("//label[contains(text(),'Fee Share End Date')]")),"Fee Share End Date");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Business Key')]")),"Business Key");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'BK Active')]")),"BK Active");
 		click(getDriver().findElement(By.xpath("//label[contains(text(),'Payment Entity')]")),"Payment Entity");
@@ -2954,7 +2955,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}
 		Thread.sleep(2000);
 
-		click(getDriver().findElement(By.xpath("//*[contains(text(),'Line of Businesses')]")),"Line Of Businessess");
+		click(getDriver().findElement(By.xpath("//div[@role='menuitem']//span[contains(text(),'Line of Business')]")),"Line Of Businessess");
 		//Thread.sleep(5000);
 		return this;
 	}
@@ -5273,6 +5274,17 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		//verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published","Record Status"); 
 		return this;
 	}
+	
+	
+	public MemberFormPage chooseStatusPublished() throws InterruptedException {
+		
+		click(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")),"Published status");
+		click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Published')]")),"Account published");
+
+		//selectDropDownUsingVisibleText(((getDriver().findElement(By.xpath("//*[@data-id='ix_recordstatus.fieldControl-option-set-select']")))),"Published", "Record Status");	
+		Thread.sleep(2000);
+		return this;
+	}
 
 	public MemberFormPage verifyIsCorporateAccountMEF(String verifyIsCorporateAccount) {
 		verifyExactValue(getDriver().findElement(By.xpath("//input[@aria-label='Is Corporate Account']")),verifyIsCorporateAccount,"Is Corporate Account"); 
@@ -5409,7 +5421,11 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//Click on LOB Save and close
 	public MemberFormPage clickLOBSaveAndCloseMEF() throws InterruptedException {
 		//Wave2 Update
-		click(getDriver().findElement(By.xpath("//button[@aria-label='Save & Close']")),"Save and Close");
+		if(getDriver().findElements(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save and Close']")).size()>0){
+			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save and Close']")),"Save and Close");
+		}else {
+			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save & Close']")),"Save and Close");
+		}
 		Thread.sleep(5000);
 		//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		//Changes as part of Ticket 833703
