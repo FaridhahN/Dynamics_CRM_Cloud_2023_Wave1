@@ -5356,6 +5356,8 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 
 	public MemberFormPage verifyAffiliateGroupIsNotNullMEF() {
+		navigateToDoNotVerifyMEF();
+		navigateToAGDateMEF();
 		getTextValue(getDriver().findElement(By.xpath("//*[@data-id='ix_affiliategroup.fieldControl-LookupResultsDropdown_ix_affiliategroup_selected_tag_text']")),"Affiliate Group");
 		return this;
 	}
@@ -5426,6 +5428,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}else {
 			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save & Close']")),"Save and Close");
 		}
+		Thread.sleep(5000);
 		Thread.sleep(5000);
 		//	click(getDriver().findElement(By.xpath("//*[@title='GENERAL DEMOGRAPHIC']")),"GENERAL DEMOGRAPHIC");
 		//Changes as part of Ticket 833703
@@ -10705,12 +10708,12 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify System Tab in the MembershipCategory
 	public MemberFormPage verifySystemInCategory() {
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Owner - Owner Id']")).size(), "Owner");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Status - Status of the Membership Category']")).size(), "Status");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Created On - Date and time when the record was created.']")).size(), "Created on Date");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Created By - Unique identifier of the user who created the record.']")).size(), "Created By");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Modified On - Date and time when the record was modified.']")).size(), "Modified Date");
-		verifyElementisDisplayed(getDriver().findElements(By.xpath("//span[@title='Modified By - Unique identifier of the user who modified the record.']")).size(), "Modified By");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Owner - Owner Id']")).size(), "Owner");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Status - Status of the Membership Category']")).size(), "Status");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Created On - Date and time when the record was created.']")).size(), "Created on Date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Created By - Unique identifier of the user who created the record.']")).size(), "Created By");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Modified On - Date and time when the record was modified.']")).size(), "Modified Date");
+		verifyElementisDisplayed(getDriver().findElements(By.xpath("//*[@title='Modified By - Unique identifier of the user who modified the record.']")).size(), "Modified By");
 		return this;
 	}
 
