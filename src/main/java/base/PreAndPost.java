@@ -7,22 +7,22 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import events.WebDriverEvents;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import utils.DataInputProvider;
 
 public class PreAndPost extends WebDriverEvents {
@@ -65,16 +65,35 @@ public class PreAndPost extends WebDriverEvents {
 	// Initiate webdriver
 	public void beforeMethod() throws Exception {
 
-//		properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
-//		webdriver = (RemoteWebDriver) WebDriverManager.chromedriver().create();		
-//		  System.setProperty("webdriver.chrome.driver",
-//		  "src\\test\\resources\\chromedriver.exe"); webdriver = new ChromeDriver(); 
-//		driver = new EventFiringWebDriver(webdriver);
-//		driver.register(this);
+		//	properties.load(new FileInputStream(new File("./src/test/resources/environment.properties")));
+		/*
+		 * webdriver = (RemoteWebDriver) WebDriverManager.chromedriver().create();
+		 * System.setProperty("webdriver.chrome.driver",
+		 * "src\\test\\resources\\chromedriver.exe"); webdriver = new ChromeDriver();
+		 */ 
+		//		driver = new EventFiringWebDriver(webdriver);
+		//		driver.register(this);
 
 		// 09-19-2023 - Implementing Selenium Manager for Browsers with 4.11 Selenium
 		// Upgrade
-		WebDriver driver = new ChromeDriver();
+
+		
+		/*
+		 * EdgeOptions options = new EdgeOptions(); options.
+		 * addArguments("--user-data-dir=E:\\vkamala2\\AppData\\Local\\Microsoft\\Edge\\User Data"
+		 * ); options.addArguments("--profile-directory=Default");
+		 */  
+		 			//	options.addArguments("--guest");
+		//options.addArguments("--inprivate");
+
+				//WebDriver driver = new EdgeDriver(options);
+		
+		 /* ChromeOptions option= new ChromeOptions(); option.addExtensions(new
+		 * File(System.getProperty("user.dir")+
+		 * "\\src\\test\\resources\\Microsoft_Single_Sign_On.crx"));*/
+		WebDriverManager.chromedriver().setup();  
+		WebDriver driver =new ChromeDriver();
+		
 		tlDriver.set(driver);
 		getDriver().manage().window().maximize();
 		getDriver().get(URL);
@@ -108,12 +127,14 @@ public class PreAndPost extends WebDriverEvents {
 			getDriver().quit();
 			test.log(Status.PASS, "The opened browsers are closed");
 		} catch (Exception e) {
+			getDriver().quit();
 			test.log(Status.FAIL, "Unexpected error occured in Browser");
 		}
 	}
 
 	@AfterSuite
 	public void tearDown() {
+		getDriver().quit();
 		extent.flush();
 	}
 }

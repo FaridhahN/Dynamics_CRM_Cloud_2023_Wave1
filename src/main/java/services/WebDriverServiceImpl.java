@@ -1160,6 +1160,7 @@ public class WebDriverServiceImpl extends WebDriverEvents implements WebDriverSe
 			getDriver().quit();
 			setReport().log(Status.PASS, "The opened browsers are closed");
 		} catch (Exception e) {
+			getDriver().quit();
 			setReport().log(Status.FAIL, "Unexpected error occured in Browser",screenshotCapture());
 			Driver.failCount++;
 			throw e;

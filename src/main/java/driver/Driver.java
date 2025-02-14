@@ -353,6 +353,7 @@ public class Driver extends PreAndPost{
 			}
 			else
 			{
+				closeAllBrowsers();
 				throw new SkipException("Skipping execution for  :"+sTestCaseID);
 
 			}
@@ -367,6 +368,7 @@ public class Driver extends PreAndPost{
 	@AfterMethod
 	public void Reports(ITestResult result) throws Exception
 	{
+		
 		if(sRunMode.equalsIgnoreCase("yes")) {
 			try
 			{
@@ -411,10 +413,14 @@ public class Driver extends PreAndPost{
 					//			test.log(Status.SKIP, MarkupHelper.createLabel(sTestCaseID+" SKIPPED", ExtentColor.ORANGE));
 					//			test.skip(result.getThrowable());
 				}
+				
+				
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
+			}finally {
+				closeAllBrowsers();
 			}
 		}
 	}

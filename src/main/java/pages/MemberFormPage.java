@@ -82,9 +82,24 @@ public class MemberFormPage extends WebDriverServiceImpl {
 	//Verify AccountType dropdown
 	public MemberFormPage verifyAccounttypedropdown() {
 
-		Select AccountType= new  Select(getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")));		
-		//Create temp Array List > add  actual options  from DOM for comparison
-		List<WebElement> mylist =AccountType.getOptions();		
+		
+		List<String> mylist = new ArrayList<String>();	
+
+		click(getDriver().findElement(By.xpath("//button[@data-id='customertypecode.fieldControl-option-set-select']")),"Account Type");
+		//loop through DOM and add dropdown values into mylist for comparison
+
+		List<WebElement> options=getDriver().findElements(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div"));
+
+		for(int i=1;i<=options.size();i++) {
+			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
+		}
+
+		/*
+		 * Select AccountType= new Select(getDriver().findElement(By.xpath(
+		 * "//*[@data-id='customertypecode.fieldControl-option-set-select']")));
+		 * //Create temp Array List > add actual options from DOM for comparison
+		 * List<WebElement> mylist =AccountType.getOptions();
+		 */
 		assertTrue(!(mylist.contains("Non-GPO Member")), "Non GPO Member Option");
 		return this;
 	}
@@ -2176,7 +2191,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//navigate to Record status
 	public MemberFormPage navigateToRecordStatus() throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 		//Scroll down to make the record status field visible
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		clickTab(4);
@@ -3393,6 +3408,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}else {
 			click(getDriver().findElement(By.xpath("//section[@data-id='quickCreateRoot']//button[@aria-label='Save & Close']")),"Save and Close");
 		}
+		Thread.sleep(5000);
 		WebDriverWait wait = new WebDriverWait(getDriver(),Duration.ofSeconds(120));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='GENERAL']")));	
 		click(getDriver().findElement(By.xpath("//*[@title='GENERAL']")),"GENERAL");
@@ -4608,7 +4624,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 			 * xpath("//*[@title='MEMBERSHIP PROVIDER CONFIGURATION']"))
 			 * ,"MEMBERSHIP PROVIDER CONFIGURATION");//To make fee share field visible }
 			 */
-			click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible
+			if(getDriver().findElements(By.xpath("//h2[text()='FEE SHARE']")).size()>0) {
+				click(getDriver().findElement(By.xpath("//h2[text()='FEE SHARE']")),"FEE SHARE");//To make fee share field visible	
+			}
+			
 			click(getDriver().findElement(By.xpath("//*[@aria-label='Fee Share Eligible']")),"Fee share Eligible");
 			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Yes')]")),"Fee share Eligible");
 			clickTab(1);
@@ -5524,7 +5543,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify premier start date is null
 	public MemberFormPage verifyDPRelationtDateIsNull() {
-		verifyNullValue(getDriver().findElement(By.xpath("//*[@data-id='ix_directparentrelationdate.fieldControl-date-time-input']")),"DP Relation Date");
+		verifyNullValue(getDriver().findElement(By.xpath("//input[@aria-label='Date of Direct Parent Relation Date']")),"DP Relation Date");
 		return this;
 	}
 	//Verify top parent relation  date is updated correctly
@@ -5925,7 +5944,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage chooseAccountNumberTypeFedTaxID() {
 		try {
 			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Federal Tax ID","Account Number Type");
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'Federal Tax ID')]")),"Account Number Type");
+		
+			//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Federal Tax ID","Account Number Type");
 			Thread.sleep(2000);
 			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Federal Tax ID","Account Numbers Type"); 
 		} catch (InterruptedException e) {
@@ -7148,6 +7170,15 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 		return this;					
 	}
+	public MemberFormPage ClickDiscarSugesstion() throws InterruptedException{
+		Thread.sleep(4000);
+		if(getDriver().findElements(By.xpath("//button[@data-id='confirmButton']")).size()>1) {
+			click(getDriver().findElement(By.xpath("//button[@data-id='confirmButton']")),"Confirm Button");
+		}
+		return this;
+	}
+	
+	
 
 	//Select Membership option
 	public MemberFormPage selectMembershipoption() throws InterruptedException   {
@@ -8573,7 +8604,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage chooseAccountNumberTypeGLN() {
 		try {
 			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"GLN","Account Number Type");
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'GLN')]")),"Account Number Type");
+			
+			//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"GLN","Account Number Type");
 			Thread.sleep(2000);
 			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"GLN","Account Numbers Type"); 
 		} catch (InterruptedException e) {
@@ -8666,7 +8700,9 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
 			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'DEA')]")),"Account Number Type");
 			Thread.sleep(2000);
-			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type"); 
+			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"DEA","Account Numbers Type");
+			
+			clearAllSuggestions();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -8679,7 +8715,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage chooseAccountNumberTypeNPI() {
 		try {
 			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NPI","Account Number Type");
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'NPI')]")),"Account Number Type");
+			
+			//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NPI","Account Number Type");
 			Thread.sleep(2000);
 			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NPI","Account Numbers Type"); 
 		} catch (InterruptedException e) {
@@ -8692,7 +8731,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	public MemberFormPage chooseAccountNumberTypeNCPDP() {
 		try {
 			Thread.sleep(2000);
-			selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NCPDP","Account Number Type");
+			click(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"Account Number Type -drop down");
+			click(getDriver().findElement(By.xpath("//div[contains(@id,'pa-option-set-component')]/div/div[contains(text(),'NCPDP')]")),"Account Number Type");
+			
+			//selectDropDownUsingVisibleText(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NCPDP","Account Number Type");
 			Thread.sleep(2000);
 			verifyExactTextWithTitleAttribute(getDriver().findElement(By.xpath("//*[@data-id='ix_accountnumbertype.fieldControl-option-set-select']")),"NCPDP","Account Numbers Type"); 
 		} catch (InterruptedException e) {
@@ -9058,7 +9100,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		Thread.sleep(4000);
 		List<WebElement> ExpirationDateLabel=getDriver().findElements(By.xpath("//label[contains(text(),'Expiration Date')]"));
 		verifyElementisDisplayed(ExpirationDateLabel.size(), "Expiration Date");
-		List<WebElement> ExpirationDate=getDriver().findElements(By.xpath("//input[contains(@data-id,'ix_expirationdate.fieldControl-date-time-input')]"));
+		List<WebElement> ExpirationDate=getDriver().findElements(By.xpath("//input[@aria-label='Date of Expiration Date']"));
 		verifyElementisDisplayed(ExpirationDate.size(), "Expiration Date");
 		return this;
 	}
@@ -9373,21 +9415,21 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Verify LOB and Account number are displayed under the account number widget
 	public MemberFormPage navigatetoNYInformationFromAdditionalCriteria() {
-		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_applicationstartdate.fieldControl-date-time-input']")), "Applicatio start date");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Require Manual AG Assignment']")), "Manual assignment");
+		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Application Date']")), "Application start date");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Require Manual AG Assignment']")), "Manual assignment");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Affiliate Group Effective Date']")), "Affiliate Group");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Corporate']")), "Affiliate Group effective date");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Exclude from Roster']")), "Premieri Owner");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Receive Direct Mail']")), "Corporate");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Corporate']")), "Affiliate Group effective date");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Exclude from Roster']")), "Premieri Owner");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Receive Direct Mail']")), "Corporate");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Business Key']")), "CAMS");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@data-id='ix_paymententityid.fieldControl-LookupResultsDropdown_ix_paymententityid_textInputBox_with_filter_new']")), "Do not roaster");
 
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_recordstatus.fieldControl-option-set-select']")), "Received email");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Record Change Status']")), "Received email");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@data-id='ix_issponsor.fieldControl-checkbox-select']")), "Is sponsor");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@data-id='ix_recordstatus.fieldControl-option-set-select']")), "Received email");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Record Change Status']")), "Received email");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@data-id='ix_issponsor.fieldControl-checkbox-select']")), "Is sponsor");
 		clickAndEsc(getDriver().findElement(By.xpath("//input[@aria-label='Date of Corporate Rebate Fee Date']")), "Corporate Rebate Fee");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='Food Service Parent Override']")), "Corporate Rebate Fee");
-		clickAndEsc(getDriver().findElement(By.xpath("//select[@aria-label='FSRPT Flag']")), "Corporate Rebate Fee");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='Food Service Parent Override']")), "Corporate Rebate Fee");
+		clickAndEsc(getDriver().findElement(By.xpath("//button[@aria-label='FSRPT Flag']")), "Corporate Rebate Fee");
 
 		return this;
 

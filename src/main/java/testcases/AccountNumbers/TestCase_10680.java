@@ -30,6 +30,7 @@ public class TestCase_10680 {
 		.selectAccountNumbers()
 		.clickAddNewAccountNumberInAccountNumbers()
 		.chooseAccountNumberTypeDEA()
+		
 		.typeStaticDEA(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
 		.typeStartDateInAccountNumbers()
 		.clickSaveInAccountNumbersEntity()

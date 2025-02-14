@@ -31,6 +31,7 @@ public class TestCase_10683 {
 		.verifyDEA(DataInputProvider.getCellData_ColName(iRowNumber, "DEANumber", sDataSheetName))
 		.selectAccountNumbers()
 		.doubleClickExistingAccountNumberDEA()
+		.ClickDiscarSugesstion()
 		.typeStaticEndDateInAccountNumbers(DataInputProvider.getCellData_ColName(iRowNumber, "accNumEndDate", sDataSheetName))
 		.clickSaveInAccountNumbersEntity()
 		.clickGoBackOnMemberForm()

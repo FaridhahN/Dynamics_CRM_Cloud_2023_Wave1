@@ -1172,6 +1172,8 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 
 	public SupplierFormPage defaultAccountType(String defaultAccountType) {
 		verifyExactValue((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']"))),defaultAccountType,"Account Type");
+		
+		//verifyExactValue((getDriver().findElement(By.xpath("//*[@aria-label='Account Type'][@readonly]"))),defaultAccountType,"Account Type");
 		return this;
 	}
 	
@@ -1189,7 +1191,7 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	public SupplierFormPage pickContractEffectiveDate(String contractEffectiveDate) throws InterruptedException {
 		navigateToPrimaryContact();
 		Thread.sleep(3000);
-		type(getDriver().findElement(By.xpath("//input[contains(@id,'DateControlPrefix')][@aria-label='Date of Contract Effective date']")),contractEffectiveDate,"Contract Effective Date");
+		type(getDriver().findElement(By.xpath("//input[contains(@id,'DateControlPrefix')][@aria-label='Date of Contract Effective Date']")),contractEffectiveDate,"Contract Effective Date");
 		return this;
 	}
 
@@ -2144,7 +2146,17 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		assertTrue(defaultvale.contentEquals("No"), "Parent Entity code is not displayed");
 		return this;
 	}
-	public SupplierFormPage navigateToDoNotVerify() {
+	
+	//Click Tab
+		public SupplierFormPage clickTab(int number)  throws InterruptedException {
+			for(int i=0;i<number;i++) {
+				Actions a =new Actions(getDriver());
+				a.sendKeys(Keys.TAB).build().perform();
+				Thread.sleep(3000);
+			}
+			return this;
+		}
+	public SupplierFormPage navigateToDoNotVerify() throws InterruptedException {
 		click(((getDriver().findElement(By.xpath("//*[@data-id='address1_line1.fieldControl-text-box-text']")))), "Street1");
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'City')]")))), "City");
 		if(getDriver().findElements(By.xpath("//label[contains(text(),'County')]")).size()>0){
@@ -2152,11 +2164,26 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
-		click((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']"))),"Other Phone");
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");	
+		
+		if(getDriver().findElements(By.xpath("//input[@aria-label='Other Phone']")).size()>0){
+			click(((getDriver().findElement(By.xpath("//input[@aria-label='Other Phone']")))), "County");
+			clickTab(5);
+		}else {
+			click((getDriver().findElement(By.xpath("//input[@aria-label='Phone']")))," Phone");	
+			clickTab(5);
+		}
+		
+		
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Receive Direct Mail')]"))),"Direct Mail");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]"))),"Do not Verify Address");
-		click((getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]"))),"Do not Verify Address");
+		
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'Siebel Address ID')]")).size()>0){
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'Siebel Address ID')]")))), "Siebel");
+		}
+		
+		if(getDriver().findElements(By.xpath("//label[contains(text(),'FSRPT Flag')]")).size()>0){
+			click(((getDriver().findElement(By.xpath("//label[contains(text(),'FSRPT Flag')]")))), "FSRPT");
+		}
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Do Not Verify Address')]"))),"Do not Verify Address");
 
 

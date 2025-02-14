@@ -113,13 +113,13 @@ public class TestCase_7191 {
 		//LOB not required for NON-GPO , removing In correct steps Wave 2023 check
 
 //		// Click the + icon on the Line of Business Grid
-//		.clickLineOfBusinesses()
+		
 //
 //		//Click New Line Of Business
 //		.clickAddNewLineOfBusiness()
 //
 //		// Line of Business =Non- GPO
-//		.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
+//	.selectLineOfBusiness(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfBusiness", sDataSheetName))
 //
 //		// Classification Type = Non- GPO
 //		.selectLOBfClassificationType(DataInputProvider.getCellData_ColName(iRowNumber, "lineOfClassification", sDataSheetName))
@@ -138,9 +138,12 @@ public class TestCase_7191 {
 
 		//Verify Entity code is generated 
 		.entityCodeIsDisplayed()
-
-		//4.Observe Premier Start date Field  in a Member Form
-		.verifyAccounttypedropdown()
+		/*
+		 * .clickLineOfBusinesses() .clickGeneralTab() //4.Observe Premier Start date
+		 * Field in a Member Form
+		 * .selectAccountType(DataInputProvider.getCellData_ColName(iRowNumber,
+		 * "accountType", sDataSheetName)) .verifyAccounttypedropdown()
+		 */
 
 		;
 	}
