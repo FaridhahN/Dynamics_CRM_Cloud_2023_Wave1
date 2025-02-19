@@ -1803,6 +1803,8 @@ public class MemberFormPage extends WebDriverServiceImpl {
 			mylist.add(getDriver().findElement(By.xpath("(//div[contains(@id,'pa-option-set-component')]/div/div)["+i+"]")).getText());
 		}
 
+		Actions action = new Actions(getDriver());
+		action.sendKeys(Keys.ESCAPE);
 
 		//Participation type should not have Provider Select : MD
 		assertTrue(!(mylist.contains("Provider Select: MD")));
@@ -2125,7 +2127,7 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 	//Type City
 	public MemberFormPage typeCity(String city) {
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),"City");
-		type((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),city,"City");
+		 type((getDriver().findElement(By.xpath("//*[@data-id='address1_city.fieldControl-text-box-text']"))),city,"City");
 		return this;
 	}
 
@@ -2201,7 +2203,9 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		}
 		click(((getDriver().findElement(By.xpath("//label[contains(text(),'State/Province')]")))), "State/Province");
 		click((getDriver().findElement(By.xpath("//*[@data-id='address1_postalcode.fieldControl-text-box-text']"))),"Zip Code");
-		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");		
+	if((getDriver().findElements(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']"))).size()>0) {
+		click(getDriver().findElement(By.xpath("//*[@data-id='address1_country.fieldControl-text-box-text']")),"Country");
+	}
 		click((getDriver().findElement(By.xpath("//label[contains(text(),'Phone')]"))),"Other Phone");
 		click((getDriver().findElement(By.xpath("//input[@data-id='telephone1.fieldControl-phone-text-input']"))),"Other Phone");
 		clickTab(4);
@@ -4456,10 +4460,10 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 		Thread.sleep(2000);
 		click(getDriver().findElement(By.xpath("(//span[contains(text(),'Deactivate')])[1]")),"Deactivate Patient Services");
 		Thread.sleep(3000);
-		click(getDriver().findElement(By.xpath("//button/span[contains(text(),'Deactivate')]")),"Deactivate Button");
+		click(getDriver().findElement(By.xpath("//button[@title='Deactivate']")),"Deactivate Button");
 		Thread.sleep(5000);
 		List<WebElement> afterCount=getDriver().findElements(By.xpath("//div[contains(@class,'ms-Checkbox is-enabled RowSelectionCheckMarkSpan checkMark')]"));
-		assertTrue(beforecount.size()> afterCount.size(),"Patient Services is not deactivated");
+		assertTrue(beforecount.size()>afterCount.size(),"Patient Services is not deactivated");
 		return this;
 	}
 
@@ -6235,13 +6239,13 @@ click(getDriver().findElement(By.xpath("//*[@aria-label='Participation Type']"))
 
 	//Save And Close
 	public MemberFormPage clickSystemTab() throws InterruptedException {
-		if(getDriver().findElements(By.xpath("//li[contains(text(),'SYSTEM')]")).size()>0) {
-			click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Click System Tab");
+		if(getDriver().findElements(By.xpath("//*[contains(text(),'SYSTEM')]")).size()>0) {
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'SYSTEM')]")),"Click System Tab");
 		}else {
 
 			click(getDriver().findElement(By.xpath("//span[contains(@id,'icon_more_tab')]")),"More Tab");
 
-			click(getDriver().findElement(By.xpath("//li[contains(text(),'SYSTEM')]")),"Click System Tab");	
+			click(getDriver().findElement(By.xpath("//*[contains(text(),'SYSTEM')]")),"Click System Tab");	
 		}
 		return this;
 

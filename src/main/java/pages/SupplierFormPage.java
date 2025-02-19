@@ -1171,9 +1171,12 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 
 	public SupplierFormPage defaultAccountType(String defaultAccountType) {
+		if(getDriver().findElements(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']")).size()>0) {
 		verifyExactValue((getDriver().findElement(By.xpath("//*[@data-id='customertypecode.fieldControl-option-set-select']"))),defaultAccountType,"Account Type");
-		
-		//verifyExactValue((getDriver().findElement(By.xpath("//*[@aria-label='Account Type'][@readonly]"))),defaultAccountType,"Account Type");
+		}
+		else {
+		verifyExactValue((getDriver().findElement(By.xpath("//*[@aria-label='Account Type'][@readonly]"))),defaultAccountType,"Account Type");
+		}
 		return this;
 	}
 	
@@ -1874,15 +1877,15 @@ public class SupplierFormPage extends WebDriverServiceImpl{
 	}
 	public SupplierFormPage doubleClickOnNationalMembership(String membershipStartDate) throws InterruptedException {	
 		//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']")),"National","Membership Provider");
-		verifyExactText(getDriver().findElement(By.xpath("//*[@col-id='ix_membershipprovider']//span")),"National","Membership Provider");
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']//span")),"National","Membership Provider");
 		//verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']")),membershipStartDate,"Membership Start Date");
 		//verifyExactText(getDriver().findElement(By.xpath("(//*[@col-id='ix_startdate']//label)[2]")),membershipStartDate,"Start Date");
 		//Wave2 update Start Date Locator Update		
-		verifyExactText(getDriver().findElement(By.xpath("//*[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRootStyles') and @aria-label]")),membershipStartDate,"Membership Start Date");
+		verifyExactText(getDriver().findElement(By.xpath("//*[@data-id='cell-0-4']//span")),membershipStartDate,"Membership Start Date");
 		//verifyExactAttribute(getDriver().findElement(By.xpath("//*[@col-id='ix_startdate']//label[contains(@class,'ms-Label labelRootStyles') and @aria-label]")), "aria-label",membershipStartDate,"Membership Start Date");
 		Actions a = new Actions(getDriver());
 		// a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-2']"))).doubleClick().build().perform();
-		a.moveToElement(getDriver().findElement(By.xpath("(//*[@col-id='ix_membershiptype']//label)[2]"))).doubleClick().build().perform();	    
+		a.moveToElement(getDriver().findElement(By.xpath("//*[@data-id='cell-0-3']//span"))).doubleClick().build().perform();	    
 		Thread.sleep(3000);
 		return this;
 	}
